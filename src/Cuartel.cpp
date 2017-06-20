@@ -9,6 +9,7 @@ Cuartel :: Cuartel(unsigned int nivel):
 {
 	for(int n=0;n<nivel; n++)
 		subirNivel();
+	rango=-1;
 }
 
 Cuartel :: ~Cuartel(void)

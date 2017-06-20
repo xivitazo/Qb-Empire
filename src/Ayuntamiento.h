@@ -4,12 +4,12 @@
 class Ayuntamiento : public Edificio
 {
 protected:
-	unsigned int ataque, rango, salpicadura;
+	unsigned int ataque, salpicadura;
 
 public:
 	Ayuntamiento(void);
 	~Ayuntamiento(void);
-	virtual bool Atacar (Edificio* objetivo);
+	bool Atacar (Edificio* objetivo, Edificio** lista);
 	//Devuelve un 1 cuando crea un disparo hacia el objetivo
 	void Timer (float t);
 	void Dibuja(Color equipo=0);

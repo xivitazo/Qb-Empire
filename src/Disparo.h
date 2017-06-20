@@ -10,10 +10,10 @@ protected:
 	Edificio* destino;
 	Vector velocidad;
 	int velocidad_max, salpicadura;
+	Edificio** lista;
 	//vector aceleracion; lo omitimos por ahora
 public:
-	//constructor con daño = d y radio = r;
-	Disparo(Vector posicion, Edificio* destino,unsigned int daño, unsigned int salpicadura );
+	Disparo(Vector posicion, Edificio* destino,unsigned int daño, unsigned int salpicadura, Edificio** lista );
 	//Introduces la posicion del disparo, aquien disparar, el daño y la salpicadura
 	virtual ~Disparo(void);
 

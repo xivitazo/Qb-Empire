@@ -16,7 +16,7 @@ Lista_de::Lista_de(unsigned char red, unsigned char green, unsigned char blue):
 	for(int n=0; n<MAX_TIPOS;n++)
 	{
 		numero_generado[n]=0;
-		nivel[n]=0;
+		nivel[n]=1;
 		max_Type[n]=0;
 	}
 
@@ -48,7 +48,10 @@ bool Lista_de:: Agregar (Type tipo, Luchadores especifico, unsigned int cuartel)
 		case CUARTEL : lista[numero++]=new Cuartel(nivel[tipo]); return true;
 		}
 		if (especifico != NINGUNO)
-			lista[numero++]=new Personaje (especifico,nivel[tipo+especifico]);
+		{
+			lista[numero]=new Personaje (especifico,nivel[tipo+especifico]);
+			lista[numero++]->setPosicion(lista[cuartel]->posicion.vx,lista[cuartel]->posicion.vy);
+		}
 
 	}
 	return false;
@@ -79,8 +82,15 @@ void Lista_de :: Dibuja()
 	for(int n=0; n<numero;n++)
 	{
 		lista[n]->Dibuja(equipo);
-		if (disparos[0]!=0)
-			disparos[n]->Dibuja();
+	}
+	for (int n=0; n<MAX;n++)
+	{
+		if (disparos[0]==0)
+		{
+			break;
+		}
+		disparos[n]->Dibuja();
+		continue;
 	}
 }
 
@@ -126,11 +136,13 @@ void Lista_de :: Timer (float t)
 	{
 		lista[n]->Timer(t);
 	}
-	for(int n=0;1;n++)
+	for(int n=0;n<MAX;n++)
 	{
 		if(disparos[n]==0)
 			break;
-		disparos[n]->Timer(t);
+		if(disparos[n]->Mueve())
+			Interaccion :: Ataque (disparos[n]);
+
 	}
 	
 }
@@ -142,16 +154,3 @@ void Lista_de :: Rebote()
 			Interaccion :: Rebote (*lista[n], *lista[i]);
 }
 
-void  Lista_de :: prueba(int tipo)
-{
-	if( tipo)
-	{
-		lista[numero]=new Personaje (CABALLERO, 1);
-		lista[numero++] -> setPosicion(2,18);
-	}
-	else
-		{
-		lista[numero]=new Personaje (CABALLERO, 1);
-		lista[numero++] -> setPosicion(150,60);
-	}
-}

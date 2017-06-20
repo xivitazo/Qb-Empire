@@ -5,6 +5,7 @@
 Edificio::Edificio(unsigned int v, unsigned int _altura, Color _color, Planta planta, Vector _superficie):
 	Objeto(_altura, _color, planta, _superficie)
 {
+	rango_visibilidad=20;
 	vida_max=v;
 	vida=vida_max;
 }
@@ -41,6 +42,8 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 {
 	glPushMatrix();
 	glTranslatef(posicion.vx, posicion.vy, 0);
+	
+	glEnable(GL_COLOR_MATERIAL);
 	glDisable(GL_LIGHTING);
 	//Pared eje X
 	glBegin(GL_POLYGON);
@@ -109,7 +112,7 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(dimension.vx/2.0f,dimension.vy/2.0f,(float)altura+2.0f);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
 	glPopMatrix();
 	
 }

@@ -12,6 +12,7 @@ Fabrica::Fabrica(Type _tipo, unsigned int nivel):
 	}
 	for(int n=0;n<nivel;n++)
 		subirNivel();
+	rango=-1;
 }
 
 Fabrica::~Fabrica(void)

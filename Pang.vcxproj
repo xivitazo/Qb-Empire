@@ -98,6 +98,7 @@
     <ClCompile Include="src\Qb-Empire.cpp" />
     <ClCompile Include="src\Recursos.cpp" />
     <ClCompile Include="src\Vector.cpp" />
+    <ClCompile Include="src\Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Ayuntamiento.h" />
@@ -114,6 +115,7 @@
     <ClInclude Include="src\Personaje.h" />
     <ClInclude Include="src\Recursos.h" />
     <ClInclude Include="src\Vector.h" />
+    <ClInclude Include="src\Vector3D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

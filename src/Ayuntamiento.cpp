@@ -4,7 +4,9 @@
 Ayuntamiento :: Ayuntamiento(void) :
 	Edificio(2500, 6, Color (215, 45, 109) ,CUADRADO, Vector (6, 6))
 {
+	rango_visibilidad=35;
 	setPosicion(4, 35);
+	rango=30;
 
 }
  
@@ -12,14 +14,14 @@ Ayuntamiento :: ~Ayuntamiento(void)
 {
 }
 
-bool Ayuntamiento :: Atacar (Edificio* objetivo)
+bool Ayuntamiento :: Atacar (Edificio* objetivo, Edificio** lista)
 {
 	if ((objetivo->getPoscion()-posicion).modulo()>rango)
 	{
-		return 0;
+		return false;
 	}
-	new Disparo (posicion,objetivo,ataque,salpicadura);
-	return 1;
+	new Disparo (posicion,objetivo,ataque,salpicadura, lista);
+	return true;
 }
 
 void Ayuntamiento :: Timer (float t)

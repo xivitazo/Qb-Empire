@@ -2,7 +2,7 @@
 #include "Interaccion.h"
 #include "glut.h"
 
-Disparo::Disparo(Vector posicion, Edificio* _destino,unsigned int daño, unsigned int salpicadura ): 
+Disparo::Disparo(Vector posicion, Edificio* _destino,unsigned int daño, unsigned int salpicadura, Edificio** lista ): 
 	Objeto(1,Color(rand(),rand(),rand()),REDONDO,1)
 {
 	//radio pequeño (copiado de Pang)
@@ -11,6 +11,7 @@ Disparo::Disparo(Vector posicion, Edificio* _destino,unsigned int daño, unsigned
 	this ->destino = destino;
 	this ->posicion = posicion;
 	this -> salpicadura = salpicadura;
+	this -> lista = lista;
 }
 
 Disparo::~Disparo(void)
@@ -35,13 +36,12 @@ bool Disparo::Mueve(void)
 void Disparo :: Timer(float t)
 {
 	posicion=posicion+velocidad*t;
-	Mueve();
 }
 
 void Disparo :: Dibuja(void)
 {
 	glTranslatef(posicion.vx,posicion.vy,5);
-	glColor3ub(rand(), rand(), rand());
+	glColor3ub(255, 255, 255);
 	glutSolidSphere(radio,20,20);
 	glTranslatef(-posicion.vx,-posicion.vy,-5);
 }

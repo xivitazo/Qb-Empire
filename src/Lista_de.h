@@ -26,7 +26,7 @@ class Lista_de
 	//Distinto del numero de tropas y demás
 	Edificio  *lista [MAX];
 	//Vector que contiene edificios y personajes
-	Objeto *disparos[MAX];
+	Disparo *disparos[MAX];
 	//Vector que contiene disparos del equipo
 
 
@@ -71,6 +71,7 @@ public:
 	void Timer (float t);
 	void Rebote();
 	Edificio getPosN(int posicion){return lista[posicion];}
+	Edificio** getLista() {return lista;}
 
 
 

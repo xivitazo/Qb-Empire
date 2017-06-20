@@ -5,29 +5,36 @@
 
 Personaje::Personaje(Luchadores tipo, unsigned int nivel)
 {
+	rango_visibilidad=10;
 	switch (tipo)
 	{
 	case CABALLERO:
 		setStats(250,200, 1.5, 10);
+		rango=2;
 		break;
 	case ARQUERA:
 		setStats(150,150, 0.75, 3);
+		rango=8;
 		break;
 	case GIGANTE:
 		setStats(1000,250, 2.5, 3);
+		rango=3;
 		break;
 	case SOLDADO:
 		setStats(200,100, 1, 3);
+		rango=1;
 		break;
 	case GUERRERO:
 		setStats(300,300, 1.5, 4.5);
+		rango=1;
 		break;
 	}
-	for (int n=1; n<nivel; n++)
+	for (unsigned int n=1; n<nivel; n++)
 	{
 		subirNivel();
 	}
-	destino.setValor(rand(),rand());
+
+	destino.setValor(100,50);
 }
 
 Personaje::~Personaje(void)
@@ -53,14 +60,14 @@ bool Personaje:: meMuevo()
 	return 0;
 }
 
-bool Personaje :: Atacar (Edificio* objetivo)
+bool Personaje :: Atacar (Edificio* objetivo, Edificio** lista)
 {
 	if ((posicion-objetivo->getPoscion()).modulo()> rango)
 	{
-		//meMuevo(posicion+((posicion-objetivo.getPoscion()).unitario()*((posicion-objetivo.getPoscion()).modulo()-rango)));
+		destino = posicion+((posicion-objetivo->getPoscion()).unitario()*((posicion-objetivo->getPoscion()).modulo()-rango));
 		return 0;
 	}	
-	new Disparo (posicion,objetivo,ataque,salpicadura);
+	new Disparo (posicion,objetivo,ataque,salpicadura, lista);
 	return 1;
 }
 
@@ -92,10 +99,11 @@ void Personaje :: subirNivel ()
 
 void Personaje :: Timer (float t) 
 {
+	velocidad=velocidad.unitario()*velocidad_max;
 	posicion=posicion+velocidad*t;
-	//velocidad=velocidad+aceleracion*t;
 	meMuevo();
-	printf("Posicion: %d\t%d\nVelocidad:%d\t%d", posicion.vx, posicion.vy, velocidad.vx, velocidad.vy);
+	//velocidad=velocidad+aceleracion*t;
+	//printf("Posicion: %d\t%d\nVelocidad:%d\t%d", posicion.vx, posicion.vy, velocidad.vx, velocidad.vy);
 }
 
 void Personaje :: Dibuja (Color equipo)

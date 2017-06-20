@@ -21,7 +21,7 @@ public:
 	virtual ~Personaje(void);
 	bool meMuevo ();
 	//devuele un 1 cuando llega a la posicion
-	bool Atacar (Edificio* objetivo);
+	bool Atacar (Edificio* objetivo, Edificio** lista);
 	//Ataca, o se mueve hasta donde pueda atacar para golpear al objetivo
 	//Devuelve un 1 cuando crea un disparo hacia el objetivo
 	void Dibuja(Color equipo=0);

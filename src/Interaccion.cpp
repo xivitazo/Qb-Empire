@@ -11,9 +11,14 @@ Interaccion::~Interaccion(void)
 
 void Interaccion:: Ataque (Disparo* disparo)
 {
-	//Falta por programar, me faltan los apuntes de ayer
-	//sin embargo solo falta programar el hecho de hacer daño en un área
+	disparo ->radio=disparo -> salpicadura;
+	for (int n=0;disparo->lista[n]!=0 ;n++)
+	{
 
+		if (Choque (*disparo, *disparo->lista[n]))
+			disparo->lista[n]->vida-=disparo->daño;
+	}
+	return;
 }
 
 float Interaccion :: Distancia (Objeto &a, Objeto &b)

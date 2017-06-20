@@ -13,7 +13,7 @@ Vector Vector :: operator - (Vector &v)
 {
 	Vector aux;
 	aux.vx =vx - v.vx;
-	aux.vy =vy - aux.vy;
+	aux.vy =vy - v.vy;
 	return aux;
 }
 
@@ -21,7 +21,7 @@ Vector Vector:: operator + (Vector &v)
 {
 	Vector aux;
 	aux.vx =vx + v.vx;
-	aux.vy =vy + aux.vy;
+	aux.vy =vy + v.vy;
 	return aux;
 }
 

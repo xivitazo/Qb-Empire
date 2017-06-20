@@ -9,8 +9,6 @@ public:
 	float modulo();
 	float argumento();	// argumento del vector
 	void setValor(float x, float y);
-	float getX();
-	float getY();
 	Vector operator - (Vector &);
 	Vector operator + (Vector &);
 	Vector operator * (float);

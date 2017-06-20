@@ -34,6 +34,7 @@ void Mapa :: cesped ()
 	glTranslatef(-30.0f,-30.0f,0);*/
 	//glPushMatrix();
 	glDisable(GL_LIGHTING);
+	
 	glBegin(GL_POLYGON);
 		glColor3ub(48,132,70);
 		glVertex2f(0,0);
@@ -56,7 +57,8 @@ void Mapa :: cesped ()
 		glVertex2f(225.0f,0);
 	glEnd();
 	glEnable(GL_LIGHTING);
-
+	
+	
 	
 }
 

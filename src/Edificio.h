@@ -23,6 +23,9 @@ protected:
 	Type tipo;
 	Luchadores especifico;
 	//Estableces el tipo de clase edificio tal y como se establece en Lista_de.h
+	int rango;
+	//Rango de ataque, si no ataca será -1;
+	int rango_visibilidad;
 
 public:
 	Edificio(unsigned int v, unsigned int _altura, Color _color=0, Planta planta= NO_GEOMETRIA, Vector _superficie=0);
@@ -40,6 +43,8 @@ public:
 	void color_vida();
 	unsigned int getMax(Type tipo);
 	void setNumero_Generado(Type tipo, int incremento);
+	int getRango (){return rango;}
+	virtual bool Atacar (Edificio* objetivo, Edificio** lista){return false;}
 
 
 	friend class Interaccion;
