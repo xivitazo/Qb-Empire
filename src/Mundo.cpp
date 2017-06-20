@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 
-Mundo::Mundo():jugador(0, 0, 205)
+Mundo::Mundo():jugador1(0, 0, 205), jugador2 (179,36,40)
 {
 }
 void Mundo::RotarOjo()
@@ -27,7 +27,8 @@ void Mundo::Dibuja()
 	
 	//dibujo del suelo
 	map.Dibuja();
-	jugador.Dibuja();
+	jugador1.Dibuja();
+	jugador2.Dibuja();
 	
 	//Tenemos posibles coordenadas del mapa.
 	/*printf("Posicion Ojo x:  %f",x_ojo);
@@ -47,7 +48,15 @@ void Mundo::Dibuja()
 
 void Mundo::Timer(float t)
 {
-	jugador.Timer(t);
+	jugador1.Rebote();
+	jugador2.Rebote();
+	for(int n=0; n<jugador1.getNumero();n++)
+	{
+		for(int i=0; i<jugador2.getNumero();i++)
+			Interaccion :: Rebote(jugador1.getPosN(n),jugador2.getPosN(i));
+	}
+	jugador1.Timer(t);
+	jugador2.Timer(t);
 }
 
 void Mundo::Inicializa()
@@ -79,7 +88,8 @@ void Mundo::Tecla(unsigned char key)
 	case '1': setPerspectiva(-37.5,37.5,50,25,37.5,0); break; //Vista Poblado
 	case '2': setPerspectiva(112.2,-28.5,60,112.5,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
-	case 'p': jugador.prueba();
+	case 'p': jugador1.prueba(1);
+	case 'o': jugador2.prueba(2);
 	}
 }
 

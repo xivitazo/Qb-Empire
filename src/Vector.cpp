@@ -67,3 +67,11 @@ void Vector :: setValor(float x, float y)
 	vx=x;
 	vy=y;
 }
+
+Vector Vector :: perpendicular()
+{
+	Vector aux;
+	aux.vx = -vy;
+	aux.vy= vx;
+	return aux;
+}

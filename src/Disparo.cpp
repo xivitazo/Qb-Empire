@@ -2,7 +2,8 @@
 #include "Interaccion.h"
 #include "glut.h"
 
-Disparo::Disparo(Vector posicion, Edificio destino,unsigned int daño, unsigned int salpicadura )
+Disparo::Disparo(Vector posicion, Edificio* _destino,unsigned int daño, unsigned int salpicadura ): 
+	Objeto(1,Color(rand(),rand(),rand()),REDONDO,1)
 {
 	//radio pequeño (copiado de Pang)
 	radio=0.1f;
@@ -19,14 +20,13 @@ Disparo::~Disparo(void)
 bool Disparo::Mueve(void)
 {
 	Vector v;
-	v=(destino.posicion-posicion).unitario();
+	v=(destino->posicion-posicion).unitario();
 //Hallas la direccion ue debe seguir el disparo de forma dinámica
 	velocidad = v*velocidad_max;
-	if (abs(posicion.vx-destino.posicion.vx)<=destino.superificie.vx && abs(posicion.vy-destino.posicion.vy)<=destino.superificie.vy)
+	if (abs(posicion.vx-destino->posicion.vx)<=destino->superficie.vx && abs(posicion.vy-destino->posicion.vy)<=destino->superficie.vy)
 //Si esta dentro de los limites del objetivo
 	{
-		Interaccion :: Ataque (posicion, daño, salpicadura);
-		return 1;
+		return true;
 	}
 	return 0;
 
@@ -35,6 +35,7 @@ bool Disparo::Mueve(void)
 void Disparo :: Timer(float t)
 {
 	posicion=posicion+velocidad*t;
+	Mueve();
 }
 
 void Disparo :: Dibuja(void)

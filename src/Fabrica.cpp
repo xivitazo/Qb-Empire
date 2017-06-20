@@ -1,25 +1,30 @@
 #include "Fabrica.h"
 
 
-Fabrica::Fabrica(Type _tipo):
+Fabrica::Fabrica(Type _tipo, unsigned int nivel):
 	tipo(_tipo), 
-	Edificio(100)
+	Edificio(1000,4,Color (),CUADRADO, Vector (4,4))
 {
 	switch(tipo){
-	case oro:		color.set(245, 208, 51); setPosicion(50,30);	break;
-	case comida:	color.set(234, 137, 154) ;setPosicion(30,50);	break;
-	case hierro:	color.set(157, 161, 170); setPosicion(40,70);	
+	case F_ORO:		color.set(245, 208, 51); setPosicion(50,30);	break;
+	case F_COMIDA:	color.set(234, 137, 154) ;setPosicion(30,50);	break;
+	case F_HIERRO:	color.set(157, 161, 170); setPosicion(40,70);	
 	}
+	for(int n=0;n<nivel;n++)
+		subirNivel();
 }
 
 Fabrica::~Fabrica(void)
 {
 }
 
-void Fabrica :: subirNivel (unsigned int tipo)
+void Fabrica :: subirNivel ()
 {
-	vida = vida*1.75f;
-	produccion.set(produccion.getComida()*1.1f,produccion.getHierro()*1.1f,produccion.getOro()*1.1f);
+	vida_max = vida_max*1.75f;
+	vida= vida_max;
+	//Si subes de nivel la vida se regenera
+	produccion.set(produccion.getComida()+30,produccion.getHierro()+20,produccion.getOro()+20);
+	altura+=4;
 }
 
 void Fabrica :: Timer (float t)
@@ -29,6 +34,7 @@ void Fabrica :: Timer (float t)
 
 void Fabrica :: Dibuja (Color equipo)
 {
-	casita(posicion, equipo, color, 4,  5);
+
+	casita(posicion, equipo, color, superficie, altura);
 }
 

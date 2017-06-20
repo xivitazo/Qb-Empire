@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdio>
+#include "Vector.h"
 
 class Mapa
 {
@@ -11,5 +12,6 @@ public:
 	void Dibuja ();
 	void cesped();
 	void rio();
+	void montaña();
 };
 

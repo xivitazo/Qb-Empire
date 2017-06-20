@@ -3,29 +3,43 @@
 #include "Disparo.h"
 #include <cstdio>
 
-Personaje::Personaje(int tipo)
+Personaje::Personaje(Luchadores tipo, unsigned int nivel)
 {
-	if (tipo==0)
+	switch (tipo)
 	{
-		setStats(1,1,1);
+	case CABALLERO:
+		setStats(250,200, 1.5, 10);
+		break;
+	case ARQUERA:
+		setStats(150,150, 0.75, 3);
+		break;
+	case GIGANTE:
+		setStats(1000,250, 2.5, 3);
+		break;
+	case SOLDADO:
+		setStats(200,100, 1, 3);
+		break;
+	case GUERRERO:
+		setStats(300,300, 1.5, 4.5);
+		break;
 	}
-	if (tipo==1)
+	for (int n=1; n<nivel; n++)
 	{
-		setStats(100,100,3);
+		subirNivel();
 	}
-	setPosicion(2,18);
-	destino.setValor(150,30);
+	destino.setValor(rand(),rand());
 }
 
 Personaje::~Personaje(void)
 {
 }
 
-void Personaje :: setStats ( unsigned int vida, unsigned int ataque,unsigned int velocidad)
+void Personaje :: setStats ( unsigned int vida, unsigned int ataque,float tiempo_ataque ,float velocidad)
 {
 	this -> vida_max = vida;
 	this -> ataque = ataque;
 	this -> velocidad_max = velocidad;
+	this -> tiempo_ataque = tiempo_ataque;
 }
 
 bool Personaje:: meMuevo()
@@ -39,9 +53,9 @@ bool Personaje:: meMuevo()
 	return 0;
 }
 
-bool Personaje :: Atacar (Edificio &objetivo)
+bool Personaje :: Atacar (Edificio* objetivo)
 {
-	if ((posicion-objetivo.getPoscion()).modulo()> rango)
+	if ((posicion-objetivo->getPoscion()).modulo()> rango)
 	{
 		//meMuevo(posicion+((posicion-objetivo.getPoscion()).unitario()*((posicion-objetivo.getPoscion()).modulo()-rango)));
 		return 0;
@@ -50,11 +64,28 @@ bool Personaje :: Atacar (Edificio &objetivo)
 	return 1;
 }
 
-void Personaje :: subirNivel (unsigned int tipo)
+void Personaje :: subirNivel ()
 {
 	if (tipo ==1)
 	{
-		setStats (vida_max*1.1f,ataque*1.1f,velocidad_max*1.1f);
+		switch (especifico)
+		{
+		case CABALLERO:
+			setStats(vida_max*1.15,ataque*1.15,tiempo_ataque,velocidad_max*1.1);
+			break;
+		case ARQUERA:
+			setStats(vida_max*1.20,ataque*1.125,tiempo_ataque,velocidad_max*1.02);
+			break;
+		case GIGANTE:
+			setStats(vida_max*1.3,ataque*1.2,tiempo_ataque,velocidad_max*1.3);
+			break;
+		case SOLDADO:
+			setStats(vida_max*1.2,ataque*1.15,tiempo_ataque,velocidad_max*1.05);
+			break;
+		case GUERRERO:
+			setStats(vida_max*1.25,ataque*1.175,tiempo_ataque,velocidad_max*1.15);
+			break;
+		}
 		vida=vida_max;
 	}
 }
@@ -74,4 +105,10 @@ void Personaje :: Dibuja (Color equipo)
 	glTranslatef(posicion.vx,posicion.vy, 0);
 	glutSolidSphere(1,20,20);
 	glPopMatrix();
+}
+
+bool Personaje :: setVelocidad (Vector velocidad)
+{
+	this -> velocidad = velocidad;
+	return true;
 }

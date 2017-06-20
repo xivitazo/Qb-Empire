@@ -13,6 +13,7 @@ void Mapa :: Dibuja ()
 {
 	cesped();
 	rio();
+	montaña();
 }
 
 void Mapa :: cesped ()
@@ -71,4 +72,53 @@ void Mapa :: rio ()
 		glVertex3f(-30.0f,1,-50.0f);
 	glEnd();
 	glEnable(GL_LIGHTING);*/
+}
+
+void Mapa :: montaña ()
+{
+	glPushMatrix();
+	float altura=-300;
+	Vector dimension(225, 75);
+	
+	//glDisable(GL_LIGHTING);	
+	//glShadeModel(GL_FLAT);
+	//Pared eje X
+	glBegin(GL_POLYGON);
+	glColor3ub(130, 130 ,130);
+		glVertex3f(0,0,0);
+		glVertex3f(0, 0,(float)altura);
+		glVertex3f((float)dimension.vx, 0, (float)altura);	
+		glVertex3f((float)dimension.vx, 0, 0);
+	glEnd();
+	//Pared Eje Y
+	glBegin(GL_POLYGON);
+		glVertex3f(0,0,0);
+		glVertex3f(0,(float)dimension.vy,0);
+		glVertex3f(0.0f,(float)dimension.vy,(float)altura);	
+		glVertex3f(0,0,(float)altura);
+	glEnd();
+	//Pared Eje XFondo
+	glBegin(GL_POLYGON);
+		glVertex3f(0,(float)dimension.vy,0);
+		glVertex3f(0.0f,(float)dimension.vy,(float)altura);
+		glVertex3f((float)dimension.vx,(float)dimension.vy,(float)altura);	
+		glVertex3f((float)dimension.vx,(float)dimension.vy,0);
+	glEnd();
+	//Pared Eje YFondo
+	glBegin(GL_POLYGON);
+		glVertex3f((float)dimension.vx,(float)dimension.vy,0);
+		glVertex3f((float)dimension.vx,(float)dimension.vy,(float)altura);	
+		glVertex3f((float)dimension.vx,0,(float)altura);	
+		glVertex3f((float)dimension.vx,0,0);
+	glEnd();
+	glBegin(GL_POLYGON);
+		glVertex3f(0,(float)dimension.vy,0);
+		glVertex3f(0.0f,(float)dimension.vy,(float)altura);
+		glVertex3f((float)dimension.vx,(float)dimension.vy,(float)altura);	
+		glVertex3f((float)dimension.vx,(float)dimension.vy,0);
+	glEnd();
+	//Techo, eso sí
+
+	//glEnable(GL_LIGHTING);
+	glPopMatrix();
 }

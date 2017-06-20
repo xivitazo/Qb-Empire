@@ -10,7 +10,7 @@ protected:
 	unsigned int tiempo;
 
 public:
-	Cuartel(void);
+	Cuartel(unsigned int nivel);
 	virtual ~Cuartel(void);
 	bool newTropa();
 	//Devuelve un TRUE si se puede generar una nueva tropa 
@@ -19,7 +19,7 @@ public:
 	// no hará falta usar la t... no entiendo la variable tiempo
 	bool poderGenerar ();
 	void Dibuja(Color equipo=0);
-	void subirNivel(unsigned int tipo=0);
+	void subirNivel();
 
 	friend class Interaccion;
 };

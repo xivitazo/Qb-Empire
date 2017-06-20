@@ -15,9 +15,66 @@ void OnMouse(int button, int state, int x, int y);
 void OnMousePas(int x, int y);
 Vector screenToWorldCoords(int iX,int iY);
 
+/*GLfloat angle = 0.0;
+
+void cube (void) {
+    glRotatef(angle, 1.0, 0.0, 0.0);
+    glRotatef(angle, 0.0, 1.0, 0.0);
+    glRotatef(angle, 0.0, 0.0, 1.0);
+    glColor3f(1.0, 0.0, 0.0);
+    glutSolidCube(2);
+}
+
+void init (void) {
+    glEnable (GL_DEPTH_TEST);
+    glEnable (GL_LIGHTING);
+    glEnable (GL_LIGHT0);
+}
+
+void display (void) {
+    glClearColor (0.0,0.0,0.0,1.0);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();  
+    gluLookAt (0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+    cube();
+    glutSwapBuffers();
+    angle ++;
+}
+
+void reshape (int w, int h) {
+    glViewport (0, 0, (GLsizei)w, (GLsizei)h);
+    glMatrixMode (GL_PROJECTION);
+    glLoadIdentity ();
+    gluPerspective (60, (GLfloat)w / (GLfloat)h, 1.0, 100.0);
+    glMatrixMode (GL_MODELVIEW);
+}*/
+
 
 int main(int argc,char* argv[])
-{
+{ 
+	/*glutInit (&argc, argv);
+    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+    glutInitWindowSize (500, 500);
+    glutInitWindowPosition (100, 100);
+    glutCreateWindow ("A basic OpenGL Window");
+    init ();
+    glutDisplayFunc (display);
+    glutIdleFunc (display);
+    glutReshapeFunc (reshape);
+    glutMainLoop ();
+    return 0;*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//Inicializar el gestor de ventanas GLUT
 	//y crear la ventana
 	glutInit(&argc, argv);
@@ -25,16 +82,35 @@ int main(int argc,char* argv[])
 	glutInitWindowSize(1280,720);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Qb-Empire");
+	//glLighti(GL_LIGHT1,GL_QUADRATIC_ATTENUATION,GL_3D_COLOR_TEXTURE);
 
 	//habilitar luces y definir perspectiva
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHTING);
+	// glClearDepth(1);
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	/*glEnable(GL_LIGHT1);
+	glEnable(GL_LIGHT2);
+	glEnable(GL_LIGHT3);
+	glEnable(GL_LIGHT4);
+	glEnable(GL_LIGHT5);
+	glEnable(GL_LIGHT6);
+	glEnable(GL_LIGHT7);*/
+	/*GLfloat lightpos[] = {.5, 1., 1., 0.};
+	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);*/
 	glEnable(GL_COLOR_MATERIAL);	
 	glMatrixMode(GL_PROJECTION);
 	
-	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);
+	/*GLfloat white[] = {0.4f, 0.4f,0.4f, 0.5f};		//GLfloat white[] = {0.8f, 0.8f, 0.8f, 1.0f};  GLfloat cyan[] = {0.f, .8f, .8f, 1.f};
+	GLfloat cyan[] = {0.1f, .4f, .4f, 0.5f};
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, cyan);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, white);
+	GLfloat shininess[] = {100};
+	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);*/
+	//glShadeModel(GL_FLAT);
 	
+
+	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);
 	glutFullScreen();
 	
 

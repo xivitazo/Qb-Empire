@@ -10,10 +10,12 @@
 	//al crearse la clase vector con ellos.
 }*/
 
-Objeto :: Objeto (float a, bool v, unsigned int red, unsigned int green, unsigned int blue):
-	color(red, green, blue),
-	altura(a),
-	visible(v) 
+Objeto :: Objeto (float _altura, Color _color , Planta _planta, Vector dimension ,bool _visible):
+	color(_color),
+	altura(_altura),
+	planta(_planta),
+	superficie(dimension),
+	visible(_visible) 
 {
 	//no inicializo posicion y vector porque están ya a 0
 	//al crearse la clase vector con ellos.

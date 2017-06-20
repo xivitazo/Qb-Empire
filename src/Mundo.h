@@ -4,7 +4,7 @@
 class Mundo
 {
 	Mapa map;
-	Lista_de jugador;
+	Lista_de jugador1, jugador2;
 public: 
 	Mundo();
 	void Tecla(unsigned char key);

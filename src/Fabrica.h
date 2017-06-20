@@ -2,7 +2,7 @@
 #include "Edificio.h"
 #include "Recursos.h"
 
-enum Type { comida, hierro, oro };
+
 class Fabrica : public Edificio
 {
 protected:
@@ -12,7 +12,7 @@ protected:
 	//Precio de oro que cuesta subir de nivel;
 
 public:
-	Fabrica(Type _tipo);
+	Fabrica(Type _tipo, unsigned int nivel);
 	/*	Según quieres:
 			tipo==oro -> Fabrica de oro
 			tipo==comida -> Fabrica de comida
@@ -23,7 +23,7 @@ public:
 	//falta implementar el rollo de cobrar el subir de nivel
 	void Dibuja(Color equipo=0);
 	void Timer (float t);
-	void subirNivel(unsigned int tipo);
+	void subirNivel();
 
 	friend class Interaccion;
 };

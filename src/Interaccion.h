@@ -12,8 +12,9 @@ class Interaccion
 public:
 	Interaccion(void);
 	virtual ~Interaccion(void);
-	static void Ataque(Vector posicion, unsigned int daño, unsigned int salpicadura); //Introduces donde atacar y cuando daño haces
-	static void Choque ( Personaje &a, Objeto &p);
+	static void Ataque(Disparo* disparo); //Introduces donde atacar y cuando daño haces
+	static bool Choque ( Objeto &a, Objeto &p);
+	static bool Rebote (Objeto &a, Objeto&b);
 	//El personaje es el que se esta moviendo por tanto es el personaje
 	//el que debe cambiar la trayectoria para evitar el obstaculo
 	static float Distancia (Objeto &a, Objeto &b);

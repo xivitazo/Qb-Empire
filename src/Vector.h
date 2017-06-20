@@ -17,5 +17,6 @@ public:
 	Vector operator / (float);
 	float operator * (Vector &);
 	Vector unitario();
+	Vector perpendicular();
 	float vx, vy;
 };
