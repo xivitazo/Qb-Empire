@@ -72,8 +72,8 @@ void Mundo::Timer(float t)
 void Mundo::Inicializa()
 {
 	x_ojo=112.5;
-	y_ojo=-112.5;
-	z_ojo=75;
+	y_ojo=-175;
+	z_ojo=50;
 	miro_x=112.5;
 	miro_y=37.5;
 	miro_z=0;
@@ -104,6 +104,7 @@ void Mundo::Tecla(unsigned char key)
 	case '1': setPerspectiva(-37.5,37.5,50,25,37.5,0); break; //Vista Poblado
 	case '2': setPerspectiva(112.2,-28.5,60,112.5,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
+	case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo
 	case 'p': jugador1.Agregar(LUCHADOR, CABALLERO, 1); break;
 	//case 'o': jugador2.prueba(2); break;
 	}

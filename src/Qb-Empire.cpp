@@ -64,7 +64,7 @@ int main(int argc,char* argv[])
 	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 	glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 15.f);
 	*/
-
+	mundo.Inicializa();
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
@@ -72,7 +72,7 @@ int main(int argc,char* argv[])
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(OnMouse);
 
-	mundo.Inicializa();
+	
 		
 	//pasarle el control a GLUT,que llamara a los callbacks
 	glutMainLoop();	
