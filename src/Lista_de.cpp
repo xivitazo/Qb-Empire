@@ -17,12 +17,13 @@ Lista_de::Lista_de(Vector ayuntamiento, Color equipo ):
 	{
 		numero_generado[n]=0;
 	}
-	max_Type[EDIFICIOS]=3;
+	max_Type[EDIFICIOS]=4;
 	max_Type[COMBATIENTES]=20;
 
 
 
 	lista[numero++]=new Ayuntamiento (ayuntamiento);
+	numero_generado[EDIFICIOS]++;
 }
 
 Lista_de::~Lista_de(void)
@@ -32,7 +33,7 @@ Lista_de::~Lista_de(void)
 
 bool Lista_de:: Agregar (Type tipo, Vector posicion)
 {
-	if(numero<MAX&&numero_generado[tipo]<max_Type[tipo])
+	if(numero<MAX&&numero_generado[EDIFICIOS]<max_Type[EDIFICIOS])
 	{
 		switch (tipo){
 		case F_ORO : 
@@ -44,13 +45,13 @@ bool Lista_de:: Agregar (Type tipo, Vector posicion)
 	}
 	return false;
 }
-bool Lista_de :: Agregar (Luchadores especifico)
+bool Lista_de :: Agregar (Luchadores tipo)
 {
 		for(int n=0; n<numero; n++)
 		{
 			if (lista[n]->tipo == CUARTEL && lista[n]->poderGenerar(LUCHADOR))
 			{
-				lista[n]-> generar (&lista[numero++], nivel[LUCHADOR+especifico], especifico);
+				lista[n]-> generar (&lista[numero++], nivel[LUCHADOR+tipo], tipo);
 				numero_generado[COMBATIENTES]++;
 				return true;
 			}

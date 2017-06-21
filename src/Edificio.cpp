@@ -42,30 +42,31 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 {
 	glPushMatrix();
 	glTranslatef(posicion.vx, posicion.vy, 0);
+	dimension=dimension/2;
 	
 	//glEnable(GL_COLOR_MATERIAL);
 	//glDisable(GL_LIGHTING);
 	//Pared eje X
 	glBegin(GL_POLYGON);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
-		glVertex3f(0,0,0);
-		glVertex3f(0, 0,(float)altura);
-		glVertex3f(dimension.vx, 0, (float)altura);	
-		glVertex3f(dimension.vx, 0, 0);
+		glVertex3f(-dimension.vx,-dimension.vy,0);
+		glVertex3f(-dimension.vx, -dimension.vy,(float)altura);
+		glVertex3f(dimension.vx, -dimension.vy, (float)altura);	
+		glVertex3f(dimension.vx, -dimension.vy, 0);
 	glEnd();
 	//Pared Eje Y
 	glBegin(GL_POLYGON);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
-		glVertex3f(0,0,0);
-		glVertex3f(0,dimension.vy,0);
-		glVertex3f(0.0f,dimension.vy,(float)altura);	
-		glVertex3f(0,0,(float)altura);
+		glVertex3f(-dimension.vx,-dimension.vy,0);
+		glVertex3f(-dimension.vx,dimension.vy,0);
+		glVertex3f(-dimension.vx,dimension.vy,(float)altura);	
+		glVertex3f(-dimension.vx,-dimension.vy,(float)altura);
 	glEnd();
 	//Pared Eje XFondo
 	glBegin(GL_POLYGON);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
-		glVertex3f(0,dimension.vy,0);
-		glVertex3f(0.0f,dimension.vy,(float)altura);
+		glVertex3f(-dimension.vx,dimension.vy,0);
+		glVertex3f(-dimension.vx,dimension.vy,(float)altura);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 		glVertex3f(dimension.vx,dimension.vy,0);
 	glEnd();
@@ -74,42 +75,42 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
 		glVertex3f(dimension.vx,dimension.vy,0);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
-		glVertex3f(dimension.vx,0,(float)altura);	
-		glVertex3f(dimension.vx,0,0);
+		glVertex3f(dimension.vx,-dimension.vy,(float)altura);	
+		glVertex3f(dimension.vx,-dimension.vy,0);
 	glEnd();
 	glBegin(GL_POLYGON);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
-		glVertex3f(0,dimension.vy,0);
-		glVertex3f(0.0f,dimension.vy,(float)altura);
+		glVertex3f(-dimension.vx,dimension.vy,0);
+		glVertex3f(-dimension.vx,dimension.vy,(float)altura);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 		glVertex3f(dimension.vx,dimension.vy,0);
 	glEnd();
 	// Techo Eje X
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
-		glVertex3f(0, 0,(float)altura);
-		glVertex3f(dimension.vx/2.0f,dimension.vy/2.0f,(float)altura+2.0f);
-		glVertex3f(dimension.vx,0,(float)altura);	
+		glVertex3f(-dimension.vx, -dimension.vy,(float)altura);
+		glVertex3f(0,0,(float)altura+2.0f);
+		glVertex3f(dimension.vx,-dimension.vy,(float)altura);	
 	glEnd();
 	//Techo Eje y
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
-		glVertex3f(0, 0,(float)altura);
-		glVertex3f(dimension.vx/2.0f,dimension.vy/2.0f,(float)altura+2.0f);
-		glVertex3f(0,dimension.vy,(float)altura);	
+		glVertex3f(-dimension.vx, dimension.vy,(float)altura);
+		glVertex3f(0,0,(float)altura+2.0f);
+		glVertex3f(-dimension.vx,-dimension.vy,(float)altura);	
 	glEnd();
 	//Techo Eje Xfondo
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
-		glVertex3f(0,dimension.vy,(float)altura);	
-		glVertex3f(dimension.vx/2.0f,dimension.vy/2.0f,(float)altura+2.0f);
+		glVertex3f(-dimension.vx,dimension.vy,(float)altura);	
+		glVertex3f(0,0,(float)altura+2.0f);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
 	//Techo Eje YFOndo
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
-		glVertex3f(dimension.vx,0,(float)altura);		
-		glVertex3f(dimension.vx/2.0f,dimension.vy/2.0f,(float)altura+2.0f);
+		glVertex3f(dimension.vx,-dimension.vy,(float)altura);		
+		glVertex3f(0,0,(float)altura+2.0f);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
 	//glEnable(GL_LIGHTING);

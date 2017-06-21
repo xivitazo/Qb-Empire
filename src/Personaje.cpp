@@ -137,6 +137,7 @@ void Personaje :: Timer (float t)
 
 void Personaje :: Dibuja (Color equipo)
 {
+	glDisable(GL_LIGHTING);
 	glPushMatrix();
 	glColor3ub(equipo.getRed(),equipo.getGreen(),equipo.getBlue());
 	glTranslatef(posicion.vx,posicion.vy, 0);
@@ -151,6 +152,7 @@ void Personaje :: Dibuja (Color equipo)
 		disparos[n]->Dibuja();
 		continue;
 	}
+	glEnable(GL_LIGHTING);
 }
 
 bool Personaje :: setVelocidad (Vector velocidad)

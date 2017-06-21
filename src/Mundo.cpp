@@ -103,7 +103,7 @@ void Mundo::Tecla(unsigned char key)
 	case 'o': jugador1.Agregar(F_ORO, Vector(50,50)); break;
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
 	case 'y': jugador1.Agregar(F_HIERRO, Vector(30,68));  break;
-	case 'ñ': jugador2.Agregar(CABALLERO); break;
+	case 'q': jugador2.Agregar(CABALLERO); break;
 	case 'k': jugador2.Agregar(CUARTEL, Vector(225-10,75-20)); break;
 	case 'l': jugador2.Agregar(F_ORO, Vector(225-50,75-50)); break;
 	case 'j': jugador2.Agregar(F_COMIDA, Vector(225-75,75-68));  break;
