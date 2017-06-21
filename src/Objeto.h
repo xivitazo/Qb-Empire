@@ -22,7 +22,7 @@ public:
 	virtual ~Objeto(void);
 	virtual void Dibuja(Color equipo=0);
 	virtual void Timer (float t);
-	Vector getPoscion();
+	Vector getPosicion();
 	void setPosicion(int x, int y);
 	virtual bool setVelocidad (Vector velocidad){return false;}
 

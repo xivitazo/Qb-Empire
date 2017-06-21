@@ -4,10 +4,9 @@
 #include "Fabrica.h"
 #include "Recursos.h"
 #include "Interaccion.h"
-//#include "Objeto.h" Personaje creo que ya incluye objetos
-
 
 #define MAX 300
+
 //Tamaño del vector de cosas
 #define MAX_TIPOS 13 
 
@@ -15,10 +14,10 @@
 class Lista_de
 {
 	int numero;
+	int num_disparos;
+	//Sirve ara contabilizar los disparos que hay n total
+
 	Color equipo;
-	//Estableces lo creado para tener un control
-	unsigned int cuarteles, fabricas, personajes;
-	//Estableces limites para crear
 	unsigned int *max;
 	unsigned int limite_tropas;// limite por unidad de tiempo
 
@@ -26,8 +25,6 @@ class Lista_de
 	//Distinto del numero de tropas y demás
 	Edificio  *lista [MAX];
 	//Vector que contiene edificios y personajes
-	Disparo *disparos[MAX];
-	//Vector que contiene disparos del equipo
 
 
 	//Atrinutos Type-Luchadores
@@ -42,9 +39,10 @@ class Lista_de
 	
 
 public:
-	Lista_de(unsigned char red=0, unsigned char green=0, unsigned char blue=0);
+	Lista_de(Vector ayuntamiento, Color equipo);
 	~Lista_de(void);
-	bool Agregar (Type tipo,Luchadores especifico=NINGUNO , unsigned int cuartel=0);	
+	bool Agregar (Type tipo, Vector posicion);	
+	bool Agregar (Luchadores especifico);	
 	/*
 		tipo es lo que quieres añadir:
 			1-Cuartel
@@ -67,7 +65,8 @@ public:
 	//devuelve cuantos personajes han muerto en el bucle
 	//los muertos se iguala la direccion a 0 para poder corroborar que no se ha borrado
 	int getNumero(){return numero;}
-	bool subirNivel (Type tipo, Luchadores especifico=NINGUNO);
+	bool subirNivel (Type tipo);
+	bool subirNivel(Luchadores tipo);
 	void Timer (float t);
 	void Rebote();
 	Edificio getPosN(int posicion){return lista[posicion];}

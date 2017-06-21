@@ -1,33 +1,24 @@
 #include "Lista_de.h"
 
 
-Lista_de::Lista_de(unsigned char red, unsigned char green, unsigned char blue):
-	equipo(red, green, blue)
+Lista_de::Lista_de(Vector ayuntamiento, Color equipo ):
+	equipo(equipo)
 {
 	numero=0;
-	cuarteles=0;
-	fabricas=0;
-	personajes=0;
 	for (int n=0;n<MAX; n++)
 	{
 		lista[n]=0;
-		disparos[n]=0;
 	}
 	for(int n=0; n<MAX_TIPOS;n++)
 	{
 		numero_generado[n]=0;
 		nivel[n]=1;
-		max_Type[n]=0;
+		max_Type[n]=50;
 	}
 
 
 
-
-	lista[numero++]=new Ayuntamiento ();
-	lista[numero++]=new Cuartel (4);
-	lista [numero++]=new Fabrica (F_COMIDA,1);
-	lista [numero++]=new Fabrica (F_HIERRO,2);
-	lista[numero++]=new Fabrica (F_ORO,3);
+	lista[numero++]=new Ayuntamiento (ayuntamiento);
 }
 
 Lista_de::~Lista_de(void)
@@ -35,46 +26,31 @@ Lista_de::~Lista_de(void)
 
 }
 
-bool Lista_de:: Agregar (Type tipo, Luchadores especifico, unsigned int cuartel)
+bool Lista_de:: Agregar (Type tipo, Vector posicion)
 {
-	if (especifico!=NINGUNO && tipo != LUCHADOR)
-			return false;
-	if(numero<MAX&&numero_generado[especifico+tipo]<max_Type[tipo+especifico])
+	if(numero<MAX&&numero_generado[tipo]<max_Type[tipo])
 	{
 		switch (tipo){
 		case F_ORO : 
 		case F_HIERRO : 
-		case F_COMIDA : lista[numero++]= new Fabrica(tipo, nivel[tipo]); return true;
-		case CUARTEL : lista[numero++]=new Cuartel(nivel[tipo]); return true;
-		}
-		if (especifico != NINGUNO)
-		{
-			lista[numero]=new Personaje (especifico,nivel[tipo+especifico]);
-			lista[numero++]->setPosicion(lista[cuartel]->posicion.vx,lista[cuartel]->posicion.vy);
+		case F_COMIDA : lista[numero++]= new Fabrica(tipo, posicion, nivel[tipo]); return true;
+		case CUARTEL : lista[numero++]=new Cuartel(posicion, nivel[tipo]); return true;
 		}
 
 	}
 	return false;
-		/*
-		if (tipo==CUARTEL && cuarteles<max[CUARTEL])
+}
+bool Lista_de :: Agregar (Luchadores especifico)
+{
+		for(int n=0; n<numero; n++)
 		{
-			lista[numero++]=new Cuartel ;
-			cuarteles++;
+			if (lista[n]->tipo == CUARTEL && lista[n]->poderGenerar(LUCHADOR))
+			{
+				lista[n]-> generar (&lista[numero++], nivel[LUCHADOR+especifico], especifico);
+				return true;
+			}
 		}
-		else if (tipo==F_ORO && fabricas(F_ORO)<max[F_ORO])
-		{
-			lista[numero++]=new Fabrica ();
-			fabricas++;
-		}
-		else if (tipo ==3 && personajes<max_personajes && cuarteles>=1 && lista[cuartel]->poderGenerar())
-		{
-			lista[numero++]=new Personaje (especifico);
-			personajes++;
-		}
-		else return false;
-	}
-	else return false;
-	return true;*/
+		return false;
 }
 
 void Lista_de :: Dibuja()
@@ -83,15 +59,7 @@ void Lista_de :: Dibuja()
 	{
 		lista[n]->Dibuja(equipo);
 	}
-	for (int n=0; n<MAX;n++)
-	{
-		if (disparos[0]==0)
-		{
-			break;
-		}
-		disparos[n]->Dibuja();
-		continue;
-	}
+	
 }
 
 /*void Lista_de :: choque()
@@ -118,14 +86,22 @@ void Lista_de :: Morir()
 		}
 	}
 }
-bool Lista_de :: subirNivel(Type tipo, Luchadores especifico)
+bool Lista_de :: subirNivel(Type tipo)
 {
-	if(especifico!=NINGUNO && tipo!= CUARTEL)
-		return 0;
-	nivel[tipo+especifico]++;
+	nivel[tipo]++;
 	for(int n=0; n<numero; n++)
 	{
 		if(lista[n]->tipo==tipo&&lista[n]->especifico)
+			lista[n]->subirNivel();
+	}
+	return true;
+}
+bool Lista_de :: subirNivel(Luchadores tipo)
+{
+	nivel[tipo+LUCHADOR]++;
+	for(int n=0; n<numero; n++)
+	{
+		if(lista[n]->especifico==tipo)
 			lista[n]->subirNivel();
 	}
 	return true;
@@ -135,16 +111,7 @@ void Lista_de :: Timer (float t)
 	for(int n=0;n<numero;n++)
 	{
 		lista[n]->Timer(t);
-	}
-	for(int n=0;n<MAX;n++)
-	{
-		if(disparos[n]==0)
-			break;
-		if(disparos[n]->Mueve())
-			Interaccion :: Ataque (disparos[n]);
-
-	}
-	
+	}	
 }
 
 void Lista_de :: Rebote()

@@ -43,8 +43,8 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 	glPushMatrix();
 	glTranslatef(posicion.vx, posicion.vy, 0);
 	
-	glEnable(GL_COLOR_MATERIAL);
-	glDisable(GL_LIGHTING);
+	//glEnable(GL_COLOR_MATERIAL);
+	//glDisable(GL_LIGHTING);
 	//Pared eje X
 	glBegin(GL_POLYGON);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
@@ -57,7 +57,7 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 	glBegin(GL_POLYGON);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
 		glVertex3f(0,0,0);
-		glVertex3f(0,dimension.vx,0);
+		glVertex3f(0,dimension.vy,0);
 		glVertex3f(0.0f,dimension.vy,(float)altura);	
 		glVertex3f(0,0,(float)altura);
 	glEnd();
@@ -121,8 +121,9 @@ void Edificio :: color_vida()
 {
 	color.set(color.getRed()*(vida/vida_max),color.getGreen()*(vida/vida_max),color.getBlue()*(vida/vida_max));
 }
-void Edificio :: poderGenerar (Type tipo)
+bool Edificio :: poderGenerar (Type tipo)
 {
+	return true;
 }
 void Edificio :: subirNivel()
 {

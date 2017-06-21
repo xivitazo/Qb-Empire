@@ -7,10 +7,6 @@ class Edificio : public Objeto
 {
 protected:
 	unsigned int vida,vida_max;
-
-	
-
-	
 	unsigned int limite;
 	//Limite de generacion por unidad de tiempo (Cuarteles y fábricas)
 	unsigned int nombre;
@@ -36,7 +32,7 @@ public:
 	void Dibuja(Color equipo=0);
 	void casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura);
 	void setTipo(Type tipo);
-	void poderGenerar (Type tipo);
+	bool poderGenerar (Type tipo);
 	//Te dice si puedes generar lo que quieras
 	virtual void subirNivel();
 	//Solo se usará el tipo en la clase personaje para definir que tropa sube de nivel
@@ -44,7 +40,8 @@ public:
 	unsigned int getMax(Type tipo);
 	void setNumero_Generado(Type tipo, int incremento);
 	int getRango (){return rango;}
-	virtual bool Atacar (Edificio* objetivo, Edificio** lista){return false;}
+	virtual bool Atacar (Edificio** lista){return false;}
+	virtual bool generar (Edificio** tropa = 0, int nivel=1, Luchadores tipo = NINGUNO){return false;}
 
 
 	friend class Interaccion;

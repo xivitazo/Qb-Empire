@@ -1,14 +1,17 @@
 #include "Fabrica.h"
 
 
-Fabrica::Fabrica(Type _tipo, unsigned int nivel):
+Fabrica::Fabrica(Type _tipo,Vector posicion, unsigned int nivel):
 	tipo(_tipo), 
-	Edificio(1000,4,Color (),CUADRADO, Vector (4,4))
+	Edificio(1000,4,Color (),CUADRADO, Vector(4,4))
 {
+	this -> posicion = posicion;
+	this -> tipo= tipo;
+	especifico=NINGUNO;
 	switch(tipo){
-	case F_ORO:		color.set(245, 208, 51); setPosicion(50,30);	break;
-	case F_COMIDA:	color.set(234, 137, 154) ;setPosicion(30,50);	break;
-	case F_HIERRO:	color.set(157, 161, 170); setPosicion(40,70);	
+	case F_ORO:		color.set(245, 208, 51);	break;
+	case F_COMIDA:	color.set(234, 137, 154) ;	break;
+	case F_HIERRO:	color.set(157, 161, 170);	
 	}
 	for(int n=0;n<nivel;n++)
 		subirNivel();

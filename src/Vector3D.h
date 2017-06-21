@@ -18,6 +18,7 @@ public:
 	float operator * (Vector3D &);
 	bool operator == (Vector3D &);
 	bool operator != (Vector3D &);
+	bool operator = (Vector3D &);
 	Vector3D unitario();
 	Vector3D perpendicular();
 };

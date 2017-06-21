@@ -25,7 +25,7 @@ Objeto::~Objeto(void)
 {
 }
 
-Vector Objeto :: getPoscion()
+Vector Objeto :: getPosicion()
 {
 	return posicion;
 }

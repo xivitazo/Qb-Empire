@@ -4,7 +4,7 @@
 #include "Mapa.h"
 #include "Vector.h"
 #include "Disparo.h"
-#include "Personaje.h"
+//#include "Personaje.h"
 
 
 class Interaccion

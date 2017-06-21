@@ -38,7 +38,9 @@ int main(int argc,char* argv[])
   glDepthFunc(GL_LESS);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
-	/*GLfloat white[] = {0.4f, 0.4f,0.4f, 0.5f};		//GLfloat white[] = {0.8f, 0.8f, 0.8f, 1.0f};  GLfloat cyan[] = {0.f, .8f, .8f, 1.f};
+	/*GLfloat white[] = {0.4f, 0.4f,0.4f, 0.5f};		
+	GLfloat white[] = {0.8f, 0.8f, 0.8f, 1.0f}; 
+	GLfloat cyan[] = {0.f, .8f, .8f, 1.f};
 	GLfloat cyan[] = {0.1f, .4f, .4f, 0.5f};
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, cyan);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, white);
@@ -56,7 +58,7 @@ int main(int argc,char* argv[])
 
 
 
-	glutFullScreen();
+//	glutFullScreen();
 	/*
 	glShadeModel(GL_SMOOTH);
 	glMatrixMode(GL_MODELVIEW);	
@@ -68,7 +70,7 @@ int main(int argc,char* argv[])
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
-	glutTimerFunc(1,OnTimer,0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
+	glutTimerFunc(25,OnTimer,0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(OnMouse);
 
@@ -118,10 +120,10 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 void OnTimer(int value)
 {
 //poner aqui el código de animacion
-	mundo.Timer(0.001f);
+	mundo.Timer(0.025f);
 
 	//no borrar estas lineas
-	glutTimerFunc(1,OnTimer,0);
+	glutTimerFunc(25,OnTimer,0);
 	glutPostRedisplay();
 }
 void OnMouse(int button, int state, int vx, int vy)
@@ -137,7 +139,7 @@ void OnMouse(int button, int state, int vx, int vy)
 	mundo.Raton(button,state,(int)x,(int)y);
 	printf("%lf\t%lf\t%lf\n", x,y,z);
 	*/
-	printf ("%d\t%d\n", vx, vy);
+	//printf ("%d\t%d\n", vx, vy);
 //	mundo.Raton(button, state, screenToWorldCoords(vx,vy));
 }
 

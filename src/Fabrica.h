@@ -12,7 +12,7 @@ protected:
 	//Precio de oro que cuesta subir de nivel;
 
 public:
-	Fabrica(Type _tipo, unsigned int nivel);
+	Fabrica(Type _tipo,Vector posicion, unsigned int nivel);
 	/*	Según quieres:
 			tipo==oro -> Fabrica de oro
 			tipo==comida -> Fabrica de comida

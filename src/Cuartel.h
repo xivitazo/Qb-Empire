@@ -10,9 +10,9 @@ protected:
 	unsigned int tiempo;
 
 public:
-	Cuartel(unsigned int nivel);
+	Cuartel( Vector posicion, unsigned int nivel);
+	Cuartel(const Cuartel *copia);
 	virtual ~Cuartel(void);
-	bool newTropa();
 	//Devuelve un TRUE si se puede generar una nueva tropa 
 	//Un FALSE si ya ha generado el maximo por unidad de tiempo
 	void Timer (float t); //****LUIS CAMBIA T->TIEMPO******
@@ -20,6 +20,7 @@ public:
 	bool poderGenerar ();
 	void Dibuja(Color equipo=0);
 	void subirNivel();
+	bool generar (Edificio ** tropa, int nivel, Luchadores tipo);
 
 	friend class Interaccion;
 };

@@ -18,7 +18,7 @@ Vector3D Vector3D :: operator - (Vector3D &v)
 	Vector3D aux;
 	aux.vx =vx - v.vx;
 	aux.vy =vy - v.vy;
-	aux.vz =vz-v.vz;
+	aux.vz =vz - v.vz;
 	return aux;
 }
 
@@ -27,7 +27,7 @@ Vector3D Vector3D :: operator + (Vector3D &v)
 	Vector3D aux;
 	aux.vx =vx + v.vx;
 	aux.vy =vy + v.vy;
-	aux.vz =vz +v.vz;
+	aux.vz =vz + v.vz;
 	return aux;
 }
 
@@ -73,13 +73,21 @@ void Vector3D :: setValor(float x, float y, float z)
 }
 bool Vector3D :: operator == (Vector3D &v)
 {
-	if(abs(vx-v.vx)<=0.1f && abs(vy-v.vy)<=0.1f && abs(vz-v.vz)<=0.1f)
+	if(abs(vx-v.vx)<=0.3f && abs(vy-v.vy)<=0.3f && abs(vz-v.vz)<=0.3f)
 		return true;
 	return false;
 }
 bool Vector3D :: operator != (Vector3D &v)
 {
-	if(abs(vx-v.vx)<=0.1f && abs(vy-v.vy)<=0.1f && abs(vz-v.vz)<=0.1f)
+	if(abs(vx-v.vx)<=0.3f && abs(vy-v.vy)<=0.3f && abs(vz-v.vz)<=0.3f)
 		return false;
 	return true;
+}
+
+bool Vector3D :: operator = (Vector3D &i)
+{
+	vx=i.vx;
+	vy=i.vy;
+	vz=i.vz;
+	return 1;
 }

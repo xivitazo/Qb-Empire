@@ -1,13 +1,16 @@
 #include "Cuartel.h"
 
 
-Cuartel :: Cuartel(unsigned int nivel):
+Cuartel :: Cuartel(Vector posicion, unsigned int nivel):
 	tiempo(0), 
 	limite_tropas(100), 
 	numero_tropas(0), 
-	Edificio(1000,4, Color (139,69,19), CUADRADO, Vector (4, 4))
+	Edificio(1000,4, Color (139,69,19), CUADRADO, Vector(4,4))
 {
-	for(int n=0;n<nivel; n++)
+	this->posicion=posicion;
+	tipo = CUARTEL;
+	especifico = NINGUNO;
+	for(unsigned int n=0;n<nivel; n++)
 		subirNivel();
 	rango=-1;
 }
@@ -26,7 +29,7 @@ void Cuartel :: subirNivel()
 
 bool Cuartel :: poderGenerar(void)
 {
-	return numero_tropas<= limite_tropas;
+	return true;
 }
 
 void Cuartel :: Timer (float t)
@@ -43,4 +46,14 @@ void Cuartel :: Dibuja (Color equipo)
 {
 	setPosicion(5, 5);
 	casita(posicion, equipo, color , superficie, altura);
+}
+
+
+Cuartel :: Cuartel(const Cuartel* copia):Edificio(copia)
+{
+}
+bool Cuartel :: generar (Edificio ** tropa, int nivel, Luchadores tipo)
+{
+	*tropa = new Personaje(tipo, nivel, posicion+superficie);
+	return true;
 }

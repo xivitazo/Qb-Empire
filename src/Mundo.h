@@ -10,7 +10,6 @@ public:
 	Mundo();
 	void Tecla(unsigned char key);
 	void Inicializa();
-	void RotarOjo(); 
 	void Timer(float t);
 	void Dibuja();
 	void Raton (int button, int state, Vector pos);
