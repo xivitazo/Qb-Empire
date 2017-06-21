@@ -44,7 +44,6 @@ void Cuartel :: Timer (float t)
 
 void Cuartel :: Dibuja (Color equipo) 
 {
-	setPosicion(5, 5);
 	casita(posicion, equipo, color , superficie, altura);
 }
 

@@ -11,10 +11,14 @@ Lista_de::Lista_de(Vector ayuntamiento, Color equipo ):
 	}
 	for(int n=0; n<MAX_TIPOS;n++)
 	{
-		numero_generado[n]=0;
 		nivel[n]=1;
-		max_Type[n]=50;
 	}
+	for(int n=0; n<MAX_GENERAL;n++)
+	{
+		numero_generado[n]=0;
+	}
+	max_Type[EDIFICIOS]=3;
+	max_Type[COMBATIENTES]=20;
 
 
 
@@ -33,8 +37,8 @@ bool Lista_de:: Agregar (Type tipo, Vector posicion)
 		switch (tipo){
 		case F_ORO : 
 		case F_HIERRO : 
-		case F_COMIDA : lista[numero++]= new Fabrica(tipo, posicion, nivel[tipo]); return true;
-		case CUARTEL : lista[numero++]=new Cuartel(posicion, nivel[tipo]); return true;
+		case F_COMIDA : lista[numero++]= new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; return true;
+		case CUARTEL : lista[numero++]=new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; return true;
 		}
 
 	}
@@ -47,6 +51,7 @@ bool Lista_de :: Agregar (Luchadores especifico)
 			if (lista[n]->tipo == CUARTEL && lista[n]->poderGenerar(LUCHADOR))
 			{
 				lista[n]-> generar (&lista[numero++], nivel[LUCHADOR+especifico], especifico);
+				numero_generado[COMBATIENTES]++;
 				return true;
 			}
 		}
@@ -89,6 +94,11 @@ void Lista_de :: Morir()
 bool Lista_de :: subirNivel(Type tipo)
 {
 	nivel[tipo]++;
+	if (tipo==AYUNTAMIENTO)
+	{
+		max_Type[COMBATIENTES]=(int)((float)max_Type[COMBATIENTES]*1.5);
+		max_Type[EDIFICIOS]+=5;
+	}
 	for(int n=0; n<numero; n++)
 	{
 		if(lista[n]->tipo==tipo&&lista[n]->especifico)

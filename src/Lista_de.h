@@ -9,6 +9,8 @@
 
 //Tamaño del vector de cosas
 #define MAX_TIPOS 13 
+#define MAX_GENERAL 2
+enum general {EDIFICIOS, COMBATIENTES};
 
 
 class Lista_de
@@ -31,8 +33,8 @@ class Lista_de
 	//Esta pirmero la info de las enumeraicones Type y seguidamente las de Luchadores
 	//Toda la informacion la tiene el ayuntamiento, si se quieren saber estas cosas, 
 	//vente al ayuntamiento y coge numero como en tu casa
-	unsigned int max_Type[MAX_TIPOS];
-	unsigned int numero_generado[MAX_TIPOS];
+	unsigned int max_Type[MAX_GENERAL];
+	unsigned int numero_generado[MAX_GENERAL];
 	unsigned int nivel[MAX_TIPOS];
 	//tener cuidado que static este funcionaria tanto para nuestro ayuntamiento
 	//como para el del rival en caso de que exista
