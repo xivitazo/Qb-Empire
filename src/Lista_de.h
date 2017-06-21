@@ -16,8 +16,8 @@ enum general {EDIFICIOS, COMBATIENTES};
 class Lista_de
 {
 	int numero;
-	int num_disparos;
-	//Sirve ara contabilizar los disparos que hay n total
+	
+	Recursos Almacen;
 
 	Color equipo;
 	unsigned int *max;
@@ -71,6 +71,7 @@ public:
 	bool subirNivel(Luchadores tipo);
 	void Timer (float t);
 	void Rebote();
+	bool generarRecursos();
 	Edificio getPosN(int posicion){return lista[posicion];}
 	Edificio** getLista() {return lista;}
 

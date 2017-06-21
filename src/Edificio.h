@@ -32,7 +32,7 @@ public:
 	void Dibuja(Color equipo=0);
 	void casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura);
 	void setTipo(Type tipo);
-	bool poderGenerar (Type tipo);
+	bool poderGenerar ();
 	//Te dice si puedes generar lo que quieras
 	virtual void subirNivel();
 	//Solo se usará el tipo en la clase personaje para definir que tropa sube de nivel

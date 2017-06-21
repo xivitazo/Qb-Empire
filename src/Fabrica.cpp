@@ -13,7 +13,7 @@ Fabrica::Fabrica(Type _tipo,Vector posicion, unsigned int nivel):
 	case F_COMIDA:	color.set(234, 137, 154) ;	break;
 	case F_HIERRO:	color.set(157, 161, 170);	
 	}
-	for(int n=0;n<nivel;n++)
+	for(unsigned int n=0;n<nivel;n++)
 		subirNivel();
 	rango=-1;
 }
@@ -40,5 +40,11 @@ void Fabrica :: Dibuja (Color equipo)
 {
 
 	casita(posicion, equipo, color, superficie, altura);
+}
+bool Fabrica :: generar (Edificio ** tropa, int nivel, Luchadores tipo)
+{
+	if (poderGenerar())
+		;
+	return true;
 }
 

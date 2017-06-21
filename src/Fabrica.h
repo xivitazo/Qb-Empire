@@ -24,7 +24,7 @@ public:
 	void Dibuja(Color equipo=0);
 	void Timer (float t);
 	void subirNivel();
-
+	bool generar (Edificio ** tropa=0, int nivel=1, Luchadores tipo=NINGUNO);
 	friend class Interaccion;
 };
 

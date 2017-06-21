@@ -53,6 +53,8 @@ Cuartel :: Cuartel(const Cuartel* copia):Edificio(copia)
 }
 bool Cuartel :: generar (Edificio ** tropa, int nivel, Luchadores tipo)
 {
+	if (tipo == NINGUNO || nivel<1)
+		return 0;
 	*tropa = new Personaje(tipo, nivel, posicion+superficie);
 	return true;
 }

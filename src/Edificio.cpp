@@ -122,7 +122,7 @@ void Edificio :: color_vida()
 {
 	color.set(color.getRed()*(vida/vida_max),color.getGreen()*(vida/vida_max),color.getBlue()*(vida/vida_max));
 }
-bool Edificio :: poderGenerar (Type tipo)
+bool Edificio :: poderGenerar ()
 {
 	return true;
 }

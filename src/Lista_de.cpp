@@ -49,7 +49,7 @@ bool Lista_de :: Agregar (Luchadores tipo)
 {
 		for(int n=0; n<numero; n++)
 		{
-			if (lista[n]->tipo == CUARTEL && lista[n]->poderGenerar(LUCHADOR))
+			if (lista[n]->tipo == CUARTEL && lista[n]->poderGenerar())
 			{
 				lista[n]-> generar (&lista[numero++], nivel[LUCHADOR+tipo], tipo);
 				numero_generado[COMBATIENTES]++;
@@ -130,5 +130,13 @@ void Lista_de :: Rebote()
 	for (int n=0;n<numero-1;n++)
 		for (int i=n; i<numero;i++)
 			Interaccion :: Rebote (*lista[n], *lista[i]);
+}
+bool Lista_de :: generarRecursos()
+{
+	for(int n=0; n<numero; n++)
+	{
+		lista[n]->generar();
+	}
+	return true;
 }
 
