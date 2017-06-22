@@ -12,7 +12,7 @@ protected:
 	Vector destino;
 
 public:
-	Personaje(Luchadores tipo, unsigned int nivel, Vector posicion);
+	Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vector destino);
 	/*Lista de tipos:
 		0-Prueba, todo 1 (subidas de nivel del 10%
 		1-.........*/

@@ -21,7 +21,9 @@ void Mundo::Dibuja()
 	map.Dibuja();
 	jugador1.Dibuja();
 	jugador2.Dibuja();
-	printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
+	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
+	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
+	printf("%d\n", jugador1.getNivel(AYUNTAMIENTO));
 	
 	//Tenemos posibles coordenadas del mapa.
 	/*printf("Posicion Ojo x:  %f",x_ojo);
@@ -41,8 +43,6 @@ void Mundo::Dibuja()
 
 void Mundo::Timer(float t)
 {
-	jugador1.Rebote();
-	jugador2.Rebote();
 	for(int n=0; n<jugador1.getNumero();n++)
 	{
 		for(int i=0; i<jugador2.getNumero();i++)
@@ -98,16 +98,17 @@ void Mundo::Tecla(unsigned char key)
 	case '2': setPerspectiva(112.2,-28.5,60,112.5,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
 	case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo
-	case 'p': jugador1.Agregar(CABALLERO); break;
+	case 'p': jugador1.Agregar(CABALLERO, Vector(200,50)); break;
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
 	case 'o': jugador1.Agregar(F_ORO, Vector(50,50)); break;
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
 	case 'y': jugador1.Agregar(F_HIERRO, Vector(30,68));  break;
-	case 'q': jugador2.Agregar(CABALLERO); break;
+	case 'q': jugador2.Agregar(CABALLERO, Vector(0,0)); break;
 	case 'k': jugador2.Agregar(CUARTEL, Vector(225-10,75-20)); break;
 	case 'l': jugador2.Agregar(F_ORO, Vector(225-50,75-50)); break;
 	case 'j': jugador2.Agregar(F_COMIDA, Vector(225-75,75-68));  break;
 	case 'm': jugador2.Agregar(F_HIERRO, Vector(225-30,75-68));  break;
+	case '+': jugador1.subirNivel(AYUNTAMIENTO);  break;
 	}
 }
 

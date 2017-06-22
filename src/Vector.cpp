@@ -53,7 +53,7 @@ float Vector::modulo()
 
 float Vector::argumento()
 {
-	return (float)atan2(vy,vx);
+	return (float)atan(vy/vx);
 }
 
 Vector Vector:: unitario ()
@@ -71,8 +71,8 @@ void Vector :: setValor(float x, float y)
 Vector Vector :: perpendicular()
 {
 	Vector aux;
-	aux.vx = -vy;
-	aux.vy= vx;
+	aux.vx = vy;
+	aux.vy= -vx;
 	return aux;
 }
 bool Vector :: operator == (Vector &v)
@@ -86,4 +86,12 @@ bool Vector :: operator != (Vector &v)
 	if(abs(vx-v.vx)<=0.1f && abs(vy-v.vy)<=0.1f)
 		return false;
 	return true;
+}
+bool Vector :: operator < (float numero)
+{
+	return modulo()<numero;
+}
+bool Vector :: operator > (float numero)
+{
+	return modulo()>numero;
 }

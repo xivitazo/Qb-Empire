@@ -66,7 +66,7 @@ void Ayuntamiento :: Dibuja (Color equipo)
 	}
 }
 
-void Ayuntamiento :: subirNivel (unsigned int tipo) 
+void Ayuntamiento :: subirNivel () 
 {
 	vida*=2;
 	ataque*=1.35;

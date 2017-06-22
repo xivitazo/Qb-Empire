@@ -1,15 +1,15 @@
 #pragma once
 #include "Edificio.h"
-#include "Recursos.h"
 
 
 class Fabrica : public Edificio
 {
 protected:
 	Type tipo;
-	Recursos produccion;
+	int produccion;
 	unsigned int p_subirNivel; 
 	//Precio de oro que cuesta subir de nivel;
+	float tiempo;
 
 public:
 	Fabrica(Type _tipo,Vector posicion, unsigned int nivel);
@@ -24,7 +24,8 @@ public:
 	void Dibuja(Color equipo=0);
 	void Timer (float t);
 	void subirNivel();
-	bool generar (Edificio ** tropa=0, int nivel=1, Luchadores tipo=NINGUNO);
+	bool poderGenerar();
+	bool generar (Recursos& Almacen);
 	friend class Interaccion;
 };
 

@@ -16,6 +16,8 @@ public:
 	float operator * (Vector &);
 	bool operator == (Vector &);
 	bool operator != (Vector &);
+	bool operator < (float numero);
+	bool operator > (float numero);
 	Vector unitario();
 	Vector perpendicular();
 	float vx, vy;

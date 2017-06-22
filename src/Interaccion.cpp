@@ -29,17 +29,17 @@ float Interaccion :: Distancia (Objeto &a, Objeto &b)
 bool Interaccion :: Choque (Objeto &a, Objeto &b)
 {
 	Vector dist=(a.posicion-b.posicion);
+	float argumento=atan((dist.vy/2)/(dist.vx/2));
 	float modulo=dist.modulo();
-	float argumento=atan(dist.vy/dist.vx);
 	switch (a.planta)
 	{
 	case CUADRADO:
 		if (b.planta == CUADRADO)
 		{
 			if(argumento<45&&argumento>-45)
-				return abs(a.superficie.vx)+abs(b.superficie.vx)<abs(modulo);
+				return abs(a.superficie.vx)/2+abs(b.superficie.vx)/2<abs(modulo);
 			else if (argumento>45&&argumento<-45)
-				return abs(a.superficie.vy)+abs(b.superficie.vy)<abs(modulo);
+				return abs(a.superficie.vy)/2+abs(b.superficie.vy)/2<abs(modulo);
 			else if (argumento == 45 && argumento == -45)
 				return sqrt(a.superficie.vx*a.superficie.vx+a.superficie.vy*a.superficie.vy)+sqrt(b.superficie.vx*b.superficie.vx+b.superficie.vy*b.superficie.vy)<abs(modulo);
 		}

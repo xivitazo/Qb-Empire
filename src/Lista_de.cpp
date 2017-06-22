@@ -45,13 +45,13 @@ bool Lista_de:: Agregar (Type tipo, Vector posicion)
 	}
 	return false;
 }
-bool Lista_de :: Agregar (Luchadores tipo)
+bool Lista_de :: Agregar (Luchadores tipo, Vector destino)
 {
 		for(int n=0; n<numero; n++)
 		{
 			if (lista[n]->tipo == CUARTEL && lista[n]->poderGenerar())
 			{
-				lista[n]-> generar (&lista[numero++], nivel[LUCHADOR+tipo], tipo);
+				lista[n]-> generar (&lista[numero++], nivel[LUCHADOR+tipo], tipo, destino);
 				numero_generado[COMBATIENTES]++;
 				return true;
 			}
@@ -94,18 +94,22 @@ void Lista_de :: Morir()
 }
 bool Lista_de :: subirNivel(Type tipo)
 {
-	nivel[tipo]++;
-	if (tipo==AYUNTAMIENTO)
+	if (nivel[tipo]<4)
 	{
-		max_Type[COMBATIENTES]=(int)((float)max_Type[COMBATIENTES]*1.5);
-		max_Type[EDIFICIOS]+=5;
+		nivel[tipo]++;
+		if (tipo==AYUNTAMIENTO)
+		{
+			max_Type[COMBATIENTES]=(int)((float)max_Type[COMBATIENTES]*1.5);
+			max_Type[EDIFICIOS]+=5;
+		}
+		for(int n=0; n<numero; n++)
+		{
+			if(lista[n]->tipo==tipo)
+				lista[n]->subirNivel();
+		}
+		return true;
 	}
-	for(int n=0; n<numero; n++)
-	{
-		if(lista[n]->tipo==tipo&&lista[n]->especifico)
-			lista[n]->subirNivel();
-	}
-	return true;
+	return false;
 }
 bool Lista_de :: subirNivel(Luchadores tipo)
 {
@@ -119,10 +123,12 @@ bool Lista_de :: subirNivel(Luchadores tipo)
 }
 void Lista_de :: Timer (float t)
 {
+	Rebote();
 	for(int n=0;n<numero;n++)
 	{
 		lista[n]->Timer(t);
-	}	
+	}
+	generarRecursos();
 }
 
 void Lista_de :: Rebote()
@@ -135,7 +141,7 @@ bool Lista_de :: generarRecursos()
 {
 	for(int n=0; n<numero; n++)
 	{
-		lista[n]->generar();
+		lista[n]->generar(almacen);
 	}
 	return true;
 }

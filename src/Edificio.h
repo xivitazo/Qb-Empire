@@ -1,7 +1,7 @@
 #pragma once
 #include "Objeto.h"
-enum Type {NINGUNA_F, AYUNTAMIENTO, F_COMIDA, F_HIERRO, F_ORO,CUARTEL, LUCHADOR  };
-enum Luchadores {NINGUNO, CABALLERO, ARQUERA, GIGANTE, SOLDADO, GUERRERO};
+#include "Recursos.h"
+
 
 class Edificio : public Objeto
 {
@@ -16,9 +16,6 @@ protected:
 
 	//Hay que organizar una variable de coste de cada edificio y tal
 	//habia 
-	Type tipo;
-	Luchadores especifico;
-	//Estableces el tipo de clase edificio tal y como se establece en Lista_de.h
 	int rango;
 	//Rango de ataque, si no ataca será -1;
 	int rango_visibilidad;
@@ -41,7 +38,8 @@ public:
 	void setNumero_Generado(Type tipo, int incremento);
 	int getRango (){return rango;}
 	virtual bool Atacar (Edificio** lista){return false;}
-	virtual bool generar (Edificio** tropa = 0, int nivel=1, Luchadores tipo = NINGUNO){return false;}
+	bool generar (Edificio ** tropa, int nivel, Luchadores tipo, Vector destino){return false;}
+	virtual bool generar (Recursos& almacen){return false;};
 
 
 	friend class Interaccion;

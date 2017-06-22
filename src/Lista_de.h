@@ -17,7 +17,7 @@ class Lista_de
 {
 	int numero;
 	
-	Recursos Almacen;
+	Recursos almacen;
 
 	Color equipo;
 	unsigned int *max;
@@ -44,7 +44,7 @@ public:
 	Lista_de(Vector ayuntamiento, Color equipo);
 	~Lista_de(void);
 	bool Agregar (Type tipo, Vector posicion);	
-	bool Agregar (Luchadores especifico);	
+	bool Agregar (Luchadores especifico, Vector destino);	
 	/*
 		tipo es lo que quieres añadir:
 			1-Cuartel
@@ -74,6 +74,9 @@ public:
 	bool generarRecursos();
 	Edificio getPosN(int posicion){return lista[posicion];}
 	Edificio** getLista() {return lista;}
+	Recursos getAlmacen(){return almacen;}
+	int getNivel(Type tipo){return nivel[tipo];}
+	int getNivel(Luchadores tipo){return nivel[LUCHADOR+tipo];}
 
 
 

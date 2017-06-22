@@ -20,7 +20,7 @@ public:
 	bool poderGenerar ();
 	void Dibuja(Color equipo=0);
 	void subirNivel();
-	bool generar (Edificio ** tropa, int nivel, Luchadores tipo);
+	bool generar (Edificio ** tropa, int nivel, Luchadores tipo, Vector destino);
 
 	friend class Interaccion;
 };

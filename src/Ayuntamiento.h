@@ -17,7 +17,7 @@ public:
 	//Devuelve un 1 cuando crea un disparo hacia el objetivo
 	void Timer (float t);
 	void Dibuja(Color equipo=0);
-	void subirNivel(unsigned int tipo);
+	void subirNivel();
 
 
 	friend class Interaccion;

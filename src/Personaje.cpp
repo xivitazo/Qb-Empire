@@ -3,7 +3,8 @@
 #include "Disparo.h"
 #include <cstdio>
 
-Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion):
+Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vector destino):
+	destino(destino),
 	Ayuntamiento(posicion)
 {
 	this -> tipo=LUCHADOR;
@@ -51,7 +52,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion):
 	{
 		subirNivel();
 	}
-	destino.setValor(100,50);
+	//destino.setValor(100,50);
 	//velocidad.setValor(0,0);
 }
 
@@ -119,6 +120,7 @@ void Personaje :: subirNivel ()
 
 void Personaje :: Timer (float t) 
 {
+	Edificio :: Timer(t);
 	meMuevo();
 	velocidad=velocidad.unitario()*velocidad_max;
 	posicion=posicion+velocidad*t;
