@@ -8,9 +8,9 @@ Mundo mundo;
 //los callback, funciones que seran llamadas automaticamente por la glut
 //cuando sucedan eventos
 //NO HACE FALTA LLAMARLAS EXPLICITAMENTE
-void OnDraw(void); //esta funcion sera llamada para dibujar
-void OnTimer(int value); //esta funcion sera llamada cuando transcurra una temporizacion
-void OnKeyboardDown(unsigned char key, int x, int y); //cuando se pulse una tecla
+void OnDraw(void);
+void OnTimer(int value); 
+void OnKeyboardDown(unsigned char key, int x, int y);
 void OnMouse(int button, int state, int x, int y);
 void OnMousePas(int x, int y);
 
@@ -59,6 +59,10 @@ int main(int argc,char* argv[])
 
 
 //	glutFullScreen();
+
+
+
+
 	/*
 	glShadeModel(GL_SMOOTH);
 	glMatrixMode(GL_MODELVIEW);	
@@ -96,6 +100,7 @@ void OnDraw(void)
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
 }
+
 void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
 	//poner aqui el código de teclado
@@ -126,6 +131,7 @@ void OnTimer(int value)
 	glutTimerFunc(25,OnTimer,0);
 	glutPostRedisplay();
 }
+
 void OnMouse(int button, int state, int vx, int vy)
 {
 	/*

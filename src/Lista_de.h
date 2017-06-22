@@ -10,7 +10,7 @@
 //Tamaño del vector de cosas
 #define MAX_TIPOS 13 
 #define MAX_GENERAL 2
-enum general {EDIFICIOS, COMBATIENTES};
+enum General {EDIFICIOS, COMBATIENTES};
 
 
 class Lista_de
@@ -77,6 +77,7 @@ public:
 	Recursos getAlmacen(){return almacen;}
 	int getNivel(Type tipo){return nivel[tipo];}
 	int getNivel(Luchadores tipo){return nivel[LUCHADOR+tipo];}
+	int getMax (General tipo){return max_Type[tipo];}
 
 
 

@@ -51,10 +51,10 @@ void Cuartel :: Dibuja (Color equipo)
 Cuartel :: Cuartel(const Cuartel* copia):Edificio(copia)
 {
 }
-bool Cuartel :: generar (Edificio ** tropa, int nivel, Luchadores tipo, Vector destino)
+Edificio* Cuartel :: generar (int nivel, Luchadores tipo, Vector destino)
 {
-	if (tipo == NINGUNO || nivel<1 || destino<0)
+	if (tipo == NINGUNO || destino<0)
 		return false;
-	*tropa = new Personaje(tipo, nivel, posicion+superficie, destino);
-	return true;
+	return new Personaje(tipo, nivel, posicion+superficie, destino);
+	
 }

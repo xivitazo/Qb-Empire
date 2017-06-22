@@ -38,8 +38,8 @@ bool Lista_de:: Agregar (Type tipo, Vector posicion)
 		switch (tipo){
 		case F_ORO : 
 		case F_HIERRO : 
-		case F_COMIDA : lista[numero++]= new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; return true;
-		case CUARTEL : lista[numero++]=new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; return true;
+		case F_COMIDA : lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
+		case CUARTEL : lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
 		}
 
 	}
@@ -47,16 +47,15 @@ bool Lista_de:: Agregar (Type tipo, Vector posicion)
 }
 bool Lista_de :: Agregar (Luchadores tipo, Vector destino)
 {
-		for(int n=0; n<numero; n++)
-		{
-			if (lista[n]->tipo == CUARTEL && lista[n]->poderGenerar())
-			{
-				lista[n]-> generar (&lista[numero++], nivel[LUCHADOR+tipo], tipo, destino);
-				numero_generado[COMBATIENTES]++;
-				return true;
-			}
-		}
+	for(int n=0;n<numero&&lista[numero]==0;n++)
+	{
+			lista[numero] = lista[n]->generar ( nivel[LUCHADOR+tipo], tipo, destino);
+	}
+	if (lista[numero]==0)
 		return false;
+	numero++;
+	numero_generado[COMBATIENTES]++;
+	return true;
 }
 
 void Lista_de :: Dibuja()
@@ -99,7 +98,7 @@ bool Lista_de :: subirNivel(Type tipo)
 		nivel[tipo]++;
 		if (tipo==AYUNTAMIENTO)
 		{
-			max_Type[COMBATIENTES]=(int)((float)max_Type[COMBATIENTES]*1.5);
+			max_Type[COMBATIENTES]=max_Type[COMBATIENTES]*1.5;
 			max_Type[EDIFICIOS]+=5;
 		}
 		for(int n=0; n<numero; n++)

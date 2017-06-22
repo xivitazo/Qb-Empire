@@ -139,7 +139,7 @@ void Personaje :: Timer (float t)
 
 void Personaje :: Dibuja (Color equipo)
 {
-	glDisable(GL_LIGHTING);
+	//glDisable(GL_LIGHTING);
 	glPushMatrix();
 	glColor3ub(equipo.getRed(),equipo.getGreen(),equipo.getBlue());
 	glTranslatef(posicion.vx,posicion.vy, 0);
@@ -147,12 +147,11 @@ void Personaje :: Dibuja (Color equipo)
 	glPopMatrix();
 	for (int n=0; n<MAX_DISPAROS;n++)
 	{
-		if (disparos[0]==0)
+		if (disparos[0]!=0)
 		{
-			break;
+			disparos[n]->Dibuja();
 		}
-		disparos[n]->Dibuja();
-		continue;
+		
 	}
 	glEnable(GL_LIGHTING);
 }

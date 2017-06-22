@@ -19,6 +19,9 @@ protected:
 	int rango;
 	//Rango de ataque, si no ataca será -1;
 	int rango_visibilidad;
+	Type tipo;
+	Luchadores especifico;
+	//Estableces el tipo de clase edificio tal y como se establece en Lista_de.h
 
 public:
 	Edificio(unsigned int v, unsigned int _altura, Color _color=0, Planta planta= NO_GEOMETRIA, Vector _superficie=0);
@@ -38,7 +41,7 @@ public:
 	void setNumero_Generado(Type tipo, int incremento);
 	int getRango (){return rango;}
 	virtual bool Atacar (Edificio** lista){return false;}
-	bool generar (Edificio ** tropa, int nivel, Luchadores tipo, Vector destino){return false;}
+	virtual Edificio* generar ( int nivel, Luchadores tipo, Vector destino){return 0;}
 	virtual bool generar (Recursos& almacen){return false;};
 
 
