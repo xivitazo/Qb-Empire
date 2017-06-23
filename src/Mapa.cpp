@@ -11,9 +11,11 @@ Mapa::~Mapa(void)
 
 void Mapa :: Dibuja ()
 {
+	glPushMatrix();
 	cesped();
 	rio();
 	montaña();
+	glPopMatrix();
 }
 
 void Mapa :: cesped ()

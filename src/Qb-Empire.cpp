@@ -22,6 +22,11 @@ int main(int argc,char* argv[])
 	//Inicializar el gestor de ventanas GLUT
 	//y crear la ventana
 	glutInit(&argc, argv);
+	glRenderMode(GL_SELECT);
+	 
+	GLuint selectBuffer[100];
+	
+	glSelectBuffer(100,selectBuffer);
 	
 	glutInitWindowSize(1280,720);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -54,8 +59,7 @@ int main(int argc,char* argv[])
 	glMatrixMode(GL_PROJECTION);
 	
 	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
-
+	gluPerspective( 40.0, 1280/720.0f, 0.1, 300); 
 
 
 //	glutFullScreen();
@@ -94,6 +98,8 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
+	glInitNames();
+	glPushName(0);
 	
 	mundo.Dibuja();
 	
@@ -132,7 +138,7 @@ void OnTimer(int value)
 	glutPostRedisplay();
 }
 
-void OnMouse(int button, int state, int vx, int vy)
+void OnMouse(int button, int state, int x, int y)
 {
 	/*
 	GLdouble x,y,z,modelview[16],proyeccion[16];
@@ -147,6 +153,14 @@ void OnMouse(int button, int state, int vx, int vy)
 	*/
 	//printf ("%d\t%d\n", vx, vy);
 //	mundo.Raton(button, state, screenToWorldCoords(vx,vy));
+	int vp[4];
+	glGetIntegerv(GL_VIEWPORT,vp);
+	
+	gluPickMatrix(x,y,1, 1, vp);
+	int hits=glRenderMode(GL_RENDER);
+	glReadBuffer(GL_SELECT);
+	printf("%d", hits);
+
+
+
 }
-
-
