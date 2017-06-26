@@ -40,7 +40,7 @@ int main(int argc,char* argv[])
 	glMatrixMode(GL_PROJECTION);
 	
 	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
-//	glutFullScreen();
+	glutFullScreen();
 
 	coordinator.Inicializa();
 
@@ -63,7 +63,7 @@ void OnDraw(void)
    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//GLfloat position[] = { -87.5, -50, 25, 0.5 };
 	//Definimos la iluminación
-	GLfloat position[] = { -87.5, -50, 25, 0.5 };
+	GLfloat position[] = { -15, 0, -5, 0.8 };
 	GLfloat qaAmbientLight[]	= {0.2, 0.2, 0.2, 1.0};
 	GLfloat qaDiffuseLight[]	= {0.8, 0.8, 0.8, 1.0};
 	GLfloat qaSpecularLight[]	= {1.0, 1.0, 1.0, 1.0};

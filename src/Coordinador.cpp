@@ -34,7 +34,7 @@ void Coordinador :: Dibuja()
 		ETSIDI::setTextColor(1,0,0);
 		glTranslatef(0, 0, -40);
 		ETSIDI::setFont("fuentes/Bitwise.ttf",30);
-		ETSIDI::printxy("PULSE LA TECLA -Esc- PARA SALIR", 50,-5);
+		ETSIDI::printxy("PULSE LA TECLA -Esc- PARA SALIR", 46,-5);
 		glPopMatrix();
 		
 	}

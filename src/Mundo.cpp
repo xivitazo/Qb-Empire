@@ -108,11 +108,8 @@ void Mundo::Tecla(unsigned char key)
 	case 'j': jugador2.Agregar(F_COMIDA, Vector(225-75,75-68));  break;
 	case 'm': jugador2.Agregar(F_HIERRO, Vector(225-30,75-68));  break;
 	case '+': jugador1.subirNivel(AYUNTAMIENTO);  break;
-	/*case '8': 
-	case 'w': 
-	case 'e': */
 	}
-	//printf("%d", spin);
+
 }
 
 void Mundo::Raton(int button, int state, Vector pos)
