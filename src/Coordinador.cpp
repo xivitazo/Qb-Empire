@@ -5,6 +5,7 @@ static int pos=0;
 Coordinador::Coordinador(void)
 {
 	estado=INICIO;
+	//play("sonidos/Two Steps from Hell   Heart of Courage.mp3");
 }
 
 
@@ -87,12 +88,12 @@ void Coordinador :: Tecla (unsigned char key)
 	case INICIO:
 		if(key=='E'){
 			estado=JUEGO;
+			mundo.setPerspectiva(-23,-47,50,50,25,0);
 		}
 		else if (key == 27)	exit(1);
 		break;
 	case JUEGO:
-		mundo.Tecla(key); 
-		mundo.setPerspectiva(-23,-47,50,50,25,0);	
+		mundo.Tecla(key); 	
 		if(key == 'Z')	
 		{
 			estado=GAME_OVER;
