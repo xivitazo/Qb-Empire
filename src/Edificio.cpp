@@ -62,9 +62,24 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(dimension.vx, -dimension.vy, (float)altura);	
 		glVertex3f(dimension.vx, -dimension.vy, 0);
 	glEnd();
+	glBegin(GL_LINES);
+		glColor3ub(pared.getRed()-30, pared.getGreen()-30, pared.getBlue()-19);
+		glVertex3f(-dimension.vx,-dimension.vy,0);
+		glVertex3f(-dimension.vx, -dimension.vy,(float)altura);
+		glVertex3f(dimension.vx, -dimension.vy, (float)altura);	
+		glVertex3f(dimension.vx, -dimension.vy, 0);
+		//glVertex3f(-dimension.vx,-dimension.vy,0);
+	glEnd();
 	//Pared Eje Y
 	glBegin(GL_QUADS);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
+		glVertex3f(-dimension.vx,-dimension.vy,0);
+		glVertex3f(-dimension.vx,dimension.vy,0);
+		glVertex3f(-dimension.vx,dimension.vy,(float)altura);	
+		glVertex3f(-dimension.vx,-dimension.vy,(float)altura);
+	glEnd();
+	glBegin(GL_LINES);
+		glColor3ub(pared.getRed()-30, pared.getGreen()-30, pared.getBlue()-19);
 		glVertex3f(-dimension.vx,-dimension.vy,0);
 		glVertex3f(-dimension.vx,dimension.vy,0);
 		glVertex3f(-dimension.vx,dimension.vy,(float)altura);	
@@ -78,6 +93,13 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 		glVertex3f(dimension.vx,dimension.vy,0);
 	glEnd();
+	glBegin(GL_LINES);
+		glColor3ub(pared.getRed()-30, pared.getGreen()-30, pared.getBlue()-19);
+		glVertex3f(-dimension.vx,dimension.vy,0);
+		glVertex3f(-dimension.vx,dimension.vy,(float)altura);
+		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
+		glVertex3f(dimension.vx,dimension.vy,0);
+	glEnd();
 	//Pared Eje YFondo
 	glBegin(GL_QUADS);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
@@ -86,16 +108,22 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(dimension.vx,-dimension.vy,(float)altura);	
 		glVertex3f(dimension.vx,-dimension.vy,0);
 	glEnd();
-	glBegin(GL_QUADS);
-		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
-		glVertex3f(-dimension.vx,dimension.vy,0);
-		glVertex3f(-dimension.vx,dimension.vy,(float)altura);
-		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
+	glBegin(GL_LINES);
+		glColor3ub(pared.getRed()-30, pared.getGreen()-30, pared.getBlue()-19);
 		glVertex3f(dimension.vx,dimension.vy,0);
+		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
+		glVertex3f(dimension.vx,-dimension.vy,(float)altura);	
+		glVertex3f(dimension.vx,-dimension.vy,0);
 	glEnd();
 	// Techo Eje X
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
+		glVertex3f(-dimension.vx, -dimension.vy,(float)altura);
+		glVertex3f(0,0,(float)altura+3.0f);
+		glVertex3f(dimension.vx,-dimension.vy,(float)altura);	
+	glEnd();
+	glBegin(GL_LINES);
+		glColor3ub(0,0,0);
 		glVertex3f(-dimension.vx, -dimension.vy,(float)altura);
 		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(dimension.vx,-dimension.vy,(float)altura);	
@@ -107,6 +135,12 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(-dimension.vx,-dimension.vy,(float)altura);	
 	glEnd();
+	glBegin(GL_LINES);
+		glColor3ub(0,0,0);
+		glVertex3f(-dimension.vx, dimension.vy,(float)altura);
+		glVertex3f(0,0,(float)altura+3.0f);
+		glVertex3f(-dimension.vx,-dimension.vy,(float)altura);	
+	glEnd();
 	//Techo Eje Xfondo
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
@@ -114,13 +148,26 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
-	//Techo Eje YFOndo
+	glBegin(GL_LINES);
+		glColor3ub(0,0,0);
+		glVertex3f(-dimension.vx,dimension.vy,(float)altura);	
+		glVertex3f(0,0,(float)altura+3.0f);
+		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
+	glEnd();
+	//Techo Eje YFondo
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
 		glVertex3f(dimension.vx,-dimension.vy,(float)altura);		
 		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
+	glBegin(GL_LINES);
+		glColor3ub(0,0,0);
+		glVertex3f(dimension.vx,-dimension.vy,(float)altura);		
+		glVertex3f(0,0,(float)altura+3.0f);
+		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
+	glEnd();
+	glLineWidth(0.4f);
 	glPopMatrix();
 	
 }

@@ -3,7 +3,7 @@
 class Coordinador
 {
 protected:
-	enum Estado{INICIO, JUEGO, PAUSE, GAME_OVER};
+	enum Estado{INICIO, JUEGO, GAME_OVER};
 	Estado estado;
 	Mundo mundo;
 public:
