@@ -3,6 +3,22 @@
 
 Mapa::Mapa(void)
 {
+	for(int n=0; n<75;n++)
+		for (int i=0; i<75;i++)
+		{
+			cespedA[i][n]=Color(48,132,70);
+			cespedB[i][n]=Color(48,132,70);
+			barroA[i][n]=Color(78,59,49);
+		}
+	for(int i=0;i<3;i++)
+		for(int n=0; n<75;n++)
+		{
+			cespedA[73+i][n]=Color(48+6*(i+1),132-14.6*(i+1),70-4.2*(i+1));
+			barroA[i][n]=Color(48+6*(i+3),132-14.6*(i+3),70-4.2*(i+3));
+			barroA[73+i][n]=Color(78-6*(i+1),59+14.6*(i+1),49+4.2*(i+1));
+			cespedB[i][n]=Color(78-6*(i+3),59+14.6*(i+3),49+4.2*(i+3));
+		}
+	nombre=0;
 }
 
 Mapa::~Mapa(void)
@@ -11,15 +27,48 @@ Mapa::~Mapa(void)
 
 void Mapa :: Dibuja ()
 {
-	glPushMatrix();
-	cesped();
-	rio();
+	cesped1();
+	cesped2();
+	barro();
 	montaña();
-	glPopMatrix();
 }
 
-void Mapa :: cesped ()
-{glDisable(GL_LIGHTING);
+void Mapa :: cesped1 ()
+{
+	for(int n=0; n<74;n++)
+		for (int i=0; i<75;i++)
+		{
+			glPushMatrix();
+			glLoadName(nombre);
+			glTranslatef(n,i,0);
+			glBegin(GL_QUADS);
+				glColor3ub(cespedA[n][i].getRed(),cespedA[n][i].getGreen(), cespedA[n][i].getBlue());
+				glVertex2f(-0.5,-0.5);
+				glVertex2f(-0.5, 0.5);
+				glColor3ub(cespedA[n+1][i].getRed(),cespedA[n+1][i].getGreen(), cespedA[n+1][i].getBlue());
+				glVertex2f(0.5,0.5);
+				glVertex2f(0.5,-0.5);
+			glEnd();
+			glPopMatrix();
+			nombre++;
+		}
+		for (int i=0; i<75;i++)
+		{
+			glPushMatrix();
+			glLoadName(nombre);
+			glTranslatef(74,i,0);
+			glBegin(GL_QUADS);
+				glColor3ub(cespedA[74][i].getRed(),cespedA[74][i].getGreen(), cespedA[74][i].getBlue());
+				glVertex2f(-0.5,-0.5);
+				glVertex2f(-0.5, 0.5);
+				glColor3ub(barroA[0][i].getRed(),barroA[0][i].getGreen(),barroA[0][i].getBlue());
+				glVertex2f(0.5,0.5);
+				glVertex2f(0.5,-0.5);
+			glEnd();
+			glPopMatrix();
+			nombre++;
+		}
+	/*glDisable(GL_LIGHTING);
 	
 	glBegin(GL_POLYGON);
 		glColor3ub(48,132,70);
@@ -58,12 +107,46 @@ void Mapa :: cesped ()
 		glVertex2f(225.0f,75.0f);	
 		glVertex2f(225.0f,0);
 	glEnd();
-	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);*/
 }
 
 
-void Mapa :: rio ()
+void Mapa :: barro ()
 {
+	
+	for(int n=0; n<74;n++)
+		for (int i=0; i<75;i++)
+		{
+			glPushMatrix();
+			glLoadName(nombre);
+			glTranslatef(75+n,i,0);
+			glBegin(GL_QUADS);
+			glColor3ub(barroA[n][i].getRed(),barroA[n][i].getGreen(), barroA[n][i].getBlue());
+				glVertex2f(-0.5,-0.5);
+				glVertex2f(-0.5, 0.5);
+				glColor3ub(barroA[n+1][i].getRed(),barroA[n+1][i].getGreen(), barroA[n+1][i].getBlue());
+				glVertex2f(0.5,0.5);
+				glVertex2f(0.5,-0.5);
+			glEnd();
+			glPopMatrix();
+			nombre++;
+		}
+		for (int i=0; i<75;i++)
+		{
+			glPushMatrix();
+			glLoadName(nombre);
+			glTranslatef(75+74,i,0);
+			glBegin(GL_QUADS);
+				glColor3ub(barroA[74][i].getRed(),barroA[74][i].getGreen(), barroA[74][i].getBlue());
+				glVertex2f(-0.5,-0.5);
+				glVertex2f(-0.5, 0.5);
+				glColor3ub(cespedB[0][i].getRed(),cespedB[0][i].getGreen(),cespedB[0][i].getBlue());
+				glVertex2f(0.5,0.5);
+				glVertex2f(0.5,-0.5);
+			glEnd();
+			glPopMatrix();
+			nombre++;
+		}
 	/*glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
 		glColor3ub(0,0,250);
@@ -80,6 +163,7 @@ void Mapa :: montaña ()
 	glPushMatrix();
 	float altura=-300;
 	Vector dimension(225, 75);
+	glTranslatef(-0.5,-0.5,0);
 	
 	//glDisable(GL_LIGHTING);	
 	//glShadeModel(GL_FLAT);
@@ -122,4 +206,44 @@ void Mapa :: montaña ()
 
 	//glEnable(GL_LIGHTING);
 	glPopMatrix();
+}
+
+void Mapa :: cesped2()
+{
+	for(int n=0; n<74;n++)
+		for (int i=0; i<75;i++)
+		{
+			glPushMatrix();
+			glLoadName(nombre);
+			glTranslatef(n+150,i,0);
+			glBegin(GL_QUADS);
+				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
+				glVertex2f(-0.5,-0.5);
+				glVertex2f(-0.5, 0.5);
+				glColor3ub(cespedB[n+1][i].getRed(),cespedB[n+1][i].getGreen(), cespedB[n+1][i].getBlue());
+				glVertex2f(0.5,0.5);
+				glVertex2f(0.5,-0.5);
+			glEnd();
+			glPopMatrix();
+			nombre++;
+		}
+	for (int i=0; i<75;i++)
+		{
+			int n=74;
+			glPushMatrix();
+			glLoadName(nombre);
+			glTranslatef(n+150,i,0);
+			glBegin(GL_QUADS);
+				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
+				glVertex2f(-0.5,-0.5);
+				glVertex2f(-0.5, 0.5);
+				glVertex2f(0.5,0.5);
+				glVertex2f(0.5,-0.5);
+			glEnd();
+			glPopMatrix();
+			nombre++;
+		}
+		
+		
+
 }

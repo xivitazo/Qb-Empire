@@ -62,7 +62,7 @@ int main(int argc,char* argv[])
 	gluPerspective( 40.0, 1280/720.0f, 0.1, 300); 
 
 
-//	glutFullScreen();
+	glutFullScreen();
 
 
 
