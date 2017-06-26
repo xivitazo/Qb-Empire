@@ -68,7 +68,8 @@ void Ayuntamiento :: Dibuja (Color equipo)
 
 void Ayuntamiento :: subirNivel () 
 {
-	vida*=2;
+	vida_max*=2;
+	vida=vida_max;
 	ataque*=1.35;
 	altura+=4;
 }
