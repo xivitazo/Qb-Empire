@@ -41,13 +41,21 @@ void Edificio :: Tecla ()
 void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura)
 {
 	glPushMatrix();
+	//Esta gilipollez mantiene las luces en su sitio, no sé muy bien cómo ni porqué... ha sido prueba y error
+	//es un cubo ínfimo que mantiene las luces encendidas por la manera en la que se dibuja (usando glut), pues
+	// usando solo los glvertex la luz por defecto se desactiva a no ser que dibujemos con una matriz
+	//Lo cual no he podido averiguar cómo se hace por falta de apuntes
+	glutWireCube(0.0001); 
 	glTranslatef(posicion.vx, posicion.vy, 0);
 	dimension=dimension/2;
 	
-	//glEnable(GL_COLOR_MATERIAL);
-	//glDisable(GL_LIGHTING);
+	//Existe distinción entre el comando GL_QUADS y el GL_POLYGON.
+	//AL parecer se renderiza mucho más rápido y ligero el GL_QUADS
+	//Pero por motivos que desconozco no es capaz de dibujarme los tejados
+	//por lo que uso polygon para ellos y quads para los planos restantes
+
 	//Pared eje X
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
 		glVertex3f(-dimension.vx,-dimension.vy,0);
 		glVertex3f(-dimension.vx, -dimension.vy,(float)altura);
@@ -55,7 +63,7 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(dimension.vx, -dimension.vy, 0);
 	glEnd();
 	//Pared Eje Y
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
 		glVertex3f(-dimension.vx,-dimension.vy,0);
 		glVertex3f(-dimension.vx,dimension.vy,0);
@@ -63,7 +71,7 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(-dimension.vx,-dimension.vy,(float)altura);
 	glEnd();
 	//Pared Eje XFondo
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
 		glVertex3f(-dimension.vx,dimension.vy,0);
 		glVertex3f(-dimension.vx,dimension.vy,(float)altura);
@@ -71,14 +79,14 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(dimension.vx,dimension.vy,0);
 	glEnd();
 	//Pared Eje YFondo
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
 		glVertex3f(dimension.vx,dimension.vy,0);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 		glVertex3f(dimension.vx,-dimension.vy,(float)altura);	
 		glVertex3f(dimension.vx,-dimension.vy,0);
 	glEnd();
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
 		glColor3ub(pared.getRed(), pared.getGreen(), pared.getBlue());
 		glVertex3f(-dimension.vx,dimension.vy,0);
 		glVertex3f(-dimension.vx,dimension.vy,(float)altura);
@@ -89,31 +97,30 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
 		glVertex3f(-dimension.vx, -dimension.vy,(float)altura);
-		glVertex3f(0,0,(float)altura+2.0f);
+		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(dimension.vx,-dimension.vy,(float)altura);	
 	glEnd();
 	//Techo Eje y
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
 		glVertex3f(-dimension.vx, dimension.vy,(float)altura);
-		glVertex3f(0,0,(float)altura+2.0f);
+		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(-dimension.vx,-dimension.vy,(float)altura);	
 	glEnd();
 	//Techo Eje Xfondo
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
 		glVertex3f(-dimension.vx,dimension.vy,(float)altura);	
-		glVertex3f(0,0,(float)altura+2.0f);
+		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
 	//Techo Eje YFOndo
 	glBegin(GL_POLYGON);
 		glColor3ub(tejado.getRed(), tejado.getGreen(), tejado.getBlue());
 		glVertex3f(dimension.vx,-dimension.vy,(float)altura);		
-		glVertex3f(0,0,(float)altura+2.0f);
+		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
-	//glEnable(GL_LIGHTING);
 	glPopMatrix();
 	
 }

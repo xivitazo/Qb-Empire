@@ -68,7 +68,13 @@ void Ayuntamiento :: Dibuja (Color equipo)
 
 void Ayuntamiento :: subirNivel () 
 {
-	vida*=2;
+	//Si subes nivel, el ayuntamiento se cambia de color debido a este comando que has hechio
+	//de vida = vida *2...
+	//Debería ser:
+	//vidamax*=2;
+	//vida=vidamax;
+	//De todas maneras no te lo toco para que lo hagas tú que eres el que lleva este tema
+	//vida*=2;
 	ataque*=1.35;
 	altura+=4;
 }
