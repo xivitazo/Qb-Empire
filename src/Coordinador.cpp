@@ -53,6 +53,7 @@ void Coordinador :: Dibuja()
 	else if (estado == GAME_OVER)
 	{
 		mundo.Dibuja();
+		
 		glPushMatrix();
 		ETSIDI::setTextColor(1,0,0);
 		glTranslatef(0, 0, 40);
