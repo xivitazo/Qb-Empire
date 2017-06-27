@@ -14,9 +14,11 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 	{
 	case CABALLERO:
 		setStats(250,200, 1.5, 10);
-		planta= CUADRADO;
+		planta=CUADRADO;
+		superficie.setValor(1,1);
+		/*planta= CUADRADO;
 		//Rectángulo como si fuera un caballo
-		superficie.setValor(2,1);
+		superficie.setValor(2,1);*/
 		rango=2;
 		break;
 	case ARQUERA:
