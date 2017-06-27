@@ -40,7 +40,7 @@ int main(int argc,char* argv[])
 	glMatrixMode(GL_PROJECTION);
 	
 	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
-	glutFullScreen();
+//	glutFullScreen();
 
 	coordinator.Inicializa();
 

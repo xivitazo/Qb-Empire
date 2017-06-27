@@ -32,43 +32,44 @@ bool Interaccion :: Choque (Objeto &a, Objeto &b)
 	Vector dist=(a.posicion-b.posicion);
 	float argumento=atan((dist.vy)/(dist.vx));
 	float modulo=dist.modulo();
+	bool aux=0;
 	switch (a.planta)
 	{
 	case CUADRADO:
 		if (b.planta == CUADRADO)
 		{
-			if(argumento<pi/4&&argumento>-pi/4)
-				return abs(a.superficie.vx)/2+abs(b.superficie.vx)/2<abs(dist.vx);
-			else if (argumento>pi/4&&argumento<-pi/4)
-				return abs(a.superficie.vy)/2+abs(b.superficie.vy)/2<abs(dist.vy);
-			else if (argumento == 45 && argumento == -45)
-				return sqrt(a.superficie.vx*a.superficie.vx/4+a.superficie.vy*a.superficie.vy/4)+sqrt(b.superficie.vx*b.superficie.vx/4+b.superficie.vy*b.superficie.vy/4)<abs(modulo);
+			if(argumento<pi/4&&argumento>-pi/4 || argumento>3*pi/4 && argumento<-3*pi/4)
+				aux= (a.superficie.vx/2+b.superficie.vx/2)>abs(dist.vx);
+			else if (argumento>pi/4&&argumento<5*pi/4 || argumento>-3*pi/4 && argumento<-pi/4)
+				aux = (a.superficie.vy/2+b.superficie.vy/2)>abs(dist.vy);
+			else if (argumento == pi/4 || argumento == -pi/4)
+				aux= sqrt(a.superficie.vx*a.superficie.vx/4)+sqrt(b.superficie.vx*b.superficie.vx/4)< modulo;
 		}
 		else if (b.planta == REDONDO)
 		{
-			if(argumento<pi/4&&argumento>-pi/4)
-				return abs(a.superficie.vx)/2+abs(b.superficie.vx)/2<abs(modulo);
-			else if (argumento>pi/4&&argumento<-pi/4)
-				return abs(a.superficie.vy)/2+abs(b.superficie.vy)<abs(modulo);
-			else if (argumento == pi/4 && argumento == -pi/4)
-				return sqrt(a.superficie.vx*a.superficie.vx/4+a.superficie.vy*a.superficie.vy/4)+abs(b.superficie.vx)<abs(modulo);
+			if(argumento<pi/4&&argumento>-pi/4 || argumento>3*pi/4 && argumento<-3*pi/4)
+				return abs(a.superficie.vx)/2+abs(b.superficie.vx)/2>abs(modulo);
+			else if (argumento>pi/4&&argumento<5*pi/4 || argumento>-3*pi/4 && argumento<-pi/4)
+				return abs(a.superficie.vy)/2+abs(b.superficie.vy)>abs(modulo);
+			else if (argumento == pi/4 || argumento == -pi/4)
+				return sqrt(a.superficie.vx*a.superficie.vx/4+a.superficie.vy*a.superficie.vy/4)+abs(b.superficie.vx)>abs(modulo);
 		}
 		break;
 	case REDONDO:
 		if (b.planta == CUADRADO)
 		{
 			if(argumento<pi/4&&argumento>-pi/4)
-				return abs(a.superficie.vx)/2+abs(b.superficie.vx)/2<abs(modulo);
+				return abs(a.superficie.vx)/2+abs(b.superficie.vx)/2>abs(modulo);
 			else if (argumento>pi/4&&argumento<-pi/4)
-				return abs(a.superficie.vy)/2+abs(b.superficie.vy)<abs(modulo);
+				return abs(a.superficie.vy)/2+abs(b.superficie.vy)>abs(modulo);
 			else if (argumento == pi/4 && argumento == -pi/4)
-				return sqrt(b.superficie.vx*b.superficie.vx/4+b.superficie.vy*b.superficie.vy/4)+abs(a.superficie.vx)<abs(modulo);
+				return sqrt(b.superficie.vx*b.superficie.vx/4+b.superficie.vy*b.superficie.vy/4)+abs(a.superficie.vx)>abs(modulo);
 		}
 		else if (b.planta == REDONDO)
-			return abs(b.superficie.vx/2)+abs(b.superficie.vy/2)<modulo;
+			return abs(b.superficie.vx/2)+abs(b.superficie.vy/2)>modulo;
 		break;
 	}
-	return false;
+	return aux;
 
 }
 
