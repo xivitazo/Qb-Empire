@@ -1,8 +1,6 @@
 #include "Lista_de.h"
 #include "Mapa.h"
 #include "Vector3D.h"
-
-
 	
 class Mundo
 {

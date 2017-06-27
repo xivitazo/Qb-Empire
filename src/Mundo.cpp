@@ -22,6 +22,7 @@ void Mundo::Dibuja()
 	jugador1.Dibuja();
 	jugador2.Dibuja();
 	
+	
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
 	//printf("%d\n", jugador1.getNivel(AYUNTAMIENTO));
@@ -108,6 +109,7 @@ void Mundo::Tecla(unsigned char key)
 	case 'j': jugador2.Agregar(F_COMIDA, Vector(225-75,75-68));  break;
 	case 'm': jugador2.Agregar(F_HIERRO, Vector(225-30,75-68));  break;
 	case '+': jugador1.subirNivel(AYUNTAMIENTO);  break;
+	case ' ': break;//Menus::construccion(); break;
 	}
 
 }

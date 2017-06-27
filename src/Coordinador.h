@@ -1,11 +1,13 @@
 #pragma once
-#include "Mundo.h"
+#include "Menus.h"
+
 class Coordinador
 {
 protected:
 	enum Estado{INICIO, JUEGO, GAME_OVER};
 	Estado estado;
 	Mundo mundo;
+
 public:
 	Coordinador(void);
 	virtual ~Coordinador(void);

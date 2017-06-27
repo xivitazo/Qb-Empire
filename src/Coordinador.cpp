@@ -1,5 +1,4 @@
 #include "Coordinador.h"
-
 static int pos=0;
 
 Coordinador::Coordinador(void)
@@ -41,6 +40,7 @@ void Coordinador :: Dibuja()
 	else if(estado == JUEGO )
 	{
 		mundo.Dibuja();
+		Menus :: superior(mundo);
 		glPushMatrix();
 		ETSIDI::setTextColor(1,1,0);
 		glTranslatef(0, 0, pos);
@@ -88,7 +88,7 @@ void Coordinador :: Tecla (unsigned char key)
 	case INICIO:
 		if(key=='E'){
 			estado=JUEGO;
-			mundo.setPerspectiva(-23,-47,50,50,25,0);
+			//mundo.setPerspectiva(-23,-47,50,50,25,0);
 		}
 		else if (key == 27)	exit(1);
 		break;
