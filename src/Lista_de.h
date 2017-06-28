@@ -83,4 +83,5 @@ public:
 
 
 	void prueba(int tipo);
+	friend class Menus;
 };

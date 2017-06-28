@@ -1,7 +1,8 @@
 #include "Lista_de.h"
 #include "Mapa.h"
 #include "Vector3D.h"
-	
+#include "Menus.h"
+
 class Mundo
 {
 	Mapa map;
@@ -29,4 +30,5 @@ public:
 	float amiro_x, amiro_y, amiro_z;
 	
 	friend class Mapa;
+	friend class Menus;
 };

@@ -40,7 +40,7 @@ void Coordinador :: Dibuja()
 	else if(estado == JUEGO )
 	{
 		mundo.Dibuja();
-		Menus :: superior(mundo);
+		Menus :: superior();
 		glPushMatrix();
 		ETSIDI::setTextColor(1,1,0);
 		glTranslatef(0, 0, pos);
@@ -101,6 +101,11 @@ void Coordinador :: Tecla (unsigned char key)
 			mundo.setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
 		}
 		break;
+		if(key == ' ')
+		{
+			Menus :: construccion(mundo);	break; 
+	case 'w': Menus :: seleccion(AYUNTAMIENTO, mundo); break;
+	case 'e': Menus :: seleccion (F_ORO, mundo); break;
 	case GAME_OVER:	
 		if(key == 'Q'){
 			estado=INICIO;
