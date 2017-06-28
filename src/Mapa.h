@@ -2,6 +2,7 @@
 #include <cstdio>
 #include "Vector.h"
 #include "Color.h"
+enum Nombre {JUGADOR1, JUGADOR2, MAPA, MENU};
 
 class Mapa
 {

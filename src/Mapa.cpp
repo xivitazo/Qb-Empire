@@ -27,6 +27,7 @@ Mapa::~Mapa(void)
 
 void Mapa :: Dibuja ()
 {
+	glLoadName(MAPA);
 	cesped1();
 	cesped2();
 	barro();
@@ -118,7 +119,7 @@ void Mapa :: barro ()
 		for (int i=0; i<75;i++)
 		{
 			glPushMatrix();
-			glLoadName(nombre);
+			glPushName(nombre);
 			glTranslatef(75+n,i,0);
 			glBegin(GL_QUADS);
 			glColor3ub(barroA[n][i].getRed(),barroA[n][i].getGreen(), barroA[n][i].getBlue());
@@ -129,12 +130,13 @@ void Mapa :: barro ()
 				glVertex2f(0.5,-0.5);
 			glEnd();
 			glPopMatrix();
+			glPopMatrix();
 			nombre++;
 		}
 		for (int i=0; i<75;i++)
 		{
 			glPushMatrix();
-			glLoadName(nombre);
+			glPushName(nombre);
 			glTranslatef(75+74,i,0);
 			glBegin(GL_QUADS);
 				glColor3ub(barroA[74][i].getRed(),barroA[74][i].getGreen(), barroA[74][i].getBlue());
@@ -144,6 +146,7 @@ void Mapa :: barro ()
 				glVertex2f(0.5,0.5);
 				glVertex2f(0.5,-0.5);
 			glEnd();
+			glPopName();
 			glPopMatrix();
 			nombre++;
 		}
@@ -164,9 +167,6 @@ void Mapa :: montaña ()
 	float altura=-300;
 	Vector dimension(225, 75);
 	glTranslatef(-0.5,-0.5,0);
-	
-	//glDisable(GL_LIGHTING);	
-	//glShadeModel(GL_FLAT);
 	//Pared eje X
 	glBegin(GL_POLYGON);
 	glColor3ub(130, 130 ,130);
@@ -214,7 +214,7 @@ void Mapa :: cesped2()
 		for (int i=0; i<75;i++)
 		{
 			glPushMatrix();
-			glLoadName(nombre);
+			glPushName(nombre);
 			glTranslatef(n+150,i,0);
 			glBegin(GL_QUADS);
 				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
@@ -224,6 +224,7 @@ void Mapa :: cesped2()
 				glVertex2f(0.5,0.5);
 				glVertex2f(0.5,-0.5);
 			glEnd();
+			glPopName();
 			glPopMatrix();
 			nombre++;
 		}
@@ -231,7 +232,7 @@ void Mapa :: cesped2()
 		{
 			int n=74;
 			glPushMatrix();
-			glLoadName(nombre);
+			glPushName(nombre);
 			glTranslatef(n+150,i,0);
 			glBegin(GL_QUADS);
 				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
@@ -240,6 +241,7 @@ void Mapa :: cesped2()
 				glVertex2f(0.5,0.5);
 				glVertex2f(0.5,-0.5);
 			glEnd();
+			glPopName();
 			glPopMatrix();
 			nombre++;
 		}
