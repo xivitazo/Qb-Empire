@@ -79,8 +79,8 @@ int main(int argc,char* argv[])
 	glutDisplayFunc(OnDraw);
 	glutTimerFunc(25,OnTimer,0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
-	glutReshapeFunc(reshape);
 	glutMouseFunc(OnMouse);
+	glutReshapeFunc(reshape);
 
 	
 		
@@ -97,8 +97,6 @@ void OnDraw(void)
 
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
-
-
 	glLoadIdentity();
 	
 	mundo.Dibuja();
@@ -145,8 +143,12 @@ void OnMouse(int button, int state, int x, int y)
 	GLuint selectBuffer[BUFSIZE];
 	GLint hits;
 	GLint vp[4];
-	
 	int width=1270, height=720;
+
+	if (button != GLUT_LEFT_BUTTON || state != GLUT_DOWN)
+      return;
+
+	
 	glSelectBuffer(BUFSIZE,selectBuffer);
 
 	
@@ -161,17 +163,18 @@ void OnMouse(int button, int state, int x, int y)
 	glGetIntegerv(GL_VIEWPORT,vp);
 	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),5.0, 5.0, vp);
 	gluPerspective( 40.0, 1280/720.0f, 0.1, 300); 
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	
 	mundo.Dibuja();
-	 
-	
+
+
 	glFlush();
+
 	hits=glRenderMode(GL_RENDER);
+
 	cout<<"Hits: "<<hits<<endl;
 
 	GLuint hitnames[BUFSIZE];
@@ -180,7 +183,7 @@ void OnMouse(int button, int state, int x, int y)
 	GLuint name, numnames, z1, z2;
 
 	// [0x6]
-	for(unsigned int j = 0; j < hits; j++)
+	for(unsigned int j = 0; j < hits && *bufp<BUFSIZE; j++)
 	{
 		numnames = *bufp++;
 		z1 = *bufp++;
@@ -188,9 +191,16 @@ void OnMouse(int button, int state, int x, int y)
 		while(numnames--)
 		{
 			name = *bufp++;
-			cout<<"Nombre"<<j<<": "<<name<<endl;
 			hitnames[hi++] = name;
+			if(hitnames[hi-1]>0 && hitnames[hi-1]<1000)
+			{
+				//Asumo que no daremos más de 1000 nombres. me parecen suficientes . tenemos el
+				//problema de qe se cuele una dirección de memoria entre el 0 y el 1000... pero como es necesario leer todo el buffer para encontrar dóndo
+				//ha puesto el nombre el buffer, es la manera más sencilla que se me ocurre con un margen de error muy pequeño
+				cout<<"Nombre"<<j<<": "<<name<<endl;
+			}
 		}
+		
 	}
 
 }
