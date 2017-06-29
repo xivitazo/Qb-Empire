@@ -1,3 +1,4 @@
+//#pragma once
 #include "Lista_de.h"
 #include "Mapa.h"
 #include "Vector3D.h"

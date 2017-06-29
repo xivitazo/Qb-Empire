@@ -1,10 +1,9 @@
 #include "Mundo.h"
-#include "glut.h"
-#include <math.h>
-#include <stdio.h>
 
 
-Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)), jugador2 (Vector(217, 37.5),Color(179,36,40))
+
+Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)),
+			jugador2 (Vector(217, 37.5),Color(179,36,40))
 {
 }
 

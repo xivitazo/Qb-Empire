@@ -13,7 +13,7 @@ Menus::~Menus(void)
 void Menus :: seleccion (Type tipo, Mundo &mundo)
 {
 	if(tipo==AYUNTAMIENTO){
-		glPushMatrix();
+	glPushMatrix();
 		GLdouble x,y,z,modelview[16],proyeccion[16];
 		GLint viewport[4];
 		glGetDoublev(GL_MODELVIEW_MATRIX,modelview);//Coges la matriz Modelview

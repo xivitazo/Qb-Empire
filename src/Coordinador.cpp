@@ -40,7 +40,7 @@ void Coordinador :: Dibuja()
 	else if(estado == JUEGO )
 	{
 		mundo.Dibuja();
-		Menus :: superior();
+		//Menus :: superior(mundo);
 		glPushMatrix();
 		ETSIDI::setTextColor(1,1,0);
 		glTranslatef(0, 0, pos);
@@ -89,7 +89,7 @@ void Coordinador :: Tecla (unsigned char key)
 	case INICIO:
 		if(key=='E'){
 			estado=JUEGO;
-			//mundo.setPerspectiva(-23,-47,50,50,25,0);
+			mundo.setPerspectiva(-23,-47,50,50,25,0);
 		}
 		else if (key == 27)	exit(1);
 		break;
@@ -100,19 +100,17 @@ void Coordinador :: Tecla (unsigned char key)
 			estado=GAME_OVER;
 			mundo.setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
 		}
+		if(key == ' ')	Menus :: construccion(mundo);	 
+		if(key == 'w')  Menus :: seleccion(AYUNTAMIENTO, mundo);
+		if(key == 'e')  Menus :: seleccion (F_ORO, mundo);
+		if(key == 27)	exit(0);
 		break;
-		if(key == ' ')
-		{
-			Menus :: construccion(mundo);	break; 
-	case 'w': Menus :: seleccion(AYUNTAMIENTO, mundo); break;
-	case 'e': Menus :: seleccion (F_ORO, mundo); break;
 	case GAME_OVER:	
 		if(key == 'Q'){
 			estado=INICIO;
-			
 			Inicializa();
 		}
-		else if (key == 27)	exit(1);
+		else if (key == 27)	exit(0);
 		break;
 	}
 }

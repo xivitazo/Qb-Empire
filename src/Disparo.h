@@ -1,6 +1,6 @@
 #pragma once
-#include "Vector.h"
 #include "Edificio.h"
+#include "Interaccion.h"
 
 class Disparo : public Objeto
 {
