@@ -1,164 +1,31 @@
-﻿Compilación iniciada a las 29/06/2017 18:39:13.
+﻿Compilación iniciada a las 29/06/2017 18:53:44.
      1>Proyecto "C:\Users\Luis\Documents\GitHub\Qb-Empire\Pang.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Ilib /Isrc /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"tmp\Debug\\" /Fd"tmp\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt src\Coordinador.cpp src\Mundo.cpp "src\Qb-Empire.cpp"
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Ilib /Isrc /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"tmp\Debug\\" /Fd"tmp\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt src\Coordinador.cpp src\Menus.cpp src\Mundo.cpp "src\Qb-Empire.cpp"
          Qb-Empire.cpp
-     1>c:\users\luis\documents\github\qb-empire\src\menus.h(10): error C2061: error de sintaxis : identificador 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\menus.h(11): error C2061: error de sintaxis : identificador 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\menus.h(12): error C2061: error de sintaxis : identificador 'Mundo'
          Mundo.cpp
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.h(8): error C2011: 'Mundo' : nueva definición del tipo 'class'
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(5): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(5): error C2059: error de sintaxis : ')'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(5): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(5): error C2078: hay demasiados inicializadores
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(5): error C2440: 'inicializando' : no se puede realizar la conversión de 'Color' a 'int'
-                 No hay disponible ningún operador de conversión definido por el usuario que pueda realizar esta conversión, o bien no se puede llamar al operador
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(6): error C2448: 'jugador2' : el inicializador de estilo de función parece ser una definición de función
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(9): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(11): error C2065: 'ax_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(11): error C2065: 'ay_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(11): error C2065: 'az_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(12): error C2065: 'amiro_x' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(12): error C2065: 'amiro_y' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(12): error C2065: 'amiro_z' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(19): error C2065: 'map' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(19): error C2228: el operando izquierdo de '.Dibuja' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(20): error C2228: el operando izquierdo de '.Dibuja' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(21): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(21): error C2228: el operando izquierdo de '.Dibuja' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(46): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(48): error C2228: el operando izquierdo de '.getNumero' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(50): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(50): error C2228: el operando izquierdo de '.getNumero' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(51): error C2228: el operando izquierdo de '.getPosN' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(51): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(53): error C2228: el operando izquierdo de '.Timer' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(54): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(54): error C2228: el operando izquierdo de '.Timer' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(55): error C2228: el operando izquierdo de '.getNumero' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(56): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(56): error C2228: el operando izquierdo de '.getNumero' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(58): error C2228: el operando izquierdo de '.getPosN' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(58): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(58): error C2228: el operando izquierdo de '.getRango' debe tener class/struct/union
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(59): error C2228: el operando izquierdo de '.getPosN' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(59): error C2228: el operando izquierdo de '.Atacar' debe tener class/struct/union
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(59): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(59): error C2228: el operando izquierdo de '.getLista' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(60): error C2228: el operando izquierdo de '.getPosN' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(60): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(60): error C2228: el operando izquierdo de '.getRango' debe tener class/struct/union
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(61): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(61): error C2228: el operando izquierdo de '.getPosN' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(61): error C2228: el operando izquierdo de '.Atacar' debe tener class/struct/union
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(61): error C2228: el operando izquierdo de '.getLista' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(63): error C3861: 'movimientoCamara': no se encontró el identificador
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(71): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(73): error C3861: 'Inicializa_vista': no se encontró el identificador
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(75): error C2065: 'map' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(75): error C2228: el operando izquierdo de '.inicializa' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(79): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(83): error C2065: 'x_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(84): error C2065: 'y_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(85): error C2065: 'z_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(86): error C2065: 'x_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(87): error C2065: 'y_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(88): error C2065: 'z_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(89): error C2065: 'miro_x' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(90): error C2065: 'miro_y' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(91): error C2065: 'miro_z' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(92): error C2065: 'miro_x' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(93): error C2065: 'miro_y' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(94): error C2065: 'miro_z' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(95): error C3861: 'setPerspectiva': no se encontró el identificador
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(96): error C3861: 'setPerspectiva': no se encontró el identificador
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(97): error C3861: 'setPerspectiva': no se encontró el identificador
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(98): error C3861: 'setPerspectiva': no se encontró el identificador
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(99): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(100): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(101): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(102): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(103): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(104): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(104): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(105): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(105): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(106): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(106): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(107): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(107): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(108): error C2065: 'jugador2' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(108): error C2228: el operando izquierdo de '.Agregar' debe tener class/struct/union
-                 el tipo es ''unknown-type''
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(109): error C2228: el operando izquierdo de '.subirNivel' debe tener class/struct/union
-                 el tipo es 'int'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(115): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(120): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(125): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(127): error C2065: 'x_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(128): error C2065: 'y_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(129): error C2065: 'z_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(130): error C2065: 'miro_x' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(131): error C2065: 'miro_y' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(132): error C2065: 'miro_z' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(135): error C2027: uso del tipo 'Mundo' sin definir
-                 c:\users\luis\documents\github\qb-empire\src\mundo.h(8) : vea la declaración de 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(137): error C2065: 'x_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(137): error C2065: 'y_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(137): error C2065: 'z_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(138): error C2065: 'ax_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(138): error C2065: 'ay_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(138): error C2065: 'az_ojo' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(139): error C2065: 'miro_x' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(139): error C2065: 'miro_y' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(139): error C2065: 'miro_z' : identificador no declarado
-     1>c:\users\luis\documents\github\qb-empire\src\mundo.cpp(139): fatal error C1003: el recuento de errores supera 100; se detiene la compilación
+         Menus.cpp
+     1>c:\users\luis\documents\github\qb-empire\src\menus.cpp(27): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : vea la declaración de 'sprintf'
+     1>c:\users\luis\documents\github\qb-empire\src\menus.cpp(43): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : vea la declaración de 'sprintf'
+     1>c:\users\luis\documents\github\qb-empire\src\menus.cpp(62): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : vea la declaración de 'sprintf'
+     1>c:\users\luis\documents\github\qb-empire\src\menus.cpp(84): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(357) : vea la declaración de 'sprintf'
          Coordinador.cpp
-     1>c:\users\luis\documents\github\qb-empire\src\menus.h(10): error C2061: error de sintaxis : identificador 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\menus.h(11): error C2061: error de sintaxis : identificador 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\menus.h(12): error C2061: error de sintaxis : identificador 'Mundo'
-     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(103): error C2660: 'Menus::construccion' : la función no acepta 1 argumentos
-     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(104): error C2660: 'Menus::seleccion' : la función no acepta 2 argumentos
-     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(105): error C2660: 'Menus::seleccion' : la función no acepta 2 argumentos
+     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(103): error C2027: uso del tipo 'Menus' sin definir
+                 c:\users\luis\documents\github\qb-empire\src\lista_de.h(86) : vea la declaración de 'Menus'
+     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(103): error C3861: 'construccion': no se encontró el identificador
+     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(104): error C2027: uso del tipo 'Menus' sin definir
+                 c:\users\luis\documents\github\qb-empire\src\lista_de.h(86) : vea la declaración de 'Menus'
+     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(104): error C3861: 'seleccion': no se encontró el identificador
+     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(105): error C2027: uso del tipo 'Menus' sin definir
+                 c:\users\luis\documents\github\qb-empire\src\lista_de.h(86) : vea la declaración de 'Menus'
+     1>c:\users\luis\documents\github\qb-empire\src\coordinador.cpp(105): error C3861: 'seleccion': no se encontró el identificador
          Generando código...
      1>Compilación del proyecto terminada "C:\Users\Luis\Documents\GitHub\Qb-Empire\Pang.vcxproj" (Build destinos) -- ERROR.
 
 ERROR al compilar.
 
-Tiempo transcurrido 00:00:03.33
+Tiempo transcurrido 00:00:04.00
