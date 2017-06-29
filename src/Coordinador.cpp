@@ -42,9 +42,9 @@ void Coordinador :: Dibuja()
 	{
 		mundo.Dibuja();
 		//Menus :: superior(mundo);
-		if(flag1)	Menus :: construccion (mundo);
-		if(flag2)	Menus :: seleccion(AYUNTAMIENTO, mundo);
-		if(flag3)	Menus :: seleccion (F_ORO, mundo);
+		//if(flag1)	Menus :: construccion (mundo);
+		//if(flag2)	Menus :: seleccion(AYUNTAMIENTO, mundo);
+		//if(flag3)	Menus :: seleccion (F_ORO, mundo);
 		glPushMatrix();
 		ETSIDI::setTextColor(1,1,0);
 		glTranslatef(0, 0, pos);

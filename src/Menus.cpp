@@ -10,7 +10,7 @@ Menus::~Menus(void)
 {
 }
 
-void Menus :: seleccion (Type tipo, Mundo &mundo)
+void Menus :: seleccion (Type tipo, Lista_de &player)
 {
 	if(tipo==AYUNTAMIENTO){
 	glPushMatrix();
@@ -24,7 +24,7 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		setTextColor(0.5,0.8,0.5);
 		setFont("fuentes/Bitwise.ttf",10);		
 		char aux[500];
-		sprintf(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
+		sprintf(aux,"SUBIR NIVEL -  (%d)",player.nivel[AYUNTAMIENTO]);
 		printxy(aux,0,0);
 	glPopMatrix();
 	}
@@ -40,13 +40,13 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		setTextColor(1,0.8,0);
 		setFont("fuentes/Bitwise.ttf",20);		
 		char aux[500];
-		sprintf(aux,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[F_ORO]);
+		sprintf(aux,"SUBIR NIVEL -  (%d)", player.nivel[F_ORO]);
 		printxy(aux,0,0);
 	glPopMatrix();
 	}
 }
 
-void Menus :: construccion(Mundo &mundo)
+void Menus :: construccion(Lista_de &player)
 {
 	glPushMatrix();
 		GLdouble x,y,z,modelview[16],proyeccion[16];
@@ -59,12 +59,12 @@ void Menus :: construccion(Mundo &mundo)
 		setTextColor(1,0.8,0);
 		setFont("fuentes/Bitwise.ttf",20);		
 		char aux[500];
-		sprintf(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[F_ORO]);
+		sprintf(aux,"SUBIR NIVEL -  (%d)", player.nivel[F_ORO]);
 		printxy(aux,0,0);
 	glPopMatrix();
 }
 
-void Menus :: superior(Mundo &mundo)
+void Menus :: superior(Lista_de &player)
 {
 	glPushMatrix();
 		GLdouble x,y,z,modelview[16],proyeccion[16];
@@ -73,16 +73,19 @@ void Menus :: superior(Mundo &mundo)
 		glGetDoublev(GL_PROJECTION_MATRIX,proyeccion);//Coges la matriz proyeccion
 		glGetIntegerv(GL_VIEWPORT,viewport);//Coges el punto de vista
 		gluUnProject(0, 700,1,modelview,proyeccion,viewport,&x,&y,&z);
-		glTranslatef(x,y,z);
+		
+		glTranslatef(x, y, z);
 		setTextColor(1,0.8,0);
 		setFont("fuentes/Bitwise.ttf",20);		
 		char aux[500];
-		sprintf(aux,"Hierro:%d        Oro:%d        Comida:%d",
-			mundo.jugador1.almacen.getHierro(),
-			mundo.jugador1.almacen.getOro(),
-			mundo.jugador1.almacen.getComida() );
+		sprintf_s(aux,"Hierro:%d        Oro:%d        Comida:%d",
+			player.almacen.getHierro(),
+			player.almacen.getOro(),
+			player.almacen.getComida() );
 		printxy(aux,0,0);
 	glPopMatrix();
+	
+		
 }
 
 void Menus :: Timer (float t)

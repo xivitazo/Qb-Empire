@@ -1,6 +1,9 @@
 #include "Mundo.h"
+#include "Menus.h"
+#include <iostream>
+using namespace std;
 
-
+GLfloat x=0, y=0, z=-0.1;
 
 Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)),
 			jugador2 (Vector(217, 37.5),Color(179,36,40))
@@ -9,7 +12,6 @@ Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)),
 
 void Mundo::Dibuja()
 {
-	Menus :: superior(this->mundo);
 	gluLookAt(ax_ojo, ay_ojo, az_ojo,  // posicion del ojo
 		amiro_x, amiro_y, amiro_z,      // hacia que punto mira  (0,0,0) 
 			0.0, 0, 1.0);      // definimos hacia arriba (eje Z)    
@@ -21,7 +23,7 @@ void Mundo::Dibuja()
 	map.Dibuja();
 	jugador1.Dibuja();
 	jugador2.Dibuja();
-	
+	Menus :: superior (jugador1);
 	
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
@@ -109,8 +111,17 @@ void Mundo::Tecla(unsigned char key)
 	case 'j': jugador2.Agregar(F_COMIDA, Vector(225-75,75-68));  break;
 	case 'm': jugador2.Agregar(F_HIERRO, Vector(225-30,75-68));  break;
 	case '+': jugador1.subirNivel(AYUNTAMIENTO);  break;
+	case '5':  x++; break;
+	case '6':  x--; break;
+	case '7':  y++; break;
+	case '8':  y--; break;
+	case '9':  z+=0.001; break;
+	case '0':  z-=0.001; break;
+	
 
 	}
+	//Imprimo coordenadas de letras en pantalla
+	cout<<x<<"    "<<y<<"    "<<z<<endl;
 
 }
 
