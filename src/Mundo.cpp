@@ -1,7 +1,8 @@
+
 #include "Mundo.h"
 #include "glut.h"
 #include <math.h>
-#include <stdio.h>
+
 
 
 Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)), jugador2 (Vector(217, 37.5),Color(179,36,40))
@@ -24,8 +25,7 @@ void Mundo::Dibuja()
 	jugador1.Dibuja();
 	glLoadName(3);
 	jugador2.Dibuja();
-	int hits=glRenderMode(GL_RENDER);
-	//The selections are stored in the buffer
+
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
 	//printf("%d\n", jugador1.getNivel(AYUNTAMIENTO));

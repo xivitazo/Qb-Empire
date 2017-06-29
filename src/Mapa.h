@@ -1,7 +1,11 @@
 #pragma once
+#include <iostream>
 #include <cstdio>
 #include "Vector.h"
 #include "Color.h"
+
+using namespace std;
+
 enum Nombre {JUGADOR1, JUGADOR2, MAPA, MENU};
 
 class Mapa
