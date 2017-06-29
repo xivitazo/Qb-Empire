@@ -38,8 +38,8 @@ bool Lista_de:: Agregar (Type tipo, Vector posicion)
 		switch (tipo){
 		case F_ORO : 
 		case F_HIERRO : 
-		case F_COMIDA : lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
-		case CUARTEL : lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
+		case F_COMIDA : lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; return true;
+		case CUARTEL : lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; return true;
 		}
 
 	}
@@ -134,7 +134,7 @@ void Lista_de :: Rebote()
 {
 	for (int n=0;n<numero-1;n++)
 		for (int i=n; i<numero;i++)
-			Interaccion :: Rebote (*lista[n], *lista[i]);
+			Interaccion :: rebote (*lista[n], *lista[i]);
 }
 bool Lista_de :: generarRecursos()
 {

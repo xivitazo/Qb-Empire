@@ -49,7 +49,7 @@ void Mundo::Timer(float t)
 	for(int n=0; n<jugador1.getNumero();n++)
 	{
 		for(int i=0; i<jugador2.getNumero();i++)
-			Interaccion :: Rebote(jugador1.getPosN(n),jugador2.getPosN(i));
+			Interaccion :: rebote(jugador1.getPosN(n),jugador2.getPosN(i));
 	}
 	jugador1.Timer(t);
 	jugador2.Timer(t);

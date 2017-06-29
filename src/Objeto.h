@@ -27,6 +27,8 @@ public:
 	Vector getPosicion();
 	void setPosicion(int x, int y);
 	virtual bool setVelocidad (Vector velocidad){return false;}
+	virtual Vector getVelocidad (){return false;}
+
 
 	friend class Interaccion;
 };

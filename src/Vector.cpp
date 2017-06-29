@@ -95,3 +95,17 @@ bool Vector :: operator > (float numero)
 {
 	return modulo()>numero;
 }
+Vector Vector :: operator - (float a)
+{
+	Vector aux;
+	aux.vx=vx-a;
+	aux.vy=vy-a;
+	return aux;
+}
+Vector Vector :: operator + (float a)
+{
+	Vector aux;
+	aux.vx=vx+a;
+	aux.vy=vy+a;
+	return aux;
+}

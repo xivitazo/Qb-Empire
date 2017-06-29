@@ -28,6 +28,7 @@ public:
 	void Timer (float t);
 	void subirNivel();
 	bool setVelocidad (Vector velocidad);
+	Vector getVelocidad ();
 
 	friend class Interaccion;
 	friend class Lista_de;

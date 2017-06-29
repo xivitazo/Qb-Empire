@@ -11,6 +11,8 @@ public:
 	void setValor(float x, float y);
 	Vector operator - (Vector &);
 	Vector operator + (Vector &);
+	Vector operator - (float);
+	Vector operator + (float);
 	Vector operator * (float);
 	Vector operator / (float);
 	float operator * (Vector &);

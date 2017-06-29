@@ -16,7 +16,7 @@ void Interaccion:: Ataque (Disparo* disparo)
 	for (int n=0;disparo->lista[n]!=0 ;n++)
 	{
 
-		if (Choque (*disparo, *disparo->lista[n]))
+		if (dentro (*disparo, *disparo->lista[n])>-1.0f)
 			disparo->lista[n]->vida-=disparo->daño;
 	}
 	return;
@@ -27,62 +27,56 @@ float Interaccion :: Distancia (Objeto &a, Objeto &b)
 	return sqrt((a.posicion.vx-b.posicion.vx)*(a.posicion.vx-b.posicion.vx)+(a.posicion.vy-b.posicion.vy)*(a.posicion.vy-b.posicion.vy));
 }
 
-bool Interaccion :: Choque (Objeto &a, Objeto &b)
-{
-	Vector dist=(a.posicion-b.posicion);
-	float argumento=atan((dist.vy)/(dist.vx));
-	float modulo=dist.modulo();
-	bool aux=0;
-	switch (a.planta)
-	{
-	case CUADRADO:
-		if (b.planta == CUADRADO)
-		{
-			if(argumento<pi/4&&argumento>-pi/4 || argumento>3*pi/4 && argumento<-3*pi/4)
-				aux= (a.superficie.vx/2+b.superficie.vx/2)>abs(dist.vx);
-			else if (argumento>pi/4&&argumento<5*pi/4 || argumento>-3*pi/4 && argumento<-pi/4)
-				aux = (a.superficie.vy/2+b.superficie.vy/2)>abs(dist.vy);
-			else if (argumento == pi/4 || argumento == -pi/4)
-				aux= sqrt(a.superficie.vx*a.superficie.vx/4)+sqrt(b.superficie.vx*b.superficie.vx/4)< modulo;
-		}
-		else if (b.planta == REDONDO)
-		{
-			if(argumento<pi/4&&argumento>-pi/4 || argumento>3*pi/4 && argumento<-3*pi/4)
-				return abs(a.superficie.vx)/2+abs(b.superficie.vx)/2>abs(modulo);
-			else if (argumento>pi/4&&argumento<5*pi/4 || argumento>-3*pi/4 && argumento<-pi/4)
-				return abs(a.superficie.vy)/2+abs(b.superficie.vy)>abs(modulo);
-			else if (argumento == pi/4 || argumento == -pi/4)
-				return sqrt(a.superficie.vx*a.superficie.vx/4+a.superficie.vy*a.superficie.vy/4)+abs(b.superficie.vx)>abs(modulo);
-		}
-		break;
-	case REDONDO:
-		if (b.planta == CUADRADO)
-		{
-			if(argumento<pi/4&&argumento>-pi/4)
-				return abs(a.superficie.vx)/2+abs(b.superficie.vx)/2>abs(modulo);
-			else if (argumento>pi/4&&argumento<-pi/4)
-				return abs(a.superficie.vy)/2+abs(b.superficie.vy)>abs(modulo);
-			else if (argumento == pi/4 && argumento == -pi/4)
-				return sqrt(b.superficie.vx*b.superficie.vx/4+b.superficie.vy*b.superficie.vy/4)+abs(a.superficie.vx)>abs(modulo);
-		}
-		else if (b.planta == REDONDO)
-			return abs(b.superficie.vx/2)+abs(b.superficie.vy/2)>modulo;
-		break;
-	}
-	return aux;
+bool Interaccion:: rebote (Objeto &h1, Objeto &h2)			//Interaccion entre hombres
+{																//ENTRE CABEZAS
+																	//Vector que une los centros								
+	Vector dif=h2.posicion-h1.posicion;
+	float d=dif.modulo();
+	float dentro=Interaccion :: dentro(h1,h2);
 
+	if(dentro>0.0f)													//si hay colision
+	{
+																	//El modulo y argumento de la velocidad de la pelota1
+		float v1=h1.getVelocidad().modulo();
+		float ang1=h1.getVelocidad().argumento();
+
+																	//El modulo y argumento de la velocidad de la pelota2
+		float v2=h2.getVelocidad().modulo();
+		float ang2=h2.getVelocidad().argumento();
+	
+																		//el argumento del vector que une los centros
+		float angd=dif.argumento();	
+		
+																	//Separamos las esferas, lo que se han incrustado
+																	//la mitad cada una
+		Vector desp(dentro/2*cos(angd),dentro/2*sin(angd));	
+		h1.posicion=h1.posicion+desp;
+		h2.posicion=h2.posicion-desp;
+		return true;
+	}
+	return false;
 }
 
-bool Interaccion :: Rebote (Objeto &a, Objeto &b)
+float Interaccion :: dentro (Objeto &a, Objeto &b)
 {
-	if(Choque(a,b))
+	Vector dist(b.posicion-a.posicion);
+	if(a.planta==CUADRADO)
 	{
-		float argumento=(a.posicion-b.posicion).argumento();
-		a.posicion.vx=Distancia(a,b)/2*cos(argumento);
-		a.posicion.vy=Distancia(a,b)/2*sin(argumento);
-		b.posicion.vx=-Distancia(a,b)/2*cos(argumento);
-		b.posicion.vy=-Distancia(a,b)/2*sin(argumento);
-		return true;
+			if(abs(tan(dist.argumento()))<=1)
+				return (a.superficie.vx/2+b.superficie.vx/2)-dist.vx;
+			else if(abs(tan(dist.argumento()))>1)
+				return (a.superficie.vy/2+b.superficie.vy/2)-dist.vy;
+	}
+	else if(a.planta == REDONDO)
+	{
+		if(b.planta == REDONDO)
+		{
+			return a.superficie.vx+b.superficie.vx-dist.modulo();
+		}
+		if(abs(tan(dist.argumento()))<=1)
+			return (a.superficie.vx/2+b.superficie.vx/2)-dist.vx;
+		else if(abs(tan(dist.argumento()))>1)
+			return (a.superficie.vy/2+b.superficie.vy/2)-dist.vy;
 	}
 	return false;
 }

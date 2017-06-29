@@ -55,6 +55,6 @@ Edificio* Cuartel :: generar (int nivel, Luchadores tipo, Vector destino)
 {
 	if (tipo == NINGUNO || destino<0)
 		return false;
-	return new Personaje(tipo, nivel, posicion+superficie, destino);
+	return new Personaje(tipo, nivel, posicion+superficie+5, destino);
 	
 }
