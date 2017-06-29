@@ -35,7 +35,7 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glGetDoublev(GL_MODELVIEW_MATRIX,modelview);//Coges la matriz Modelview
 		glGetDoublev(GL_PROJECTION_MATRIX,proyeccion);//Coges la matriz proyeccion
 		glGetIntegerv(GL_VIEWPORT,viewport);//Coges el punto de vista
-		gluUnProject(0, 700,1,modelview,proyeccion,viewport,&x,&y,&z);
+		gluUnProject(0, 100,1,modelview,proyeccion,viewport,&x,&y,&z);
 		glTranslatef(x,y,z);
 		setTextColor(1,0.8,0);
 		setFont("fuentes/Bitwise.ttf",20);		
@@ -77,7 +77,6 @@ void Menus :: superior(Mundo &mundo)
 		setTextColor(1,0.8,0);
 		setFont("fuentes/Bitwise.ttf",20);		
 		char aux[500];
-		//sprintf(aux,"Jugador1\tHierro:%5.2f\t Oro:%5.2f\t, Comida:%5.2f",
 		sprintf(aux,"Hierro:%d        Oro:%d        Comida:%d",
 			mundo.jugador1.almacen.getHierro(),
 			mundo.jugador1.almacen.getOro(),

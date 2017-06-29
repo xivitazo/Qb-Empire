@@ -9,6 +9,7 @@ Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)),
 
 void Mundo::Dibuja()
 {
+	Menus :: superior(this->mundo);
 	gluLookAt(ax_ojo, ay_ojo, az_ojo,  // posicion del ojo
 		amiro_x, amiro_y, amiro_z,      // hacia que punto mira  (0,0,0) 
 			0.0, 0, 1.0);      // definimos hacia arriba (eje Z)    

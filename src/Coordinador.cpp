@@ -1,5 +1,6 @@
 #include "Coordinador.h"
 static int pos=0;
+static bool flag1=0, flag2=0, flag3=0;
 
 Coordinador::Coordinador(void)
 {
@@ -41,6 +42,9 @@ void Coordinador :: Dibuja()
 	{
 		mundo.Dibuja();
 		//Menus :: superior(mundo);
+		if(flag1)	Menus :: construccion (mundo);
+		if(flag2)	Menus :: seleccion(AYUNTAMIENTO, mundo);
+		if(flag3)	Menus :: seleccion (F_ORO, mundo);
 		glPushMatrix();
 		ETSIDI::setTextColor(1,1,0);
 		glTranslatef(0, 0, pos);
@@ -53,7 +57,6 @@ void Coordinador :: Dibuja()
 	else if (estado == GAME_OVER)
 	{
 		mundo.Dibuja();
-		
 		glPushMatrix();
 		ETSIDI::setTextColor(1,0,0);
 		glTranslatef(0, 0, 40);
@@ -100,9 +103,18 @@ void Coordinador :: Tecla (unsigned char key)
 			estado=GAME_OVER;
 			mundo.setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
 		}
-		if(key == ' ')	Menus :: construccion(mundo);	 
-		if(key == 'w')  Menus :: seleccion(AYUNTAMIENTO, mundo);
-		if(key == 'e')  Menus :: seleccion (F_ORO, mundo);
+		if(key == ' ')	{
+			if(flag1) flag1=false;
+			flag1=true;
+		}
+		if(key == 'w')  {
+			if(flag1) flag1=false;
+			flag1=true;
+		}
+		if(key == 'e')  {
+			if(flag3) flag3=false;
+			flag3=true;
+		}
 		if(key == 27)	exit(0);
 		break;
 	case GAME_OVER:	

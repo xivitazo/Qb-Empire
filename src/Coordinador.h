@@ -1,5 +1,6 @@
 #pragma once
 #include "Mundo.h"
+#include "Menus.h"
 
 class Coordinador
 {
