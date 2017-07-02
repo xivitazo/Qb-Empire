@@ -5,7 +5,7 @@
 class Coordinador
 {
 protected:
-	enum Estado{INICIO, JUEGO, GAME_OVER};
+	enum Estado{INICIO, OPCIONES, JUEGO, GAME_OVER, YOU_WIN};
 	Estado estado;
 	Mundo mundo;
 

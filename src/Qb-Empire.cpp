@@ -40,7 +40,11 @@ int main(int argc,char* argv[])
 	glMatrixMode(GL_PROJECTION);
 	
 	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
-//	glutFullScreen();
+	//IDEA
+	//Si usamos full Screen, flag=1. 
+	//Si no usamos full screen, flag=0;
+	//glutFullScreen();
+
 
 	coordinator.Inicializa();
 
