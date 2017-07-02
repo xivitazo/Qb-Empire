@@ -1,7 +1,13 @@
 #include "Coordinador.h"
-static int pos=0;
-static bool flag1=0, flag2=0, flag3=0, flag4=0;
-static unsigned int flag_musica=2;
+
+int Coordinador :: pos = 0;
+bool Coordinador :: flag1=0;
+bool Coordinador :: flag2=0;
+bool Coordinador :: flag3=0;
+bool Coordinador :: flag4=0;
+bool Coordinador :: flag5=0;
+bool Coordinador :: flag6=0;
+unsigned int Coordinador :: flag_musica=2;
 
 Coordinador::Coordinador(void)
 {
@@ -16,10 +22,7 @@ Coordinador::~Coordinador(void)
 void Coordinador :: Dibuja()
 {
 	mundo.Dibuja();
-	if(estado==INICIO)
-	{   
-		Menus :: inicio();
-	}
+	if(estado==INICIO)   Menus :: inicio();
 	else if(estado == OPCIONES)
 	{
 		Menus :: opciones();
@@ -29,27 +32,17 @@ void Coordinador :: Dibuja()
 			playMusica("sonidos/Two Steps from Hell   Heart of Courage.mp3", true);
 			flag_musica++;
 		}
-		else if(flag_musica%3 == 2)	stopMusica();
+		else if(flag_musica%3 == 2)		stopMusica();
 	}
 	else if(estado == JUEGO )
 	{
 		Menus :: superior(mundo);
-		if(flag1)
-		{
-			Menus :: construccion (mundo);
-		}
-		if(flag2)
-		{
-			Menus :: seleccion(AYUNTAMIENTO, mundo);
-		}
-		if(flag3)	
-		{
-			Menus :: seleccion (F_ORO, mundo);
-		}
-		if(flag4)
-		{
-			Menus :: seleccion (CUARTEL, mundo);
-		}
+		if(flag1)	Menus :: construccion (mundo);
+		if(flag2)	Menus :: seleccion (AYUNTAMIENTO, mundo);
+		if(flag3)	Menus :: seleccion (F_ORO, mundo);
+		if(flag4)	Menus :: seleccion (CUARTEL, mundo);
+		if(flag5)	Menus :: seleccion (F_HIERRO, mundo);
+		if(flag6)	Menus :: seleccion (F_COMIDA, mundo);
 	}
 	
 	//Frase aleatoria divertida 
@@ -65,6 +58,7 @@ void Coordinador :: Dibuja()
 
 	else if (estado == GAME_OVER)
 	{
+		Menus :: game_over ();
 		/*
 		mundo.Dibuja();
 		glPushMatrix();
@@ -86,7 +80,7 @@ void Coordinador :: Dibuja()
 			ETSIDI::printxy("PRESS -Esc- TO EXIT", 75,-5);
 		glPopMatrix();
 		*/
-		Menus :: game_over ();
+
 	}
 	else if (estado == YOU_WIN)
 	{
@@ -173,6 +167,15 @@ void Coordinador :: Tecla (unsigned char key)
 		if(key == 27)	exit(0);
 		break;
 	case GAME_OVER:	
+		if(key == 'Q' || key=='q')  {
+			estado=INICIO;
+			//No sé cómo destruir el mundo
+
+			Inicializa();
+		}
+		else if (key == 27)	exit(0);
+		break;
+	case YOU_WIN:	
 		if(key == 'Q' || key=='q')  {
 			estado=INICIO;
 			//No sé cómo destruir el mundo
