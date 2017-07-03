@@ -153,7 +153,7 @@ void Personaje :: Dibuja (Color equipo)
 		}
 		
 	}
-	glEnable(GL_LIGHTING);
+	//glEnable(GL_LIGHTING);
 }
 
 bool Personaje :: setVelocidad (Vector velocidad)

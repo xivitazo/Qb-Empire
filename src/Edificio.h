@@ -6,7 +6,7 @@
 class Edificio : public Objeto
 {
 protected:
-	unsigned int vida,vida_max;
+	int vida,vida_max;
 	unsigned int limite;
 	//Limite de generacion por unidad de tiempo (Cuarteles y fábricas)
 	unsigned int nombre;

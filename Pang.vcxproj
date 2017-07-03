@@ -85,6 +85,7 @@
   <ItemGroup>
     <ClCompile Include="src\Ayuntamiento.cpp" />
     <ClCompile Include="src\Color.cpp" />
+    <ClCompile Include="src\Coordinador.cpp" />
     <ClCompile Include="src\Cuartel.cpp" />
     <ClCompile Include="src\Disparo.cpp" />
     <ClCompile Include="src\Edificio.cpp" />
@@ -103,6 +104,7 @@
   <ItemGroup>
     <ClInclude Include="src\Ayuntamiento.h" />
     <ClInclude Include="src\Color.h" />
+    <ClInclude Include="src\Coordinador.h" />
     <ClInclude Include="src\Cuartel.h" />
     <ClInclude Include="src\Disparo.h" />
     <ClInclude Include="src\Edificio.h" />
