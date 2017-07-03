@@ -12,7 +12,7 @@ void OnTimer(int value);
 void OnKeyboardDown(unsigned char key, int x, int y);
 void OnMouse(int button, int state, int x, int y);
 void OnMousePas(int x, int y);
-
+/*
 void reshape(int w, int h)
 {
    glViewport(0, 0, (GLsizei) w, (GLsizei) h);
@@ -23,13 +23,14 @@ void reshape(int w, int h)
    glLoadIdentity();
    
 }
-
+*/
 int main(int argc,char* argv[])
 { 	
 	//Inicializar el gestor de ventanas GLUT
 	//y crear la ventana
 	glutInit(&argc, argv);
 	glutInitWindowSize(1280,720);
+//	glutInitWindowSize(1920,1080);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Qb-Empire");
 
@@ -80,7 +81,7 @@ int main(int argc,char* argv[])
 	glutTimerFunc(25,OnTimer,0);//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(OnMouse);
-	glutReshapeFunc(reshape);
+	//glutReshapeFunc(reshape);
 
 	
 		
@@ -143,7 +144,8 @@ void OnMouse(int button, int state, int x, int y)
 	GLuint selectBuffer[BUFSIZE];
 	GLint hits;
 	GLint vp[4];
-	int width=1270, height=720;
+	float width=1280, height=720;
+	//float width=1920, height=1080;
 
 	if (button != GLUT_LEFT_BUTTON || state != GLUT_DOWN)
       return;
@@ -162,7 +164,7 @@ void OnMouse(int button, int state, int x, int y)
 	glLoadIdentity();
 	glGetIntegerv(GL_VIEWPORT,vp);
 	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),5.0, 5.0, vp);
-	gluPerspective( 40.0, 1280/720.0f, 0.1, 300); 
+	gluPerspective( 40.0, width/height, 0.1, 300); 
 	
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
@@ -170,8 +172,17 @@ void OnMouse(int button, int state, int x, int y)
 	
 	mundo.Dibuja();
 
-
 	glFlush();
+
+	//Vuelvo a colocar la vista original
+	//Aplico un RESHAPE. 
+	glViewport(0, 0, (GLsizei) width, (GLsizei) height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+   // gluPerspective( 40.0, 1280/720.0f, 0.1, 300);
+	gluPerspective( 40.0, width/height, 0.1, 300);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
 	hits=glRenderMode(GL_RENDER);
 
@@ -202,5 +213,4 @@ void OnMouse(int button, int state, int x, int y)
 		}
 		
 	}
-
 }
