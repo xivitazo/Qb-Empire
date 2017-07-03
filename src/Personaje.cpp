@@ -1,6 +1,4 @@
 #include "Personaje.h"
-#include <stdio.h>
-#include "Disparo.h"
 #include <cstdio>
 
 Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vector destino):

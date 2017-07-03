@@ -1,5 +1,5 @@
 #include "Mapa.h"
-#include "glut.h"
+
 
 Mapa::Mapa(void)
 {

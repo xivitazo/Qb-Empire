@@ -12,7 +12,7 @@ Fabrica::Fabrica(Type _tipo,Vector posicion, unsigned int nivel):
 	switch(tipo){
 	case F_ORO:		color.set(245, 208, 51); produccion=2;	break;
 	case F_COMIDA:	color.set(234, 137, 154); produccion=4;	break;
-	case F_HIERRO:	color.set(157, 161, 170); produccion=3;	
+	case F_HIERRO:	color.set(157, 161, 170); produccion=3;	break;
 	}
 	for(unsigned int n=0;n<nivel;n++)
 		subirNivel();

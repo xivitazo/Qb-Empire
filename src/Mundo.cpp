@@ -1,10 +1,12 @@
 #include "Mundo.h"
-#include "glut.h"
-#include <math.h>
-#include <stdio.h>
+#include "Menus.h"
+#include <iostream>
+using namespace std;
 
+GLfloat x=0, y=0, z=-0.1;
 
-Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)), jugador2 (Vector(217, 37.5),Color(179,36,40))
+Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)),
+			jugador2 (Vector(217, 37.5),Color(179,36,40))
 {
 }
 
@@ -81,34 +83,65 @@ void Mundo::Tecla(unsigned char key)
 {
 	switch(key)
 	{
+	case 'A':
 	case 'a': x_ojo+=1; break;
+	case 'S':
 	case 's': y_ojo+=1; break;
+	case 'D':
 	case 'd': z_ojo+=1; break;
+	case 'Z':
 	case 'z': x_ojo-=1; break;
+	case 'X':
 	case 'x': y_ojo-=1; break;
+	case 'C':
 	case 'c': z_ojo-=1; break;
+	case 'F':
 	case 'f': miro_x+=1; break;
+	case 'G':
 	case 'g': miro_y+=1; break;
+	case 'H':
 	case 'h': miro_z+=1; break;
+	case 'V':
 	case 'v': miro_x-=1; break;
+	case 'B':
 	case 'b': miro_y-=1; break;
+	case 'N':
 	case 'n': miro_z-=1; break;
 	case '1': setPerspectiva(-37.5,37.5,50,25,37.5,0); break; //Vista Poblado
 	case '2': setPerspectiva(112.2,-28.5,60,112.5,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
 	case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo
+	case 'P':
 	case 'p': jugador1.Agregar(CABALLERO, Vector(200,50)); break;
+	case 'I':
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
+	case 'O':
 	case 'o': jugador1.Agregar(F_ORO, Vector(50,50)); break;
+	case 'U':
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
+	case 'Y':
 	case 'y': jugador1.Agregar(F_HIERRO, Vector(30,68));  break;
+	case 'Q':
 	case 'q': jugador2.Agregar(CABALLERO, Vector(0,0)); break;
+	case 'K':
 	case 'k': jugador2.Agregar(CUARTEL, Vector(225-10,75-20)); break;
+	case 'L':
 	case 'l': jugador2.Agregar(F_ORO, Vector(225-50,75-50)); break;
+	case 'J':
 	case 'j': jugador2.Agregar(F_COMIDA, Vector(225-75,75-68));  break;
+	case 'M':
 	case 'm': jugador2.Agregar(F_HIERRO, Vector(225-30,75-68));  break;
 	case '+': jugador1.subirNivel(AYUNTAMIENTO);  break;
+	case '5':  x++; break;
+	case '6':  x--; break;
+	case '7':  y++; break;
+	case '8':  y--; break;
+	case '9':  z+=0.001; break;
+	case '0':  z-=0.001; break;
+	
 	}
+	//Imprimo coordenadas de letras en pantalla
+	//cout<<x<<"    "<<y<<"    "<<z<<endl;
 
 }
 

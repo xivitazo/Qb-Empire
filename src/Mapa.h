@@ -2,6 +2,7 @@
 #include <cstdio>
 #include "Vector.h"
 #include "ETSIDI.h"
+#include "glut.h"
 
 using namespace ETSIDI;
 

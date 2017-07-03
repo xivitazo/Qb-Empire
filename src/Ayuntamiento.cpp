@@ -1,5 +1,4 @@
 #include "Ayuntamiento.h"
-#include "Disparo.h"
 
 Ayuntamiento :: Ayuntamiento(Vector posicion) :
 	Edificio(2500, 6, Color (215, 45, 109) ,CUADRADO, Vector (6, 15)),
