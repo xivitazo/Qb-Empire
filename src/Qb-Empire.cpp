@@ -1,6 +1,6 @@
 #include "Coordinador.h"
 #include "glut.h"
-<<<<<<< HEAD
+
 #define BUFSIZE 512
 =======
 
