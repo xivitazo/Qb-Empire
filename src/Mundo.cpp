@@ -21,15 +21,13 @@ void Mundo::Dibuja()
 	//dibujo del suelo
 	glLoadName(1);
 	map.Dibuja();
+
+	//Dibujamos ayuntamientos
 	glLoadName(2);
 	jugador1.Dibuja();
 	glLoadName(3);
-	jugador2.Dibuja();
-<<<<<<< HEAD
+	jugador2.Dibuja();	
 
-=======
-	
->>>>>>> refs/remotes/origin/master
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
 	//printf("%d\n", jugador1.getNivel(AYUNTAMIENTO));

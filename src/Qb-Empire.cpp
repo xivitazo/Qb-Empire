@@ -2,12 +2,8 @@
 #include "glut.h"
 
 #define BUFSIZE 512
-=======
-
 static float  x=-87.5, y=-50, z=25, t=0.5;
 Coordinador coordinator;
-
->>>>>>> refs/remotes/origin/master
 
 //los callback, funciones que seran llamadas automaticamente por la glut
 //cuando sucedan eventos
@@ -39,16 +35,14 @@ int main(int argc,char* argv[])
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Qb-Empire");
 
-	//habilitar luces y definir perspectiva
-<<<<<<< HEAD
-	
+	//habilitar luces y definir perspectiva	
 	GLfloat lightpos[] = {-50.5, 100.0, 501.0, 100.0};
 	
 	
-  glEnable(GL_LIGHT0);
-  glDepthFunc(GL_LESS);
-  glEnable(GL_DEPTH_TEST);
-  glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glDepthFunc(GL_LESS);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
 	/*GLfloat white[] = {0.4f, 0.4f,0.4f, 0.5f};		
 	GLfloat white[] = {0.8f, 0.8f, 0.8f, 1.0f}; 
 	GLfloat cyan[] = {0.f, .8f, .8f, 1.f};
@@ -59,43 +53,23 @@ int main(int argc,char* argv[])
 	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);*/
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
-=======
 	glEnable(GL_LIGHT0);
 //	glDepthFunc(GL_LESS);
 	glEnable(GL_LIGHTING);
 	glEnable(GL_DEPTH_TEST);
 	//glMatrixMode(GL_MODELVIEW);	
 	//glLoadIdentity();				//	MH no las pone... será por algo
->>>>>>> refs/remotes/origin/master
 	//glDepthFunc(GL_EQUAL);
 
 	glEnable(GL_COLOR_MATERIAL);
 	glMatrixMode(GL_PROJECTION);
 	
-<<<<<<< HEAD
 	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-	gluPerspective( 40.0, 1280/720.0f, 0.1, 300); 
 
-
+	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
 //	glutFullScreen();
 
-
-
-
-	/*
-	glShadeModel(GL_SMOOTH);
-	glMatrixMode(GL_MODELVIEW);	
-	glLoadIdentity();
-	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
-	glLightf (GL_LIGHT1, GL_SPOT_CUTOFF, 15.f);
-	*/
-	mundo.Inicializa();
-=======
-	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
-	glutFullScreen();
-
 	coordinator.Inicializa();
->>>>>>> refs/remotes/origin/master
 
 	//Registrar los callbacks
 	glutDisplayFunc(OnDraw);
@@ -126,8 +100,8 @@ void OnDraw(void)
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, qaDiffuseLight);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, qaSpecularLight);
    
-   glEnable(GL_LIGHT0);
-   glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHTING);
   
 
 	//Para definir el punto de vista
@@ -147,11 +121,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
 	//poner aqui el código de teclado
 	coordinator.Tecla(key);
-	switch(key){
-<<<<<<< HEAD
-	case 27:	exit(1); break;
-	
-=======
+	switch(key){	
 	case 27: exit(1); break;
 	case '5': x+=1; break;
 	case '6': x-=1; break;
@@ -159,7 +129,6 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 	case '8': y-=1;break;
 	case '9': z+=0.1; break;
 	case '0': z-=0.1; break;
->>>>>>> refs/remotes/origin/master
 	}
 	//printf("%f\t%f\t%f\t%f\n", x, y, z, t);
 	glutPostRedisplay();
@@ -217,7 +186,7 @@ void OnMouse(int button, int state, int x, int y)
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	
-	mundo.Dibuja();
+	coordinator.Dibuja();
 
 	glFlush();
 

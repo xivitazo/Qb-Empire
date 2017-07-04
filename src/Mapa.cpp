@@ -18,7 +18,7 @@ Mapa::Mapa(void)
 			barroA[73+i][n]=Color(78-6*(i+1),59+14.6*(i+1),49+4.2*(i+1));
 			cespedB[i][n]=Color(78-6*(i+3),59+14.6*(i+3),49+4.2*(i+3));
 		}
-	nombre=0;
+	nombre=50;
 }
 
 Mapa::~Mapa(void)
@@ -45,20 +45,16 @@ void Mapa :: inicializa()
 }
 void Mapa :: Dibuja ()
 {
-<<<<<<< HEAD
 	glLoadName(MAPA);
-	cesped1();
-	cesped2();
+	//cesped1();
+	//cesped2();
 	barro();
-=======
 	cesped();
 	//rio();
->>>>>>> refs/remotes/origin/master
 	montaña();
 	nubes();
 }
-
-<<<<<<< HEAD
+/*
 void Mapa :: cesped1 ()
 {
 	for(int n=0; n<74;n++)
@@ -94,10 +90,8 @@ void Mapa :: cesped1 ()
 			glPopMatrix();
 			nombre++;
 		}
-	/*glDisable(GL_LIGHTING);
-	
-	glBegin(GL_POLYGON);
-=======
+}*/
+
 void Mapa :: cesped ()
 {
 	glPushMatrix();
@@ -123,7 +117,6 @@ void Mapa :: cesped ()
 	glEnd();
 	*/
 	glBegin(GL_QUADS);
->>>>>>> refs/remotes/origin/master
 		glColor3ub(48,132,70);
 		glVertex2f(0,0);
 		glVertex2f(72.5f, 0);
@@ -160,11 +153,8 @@ void Mapa :: cesped ()
 		glVertex2f(225.0f,75.0f);	
 		glVertex2f(225.0f,0);
 	glEnd();
-<<<<<<< HEAD
-	glEnable(GL_LIGHTING);*/
-=======
+
 	glPopMatrix();
->>>>>>> refs/remotes/origin/master
 }
 
 
@@ -185,10 +175,11 @@ void Mapa :: barro ()
 				glVertex2f(0.5,0.5);
 				glVertex2f(0.5,-0.5);
 			glEnd();
-			glPopMatrix();
+			glPopName();
 			glPopMatrix();
 			nombre++;
 		}
+		/*
 		for (int i=0; i<75;i++)
 		{
 			glPushMatrix();
@@ -205,7 +196,7 @@ void Mapa :: barro ()
 			glPopName();
 			glPopMatrix();
 			nombre++;
-		}
+		}*/
 	/*glDisable(GL_LIGHTING);
 	glBegin(GL_POLYGON);
 		glColor3ub(0,0,250);
@@ -222,12 +213,9 @@ void Mapa :: montaña ()
 	glPushMatrix();
 	float altura=-300;
 	Vector dimension(225, 75);
-<<<<<<< HEAD
 	glTranslatef(-0.5,-0.5,0);
-=======
 	//glutWireCube(0.0001);
-	
->>>>>>> refs/remotes/origin/master
+
 	//Pared eje X
 	glBegin(GL_QUADS);
 	glColor3ub(130, 130 ,130);
@@ -287,7 +275,7 @@ void Mapa :: nubes ()
 	nube03->draw();
 	glPopMatrix();
 }
-
+/*
 void Mapa :: cesped2()
 {
 	for(int n=0; n<74;n++)
@@ -300,7 +288,7 @@ void Mapa :: cesped2()
 				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
 				glVertex2f(-0.5,-0.5);
 				glVertex2f(-0.5, 0.5);
-				glColor3ub(cespedB[n+1][i].getRed(),cespedB[n+1][i].getGreen(), cespedB[n+1][i].getBlue());
+				glColor3ub(cespedB[n+1 ][i].getRed(),cespedB[n+1][i].getGreen(), cespedB[n+1][i].getBlue());
 				glVertex2f(0.5,0.5);
 				glVertex2f(0.5,-0.5);
 			glEnd();
@@ -325,7 +313,5 @@ void Mapa :: cesped2()
 			glPopMatrix();
 			nombre++;
 		}
-		
-		
-
 }
+*/
