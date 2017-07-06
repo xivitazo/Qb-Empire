@@ -21,7 +21,7 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glLoadIdentity();
 
 		setTextColor(215.0f/255.0f, 45.0f/255.0f, 109.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
+			setFont("fuentes/LemonMilk.otf",30);		
 			char aux[100];
 			//sprintf(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
 			sprintf_s(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
@@ -48,7 +48,7 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glLoadIdentity();
 
 		setTextColor(245.0f/255.0f,208.0f/255.0f,51.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
+			setFont("fuentes/LemonMilk.otf",30);		
 			char aux[100];
 			sprintf_s(aux,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[F_ORO]);
 			printxy(aux, 50, 50);
@@ -74,7 +74,7 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glLoadIdentity();
 
 		setTextColor(139.0f/255.0f,69.0f/255.0f,19.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
+			setFont("fuentes/LemonMilk.otf",30);		
 			char aux1[100], aux2[100], aux3[100], aux4[100], aux5[100], aux6[100];
 			sprintf_s(aux1,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[CUARTEL]);
 			sprintf_s(aux2,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[ARQUERA]);
@@ -114,7 +114,7 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glLoadIdentity();
 
 		setTextColor(157.0f/255.0f, 161.0f/255.0f, 170.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
+			setFont("fuentes/LemonMilk.otf",30);		
 			char aux[100];
 			sprintf_s(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[F_HIERRO]);
 			printxy(aux, 50, 50);
@@ -137,7 +137,7 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glLoadIdentity();
 
 		setTextColor(234.0f/255.0f, 137.0f/255.0f, 154.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
+			setFont("fuentes/LemonMilk.otf",30);		
 			char aux[100];
 			sprintf_s(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[F_COMIDA]);
 			printxy(aux, 50, 50);
@@ -182,7 +182,7 @@ void Menus :: construccion(Mundo &mundo)
 
 		
 		setTextColor(1,0.8,0);
-			setFont("fuentes/waltographUI.ttf",30);		
+			setFont("fuentes/LemonMilk.otf",20);		
 			char aux1[100], aux2[100], aux3[100], aux4[100];
 			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   O   -");	
 			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   Y  -");	
@@ -242,7 +242,7 @@ void Menus :: superior(Mundo &mundo)
 				mundo.jugador1.almacen.getHierro(),
 				mundo.jugador1.almacen.getOro(),
 				mundo.jugador1.almacen.getComida() );
-			printxy(aux,50,1000);
+			printxy(aux,50,900);
 		
 			
 		glMatrixMode(GL_PROJECTION);
@@ -269,20 +269,20 @@ void Menus :: inicio ()
 		glLoadIdentity();
 
 		setTextColor(1,1,0);
-			setFont("fuentes/Bitwise.ttf",100);		
-			printxy("QB--EMPIRE", 580,700);
+			setFont("fuentes/cityburn.ttf",100);		
+			printxy("QB EMPIRE",glutGet(GLUT_WINDOW_WIDTH)*1/4 , glutGet(GLUT_WINDOW_HEIGHT)*3/4);
 
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PULSE LA TECLA -E- PARA EMPEZAR", 200,280);
 
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PULSE LA TECLA -O- PARA OPCIONES", 200,180);
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PULSE LA TECLA -Esc- PARA SALIR", 210, 80);
 	
 		glMatrixMode(GL_PROJECTION);
@@ -311,11 +311,11 @@ void Menus :: game_over ()
 
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PRESS -Q- TO RESTART", 200, 280);
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PRESS -Esc- TO EXIT",210,180);
 	
 		glMatrixMode(GL_PROJECTION);
@@ -340,15 +340,15 @@ void Menus :: opciones ()
 		glLoadIdentity();
 
 		setTextColor(0.5,0.5,1);
-			setFont("fuentes/waltographUI.ttff",50);
+			setFont("fuentes/LemonMilk.otf",50);
 			printxy("MUSICA  - M - ", 650, 550);
 	
 		setTextColor(0.5,0.8,0);
-			setFont("fuentes/waltographUI.ttf",50);
+			setFont("fuentes/LemonMilk.otf",50);
 			printxy("EFECTOS  - K -", 650,400);
 
 		setTextColor(1,0,0);
-			setFont("fuentes/waltographUI.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("VOLVER  - DEL -", 200,200);
 	
 		glMatrixMode(GL_PROJECTION);
@@ -378,11 +378,11 @@ void Menus :: you_win()
 
 	
 		setTextColor(0,1,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PRESS -Q- TO RESTART", 200, 280);
 	
 		setTextColor(0,1,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PRESS -Esc- TO EXIT",210,180);
 	
 		glMatrixMode(GL_PROJECTION);

@@ -22,6 +22,7 @@ Coordinador::~Coordinador(void)
 void Coordinador :: Dibuja()
 {
 	mundo.Dibuja();
+
 	if(estado==INICIO)   Menus :: inicio();
 	else if(estado == OPCIONES)
 	{
