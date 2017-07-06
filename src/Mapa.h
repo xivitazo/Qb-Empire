@@ -18,6 +18,7 @@ protected:
 	Sprite *nube01;
 	Sprite *nube02;
 	Sprite *nube03;
+	Sprite *help;
 
 public:
 	Mapa(void);
@@ -30,5 +31,6 @@ public:
 	void montaña();
 	void nubes();
 	void inicializa ();
+	void sprites();
 };
 

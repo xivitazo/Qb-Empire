@@ -51,7 +51,6 @@ void Fabrica :: Timer (float t)
 
 void Fabrica :: Dibuja (Color equipo)
 {
-
 	casita(posicion, equipo, color, superficie, altura);
 }
 bool Fabrica :: generar (Recursos& almacen)

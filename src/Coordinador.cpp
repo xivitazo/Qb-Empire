@@ -14,7 +14,6 @@ Coordinador::Coordinador(void)
 	estado=INICIO;
 }
 
-
 Coordinador::~Coordinador(void)
 {
 }
@@ -202,3 +201,37 @@ void Coordinador :: Raton (int button, int state, Vector pos)
 	mundo.Raton(button, state, pos);
 }
 
+int Coordinador :: Mouse (int names[], unsigned int hits)
+{
+	bool flag=false;
+	for (unsigned int i=0; i<hits; i++)		if(names[i]==2)	flag=true;
+
+	unsigned int j=0;
+	while(names[j]<hits && flag==true)
+	{
+		switch(names[j])
+		{
+		case 21:	
+			if(flag2)	flag2=false;
+			else		flag2=true;
+			flag1=false;
+			flag3=false;
+			flag4=false;
+			flag5=false;
+			flag6=false;
+			break;
+		case 22:
+			if(flag3)	flag3=false;
+			else		flag3=true;
+			flag1=false;
+			flag2=false;
+			flag4=false;
+			flag5=false;
+			flag6=false;
+			break;
+		}
+		mundo.Mouse(names[j]);
+		j++;
+	}
+	return true;
+}

@@ -34,8 +34,6 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glPopMatrix();
 
 	glEnable(GL_DEPTH_TEST);
-
-	
 	}
 	if(tipo==F_ORO){
 	//Menu definitivo
@@ -60,7 +58,6 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glPopMatrix();
 
 	glEnable(GL_DEPTH_TEST);
-
 	}
 
 
@@ -227,6 +224,7 @@ void Menus :: superior(Mundo &mundo)
 	*/
 	
 	//FORMA DEFINITIVA DE HACER LOS MENUS 
+	
 	glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
@@ -242,8 +240,9 @@ void Menus :: superior(Mundo &mundo)
 				mundo.jugador1.almacen.getHierro(),
 				mundo.jugador1.almacen.getOro(),
 				mundo.jugador1.almacen.getComida() );
-			printxy(aux,50,900);
-		
+			printxy(aux,60 , glutGet(GLUT_WINDOW_HEIGHT)-60);
+			printxy("AYUDA :: ESP",glutGet(GLUT_WINDOW_WIDTH)-200 , glutGet(GLUT_WINDOW_HEIGHT)-60);
+				
 			
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -252,6 +251,7 @@ void Menus :: superior(Mundo &mundo)
 		glPopMatrix();
 
 	glEnable(GL_DEPTH_TEST);
+	
 }
 
 void Menus :: Timer (float t)
@@ -274,16 +274,16 @@ void Menus :: inicio ()
 
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/LemonMilk.otf",30);
-			printxy("PULSE LA TECLA -E- PARA EMPEZAR", 200,280);
+			setFont("fuentes/LemonMilk.otf",30);//200, 280
+			printxy("PULSE LA TECLA -E- PARA EMPEZAR", glutGet(GLUT_WINDOW_WIDTH)*1/4, 280);
 
 		setTextColor(1,0,0);
-			setFont("fuentes/LemonMilk.otf",30);
-			printxy("PULSE LA TECLA -O- PARA OPCIONES", 200,180);
+			setFont("fuentes/LemonMilk.otf",30);//200,180
+			printxy("PULSE LA TECLA -O- PARA OPCIONES",glutGet(GLUT_WINDOW_WIDTH)*1/4, 180);
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/LemonMilk.otf",30);
-			printxy("PULSE LA TECLA -Esc- PARA SALIR", 210, 80);
+			setFont("fuentes/LemonMilk.otf",30);//210, 80
+			printxy("PULSE LA TECLA -Esc- PARA SALIR",glutGet(GLUT_WINDOW_WIDTH)*1/4, 80);
 	
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();

@@ -20,8 +20,6 @@ Lista_de::Lista_de(Vector ayuntamiento, Color equipo ):
 	max_Type[EDIFICIOS]=4;
 	max_Type[COMBATIENTES]=20;
 
-
-
 	lista[numero++]=new Ayuntamiento (ayuntamiento);
 	numero_generado[EDIFICIOS]++;
 }

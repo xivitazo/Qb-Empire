@@ -16,6 +16,7 @@ public:
 	Coordinador(void);
 	virtual ~Coordinador(void);
 
+	int Mouse (int names[], unsigned int hits);
 	void TeclaEspecial(unsigned char key);
 	void Tecla(unsigned char key);
 	void Timer(float t);

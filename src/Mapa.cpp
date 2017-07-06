@@ -24,13 +24,16 @@ Mapa::Mapa(void)
 Mapa::~Mapa(void)
 {
 }
-
+			
 void Mapa :: inicializa()
 {
 	//Ponemos los posibles sprites ( animaciones / explosiones)
+	//glPushName(20);
+	//help = new Sprite ("imagenes/help.png", glutGet(GLUT_WINDOW_WIDTH)-150, glutGet(GLUT_WINDOW_HEIGHT)-60, 40, 40);
+	//glPopName();
 	nube01 = new Sprite ("imagenes/nube01.png", 0, 105, 30, 30);
 	nube02 = new Sprite ("imagenes/nube02.png", 0, 105, 30, 30);
-	nube03= new Sprite ("imagenes/nube03.png", 0, 105, 30, 30);
+	nube03 = new Sprite ("imagenes/nube03.png", 0, 105, 30, 30);
 	//nube01->Sprite::setPos(0, 0);
 	//nube01->ETSIDI::Sprite::setVel(0, 0);
 
@@ -53,7 +56,7 @@ void Mapa :: Dibuja ()
 	barro();
 	//rio();
 	montaña();
-	nubes();
+	sprites();
 }
 
 void Mapa :: cesped1 ()
@@ -187,4 +190,30 @@ void Mapa :: cesped2()
 			glPopMatrix();
 			nombre++;
 		}
+}
+
+void Mapa :: sprites ()
+{
+	nubes();
+	/*
+	//ayuda	
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT));
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+
+			help->draw();				
+			
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+
+	glEnable(GL_DEPTH_TEST);
+	*/
 }

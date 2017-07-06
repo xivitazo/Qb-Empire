@@ -53,7 +53,9 @@ void Ayuntamiento :: Timer (float t)
 
 void Ayuntamiento :: Dibuja (Color equipo)
 {
+	glPushName(21);
 	casita(posicion, equipo, color, superficie, altura);
+	glPopName();
 	for (int n=0; n<MAX_DISPAROS;n++)
 	{
 		if (disparos[0]==0)

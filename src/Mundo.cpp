@@ -30,6 +30,7 @@ void Mundo::Dibuja()
 	//Dibujamos ayuntamientos
 	glLoadName(2);
 	jugador1.Dibuja();
+
 	glLoadName(3);
 	jugador2.Dibuja();	
 
@@ -123,7 +124,7 @@ void Mundo::Tecla(unsigned char key)
 	case 'I':
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
 	case 'O':
-	case 'o': jugador1.Agregar(F_ORO, Vector(50,50)); break;
+	case 'o': jugador1.Agregar(F_ORO, Vector(50,50));	break;
 	case 'U':
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
 	case 'Y':
@@ -218,4 +219,15 @@ void Mundo :: Inicializa_vista()
 	amiro_x=112.5;
 	amiro_y=37.5;
 	amiro_z=0;
+}
+
+int  Mundo :: Mouse (int nombre)
+{
+	switch(nombre)
+	{
+	case 21: jugador1.subirNivel(AYUNTAMIENTO); break;
+	case 22: jugador1.subirNivel(F_ORO); break;
+	} 
+
+	return false;
 }

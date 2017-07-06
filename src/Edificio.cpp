@@ -38,12 +38,21 @@ void Edificio :: Tecla ()
 
 void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura)
 {
+	Color oro=(245, 208, 51),
+		hierro=(157, 161, 170), 
+		comida=(234, 137, 154), 
+		cuartel=(139, 69, 19);
+	glutWireCube(0.001); 
 	glPushMatrix();
+		if(pared==oro)			glPushName(22);
+		if(pared==hierro)		glPushName(23);
+		if(pared==comida)		glPushName(24);
+		if(pared==cuartel)		glPushName(25);
+			
 	//Esta gilipollez mantiene las luces en su sitio, no sé muy bien cómo ni porqué... ha sido prueba y error
 	//es un cubo ínfimo que mantiene las luces encendidas por la manera en la que se dibuja (usando glut), pues
 	// usando solo los glvertex la luz por defecto se desactiva a no ser que dibujemos con una matriz
 	//Lo cual no he podido averiguar cómo se hace por falta de apuntes
-	glutWireCube(0.001); 
 	glTranslatef(posicion.vx, posicion.vy, 0);
 	dimension=dimension/2;
 	
@@ -166,6 +175,7 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
 	glLineWidth(0.4f);
+	glPopName();
 	glPopMatrix();
 	
 }
