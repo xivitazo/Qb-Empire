@@ -4,6 +4,7 @@
 #include "Vector.h"
 #include "Color.h"
 #include "ETSIDI.h"
+#include "glut.h"
 using namespace std;
 using namespace ETSIDI;
 enum Nombre {JUGADOR1, JUGADOR2, MAPA, MENU};
@@ -22,9 +23,9 @@ public:
 	Mapa(void);
 	virtual ~Mapa(void);
 	void Dibuja ();
-	//void cesped1();
-	//void cesped2();
-	void cesped();
+	void cesped1();
+	void cesped2();
+	//void cesped();
 	void barro();
 	void montaña();
 	void nubes();

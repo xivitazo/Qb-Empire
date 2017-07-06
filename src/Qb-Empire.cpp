@@ -43,14 +43,7 @@ int main(int argc,char* argv[])
     glDepthFunc(GL_LESS);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
-	/*GLfloat white[] = {0.4f, 0.4f,0.4f, 0.5f};		
-	GLfloat white[] = {0.8f, 0.8f, 0.8f, 1.0f}; 
-	GLfloat cyan[] = {0.f, .8f, .8f, 1.f};
-	GLfloat cyan[] = {0.1f, .4f, .4f, 0.5f};
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, cyan);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, white);
-	GLfloat shininess[] = {100};
-	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);*/
+	
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	glEnable(GL_LIGHT0);
@@ -67,7 +60,11 @@ int main(int argc,char* argv[])
 	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 
 	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
-//	glutFullScreen();
+
+	//IDEA
+	//Si usamos full Screen, flag=1. 
+	//Si no usamos full screen, flag=0;
+	//glutFullScreen();
 
 	coordinator.Inicializa();
 
@@ -111,7 +108,6 @@ void OnDraw(void)
 	coordinator.Dibuja();
 
 	
-	
 
 	//no borrar esta linea ni poner nada despues
 	glutSwapBuffers();
@@ -136,7 +132,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 
 void OnTimer(int value)
 {
-//poner aqui el código de animacion
+	//poner aqui el código de animacion
 	coordinator.Timer(0.025f);
 
 	//no borrar estas lineas
@@ -157,6 +153,8 @@ void OnMouse(int button, int state, int x, int y)
 	mundo.Raton(button,state,(int)x,(int)y);
 	printf("%lf\t%lf\t%lf\n", x,y,z);
 	*/
+
+	//Empezamos con el Ratón
 	GLuint selectBuffer[BUFSIZE];
 	GLint hits;
 	GLint vp[4];
@@ -166,10 +164,8 @@ void OnMouse(int button, int state, int x, int y)
 	if (button != GLUT_LEFT_BUTTON || state != GLUT_DOWN)
       return;
 
-	
 	glSelectBuffer(BUFSIZE,selectBuffer);
 
-	
 	(void) glRenderMode(GL_SELECT);
 
 	glInitNames();
@@ -195,7 +191,7 @@ void OnMouse(int button, int state, int x, int y)
 	glViewport(0, 0, (GLsizei) width, (GLsizei) height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-   // gluPerspective( 40.0, 1280/720.0f, 0.1, 300);
+    // gluPerspective( 40.0, 1280/720.0f, 0.1, 300);
 	gluPerspective( 40.0, width/height, 0.1, 300);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();

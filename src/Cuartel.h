@@ -1,5 +1,5 @@
 #pragma once
-#include "Edificio.h"
+//#include "Edificio.h"
 #include "Personaje.h"
 #include "Lista_de.h"
 

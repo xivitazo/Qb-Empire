@@ -1,23 +1,23 @@
 #include "Mapa.h"
-#include "glut.h"
+
 
 Mapa::Mapa(void)
 {
-	for(int n=0; n<75;n++)
-		for (int i=0; i<75;i++)
+	for(int n=0; n<20;n++)
+		for (int i=0; i<21;i++)
 		{
 			cespedA[i][n]=Color(48,132,70);
 			cespedB[i][n]=Color(48,132,70);
 			barroA[i][n]=Color(78,59,49);
-		}
-	for(int i=0;i<3;i++)
-		for(int n=0; n<75;n++)
+		}/*
+	for(int i=0;i<2;i++)
+		for(int n=0; n<20;n++)
 		{
-			cespedA[73+i][n]=Color(48+6*(i+1),132-14.6*(i+1),70-4.2*(i+1));
-			barroA[i][n]=Color(48+6*(i+3),132-14.6*(i+3),70-4.2*(i+3));
-			barroA[73+i][n]=Color(78-6*(i+1),59+14.6*(i+1),49+4.2*(i+1));
-			cespedB[i][n]=Color(78-6*(i+3),59+14.6*(i+3),49+4.2*(i+3));
-		}
+			cespedA[18+i][n]=Color(48+7.5*(i+1),132-18.25*(i+1),70-5.25*(i+1));
+			barroA[i][n]=Color(48+7.5*(i+3),132-18.25*(i+3),70-5.25*(i+3));
+			barroA[18+i][n]=Color(78-7.5*(i+1),59+18.25*(i+1),49+5.25*(i+1));
+			cespedB[i][n]=Color(78-7.5*(i+3),59+18.25*(i+3),49+5.25*(i+3));
+		}*/
 	nombre=50;
 }
 
@@ -43,179 +43,69 @@ void Mapa :: inicializa()
 	nube03 = new Sprite ("imagenes/nube03.png", 0, 105, 30, 30);*/
 
 }
+
 void Mapa :: Dibuja ()
 {
+	glutWireCube(0.001);
 	glLoadName(MAPA);
-	//cesped1();
-	//cesped2();
+	cesped1();
+	cesped2();
 	barro();
-	cesped();
 	//rio();
 	montaña();
 	nubes();
 }
-/*
+
 void Mapa :: cesped1 ()
 {
-	for(int n=0; n<74;n++)
-		for (int i=0; i<75;i++)
+	for(int n=0; n<20;n++)
+		for (int i=0; i<20;i++)
 		{
 			glPushMatrix();
 			glLoadName(nombre);
-			glTranslatef(n,i,0);
+			glTranslatef(n*4,4*i,0);
 			glBegin(GL_QUADS);
 				glColor3ub(cespedA[n][i].getRed(),cespedA[n][i].getGreen(), cespedA[n][i].getBlue());
-				glVertex2f(-0.5,-0.5);
-				glVertex2f(-0.5, 0.5);
+				glVertex2f(-2,-2);
+				glVertex2f(-2, 2);
 				glColor3ub(cespedA[n+1][i].getRed(),cespedA[n+1][i].getGreen(), cespedA[n+1][i].getBlue());
-				glVertex2f(0.5,0.5);
-				glVertex2f(0.5,-0.5);
+				glVertex2f(2,2);
+				glVertex2f(2,-2);
 			glEnd();
 			glPopMatrix();
 			nombre++;
 		}
-		for (int i=0; i<75;i++)
-		{
-			glPushMatrix();
-			glLoadName(nombre);
-			glTranslatef(74,i,0);
-			glBegin(GL_QUADS);
-				glColor3ub(cespedA[74][i].getRed(),cespedA[74][i].getGreen(), cespedA[74][i].getBlue());
-				glVertex2f(-0.5,-0.5);
-				glVertex2f(-0.5, 0.5);
-				glColor3ub(barroA[0][i].getRed(),barroA[0][i].getGreen(),barroA[0][i].getBlue());
-				glVertex2f(0.5,0.5);
-				glVertex2f(0.5,-0.5);
-			glEnd();
-			glPopMatrix();
-			nombre++;
-		}
-}*/
-
-void Mapa :: cesped ()
-{
-	glPushMatrix();
-	//Misma razón que con otros. El comando glut para dibujar nos mantiene las luces puestas sin necesidad de hacer nada más.
-	//Trucos del prueba y error
-	glutWireCube(0.0001); //Queda poco profesional, pero funciona
-
-	//Así coloreamos por trozos, pero no usamos una matriz
-	//Por eso no lo implemento, no hallo diferencia...
-	/*
-	glBegin(GL_QUADS);
-	glColor3ub(48,132,70);
-	for(int i=0; i<72; i++)
-	{
-		for (int j=0; j<75; j++)
-		{
-				glVertex3f(i,j,0);
-				glVertex3f(i+1,j,0);
-				glVertex3f(i+1,j+1,0);
-				glVertex3f(i,j+1,0);
-		}
-	}
-	glEnd();
-	*/
-	glBegin(GL_QUADS);
-		glColor3ub(48,132,70);
-		glVertex2f(0,0);
-		glVertex2f(72.5f, 0);
-		glVertex2f(72.5f,75.0f);
-		glVertex2f(0,75.0f);
-	glEnd();
-	glBegin(GL_QUADS);
-		glColor3ub(48,132,70);
-		glVertex2f(72.5f,0);
-		glVertex2f(72.5f,75.0f);
-		glColor3ub(78,59,49);
-		glVertex2f(77.5f,75.0f);	
-		glVertex2f(77.5f,0);
-	glEnd();
-	glBegin(GL_QUADS);
-		glColor3ub(78,59,49);
-		glVertex2f(77.5f,0);
-		glVertex2f(77.5f,75.0f);
-		glVertex2f(147.5f,75.0f);	
-		glVertex2f(147.5f,0);
-	glEnd();
-	glBegin(GL_QUADS);
-		glColor3ub(78,59,49);
-		glVertex2f(147.5f,0);
-		glVertex2f(147.5f,75.0f);
-		glColor3ub(48,132,70);
-		glVertex2f(152.5f,75.0f);	
-		glVertex2f(152.5f,0);
-	glEnd();
-	glBegin(GL_QUADS);
-		glColor3ub(48,132,70);
-		glVertex2f(152.5f,0);
-		glVertex2f(152.5f,75.0f);
-		glVertex2f(225.0f,75.0f);	
-		glVertex2f(225.0f,0);
-	glEnd();
-
-	glPopMatrix();
 }
-
 
 void Mapa :: barro ()
 {
-	
-	for(int n=0; n<74;n++)
-		for (int i=0; i<75;i++)
+	for(int n=0; n<20;n++)
+		for (int i=0; i<20;i++)
 		{
 			glPushMatrix();
 			glPushName(nombre);
-			glTranslatef(75+n,i,0);
+			glTranslatef(80+n*4,4*i,0);
 			glBegin(GL_QUADS);
 			glColor3ub(barroA[n][i].getRed(),barroA[n][i].getGreen(), barroA[n][i].getBlue());
-				glVertex2f(-0.5,-0.5);
-				glVertex2f(-0.5, 0.5);
+				glVertex2f(-2,-2);
+				glVertex2f(-2, 2);
 				glColor3ub(barroA[n+1][i].getRed(),barroA[n+1][i].getGreen(), barroA[n+1][i].getBlue());
-				glVertex2f(0.5,0.5);
-				glVertex2f(0.5,-0.5);
+				glVertex2f(2,2);
+				glVertex2f(2,-2);
 			glEnd();
 			glPopName();
 			glPopMatrix();
 			nombre++;
 		}
-		/*
-		for (int i=0; i<75;i++)
-		{
-			glPushMatrix();
-			glPushName(nombre);
-			glTranslatef(75+74,i,0);
-			glBegin(GL_QUADS);
-				glColor3ub(barroA[74][i].getRed(),barroA[74][i].getGreen(), barroA[74][i].getBlue());
-				glVertex2f(-0.5,-0.5);
-				glVertex2f(-0.5, 0.5);
-				glColor3ub(cespedB[0][i].getRed(),cespedB[0][i].getGreen(),cespedB[0][i].getBlue());
-				glVertex2f(0.5,0.5);
-				glVertex2f(0.5,-0.5);
-			glEnd();
-			glPopName();
-			glPopMatrix();
-			nombre++;
-		}*/
-	/*glDisable(GL_LIGHTING);
-	glBegin(GL_POLYGON);
-		glColor3ub(0,0,250);
-		glVertex3f(-10.0f,1,-50.0f);
-		glVertex3f(-10.0f,1,50.0f);
-		glVertex3f(-30.0f,1,50.0f);	
-		glVertex3f(-30.0f,1,-50.0f);
-	glEnd();
-	glEnable(GL_LIGHTING);*/
 }
 
 void Mapa :: montaña ()
 {
 	glPushMatrix();
 	float altura=-300;
-	Vector dimension(225, 75);
-	glTranslatef(-0.5,-0.5,0);
-	//glutWireCube(0.0001);
-
+	Vector dimension(240, 80);
+	glTranslatef(-2,-2,0);
+	glPushName(-1);
 	//Pared eje X
 	glBegin(GL_QUADS);
 	glColor3ub(130, 130 ,130);
@@ -224,6 +114,8 @@ void Mapa :: montaña ()
 		glVertex3f((float)dimension.vx, 0, (float)altura);	
 		glVertex3f(0, 0,(float)altura);
 	glEnd();
+	glPopName();
+	glPushName(-2);
 	//Pared Eje Y
 	glBegin(GL_QUADS);
 		glVertex3f(0,0,0);
@@ -231,6 +123,8 @@ void Mapa :: montaña ()
 		glVertex3f(0.0f,(float)dimension.vy,(float)altura);	
 		glVertex3f(0,(float)dimension.vy,0);
 	glEnd();
+	glPopName();
+	glPushName(-3);
 	//Pared Eje XFondo
 	glBegin(GL_QUADS);
 		glVertex3f(0,(float)dimension.vy,0);
@@ -238,6 +132,8 @@ void Mapa :: montaña ()
 		glVertex3f((float)dimension.vx,(float)dimension.vy,(float)altura);	
 		glVertex3f((float)dimension.vx,(float)dimension.vy,0);
 	glEnd();
+	glPopName();
+	glPushName(-4);
 	//Pared Eje YFondo
 	glBegin(GL_QUADS);
 		glVertex3f((float)dimension.vx,(float)dimension.vy,0);
@@ -245,12 +141,7 @@ void Mapa :: montaña ()
 		glVertex3f((float)dimension.vx,0,(float)altura);	
 		glVertex3f((float)dimension.vx,0,0);
 	glEnd();
-	glBegin(GL_QUADS);
-		glVertex3f(0,(float)dimension.vy,0);
-		glVertex3f(0.0f,(float)dimension.vy,(float)altura);
-		glVertex3f((float)dimension.vx,(float)dimension.vy,(float)altura);	
-		glVertex3f((float)dimension.vx,(float)dimension.vy,0);
-	glEnd();
+	glPopName();
 	glPopMatrix();
 }
 
@@ -275,43 +166,25 @@ void Mapa :: nubes ()
 	nube03->draw();
 	glPopMatrix();
 }
-/*
+
 void Mapa :: cesped2()
 {
-	for(int n=0; n<74;n++)
-		for (int i=0; i<75;i++)
+	for(int n=0; n<20;n++)
+		for (int i=0; i<20;i++)
 		{
 			glPushMatrix();
 			glPushName(nombre);
-			glTranslatef(n+150,i,0);
+			glTranslatef(n*4+160,i*4,0);
 			glBegin(GL_QUADS);
 				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
-				glVertex2f(-0.5,-0.5);
-				glVertex2f(-0.5, 0.5);
+				glVertex2f(-2,-2);
+				glVertex2f(-2, 2);
 				glColor3ub(cespedB[n+1 ][i].getRed(),cespedB[n+1][i].getGreen(), cespedB[n+1][i].getBlue());
-				glVertex2f(0.5,0.5);
-				glVertex2f(0.5,-0.5);
-			glEnd();
-			glPopName();
-			glPopMatrix();
-			nombre++;
-		}
-	for (int i=0; i<75;i++)
-		{
-			int n=74;
-			glPushMatrix();
-			glPushName(nombre);
-			glTranslatef(n+150,i,0);
-			glBegin(GL_QUADS);
-				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
-				glVertex2f(-0.5,-0.5);
-				glVertex2f(-0.5, 0.5);
-				glVertex2f(0.5,0.5);
-				glVertex2f(0.5,-0.5);
+				glVertex2f(2,2);
+				glVertex2f(2,-2);
 			glEnd();
 			glPopName();
 			glPopMatrix();
 			nombre++;
 		}
 }
-*/

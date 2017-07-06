@@ -27,5 +27,6 @@ public:
 	bool poderGenerar();
 	bool generar (Recursos& Almacen);
 	friend class Interaccion;
+	friend class Menus;
 };
 

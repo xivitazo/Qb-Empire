@@ -1,6 +1,5 @@
 #include "Disparo.h"
-#include "Interaccion.h"
-#include "glut.h"
+
 
 Disparo::Disparo(Vector posicion, Edificio* _destino,unsigned int daño, unsigned int salpicadura, Edificio** lista ): 
 	Objeto(1,Color(rand(),rand(),rand()),REDONDO,1)

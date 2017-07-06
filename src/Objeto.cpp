@@ -1,15 +1,6 @@
 #include "Objeto.h"
 #include <cstdio>
 
-/*Objeto::Objeto(float a,bool v)
-{
-	
-	altura=a;
-	visible=v;
-	//no inicializo posicion y vector porque están ya a 0
-	//al crearse la clase vector con ellos.
-}*/
-
 Objeto :: Objeto (float _altura, Color _color , Planta _planta, Vector dimension ,bool _visible):
 	color(_color),
 	altura(_altura),
