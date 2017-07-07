@@ -51,8 +51,32 @@ void Fabrica :: Timer (float t)
 
 void Fabrica :: Dibuja (Color equipo)
 {
+	bool flag=false;
+	Color oro(245, 208, 51),
+		hierro(157, 161, 170), 
+		comida(234, 137, 154);
+
+		if(this->color==oro)
+		{
+			glPushName(22);
+			flag=true;
+		}
+		if(this->color==hierro)
+		{
+			glPushName(23);
+			flag=true;
+		}
+		if(this->color==comida)
+		{
+			glPushName(24);
+			flag=true;
+		}
+
 	casita(posicion, equipo, color, superficie, altura);
+
+	if(flag)	glPopName();
 }
+
 bool Fabrica :: generar (Recursos& almacen)
 {
 	if (poderGenerar())
@@ -73,6 +97,7 @@ bool Fabrica :: generar (Recursos& almacen)
 	}
 	return false;
 }
+
 bool Fabrica :: poderGenerar()
 {
 	if (tiempo>=3)

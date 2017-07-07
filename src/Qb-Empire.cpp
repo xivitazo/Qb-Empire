@@ -31,7 +31,7 @@ int main(int argc,char* argv[])
 	//y crear la ventana
 	glutInit(&argc, argv);
 	glutInitWindowSize(1280,720);
-//	glutInitWindowSize(1920,1080);
+	//glutInitWindowSize(1920,1080);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Qb-Empire");
 
@@ -60,6 +60,7 @@ int main(int argc,char* argv[])
 	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 
 	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
+	//gluPerspective( 40.0, 1920/1080.f, 0.1, 300);  
 
 	//IDEA
 	//Si usamos full Screen, flag=1. 
@@ -204,6 +205,8 @@ void OnMouse(int button, int state, int x, int y)
 	unsigned int hi = 0;
 	GLuint *bufp = selectBuffer;
 	GLuint name, numnames, z1, z2;
+	int nombre[100];
+	unsigned k=0;
 
 	// [0x6]
 	for(unsigned int j = 0; j < hits && *bufp<BUFSIZE; j++)
@@ -215,14 +218,17 @@ void OnMouse(int button, int state, int x, int y)
 		{
 			name = *bufp++;
 			hitnames[hi++] = name;
-			if(hitnames[hi-1]>0 && hitnames[hi-1]<1000)
+			if(hitnames[hi-1]>=0 && hitnames[hi-1]<10000)
 			{
 				//Asumo que no daremos más de 1000 nombres. me parecen suficientes . tenemos el
 				//problema de qe se cuele una dirección de memoria entre el 0 y el 1000... pero como es necesario leer todo el buffer para encontrar dóndo
 				//ha puesto el nombre el buffer, es la manera más sencilla que se me ocurre con un margen de error muy pequeño
-				cout<<"Nombre"<<j<<": "<<name<<endl;
+				
+				nombre[k++]=name;
+				cout<<"Nombre"<<j<<": "<<nombre[k-1]<<endl;
 			}
-		}
 		
+		}
 	}
+	coordinator.Mouse(nombre, k);
 }

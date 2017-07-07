@@ -59,10 +59,5 @@ unsigned int Color:: getBlue ()
 
 bool Color :: operator== (Color &c)
 {
-	if(this->red==c.red && this->green==c.green
-		&& this->blue == c.blue)
-	{
-		return true;
-	}
-	else return false;
+	return this->red==c.red && this->green==c.green && this->blue == c.blue;
 }

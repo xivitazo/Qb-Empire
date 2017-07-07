@@ -24,15 +24,17 @@ void Mundo::Dibuja()
 
 	
 	//dibujo del suelo
-	glLoadName(1);
 	map.Dibuja();
 
 	//Dibujamos ayuntamientos
-	glLoadName(2);
+	glPushName(100);
 	jugador1.Dibuja();
+	glPopName();
 
-	glLoadName(3);
+	//glLoadName(3);
+	glPushName(200);
 	jugador2.Dibuja();	
+	glPopName();
 
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 

@@ -31,13 +31,17 @@ Lista_de::~Lista_de(void)
 
 bool Lista_de:: Agregar (Type tipo, Vector posicion)
 {
-	if(numero<MAX&&numero_generado[EDIFICIOS]<max_Type[EDIFICIOS])
+	if(numero<MAX && numero_generado[EDIFICIOS]<max_Type[EDIFICIOS])
 	{
 		switch (tipo){
 		case F_ORO : 
 		case F_HIERRO : 
-		case F_COMIDA : lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
-		case CUARTEL : lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
+		case F_COMIDA :
+			lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
+			return true;
+		case CUARTEL :
+			lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++;
+			return true;
 		}
 
 	}

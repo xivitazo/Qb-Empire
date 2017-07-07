@@ -12,7 +12,7 @@ enum Nombre {JUGADOR1, JUGADOR2, MAPA, MENU};
 class Mapa
 {
 protected:
-	Color cespedA[75][75], cespedB[75][75], barroA[75][75];
+	Color cespedA[25][25], cespedB[25][25], barroA[25][25];
 	unsigned int nombre;
 
 	Sprite *nube01;

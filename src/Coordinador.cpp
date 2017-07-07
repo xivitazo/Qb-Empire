@@ -204,14 +204,21 @@ void Coordinador :: Raton (int button, int state, Vector pos)
 int Coordinador :: Mouse (int names[], unsigned int hits)
 {
 	bool flag=false;
-	for (unsigned int i=0; i<hits; i++)		if(names[i]==2)	flag=true;
+	for (unsigned int i=0; i<hits; i++)	
+	{
+		if(names[i]==100)
+		{
+			flag=true;
+		}
+	}
 
 	unsigned int j=0;
-	while(names[j]<hits && flag==true)
+	while(j<hits && flag==true)
 	{
 		switch(names[j])
 		{
 		case 21:	
+			cout<<"AYUNTAMIENTO"<<endl;
 			if(flag2)	flag2=false;
 			else		flag2=true;
 			flag1=false;
@@ -221,6 +228,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits)
 			flag6=false;
 			break;
 		case 22:
+			cout<<"FABRICA DE ORO"<<endl;
 			if(flag3)	flag3=false;
 			else		flag3=true;
 			flag1=false;
