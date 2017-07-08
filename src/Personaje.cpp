@@ -136,12 +136,21 @@ void Personaje :: Timer (float t)
 }
 
 void Personaje :: Dibuja (Color equipo)
-{
-	//glDisable(GL_LIGHTING);
+{	
 	glPushMatrix();
 	glColor3ub(equipo.getRed(),equipo.getGreen(),equipo.getBlue());
-	glTranslatef(posicion.vx,posicion.vy, 0);
-	glutSolidSphere(1,20,20);
+	glTranslatef(posicion.vx,posicion.vy, 1);
+	
+	switch(especifico)
+	{
+	case CABALLERO:	glutSolidSphere(2,20,20);	break;
+	case ARQUERA:	glutSolidCone((double)1,(double) altura, 20, 20);	break;
+	case GIGANTE:	
+		glRotatef(90,1, 0, 0);
+		glutSolidTeapot(5);		break;
+	case SOLDADO:	glutSolidSphere(1,20,20);	break;
+	case GUERRERO:	glutSolidIcosahedron();		break;
+	}
 	glPopMatrix();
 	for (int n=0; n<MAX_DISPAROS;n++)
 	{
@@ -151,7 +160,7 @@ void Personaje :: Dibuja (Color equipo)
 		}
 		
 	}
-	//glEnable(GL_LIGHTING);
+	
 }
 
 bool Personaje :: setVelocidad (Vector velocidad)

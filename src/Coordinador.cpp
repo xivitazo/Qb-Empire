@@ -7,6 +7,7 @@ bool Coordinador :: flag3=0;
 bool Coordinador :: flag4=0;
 bool Coordinador :: flag5=0;
 bool Coordinador :: flag6=0;
+bool Coordinador :: flag_jugador=0;
 unsigned int Coordinador :: flag_musica=2;
 
 Coordinador::Coordinador(void)
@@ -40,9 +41,9 @@ void Coordinador :: Dibuja()
 		if(flag1)	Menus :: construccion (mundo);
 		if(flag2)	Menus :: seleccion (AYUNTAMIENTO, mundo);
 		if(flag3)	Menus :: seleccion (F_ORO, mundo);
-		if(flag4)	Menus :: seleccion (CUARTEL, mundo);
+		if(flag6)	Menus :: seleccion (CUARTEL, mundo);
 		if(flag5)	Menus :: seleccion (F_HIERRO, mundo);
-		if(flag6)	Menus :: seleccion (F_COMIDA, mundo);
+		if(flag4)	Menus :: seleccion (F_COMIDA, mundo);
 	}
 	
 	//Frase aleatoria divertida 
@@ -119,12 +120,12 @@ void Coordinador :: Tecla (unsigned char key)
 		break;
 	case JUEGO:
 		mundo.Tecla(key); 	
-		if(key == 'Z' || key=='z')	
+		if(key == 'Z')	
 		{
 			estado=GAME_OVER;
 			mundo.setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
 		}
-		if(key == 'a' || key=='A')	
+		if( key=='A')	
 		{
 			estado=YOU_WIN;
 			mundo.setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
@@ -135,27 +136,9 @@ void Coordinador :: Tecla (unsigned char key)
 			flag2=false;
 			flag3=false;
 			flag4=false;
-		}
-		if(key == 'w' || key=='W')  {
-			if(flag2) flag2=false;
-			else flag2=true;
-			flag1=false;
-			flag3=false;
-			flag4=false;
-		}
-		if(key == 'e' || key=='E')  {
-			if(flag3) flag3=false;
-			else flag3=true;
-			flag2=false;
-			flag1=false;
-			flag4=false;
-		}
-		if(key == 'r' || key=='R'){
-			if(flag4) flag4=false;
-			else flag4=true;
-			flag1=0;
-			flag2=0;
-			flag3=0;
+			flag5=false;
+			flag6=false;
+
 		}
 		if(key == 8) {
 			//retroceso (DEL)
@@ -163,6 +146,8 @@ void Coordinador :: Tecla (unsigned char key)
 			flag2=0;
 			flag3=0;
 			flag4=0;
+			flag5=false;
+			flag6=false;
 		}
 		if(key == 27)	exit(0);
 		break;
@@ -203,23 +188,48 @@ void Coordinador :: Raton (int button, int state, Vector pos)
 
 int Coordinador :: Mouse (int names[], unsigned int hits)
 {
-	bool flag=false;
+	unsigned int j=0;
 	for (unsigned int i=0; i<hits; i++)	
 	{
 		if(names[i]==100)
 		{
-			flag=true;
+			flag_jugador=true;
 		}
 	}
-
-	unsigned int j=0;
-	while(j<hits && flag==true)
+	if(flag_jugador==false)
+	{
+		flag1=false;
+		flag2=false;
+		flag3=false;
+		flag4=false;
+		flag5=false;
+		flag6=false;
+	}
+	while(j<hits && flag_jugador)
 	{
 		switch(names[j])
 		{
+		case 20:
+			//MENU DE AYUDA PARA CONSTRUIR (ESPACIO)
+			if(flag1)	
+			{
+				mundo.Mouse(names[j]);
+				flag1=false;
+			}
+			else		flag1=true;
+			flag3=false;
+			flag2=false;
+			flag4=false;
+			flag5=false;
+			flag6=false;
+			break;
 		case 21:	
 			cout<<"AYUNTAMIENTO"<<endl;
-			if(flag2)	flag2=false;
+			if(flag2)
+			{
+				mundo.Mouse(names[j]);
+				//flag2=false;
+			}
 			else		flag2=true;
 			flag1=false;
 			flag3=false;
@@ -229,7 +239,11 @@ int Coordinador :: Mouse (int names[], unsigned int hits)
 			break;
 		case 22:
 			cout<<"FABRICA DE ORO"<<endl;
-			if(flag3)	flag3=false;
+			if(flag3)
+			{
+				mundo.Mouse(names[j]);
+				flag3=false;
+			}
 			else		flag3=true;
 			flag1=false;
 			flag2=false;
@@ -237,9 +251,51 @@ int Coordinador :: Mouse (int names[], unsigned int hits)
 			flag5=false;
 			flag6=false;
 			break;
+		case 23:
+			cout<<"FABRICA DE HIERRO"<<endl;
+			if(flag5)
+			{
+				mundo.Mouse(names[j]);
+				flag5=false;
+			}
+			else		flag5=true;
+			flag1=false;
+			flag2=false;
+			flag4=false;
+			flag3=false;
+			flag6=false;
+			break;
+		case 24:
+			cout<<"FABRICA DE COMIDA"<<endl;
+			if(flag4)
+			{
+				mundo.Mouse(names[j]);
+				flag4=false;
+			}
+			else		flag4=true;
+			flag1=false;
+			flag2=false;
+			flag3=false;
+			flag5=false;
+			flag6=false;
+			break;
+		case 25:
+			cout<<"CUARTEL"<<endl;
+			if(flag6)	
+			{
+				mundo.Mouse(names[j]);
+				flag6=false;
+			}
+			else		flag6=true;
+			flag1=false;
+			flag2=false;
+			flag4=false;
+			flag5=false;
+			flag3=false;
+			break;		
 		}
-		mundo.Mouse(names[j]);
 		j++;
 	}
+	flag_jugador=false;
 	return true;
 }

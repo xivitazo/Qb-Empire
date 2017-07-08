@@ -10,7 +10,7 @@ Cuartel :: Cuartel(Vector posicion, unsigned int nivel):
 	this->posicion=posicion;
 	tipo = CUARTEL;
 	especifico = NINGUNO;
-	for(unsigned int n=0;n<nivel; n++)
+	for(unsigned int n=1;n<nivel; n++)
 		subirNivel();
 	rango=-1;
 }
@@ -25,6 +25,7 @@ void Cuartel :: subirNivel()
 	vida=vida_max;
 	limite+=20;
 	altura+=4;
+	
 }
 
 bool Cuartel :: poderGenerar(void)

@@ -47,6 +47,7 @@ bool Lista_de:: Agregar (Type tipo, Vector posicion)
 	}
 	return false;
 }
+
 bool Lista_de :: Agregar (Luchadores tipo, Vector destino)
 {
 	for(int n=0;n<numero&&lista[numero]==0;n++)
@@ -93,6 +94,7 @@ void Lista_de :: Morir()
 		}
 	}
 }
+
 bool Lista_de :: subirNivel(Type tipo)
 {
 	if (nivel[tipo]<4)
@@ -112,6 +114,7 @@ bool Lista_de :: subirNivel(Type tipo)
 	}
 	return false;
 }
+
 bool Lista_de :: subirNivel(Luchadores tipo)
 {
 	nivel[tipo+LUCHADOR]++;
@@ -122,6 +125,7 @@ bool Lista_de :: subirNivel(Luchadores tipo)
 	}
 	return true;
 }
+
 void Lista_de :: Timer (float t)
 {
 	Rebote();

@@ -121,13 +121,13 @@ void Mundo::Tecla(unsigned char key)
 	case '2': setPerspectiva(112.2,-28.5,60,112.5,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
 	case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo
-	case 'P':
+	case 'P': jugador1.Agregar(ARQUERA, Vector(200,50)); break;
 	case 'p': jugador1.Agregar(CABALLERO, Vector(200,50)); break;
-	case 'I':
+	case 'I': jugador1.Agregar(CUARTEL, Vector(100,20)); break;
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
-	case 'O':
+	case 'O': jugador1.Agregar(GUERRERO, Vector(200,50)); break;
 	case 'o': jugador1.Agregar(F_ORO, Vector(50,50));	break;
-	case 'U':
+	case 'U': jugador1.Agregar(SOLDADO, Vector(200,50)); break;
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
 	case 'Y':
 	case 'y': jugador1.Agregar(F_HIERRO, Vector(30,68));  break;
@@ -229,6 +229,9 @@ int  Mundo :: Mouse (int nombre)
 	{
 	case 21: jugador1.subirNivel(AYUNTAMIENTO); break;
 	case 22: jugador1.subirNivel(F_ORO); break;
+	case 23: jugador1.subirNivel(F_HIERRO); break;
+	case 24: jugador1.subirNivel(F_COMIDA); break;
+	case 25: jugador1.subirNivel(CUARTEL); break;
 	} 
 
 	return false;
