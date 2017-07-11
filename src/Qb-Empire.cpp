@@ -162,7 +162,7 @@ void OnMouse(int button, int state, int x, int y)
 	float width=1280, height=720;
 	//float width=1920, height=1080;
 
-	if (button != GLUT_LEFT_BUTTON || state != GLUT_DOWN)
+	if ( state != GLUT_DOWN)
       return;
 
 	glSelectBuffer(BUFSIZE,selectBuffer);
@@ -178,7 +178,8 @@ void OnMouse(int button, int state, int x, int y)
 	glGetIntegerv(GL_VIEWPORT,vp);
 	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),1.0, 1.0, vp);
 	gluPerspective( 40.0, width/height, 0.1, 300); 
-	
+	//int x1=glutGet(GLUT_WINDOW_WIDTH);
+	//int y1=glutGet(GLUT_WINDOW_HEIGHT);
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
@@ -224,12 +225,13 @@ void OnMouse(int button, int state, int x, int y)
 				//Asumo que no daremos más de 1000 nombres. me parecen suficientes . tenemos el
 				//problema de qe se cuele una dirección de memoria entre el 0 y el 1000... pero como es necesario leer todo el buffer para encontrar dóndo
 				//ha puesto el nombre el buffer, es la manera más sencilla que se me ocurre con un margen de error muy pequeño
-				
-				nombre[k++]=name;
-				cout<<"Nombre"<<j<<": "<<nombre[k-1]<<endl;
+				if(name!=99)
+				{
+					nombre[k++]=name;
+					cout<<"Nombre"<<j<<": "<<nombre[k-1]<<endl;
+				}
 			}
-		
 		}
 	}
-	coordinator.Mouse(nombre, k);
+	coordinator.Mouse(nombre, k,(bool)button);
 }

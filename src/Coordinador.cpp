@@ -1,12 +1,12 @@
 #include "Coordinador.h"
 
 int Coordinador :: pos = 0;
-bool Coordinador :: flag1=0;
-bool Coordinador :: flag2=0;
-bool Coordinador :: flag3=0;
-bool Coordinador :: flag4=0;
-bool Coordinador :: flag5=0;
-bool Coordinador :: flag6=0;
+bool Coordinador :: flag1=0;	//Menu construccion
+bool Coordinador :: flag2=0;	//Menu seleccion AYUNTAMIENTO
+bool Coordinador :: flag3=0;	//Menu seleccion F_ORO
+bool Coordinador :: flag4=0;	//Menu seleccion F_COMIDA
+bool Coordinador :: flag5=0;	//Menu seleccion F_HIERRO
+bool Coordinador :: flag6=0;	//Menu seleccion CUARTEL
 bool Coordinador :: flag_jugador=0;
 unsigned int Coordinador :: flag_musica=2;
 
@@ -189,16 +189,79 @@ void Coordinador :: Raton (int button, int state, Vector pos)
 	mundo->Raton(button, state, pos);
 }
 
-int Coordinador :: Mouse (int names[], unsigned int hits)
+int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 {
 	unsigned int j=0;
 	Type nombre;
-	for (unsigned int i=0; i<hits; i++)	
+	for (int i=hits; i>=0; i--)	
 	{
 		if(names[i]==JUGADOR1)
 		{
-			flag_jugador=true;
-			nombre = mundo->jugador1.getLista()[names[++i]-100]->getTipo();
+			switch (mundo->jugador1.getLista()[names[i+1]-100]->getTipo()){
+			case AYUNTAMIENTO: 
+				cout<<"AYUNTAMIENTO"<<endl;
+				if(flag2)
+				{
+					mundo->Mouse(names[j]);
+					//flag2=false;
+				}
+				else		flag2=true;
+				flag1=false;
+				flag3=false;
+				flag4=false;
+				flag5=false;
+				flag6=false;
+				break;
+			case F_ORO:
+				cout<<"FABRICA DE ORO"<<endl;
+				if(flag3)
+				{
+					mundo->Mouse(names[j]);
+					flag3=false;
+				}
+				else		flag3=true;
+				flag1=false;
+				flag2=false;
+				flag4=false;
+				flag5=false;
+				flag6=false;
+				break;
+			case F_HIERRO:
+				cout<<"FABRICA DE HIERRO"<<endl;
+				if(flag5)
+				{
+					mundo->Mouse(names[j]);
+					flag5=false;
+				}
+				else		flag5=true;
+				flag1=false;
+				flag2=false;
+				flag4=false;
+				flag3=false;
+				flag6=false;
+				break;
+			case F_COMIDA:
+				cout<<"FABRICA DE COMIDA"<<endl;
+				if(flag4)
+				{
+					mundo->Mouse(names[j]);
+					flag4=false;
+				}
+				else		flag4=true;
+				flag1=false;
+				flag2=false;
+				flag3=false;
+				flag5=false;
+				flag6=false;
+				break;
+			}
+
+			//nombre = mundo->jugador1.getLista()[names[i+1]-100]->getTipo();
+		}
+		else if(names[i]==MAPA)
+		{
+			int x = ((names[i+1]-100)/20)*4+2;
+			int y = ((names[i+1]-100)%20)*4+2;
 		}
 	}
 	if(flag_jugador==false)
@@ -210,7 +273,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits)
 		flag5=false;
 		flag6=false;
 	}
-
+/*
 	switch(names[j])
 	{
 	case 20:
@@ -297,7 +360,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits)
 		flag5=false;
 		flag3=false;
 		break;		
-	}
+	}*/
 	j++;
 
 	flag_jugador=false;

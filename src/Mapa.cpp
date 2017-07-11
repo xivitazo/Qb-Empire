@@ -56,7 +56,7 @@ void Mapa :: Dibuja ()
 	barro();
 	cesped2();
 	//rio();
-	glLoadName(66);
+	glLoadName(99);
 	montaña();
 	sprites();
 	//glPopName();
@@ -111,7 +111,6 @@ void Mapa :: barro ()
 void Mapa :: montaña ()
 {
 	glPushMatrix();
-	glPushName(0);
 	float altura=-300;
 	Vector dimension(240, 80);
 	glTranslatef(-2,-2,0);
@@ -148,8 +147,6 @@ void Mapa :: montaña ()
 		glVertex3f((float)dimension.vx,0,(float)altura);	
 		glVertex3f((float)dimension.vx,0,0);
 	glEnd();
-
-	glPopName();
 	glPopMatrix();
 }
 

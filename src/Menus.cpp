@@ -115,6 +115,7 @@ void Menus :: construccion(Mundo &mundo)
 		setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",20);		
 			char aux1[100], aux2[100], aux3[100], aux4[100];
+						
 			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   O   -");	
 			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   Y  -");	
 			sprintf_s(aux3," CONSTRUIR FABRICA DE COMIDA  -  PULSAR   U  -");

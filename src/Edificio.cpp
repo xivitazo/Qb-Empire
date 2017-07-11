@@ -28,7 +28,6 @@ Type Edificio :: getTipo (void )
 	return tipo;
 }
 
-
 void Edificio :: Timer (float t)
 {
 	color_vida();
