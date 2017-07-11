@@ -32,6 +32,7 @@ public:
 	void Dibuja(Color equipo=0);
 	void casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura);
 	void setTipo(Type tipo);
+	Type getTipo (void );
 	bool poderGenerar ();
 	//Te dice si puedes generar lo que quieras
 	virtual void subirNivel();

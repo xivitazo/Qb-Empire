@@ -65,7 +65,9 @@ void Lista_de :: Dibuja()
 {
 	for(int n=0; n<numero;n++)
 	{
+		glPushName(n+100);
 		lista[n]->Dibuja(equipo);
+		glPopName();
 	}
 	
 }

@@ -18,7 +18,7 @@ Mapa::Mapa(void)
 			barroA[18+i][n]=Color(78-7.5*(i+1),59+18.25*(i+1),49+5.25*(i+1));
 			cespedB[i][n]=Color(78-7.5*(i+3),59+18.25*(i+3),49+5.25*(i+3));
 		}*/
-	nombre=1;
+	nombre=0;
 }
 
 Mapa::~Mapa(void)
@@ -49,25 +49,26 @@ void Mapa :: inicializa()
 
 void Mapa :: Dibuja ()
 {
-		//glutWireCube(0.001);
-		//glLoadName(MAPA);
-		cesped1();
-		barro();
-		cesped2();
-		//rio();
-		montaña();
-		sprites();
+	nombre=0;
+	//glutWireCube(0.001);
+	//glLoadName(MAPA);
+	cesped1();
+	barro();
+	cesped2();
+	//rio();
+	glLoadName(66);
+	montaña();
+	sprites();
 	//glPopName();
 }
 
 void Mapa :: cesped1 ()
 {
-	nombre=0;
 	for(int n=0; n<20;n++)
 	{
 		for (int i=0; i<20;i++)
 		{
-			glLoadName(1000+nombre);
+			glPushName(100+nombre);
 			glPushMatrix();
 			glTranslatef(n*4,4*i,0);
 			glBegin(GL_QUADS);
@@ -79,7 +80,7 @@ void Mapa :: cesped1 ()
 				glVertex2f(2,-2);
 			glEnd();
 			glPopMatrix();
-			//glPopName();
+			glPopName();
 			nombre++;
 		}
 	}
@@ -87,12 +88,11 @@ void Mapa :: cesped1 ()
 
 void Mapa :: barro ()
 {
-	nombre=0;
 	for(int n=0; n<20;n++)
 		for (int i=0; i<20;i++)
 		{
 			glPushMatrix();
-			glLoadName(1400+nombre);
+			glPushName(100+nombre);
 			glTranslatef(80+n*4,4*i,0);
 			glBegin(GL_QUADS);
 			glColor3ub(barroA[n][i].getRed(),barroA[n][i].getGreen(), barroA[n][i].getBlue());
@@ -102,7 +102,7 @@ void Mapa :: barro ()
 				glVertex2f(2,2);
 				glVertex2f(2,-2);
 			glEnd();
-			//glPopName();
+			glPopName();
 			glPopMatrix();
 			nombre++;
 		}
@@ -110,8 +110,8 @@ void Mapa :: barro ()
 
 void Mapa :: montaña ()
 {
-	glLoadName(0);
 	glPushMatrix();
+	glPushName(0);
 	float altura=-300;
 	Vector dimension(240, 80);
 	glTranslatef(-2,-2,0);
@@ -148,6 +148,8 @@ void Mapa :: montaña ()
 		glVertex3f((float)dimension.vx,0,(float)altura);	
 		glVertex3f((float)dimension.vx,0,0);
 	glEnd();
+
+	glPopName();
 	glPopMatrix();
 }
 
@@ -175,11 +177,10 @@ void Mapa :: nubes ()
 
 void Mapa :: cesped2()
 {
-	nombre=0;
 	for(int n=0; n<20;n++)
 		for (int i=0; i<20;i++)
 		{
-			glLoadName(1800+nombre);
+			glPushName(100+nombre);
 			glPushMatrix();
 			glTranslatef(n*4+160,i*4,0);
 			glBegin(GL_QUADS);
@@ -191,7 +192,7 @@ void Mapa :: cesped2()
 				glVertex2f(2,-2);
 			glEnd();
 			glPopMatrix();
-			//glPopName();
+			glPopName();
 			nombre++;
 		}
 }

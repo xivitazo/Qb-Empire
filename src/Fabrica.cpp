@@ -29,7 +29,6 @@ void Fabrica :: subirNivel ()
 {
 	vida_max = vida_max*1.25f;
 	vida= vida_max;
-	cout<<"Altura del edificio:"<<altura<<endl;
 	altura+=4;
 	//Si subes de nivel la vida se regenera
 	switch (tipo)
@@ -54,6 +53,7 @@ void Fabrica :: Timer (float t)
 
 void Fabrica :: Dibuja (Color equipo)
 {
+	/*
 	bool flag=false;
 	Color oro(245, 208, 51),
 		hierro(157, 161, 170), 
@@ -74,10 +74,10 @@ void Fabrica :: Dibuja (Color equipo)
 			glPushName(24);
 			flag=true;
 		}
-
+		*/
 	casita(posicion, equipo, color, superficie, altura);
 
-	if(flag)	glPopName();
+	//if(flag)	glPopName();
 }
 
 bool Fabrica :: generar (Recursos& almacen)

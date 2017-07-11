@@ -45,9 +45,9 @@ void Cuartel :: Timer (float t)
 
 void Cuartel :: Dibuja (Color equipo) 
 {
-	glPushName(25);
+	//glPushName(25);
 	casita(posicion, equipo, color , superficie, altura);
-	glPopName();
+	//glPopName();
 }
 
 Cuartel :: Cuartel(const Cuartel* copia):Edificio(copia)

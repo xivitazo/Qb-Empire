@@ -7,7 +7,7 @@ class Coordinador
 protected:
 	enum Estado{INICIO, OPCIONES, JUEGO, GAME_OVER, YOU_WIN};
 	Estado estado;
-	Mundo mundo;
+	Mundo *mundo;
 	static int pos;
 	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag_jugador;
 	static unsigned int flag_musica;

@@ -31,5 +31,6 @@ public:
 	float amiro_x, amiro_y, amiro_z;
 	
 	friend class Mapa;
+	friend class Coordinador;
 	friend class Menus;
 };

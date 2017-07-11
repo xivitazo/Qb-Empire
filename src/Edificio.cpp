@@ -23,6 +23,12 @@ void Edificio :: setTipo (Type tipo)
 	this->tipo=tipo;
 }
 
+Type Edificio :: getTipo (void )
+{
+	return tipo;
+}
+
+
 void Edificio :: Timer (float t)
 {
 	color_vida();

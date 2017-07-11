@@ -176,13 +176,14 @@ void OnMouse(int button, int state, int x, int y)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glGetIntegerv(GL_VIEWPORT,vp);
-	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),5.0, 5.0, vp);
+	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),1.0, 1.0, vp);
 	gluPerspective( 40.0, width/height, 0.1, 300); 
 	
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
 	
+	//glPopName();
 	coordinator.Dibuja();
 
 	glFlush();

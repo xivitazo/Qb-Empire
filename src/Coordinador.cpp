@@ -12,16 +12,18 @@ unsigned int Coordinador :: flag_musica=2;
 
 Coordinador::Coordinador(void)
 {
+	mundo = new Mundo ();
 	estado=INICIO;
 }
 
 Coordinador::~Coordinador(void)
 {
+	delete mundo;
 }
 
 void Coordinador :: Dibuja()
 {
-	mundo.Dibuja();
+	mundo->Dibuja();
 
 	if(estado==INICIO)   Menus :: inicio();
 	else if(estado == OPCIONES)
@@ -37,13 +39,13 @@ void Coordinador :: Dibuja()
 	}
 	else if(estado == JUEGO )
 	{
-		Menus :: superior(mundo);
-		if(flag1)	Menus :: construccion (mundo);
-		if(flag2)	Menus :: seleccion (AYUNTAMIENTO, mundo);
-		if(flag3)	Menus :: seleccion (F_ORO, mundo);
-		if(flag6)	Menus :: seleccion (CUARTEL, mundo);
-		if(flag5)	Menus :: seleccion (F_HIERRO, mundo);
-		if(flag4)	Menus :: seleccion (F_COMIDA, mundo);
+		Menus :: superior(*mundo);
+		if(flag1)	Menus :: construccion (*mundo);
+		if(flag2)	Menus :: seleccion (AYUNTAMIENTO, *mundo);
+		if(flag3)	Menus :: seleccion (F_ORO, *mundo);
+		if(flag6)	Menus :: seleccion (CUARTEL, *mundo);
+		if(flag5)	Menus :: seleccion (F_HIERRO, *mundo);
+		if(flag4)	Menus :: seleccion (F_COMIDA,* mundo);
 	}
 	
 	//Frase aleatoria divertida 
@@ -91,7 +93,7 @@ void Coordinador :: Dibuja()
 
 void Coordinador :: Timer (float t)
 {
-	mundo.Timer(t);
+	mundo->Timer(t);
 }
 
 void Coordinador :: Tecla (unsigned char key)
@@ -101,7 +103,7 @@ void Coordinador :: Tecla (unsigned char key)
 	case INICIO:
 		if(key=='E' || key=='e'){
 			estado=JUEGO;
-			mundo.setPerspectiva(-23,-47,50,50,25,0);
+			mundo->setPerspectiva(-23,-47,50,50,25,0);
 		}
 		if(key=='o' || key=='O'){
 			estado=OPCIONES;
@@ -119,16 +121,16 @@ void Coordinador :: Tecla (unsigned char key)
 		else if (key == 27)	exit(1);
 		break;
 	case JUEGO:
-		mundo.Tecla(key); 	
+		mundo->Tecla(key); 	
 		if(key == 'Z')	
 		{
 			estado=GAME_OVER;
-			mundo.setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
+			mundo->setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
 		}
 		if( key=='A')	
 		{
 			estado=YOU_WIN;
-			mundo.setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
+			mundo->setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
 		}
 		if(key == ' ')	{
 			if(flag1) flag1=false;
@@ -155,7 +157,8 @@ void Coordinador :: Tecla (unsigned char key)
 		if(key == 'Q' || key=='q')  {
 			estado=INICIO;
 			//No sé cómo destruir el mundo
-
+			delete mundo;
+			mundo = new Mundo ();
 			Inicializa();
 		}
 		else if (key == 27)	exit(0);
@@ -178,22 +181,24 @@ void Coordinador :: TeclaEspecial (unsigned char key)
 
 void Coordinador :: Inicializa ()
 {
-	mundo.Inicializa();
+	mundo->Inicializa();
 }
 
 void Coordinador :: Raton (int button, int state, Vector pos)
 {
-	mundo.Raton(button, state, pos);
+	mundo->Raton(button, state, pos);
 }
 
 int Coordinador :: Mouse (int names[], unsigned int hits)
 {
 	unsigned int j=0;
+	Type nombre;
 	for (unsigned int i=0; i<hits; i++)	
 	{
-		if(names[i]==100)
+		if(names[i]==JUGADOR1)
 		{
 			flag_jugador=true;
+			nombre = mundo->jugador1.getLista()[names[++i]-100]->getTipo();
 		}
 	}
 	if(flag_jugador==false)
@@ -205,97 +210,96 @@ int Coordinador :: Mouse (int names[], unsigned int hits)
 		flag5=false;
 		flag6=false;
 	}
-	while(j<hits && flag_jugador)
+
+	switch(names[j])
 	{
-		switch(names[j])
+	case 20:
+		//MENU DE AYUDA PARA CONSTRUIR (ESPACIO)
+		if(flag1)	
 		{
-		case 20:
-			//MENU DE AYUDA PARA CONSTRUIR (ESPACIO)
-			if(flag1)	
-			{
-				mundo.Mouse(names[j]);
-				flag1=false;
-			}
-			else		flag1=true;
-			flag3=false;
-			flag2=false;
-			flag4=false;
-			flag5=false;
-			flag6=false;
-			break;
-		case 21:	
-			cout<<"AYUNTAMIENTO"<<endl;
-			if(flag2)
-			{
-				mundo.Mouse(names[j]);
-				//flag2=false;
-			}
-			else		flag2=true;
+			mundo->Mouse(names[j]);
 			flag1=false;
-			flag3=false;
-			flag4=false;
-			flag5=false;
-			flag6=false;
-			break;
-		case 22:
-			cout<<"FABRICA DE ORO"<<endl;
-			if(flag3)
-			{
-				mundo.Mouse(names[j]);
-				flag3=false;
-			}
-			else		flag3=true;
-			flag1=false;
-			flag2=false;
-			flag4=false;
-			flag5=false;
-			flag6=false;
-			break;
-		case 23:
-			cout<<"FABRICA DE HIERRO"<<endl;
-			if(flag5)
-			{
-				mundo.Mouse(names[j]);
-				flag5=false;
-			}
-			else		flag5=true;
-			flag1=false;
-			flag2=false;
-			flag4=false;
-			flag3=false;
-			flag6=false;
-			break;
-		case 24:
-			cout<<"FABRICA DE COMIDA"<<endl;
-			if(flag4)
-			{
-				mundo.Mouse(names[j]);
-				flag4=false;
-			}
-			else		flag4=true;
-			flag1=false;
-			flag2=false;
-			flag3=false;
-			flag5=false;
-			flag6=false;
-			break;
-		case 25:
-			cout<<"CUARTEL"<<endl;
-			if(flag6)	
-			{
-				mundo.Mouse(names[j]);
-				flag6=false;
-			}
-			else		flag6=true;
-			flag1=false;
-			flag2=false;
-			flag4=false;
-			flag5=false;
-			flag3=false;
-			break;		
 		}
-		j++;
+		else		flag1=true;
+		flag3=false;
+		flag2=false;
+		flag4=false;
+		flag5=false;
+		flag6=false;
+		break;
+	case 21:	
+		cout<<"AYUNTAMIENTO"<<endl;
+		if(flag2)
+		{
+			mundo->Mouse(names[j]);
+			//flag2=false;
+		}
+		else		flag2=true;
+		flag1=false;
+		flag3=false;
+		flag4=false;
+		flag5=false;
+		flag6=false;
+		break;
+	case 22:
+		cout<<"FABRICA DE ORO"<<endl;
+		if(flag3)
+		{
+			mundo->Mouse(names[j]);
+			flag3=false;
+		}
+		else		flag3=true;
+		flag1=false;
+		flag2=false;
+		flag4=false;
+		flag5=false;
+		flag6=false;
+		break;
+	case 23:
+		cout<<"FABRICA DE HIERRO"<<endl;
+		if(flag5)
+		{
+			mundo->Mouse(names[j]);
+			flag5=false;
+		}
+		else		flag5=true;
+		flag1=false;
+		flag2=false;
+		flag4=false;
+		flag3=false;
+		flag6=false;
+		break;
+	case 24:
+		cout<<"FABRICA DE COMIDA"<<endl;
+		if(flag4)
+		{
+			mundo->Mouse(names[j]);
+			flag4=false;
+		}
+		else		flag4=true;
+		flag1=false;
+		flag2=false;
+		flag3=false;
+		flag5=false;
+		flag6=false;
+		break;
+	case 25:
+		cout<<"CUARTEL"<<endl;
+		if(flag6)	
+		{
+			mundo->Mouse(names[j]);
+			flag6=false;
+		}
+		else		flag6=true;
+		flag1=false;
+		flag2=false;
+		flag4=false;
+		flag5=false;
+		flag3=false;
+		break;		
 	}
+	j++;
+
 	flag_jugador=false;
 	return true;
 }
