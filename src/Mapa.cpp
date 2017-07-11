@@ -68,7 +68,8 @@ void Mapa :: cesped1 ()
 	{
 		for (int i=0; i<20;i++)
 		{
-			glPushName(100+nombre);
+			glPushName(100+n);
+			glPushName(100+i);
 			glPushMatrix();
 			glTranslatef(n*4,4*i,0);
 			glBegin(GL_QUADS);

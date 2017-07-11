@@ -193,16 +193,27 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 {
 	unsigned int j=0;
 	Type nombre;
+	if(flag_jugador==false)
+	{
+		flag1=false;
+		flag2=false;
+		flag3=false;
+		flag4=false;
+		flag5=false;
+		flag6=false;
+	}
 	for (int i=hits; i>=0; i--)	
 	{
+		
 		if(names[i]==JUGADOR1)
 		{
+			flag_jugador=true;
 			switch (mundo->jugador1.getLista()[names[i+1]-100]->getTipo()){
 			case AYUNTAMIENTO: 
 				cout<<"AYUNTAMIENTO"<<endl;
 				if(flag2)
 				{
-					mundo->Mouse(names[j]);
+					mundo->Mouse(AYUNTAMIENTO);
 					//flag2=false;
 				}
 				else		flag2=true;
@@ -216,7 +227,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				cout<<"FABRICA DE ORO"<<endl;
 				if(flag3)
 				{
-					mundo->Mouse(names[j]);
+					mundo->Mouse(F_ORO);
 					flag3=false;
 				}
 				else		flag3=true;
@@ -230,7 +241,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				cout<<"FABRICA DE HIERRO"<<endl;
 				if(flag5)
 				{
-					mundo->Mouse(names[j]);
+					mundo->Mouse(F_HIERRO);
 					flag5=false;
 				}
 				else		flag5=true;
@@ -244,7 +255,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				cout<<"FABRICA DE COMIDA"<<endl;
 				if(flag4)
 				{
-					mundo->Mouse(names[j]);
+					mundo->Mouse(F_COMIDA);
 					flag4=false;
 				}
 				else		flag4=true;
@@ -255,7 +266,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag6=false;
 				break;
 			}
-
+			
 			//nombre = mundo->jugador1.getLista()[names[i+1]-100]->getTipo();
 		}
 		else if(names[i]==MAPA)
@@ -263,16 +274,10 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 			int x = ((names[i+1]-100)/20)*4+2;
 			int y = ((names[i+1]-100)%20)*4+2;
 		}
+
 	}
-	if(flag_jugador==false)
-	{
-		flag1=false;
-		flag2=false;
-		flag3=false;
-		flag4=false;
-		flag5=false;
-		flag6=false;
-	}
+	flag_jugador=false;
+	
 /*
 	switch(names[j])
 	{

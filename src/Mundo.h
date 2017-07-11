@@ -15,7 +15,7 @@ public:
 	void Inicializa_vista();
 	void Timer(float t);
 	void Dibuja();
-	int Mouse(int nombre);
+	int Mouse(Type tipo);
 	void Raton (int button, int state, Vector pos);
 	void RatonPasivo(int x, int y);
 	void setPerspectiva(float ojo_a, float ojo_b, float ojo_c, float miro_a, float miro_b, float miro_c);
