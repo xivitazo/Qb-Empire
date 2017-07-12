@@ -24,17 +24,22 @@ void Mundo::Dibuja()
 
 	
 	//dibujo del suelo
+	//glPushName(2);
+	glLoadName(MAPA);
 	map.Dibuja();
+	//glPopName();
 
 	//Dibujamos ayuntamientos
-	glPushName(100);
+
+	glLoadName(JUGADOR1);
 	jugador1.Dibuja();
-	glPopName();
+	//glPopName();
 
 	//glLoadName(3);
-	glPushName(200);
+	glLoadName(JUGADOR2);
 	jugador2.Dibuja();	
-	glPopName();
+	//glPopName();
+	glLoadName(99);
 
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
@@ -126,7 +131,8 @@ void Mundo::Tecla(unsigned char key)
 	case 'I': jugador1.Agregar(CUARTEL, Vector(100,20)); break;
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
 	case 'O': jugador1.Agregar(GUERRERO, Vector(200,50)); break;
-	case 'o': jugador1.Agregar(F_ORO, Vector(50,50));	break;
+	//case 'o': jugador1.Agregar(F_ORO, Vector(50,50));	break;
+	case 'o': jugador1.Agregar(F_ORO, Vector(lanzaDado(200),lanzaDado(200)));	break;
 	case 'U': jugador1.Agregar(SOLDADO, Vector(200,50)); break;
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
 	case 'Y':
@@ -223,11 +229,11 @@ void Mundo :: Inicializa_vista()
 	amiro_z=0;
 }
 
-int  Mundo :: Mouse (int nombre)
+int  Mundo :: Mouse (Type  nombre)
 {
 	switch(nombre)
 	{
-	case 21: jugador1.subirNivel(AYUNTAMIENTO); break;
+	case AYUNTAMIENTO: jugador1.subirNivel(AYUNTAMIENTO); break;
 	case 22: jugador1.subirNivel(F_ORO); break;
 	case 23: jugador1.subirNivel(F_HIERRO); break;
 	case 24: jugador1.subirNivel(F_COMIDA); break;
