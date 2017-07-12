@@ -66,12 +66,12 @@ void Mapa :: cesped1 ()
 {
 	for(int n=0; n<20;n++)
 	{
+		glPushName(100+4*n+2);
 		for (int i=0; i<20;i++)
 		{
-			glPushName(100+n);
-			glPushName(100+i);
+			glPushName(100+4*i+2);
 			glPushMatrix();
-			glTranslatef(n*4,4*i,0);
+			glTranslatef(n*4+2,4*i+2,0);
 			glBegin(GL_QUADS);
 				glColor3ub(cespedA[n][i].getRed(),cespedA[n][i].getGreen(), cespedA[n][i].getBlue());
 				glVertex2f(-2,-2);
@@ -84,17 +84,20 @@ void Mapa :: cesped1 ()
 			glPopName();
 			nombre++;
 		}
+		glPopName();
 	}
 }
 
 void Mapa :: barro ()
 {
 	for(int n=0; n<20;n++)
+	{
+		glPushName(180+4*n+2);
 		for (int i=0; i<20;i++)
 		{
 			glPushMatrix();
-			glPushName(100+nombre);
-			glTranslatef(80+n*4,4*i,0);
+			glPushName(100+4*i+2);
+			glTranslatef(80+n*4+2,4*i+2,0);
 			glBegin(GL_QUADS);
 			glColor3ub(barroA[n][i].getRed(),barroA[n][i].getGreen(), barroA[n][i].getBlue());
 				glVertex2f(-2,-2);
@@ -107,6 +110,8 @@ void Mapa :: barro ()
 			glPopMatrix();
 			nombre++;
 		}
+		glPopName();
+	}
 }
 
 void Mapa :: montaña ()
@@ -114,7 +119,6 @@ void Mapa :: montaña ()
 	glPushMatrix();
 	float altura=-300;
 	Vector dimension(240, 80);
-	glTranslatef(-2,-2,0);
 
 	//Pared eje X
 	glBegin(GL_QUADS);
@@ -176,11 +180,13 @@ void Mapa :: nubes ()
 void Mapa :: cesped2()
 {
 	for(int n=0; n<20;n++)
+	{
+		glPushName(260+4*n+2);
 		for (int i=0; i<20;i++)
 		{
-			glPushName(100+nombre);
+			glPushName(100+4*i+2);
 			glPushMatrix();
-			glTranslatef(n*4+160,i*4,0);
+			glTranslatef(n*4+160+2,i*4+2,0);
 			glBegin(GL_QUADS);
 				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
 				glVertex2f(-2,-2);
@@ -193,6 +199,8 @@ void Mapa :: cesped2()
 			glPopName();
 			nombre++;
 		}
+		glPopName();
+	}
 }
 
 void Mapa :: sprites ()

@@ -184,24 +184,13 @@ void Coordinador :: Inicializa ()
 	mundo->Inicializa();
 }
 
-void Coordinador :: Raton (int button, int state, Vector pos)
-{
-	mundo->Raton(button, state, pos);
-}
 
-int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
+bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 {
 	unsigned int j=0;
 	Type nombre;
-	if(flag_jugador==false)
-	{
-		flag1=false;
-		flag2=false;
-		flag3=false;
-		flag4=false;
-		flag5=false;
-		flag6=false;
-	}
+	Vector click;
+	int cuadrados=0;
 	for (int i=hits; i>=0; i--)	
 	{
 		
@@ -265,16 +254,42 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag5=false;
 				flag6=false;
 				break;
-			}
+			case CUARTEL:
+				cout<<"CUARTEL"<<endl;
+				if(flag6)	
+				{
+					mundo->Mouse(CUARTEL);
+					flag6=false;
+				}
+				else		flag6=true;
+				flag1=false;
+				flag2=false;
+				flag4=false;
+				flag5=false;
+				flag3=false;
+				break;
+					}
 			
 			//nombre = mundo->jugador1.getLista()[names[i+1]-100]->getTipo();
 		}
 		else if(names[i]==MAPA)
 		{
-			int x = ((names[i+1]-100)/20)*4+2;
-			int y = ((names[i+1]-100)%20)*4+2;
+			click.vx += names[i+1]-100;
+			click.vy += names[i+2]-100;
+			cuadrados++;
 		}
 
+	}
+	click=click/cuadrados;
+	cout<<click.vx<<"\t"<<click.vy<<endl;
+	if(flag_jugador==false)
+	{
+		flag1=false;
+		flag2=false;
+		flag3=false;
+		flag4=false;
+		flag5=false;
+		flag6=false;
 	}
 	flag_jugador=false;
 	
@@ -366,8 +381,6 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		flag3=false;
 		break;		
 	}*/
-	j++;
 
-	flag_jugador=false;
 	return true;
 }
