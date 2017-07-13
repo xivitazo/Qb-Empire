@@ -26,14 +26,17 @@ float Interaccion :: Distancia (Objeto &a, Objeto &b)
 {
 	return sqrt((a.posicion.vx-b.posicion.vx)*(a.posicion.vx-b.posicion.vx)+(a.posicion.vy-b.posicion.vy)*(a.posicion.vy-b.posicion.vy));
 }
-
+#include "Personaje.h"
 bool Interaccion:: rebote (Objeto &h1, Objeto &h2)			//Interaccion entre hombres
 {																//ENTRE CABEZAS
 																	//Vector que une los centros								
 	Vector dif=h2.posicion-h1.posicion;
 	float d=dif.modulo();
 	float dentro=Interaccion :: dentro(h1,h2);
-
+	Personaje *aux=dynamic_cast<Personaje *>(&h1);
+	if(aux){
+		aux->altura;
+	}
 	if(dentro>0.0f)													//si hay colision
 	{
 																	//El modulo y argumento de la velocidad de la pelota1
@@ -62,6 +65,10 @@ float Interaccion :: dentro (Objeto &a, Objeto &b)
 	Vector dist(b.posicion-a.posicion);
 	if(a.planta==CUADRADO)
 	{
+		Vector superposicion=(a.superficie+b.superficie)/2.0F-dist;
+
+		if((dist.vx < (a.superficie.vx+b.superficie.vx)/2.0)&&
+			(dist.vy < (a.superficie.vy+b.superficie.vy)/2.0))
 			if(abs(tan(dist.argumento()))<=1)
 				return (a.superficie.vx/2+b.superficie.vx/2)-dist.vx;
 			else if(abs(tan(dist.argumento()))>1)
