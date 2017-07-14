@@ -1,6 +1,5 @@
 #pragma once
-#include "Edificio.h"
-#include "Interaccion.h"
+#include "Disparo.h"
 #define MAX_DISPAROS 10
 
 class Ayuntamiento : public Edificio

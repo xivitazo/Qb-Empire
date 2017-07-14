@@ -133,7 +133,7 @@ void Lista_de :: Timer (float t)
 void Lista_de :: Rebote()
 {
 	for (int n=0;n<numero-1;n++)
-		for (int i=n; i<numero;i++)
+		for (int i=n+1; i<numero;i++)
 			Interaccion :: rebote (*lista[n], *lista[i]);
 }
 bool Lista_de :: generarRecursos()

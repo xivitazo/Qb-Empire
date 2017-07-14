@@ -25,7 +25,7 @@ bool Ayuntamiento :: Atacar (Edificio** lista)
 	Edificio* objetivo=0;
 	for(int n=0; lista[n]!=0;n++)
 	{
-		if(Interaccion :: Distancia(*objetivo, *lista[n])<=rango)
+		if((posicion-lista[n]->getPosicion()).modulo()<=rango)
 		{
 			if(objetivo==0)
 				objetivo = lista[n];

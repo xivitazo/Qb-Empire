@@ -72,7 +72,7 @@ public:
 	void Timer (float t);
 	void Rebote();
 	bool generarRecursos();
-	Edificio getPosN(int posicion){return lista[posicion];}
+	Edificio* getPosN(int posicion){return lista[posicion];}
 	Edificio** getLista() {return lista;}
 	Recursos getAlmacen(){return almacen;}
 	int getNivel(Type tipo){return nivel[tipo];}

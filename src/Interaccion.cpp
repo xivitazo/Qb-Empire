@@ -26,64 +26,105 @@ float Interaccion :: Distancia (Objeto &a, Objeto &b)
 {
 	return sqrt((a.posicion.vx-b.posicion.vx)*(a.posicion.vx-b.posicion.vx)+(a.posicion.vy-b.posicion.vy)*(a.posicion.vy-b.posicion.vy));
 }
-#include "Personaje.h"
+
 bool Interaccion:: rebote (Objeto &h1, Objeto &h2)			//Interaccion entre hombres
-{																//ENTRE CABEZAS
-																	//Vector que une los centros								
-	Vector dif=h2.posicion-h1.posicion;
-	float d=dif.modulo();
-	float dentro=Interaccion :: dentro(h1,h2);
-	Personaje *aux=dynamic_cast<Personaje *>(&h1);
-	if(aux){
-		aux->altura;
+{
+	Vector dentro=Interaccion :: dentro(h1,h2);
+	Personaje *aux1=dynamic_cast<Personaje *>(&h1);
+	Personaje *aux2=dynamic_cast<Personaje *>(&h2);
+	if(aux1&&aux2){
+		aux1->posicion=aux1->posicion-dentro/2.0f;
+		aux2->posicion=aux2->posicion+dentro/2.0f;
+		return true;
 	}
-	if(dentro>0.0f)													//si hay colision
+	else if(aux1)
 	{
-																	//El modulo y argumento de la velocidad de la pelota1
+		aux1->posicion=aux1->posicion+dentro;
+		return true;
+	}
+	else if(aux2)
+	{
+		aux2->posicion=aux2->posicion+dentro;
+		return true;
+	}
+	else
+	{
+		h1.posicion=h1.posicion-dentro/2.0f;
+		h2.posicion=h2.posicion+dentro/2.0f;
+		return true;
+	}
+	/*if(dentro.modulo())	
+	{
 		float v1=h1.getVelocidad().modulo();
 		float ang1=h1.getVelocidad().argumento();
-
-																	//El modulo y argumento de la velocidad de la pelota2
 		float v2=h2.getVelocidad().modulo();
 		float ang2=h2.getVelocidad().argumento();
-	
-																		//el argumento del vector que une los centros
-		float angd=dif.argumento();	
-		
-																	//Separamos las esferas, lo que se han incrustado
-																	//la mitad cada una
+		float angd=dif.argumento();
 		Vector desp(dentro/2*cos(angd),dentro/2*sin(angd));	
 		h1.posicion=h1.posicion+desp;
 		h2.posicion=h2.posicion-desp;
 		return true;
-	}
+	}*/
 	return false;
 }
 
-float Interaccion :: dentro (Objeto &a, Objeto &b)
+Vector Interaccion :: dentro (Objeto &a, Objeto &b)
 {
-	Vector dist(b.posicion-a.posicion);
+	Vector dist=a.posicion-b.posicion;
 	if(a.planta==CUADRADO)
 	{
-		Vector superposicion=(a.superficie+b.superficie)/2.0F-dist;
+		if(b.planta==CUADRADO)
+		{
+			Vector superposicion=(a.superficie+b.superficie)/2.0F-dist;
 
-		if((dist.vx < (a.superficie.vx+b.superficie.vx)/2.0)&&
-			(dist.vy < (a.superficie.vy+b.superficie.vy)/2.0))
-			if(abs(tan(dist.argumento()))<=1)
-				return (a.superficie.vx/2+b.superficie.vx/2)-dist.vx;
-			else if(abs(tan(dist.argumento()))>1)
-				return (a.superficie.vy/2+b.superficie.vy/2)-dist.vy;
+			if((abs(dist.vx) < (a.superficie.vx+b.superficie.vx)/2.0)&&
+				(abs(dist.vy) < (a.superficie.vy+b.superficie.vy)/2.0))
+			{
+				return superposicion;
+		
+				/*if(abs(tan(dist.argumento()))<=1)
+					return (a.superficie.vx/2+b.superficie.vx/2)-dist.vx;
+				else if(abs(tan(dist.argumento()))>1)
+					return (a.superficie.vy/2+b.superficie.vy/2)-dist.vy;*/
+			}
+		}
+		else if(b.planta==REDONDO)
+		{
+			Vector superposicion=(a.superficie+b.superficie)/2.0F-dist;
+
+			if((abs(dist.vx) < (a.superficie.vx+b.superficie.vx)/2.0)&&
+				(dist.vy < (a.superficie.vy+b.superficie.vy)/2.0))
+			{
+				return superposicion;
+			}
+		}
 	}
 	else if(a.planta == REDONDO)
 	{
 		if(b.planta == REDONDO)
 		{
-			return a.superficie.vx+b.superficie.vx-dist.modulo();
+			float modulo=-dist.modulo()+(a.superficie.vx+b.superficie.vx);
+			float argumento=dist.argumento();
+			if(modulo>0)
+				return Vector(modulo*cos(argumento),modulo*sin(argumento));;
+			//return a.superficie.vx+b.superficie.vx-dist.modulo();
 		}
+		else if(b.planta==CUADRADO)
+		{
+			Vector superposicion=(a.superficie+b.superficie)/2.0F-dist;
+
+			if((abs(dist.vx) < (a.superficie.vx+b.superficie.vx)/2.0)&&
+				(dist.vy < (a.superficie.vy+b.superficie.vy)/2.0))
+			{
+				return superposicion;
+			}
+		}
+
+		/*
 		if(abs(tan(dist.argumento()))<=1)
 			return (a.superficie.vx/2+b.superficie.vx/2)-dist.vx;
 		else if(abs(tan(dist.argumento()))>1)
-			return (a.superficie.vy/2+b.superficie.vy/2)-dist.vy;
+			return (a.superficie.vy/2+b.superficie.vy/2)-dist.vy;*/
 	}
-	return false;
+	return Vector(0,0);
 }

@@ -49,17 +49,17 @@ void Mundo::Timer(float t)
 	for(int n=0; n<jugador1.getNumero();n++)
 	{
 		for(int i=0; i<jugador2.getNumero();i++)
-			Interaccion :: rebote(jugador1.getPosN(n),jugador2.getPosN(i));
+			Interaccion :: rebote(*jugador1.getPosN(n),*jugador2.getPosN(i));
 	}
 	jugador1.Timer(t);
 	jugador2.Timer(t);
 	for (int n=0; n<jugador1.getNumero(); n++)
 	for(int i=0; i<jugador2.getNumero(); i++)
 		{
-			if (Interaccion ::Distancia (jugador1.getPosN(n), jugador2.getPosN(n))<jugador1.getPosN(n).getRango())
-				jugador1.getPosN(n).Atacar(jugador2.getLista());
-			if (Interaccion ::Distancia (jugador1.getPosN(n), jugador2.getPosN(n))<jugador2.getPosN(i).getRango())
-				jugador2.getPosN(i).Atacar(jugador1.getLista());
+			if (Interaccion ::Distancia (*jugador1.getPosN(n), *jugador2.getPosN(i))<jugador1.getPosN(n)->getRango())
+				jugador1.getPosN(n)->Atacar(jugador2.getLista());
+			if (Interaccion ::Distancia (*jugador1.getPosN(n), *jugador2.getPosN(i))<jugador2.getPosN(i)->getRango())
+				jugador2.getPosN(i)->Atacar(jugador1.getLista());
 		}
 	movimientoCamara(t);
 
@@ -97,12 +97,12 @@ void Mundo::Tecla(unsigned char key)
 	case '2': setPerspectiva(112.2,-28.5,60,112.5,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
 	case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo
-	case 'p': jugador1.Agregar(ARQUERA, Vector(200,50)); break;
+	case 'p': jugador1.Agregar(CABALLERO, Vector(200,50)); break;
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
 	case 'o': jugador1.Agregar(F_ORO, Vector(50,50)); break;
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
 	case 'y': jugador1.Agregar(F_HIERRO, Vector(30,68));  break;
-	case 'q': jugador2.Agregar(ARQUERA, Vector(0,0)); break;
+	case 'q': jugador2.Agregar(CABALLERO, Vector(0,0)); break;
 	case 'k': jugador2.Agregar(CUARTEL, Vector(225-10,75-20)); break;
 	case 'l': jugador2.Agregar(F_ORO, Vector(225-50,75-50)); break;
 	case 'j': jugador2.Agregar(F_COMIDA, Vector(225-75,75-68));  break;

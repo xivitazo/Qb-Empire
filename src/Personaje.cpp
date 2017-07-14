@@ -73,10 +73,10 @@ bool Personaje:: meMuevo()
 	if (destino==posicion)
 	{
 		velocidad=0;
-		return 1;
+		return true;
 	}
 	velocidad=(destino-posicion).unitario()*(float)velocidad_max;
-	return 0;
+	return false;
 }
 
 bool Personaje :: Atacar (Edificio** lista)
@@ -120,16 +120,18 @@ void Personaje :: subirNivel ()
 
 void Personaje :: Timer (float t) 
 {
-	Edificio :: Timer(t);
+	Ayuntamiento :: Timer(t);
 	meMuevo();
-	velocidad=velocidad.unitario()*velocidad_max;
 	posicion=posicion+velocidad*t;
 	for(int n=0;n<MAX_DISPAROS;n++)
 	{
 		if(disparos[n]==0)
-			break;
+			continue;
 		if(disparos[n]->Mueve())
-			Interaccion :: Ataque (disparos[n]);
+		{
+			delete disparos[n];
+			disparos[n]=0;
+		}
 
 	}
 	
