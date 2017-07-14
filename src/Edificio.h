@@ -43,7 +43,8 @@ public:
 	int getRango (){return rango;}
 	virtual bool Atacar (Edificio** lista){return false;}
 	virtual Edificio* generar ( int nivel, Luchadores tipo, Vector destino){return 0;}
-	virtual bool generar (Recursos& almacen){return false;};
+	virtual bool generar (Recursos& almacen){return false;}
+	virtual bool mover(Vector destino){return false;}
 
 
 	friend class Interaccion;

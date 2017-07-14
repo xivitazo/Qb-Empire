@@ -168,3 +168,9 @@ bool Personaje :: setVelocidad (Vector velocidad)
 	this -> velocidad = velocidad;
 	return true;
 }
+
+bool Personaje :: mover(Vector destino)
+{
+	this -> destino = destino;
+	return true;
+}

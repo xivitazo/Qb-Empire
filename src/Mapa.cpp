@@ -71,7 +71,7 @@ void Mapa :: cesped1 ()
 		{
 			glPushName(100+4*i+2);
 			glPushMatrix();
-			glTranslatef(n*4,4*i,0);
+			glTranslatef(n*4+2,4*i+2,0);
 			glBegin(GL_QUADS);
 				glColor3ub(cespedA[n][i].getRed(),cespedA[n][i].getGreen(), cespedA[n][i].getBlue());
 				glVertex2f(-2,-2);
@@ -97,7 +97,11 @@ void Mapa :: barro ()
 		{
 			glPushMatrix();
 			glPushName(100+4*i+2);
+<<<<<<< HEAD
 			glTranslatef(80+n*4,4*i,0);
+=======
+			glTranslatef(80+n*4+2,4*i+2,0);
+>>>>>>> origin/Raton
 			glBegin(GL_QUADS);
 			glColor3ub(barroA[n][i].getRed(),barroA[n][i].getGreen(), barroA[n][i].getBlue());
 				glVertex2f(-2,-2);
@@ -119,7 +123,6 @@ void Mapa :: montaña ()
 	glPushMatrix();
 	float altura=-300;
 	Vector dimension(240, 80);
-	glTranslatef(-2,-2,0);
 
 	//Pared eje X
 	glBegin(GL_QUADS);
@@ -187,7 +190,7 @@ void Mapa :: cesped2()
 		{
 			glPushName(100+4*i+2);
 			glPushMatrix();
-			glTranslatef(n*4+160,i*4,0);
+			glTranslatef(n*4+160+2,i*4+2,0);
 			glBegin(GL_QUADS);
 				glColor3ub(cespedB[n][i].getRed(),cespedB[n][i].getGreen(), cespedB[n][i].getBlue());
 				glVertex2f(-2,-2);

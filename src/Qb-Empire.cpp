@@ -59,7 +59,7 @@ int main(int argc,char* argv[])
 	
 	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 
-	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
+	gluPerspective( 40.0, 1280/720.0f, 0.1, 400);  
 	//gluPerspective( 40.0, 1920/1080.f, 0.1, 300);  
 
 	//IDEA
@@ -177,7 +177,7 @@ void OnMouse(int button, int state, int x, int y)
 	glLoadIdentity();
 	glGetIntegerv(GL_VIEWPORT,vp);
 	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),1.0, 1.0, vp);
-	gluPerspective( 40.0, width/height, 0.1, 300); 
+	gluPerspective( 40.0, width/height, 0.1, 400); 
 	//int x1=glutGet(GLUT_WINDOW_WIDTH);
 	//int y1=glutGet(GLUT_WINDOW_HEIGHT);
 	//Para definir el punto de vista
@@ -195,7 +195,7 @@ void OnMouse(int button, int state, int x, int y)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     // gluPerspective( 40.0, 1280/720.0f, 0.1, 300);
-	gluPerspective( 40.0, width/height, 0.1, 300);
+	gluPerspective( 40.0, width/height, 0.1, 400);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -234,4 +234,8 @@ void OnMouse(int button, int state, int x, int y)
 		}
 	}
 	coordinator.Mouse(nombre, k,(bool)button);
+}
+
+void OnMousePas(int x, int y)
+{
 }

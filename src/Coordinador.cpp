@@ -7,6 +7,7 @@ bool Coordinador :: flag3=0;	//Menu seleccion F_ORO
 bool Coordinador :: flag4=0;	//Menu seleccion F_COMIDA
 bool Coordinador :: flag5=0;	//Menu seleccion F_HIERRO
 bool Coordinador :: flag6=0;	//Menu seleccion CUARTEL
+bool Coordinador :: flag7=0;	//Menu seleccion LUCHADOR
 bool Coordinador :: flag_jugador=0;
 unsigned int Coordinador :: flag_musica=2;
 
@@ -184,30 +185,20 @@ void Coordinador :: Inicializa ()
 	mundo->Inicializa();
 }
 
-void Coordinador :: Raton (int button, int state, Vector pos)
-{
-	mundo->Raton(button, state, pos);
-}
 
-int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
+bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 {
 	unsigned int j=0;
 	Type nombre;
-	if(flag_jugador==false)
-	{
-		flag1=false;
-		flag2=false;
-		flag3=false;
-		flag4=false;
-		flag5=false;
-		flag6=false;
-	}
+	Vector click;
+	int cuadrados=0;
 	for (int i=hits; i>=0; i--)	
 	{
 		
 		if(names[i]==JUGADOR1)
 		{
 			flag_jugador=true;
+			seleccion=names[i+1]-100;
 			switch (mundo->jugador1.getLista()[names[i+1]-100]->getTipo()){
 			case AYUNTAMIENTO: 
 				cout<<"AYUNTAMIENTO"<<endl;
@@ -222,6 +213,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag4=false;
 				flag5=false;
 				flag6=false;
+				flag7=false;
 				break;
 			case F_ORO:
 				cout<<"FABRICA DE ORO"<<endl;
@@ -236,6 +228,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag4=false;
 				flag5=false;
 				flag6=false;
+				flag7=false;
 				break;
 			case F_HIERRO:
 				cout<<"FABRICA DE HIERRO"<<endl;
@@ -250,6 +243,7 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag4=false;
 				flag3=false;
 				flag6=false;
+				flag7=false;
 				break;
 			case F_COMIDA:
 				cout<<"FABRICA DE COMIDA"<<endl;
@@ -264,17 +258,63 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag3=false;
 				flag5=false;
 				flag6=false;
+				flag7=false;
+				break;
+			case CUARTEL:
+				cout<<"CUARTEL"<<endl;
+				if(flag6)	
+				{
+					mundo->Mouse(CUARTEL);
+					flag6=false;
+				}
+				else		flag6=true;
+				flag1=false;
+				flag2=false;
+				flag4=false;
+				flag5=false;
+				flag3=false;
+				flag7=false;
+				break;
+			case LUCHADOR:
+				cout<<"LUCHADOR"<<endl;
+				if(flag7)
+				{
+				}
+				else flag7=true;
+				flag1=false;
+				flag2=false;
+				flag3=false;
+				flag4=false;
+				flag5=false;
+				flag6=false;
 				break;
 			}
+
 			
 			//nombre = mundo->jugador1.getLista()[names[i+1]-100]->getTipo();
 		}
 		else if(names[i]==MAPA)
 		{
-			int x = ((names[i+1]-100)/20)*4+2;
-			int y = ((names[i+1]-100)%20)*4+2;
+			click.vx += names[i+1]-100;
+			click.vy += names[i+2]-100;
+			cuadrados++;
+
 		}
 
+	}
+	click=click/cuadrados;
+	cout<<click.vx<<"\t"<<click.vy<<endl;
+	if(flag7 && button)
+		mundo->jugador1.getLista()[seleccion]->mover(click);
+	if(flag_jugador==false)
+	{
+		flag1=false;
+		flag2=false;
+		flag3=false;
+		flag4=false;
+		flag5=false;
+		flag6=false;
+		seleccion=0;
 	}
 	flag_jugador=false;
 	
@@ -366,8 +406,6 @@ int Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		flag3=false;
 		break;		
 	}*/
-	j++;
 
-	flag_jugador=false;
 	return true;
 }

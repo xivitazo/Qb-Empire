@@ -9,19 +9,19 @@ protected:
 	Estado estado;
 	Mundo *mundo;
 	static int pos;
-	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag_jugador;
+	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag_jugador;
 	static unsigned int flag_musica;
+	int seleccion;
 
 public:
 	Coordinador(void);
 	virtual ~Coordinador(void);
 
-	int Mouse (int names[], unsigned int hits, bool button);
+	bool Mouse (int names[], unsigned int hits, bool button);
 	void TeclaEspecial(unsigned char key);
 	void Tecla(unsigned char key);
 	void Timer(float t);
 	void Dibuja();
 	void Inicializa ();
-	void Raton (int button, int state, Vector pos);
 };
 
