@@ -97,11 +97,7 @@ void Mapa :: barro ()
 		{
 			glPushMatrix();
 			glPushName(100+4*i+2);
-<<<<<<< HEAD
-			glTranslatef(80+n*4,4*i,0);
-=======
 			glTranslatef(80+n*4+2,4*i+2,0);
->>>>>>> origin/Raton
 			glBegin(GL_QUADS);
 			glColor3ub(barroA[n][i].getRed(),barroA[n][i].getGreen(), barroA[n][i].getBlue());
 				glVertex2f(-2,-2);
