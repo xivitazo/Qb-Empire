@@ -5,9 +5,10 @@
 Edificio::Edificio(unsigned int v, unsigned int _altura, Color _color, Planta planta, Vector _superficie):
 	Objeto(_altura, _color, planta, _superficie)
 {
-	rango_visibilidad=20;
+//	rango_visibilidad=20;
 	vida_max=v;
 	vida=vida_max;
+	color_max=color;
 }
 Edificio :: Edificio (const Edificio* copia)
 {
@@ -174,7 +175,7 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 
 void Edificio :: color_vida()
 {
-	color.set(color.getRed()*(vida/vida_max),color.getGreen()*(vida/vida_max),color.getBlue()*(vida/vida_max));
+	color.set(color_max.getRed()*(vida/vida_max),color_max.getGreen()*(vida/vida_max),color_max.getBlue()*(vida/vida_max));
 }
 bool Edificio :: poderGenerar ()
 {

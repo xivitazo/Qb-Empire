@@ -19,7 +19,7 @@ public:
 
 	void Dibuja(void);
 	bool Mueve(void); //devuelve un 1 en el momento que llega al destino
-	void Timer (float t);
+	bool Timer_disparo (float t);
 	bool setVelocidad(Vector velocidad){return true;}
 
 	//amigo de la clase interacción para que interaccion

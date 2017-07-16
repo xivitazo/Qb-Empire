@@ -7,9 +7,9 @@ protected:
 	Vector velocidad;
 	Vector aceleracion;	//introduzco aceleración de los personajes
 	float velocidad_max;
-	float tiempo_ataque;
-	void setStats ( unsigned int vida,unsigned int ataque, float tiempo_ataque, float velocidad);
+	void setStats ( unsigned int vida,unsigned int ataque, float vel_ataque, float salpicadura, float velocidad);
 	Vector destino;
+	int rango_visibilidad;
 
 public:
 	Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vector destino);

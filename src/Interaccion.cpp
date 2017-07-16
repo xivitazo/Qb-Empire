@@ -16,7 +16,7 @@ void Interaccion:: Ataque (Disparo* disparo)
 	for (int n=0;disparo->lista[n]!=0 ;n++)
 	{
 
-		if (dentro (*disparo, *disparo->lista[n])>-1.0f)
+		if (dentro (*disparo, *disparo->lista[n]).modulo())
 			disparo->lista[n]->vida-=disparo->daño;
 	}
 	return;

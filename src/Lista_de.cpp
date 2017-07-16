@@ -79,14 +79,26 @@ void Lista_de :: Morir()
 {
 	for (int n=0;n<numero;n++)
 	{
-		if (lista[n]->vida<=0)
+		if (lista[n]->vida<=0.0f)
 		{
-			numero_generado[lista[n]->tipo+lista[n]->especifico]--;
+			switch (lista[n]->tipo){
+			case AYUNTAMIENTO:
+				//GAME OVER
+				//Ya veremos como lo hacemos
+				break;
+			case LUCHADOR:
+				numero_generado[COMBATIENTES]--;
+				break;
+			default:
+				numero_generado[EDIFICIOS]--;
+				break;
+			}
 			delete lista[n];
 			numero--;
 			for (int i=n;i<numero; i++)
 			{
 				lista[i]=lista[i+1];
+				lista[i+1]=0;
 			}
 		}
 	}
@@ -122,6 +134,7 @@ bool Lista_de :: subirNivel(Luchadores tipo)
 }
 void Lista_de :: Timer (float t)
 {
+	Morir();
 	Rebote();
 	for(int n=0;n<numero;n++)
 	{

@@ -6,7 +6,7 @@
 class Edificio : public Objeto
 {
 protected:
-	unsigned int vida,vida_max;
+	int vida,vida_max;
 	unsigned int limite;
 	//Limite de generacion por unidad de tiempo (Cuarteles y fábricas)
 	unsigned int nombre;
@@ -18,9 +18,9 @@ protected:
 	//habia 
 	int rango;
 	//Rango de ataque, si no ataca será -1;
-	int rango_visibilidad;
 	Type tipo;
 	Luchadores especifico;
+	Color color_max;
 	//Estableces el tipo de clase edificio tal y como se establece en Lista_de.h
 
 public:
