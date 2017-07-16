@@ -67,14 +67,6 @@ void Lista_de :: Dibuja()
 	
 }
 
-/*void Lista_de :: choque()
-{
-	for(int n=0; n<numero;n++)
-	{
-		Interaccion
-	}
-}*/
-
 void Lista_de :: Morir()
 {
 	for (int n=0;n<numero;n++)

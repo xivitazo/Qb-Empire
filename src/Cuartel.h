@@ -11,7 +11,6 @@ protected:
 
 public:
 	Cuartel( Vector posicion, unsigned int nivel);
-	Cuartel(const Cuartel *copia);
 	virtual ~Cuartel(void);
 	//Devuelve un TRUE si se puede generar una nueva tropa 
 	//Un FALSE si ya ha generado el maximo por unidad de tiempo

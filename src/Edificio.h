@@ -24,8 +24,7 @@ protected:
 	//Estableces el tipo de clase edificio tal y como se establece en Lista_de.h
 
 public:
-	Edificio(unsigned int v, unsigned int _altura, Color _color=0, Planta planta= NO_GEOMETRIA, Vector _superficie=0);
-	Edificio(const Edificio* copia);
+	Edificio(unsigned int v=0, unsigned int _altura=0, Color _color=0, Planta planta=NO_GEOMETRIA, Vector _superficie=0);
 	virtual ~Edificio(void);
 	void Tecla();
 	void Timer (float t);

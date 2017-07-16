@@ -10,9 +10,6 @@ Edificio::Edificio(unsigned int v, unsigned int _altura, Color _color, Planta pl
 	vida=vida_max;
 	color_max=color;
 }
-Edificio :: Edificio (const Edificio* copia)
-{
-}
 
 Edificio::~Edificio(void)
 {

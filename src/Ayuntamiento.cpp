@@ -15,8 +15,9 @@ Ayuntamiento :: Ayuntamiento(Vector posicion) :
 	tipo = AYUNTAMIENTO;
 	especifico = NINGUNO;
 //	rango_visibilidad=35;
-	rango=30;
+	rango=50;
 	vel_ataque=0.5f;
+	tiempo=0;
 }
  
 Ayuntamiento :: ~Ayuntamiento(void)
@@ -25,15 +26,15 @@ Ayuntamiento :: ~Ayuntamiento(void)
 
 bool Ayuntamiento :: Atacar (Edificio** lista)
 {
-	Edificio* objetivo=0;
+	int objetivo=0;
 	for(int n=0; lista[n]!=0;n++)
 	{
 		if((posicion-lista[n]->getPosicion()).modulo()<=rango)
 		{
 			if(objetivo==0)
-				objetivo = lista[n];
-			else if ((objetivo->getPosicion()-posicion).modulo()>(lista[n]->getPosicion()-posicion).modulo())
-				objetivo= lista[n];
+				objetivo = n;
+			else if ((lista[objetivo]->getPosicion()-posicion).modulo()>(lista[n]->getPosicion()-posicion).modulo())
+				objetivo= n;
 		}
 	}
 	if (objetivo == 0)
@@ -42,7 +43,8 @@ bool Ayuntamiento :: Atacar (Edificio** lista)
 	{
 		if (disparos[n]==0 && poderDisparar())
 		{
-			disparos[n] = new Disparo (posicion,objetivo,ataque,salpicadura, lista);
+			tiempo=0;
+			disparos[n] = new Disparo (posicion,lista[objetivo],ataque,salpicadura, lista);
 			return true;
 		}
 	}
@@ -90,9 +92,9 @@ void Ayuntamiento :: subirNivel ()
 
 bool Ayuntamiento :: poderDisparar()
 {
-	if(tiempo>vel_ataque)
+	if(tiempo>=vel_ataque)
 	{
-		tiempo=0;
 		return true;
 	}
+	return false;
 }

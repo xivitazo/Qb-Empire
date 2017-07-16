@@ -47,10 +47,6 @@ void Cuartel :: Dibuja (Color equipo)
 	casita(posicion, equipo, color , superficie, altura);
 }
 
-
-Cuartel :: Cuartel(const Cuartel* copia):Edificio(copia)
-{
-}
 Edificio* Cuartel :: generar (int nivel, Luchadores tipo, Vector destino)
 {
 	if (tipo == NINGUNO || destino<0)

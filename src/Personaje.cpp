@@ -25,8 +25,8 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		planta = CUADRADO;
 		//Pirámide de 4 lados
 		superficie.setValor(1,1);
-		rango=8;
-		rango_visibilidad=15;
+		rango=30;
+		rango_visibilidad=40;
 		break;
 	case GIGANTE:
 		setStats(1000,250, 2.5,3, 3);
@@ -63,6 +63,9 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 
 Personaje::~Personaje(void)
 {
+	for(int n=0;n<MAX_DISPAROS;n++)
+		if (disparos[n]!=0)
+			delete disparos[n];
 }
 
 void Personaje :: setStats ( unsigned int vida, unsigned int ataque,float vel_ataque ,float salpicadura, float velocidad)
@@ -93,6 +96,8 @@ bool Personaje :: Atacar (Edificio** lista)
 		destino=posicion;
 		return true;
 	}
+	if(!poderDisparar())
+		return false;
 	Edificio* objetivo=0;
 	for(int n=0;lista[n]!=0;n++)
 	{
@@ -114,28 +119,25 @@ bool Personaje :: Atacar (Edificio** lista)
 
 void Personaje :: subirNivel ()
 {
-	if (tipo ==1)
+	switch (especifico)
 	{
-		switch (especifico)
-		{
-		case CABALLERO:
-			setStats(vida_max*1.15,ataque*1.15,vel_ataque,salpicadura,velocidad_max*1.1);
-			break;
-		case ARQUERA:
-			setStats(vida_max*1.20,ataque*1.125,vel_ataque,salpicadura,velocidad_max*1.02);
-			break;
-		case GIGANTE:
-			setStats(vida_max*1.3,ataque*1.2,vel_ataque,salpicadura,velocidad_max*1.3);
-			break;
-		case SOLDADO:
-			setStats(vida_max*1.2,ataque*1.15,vel_ataque,salpicadura,velocidad_max*1.05);
-			break;
-		case GUERRERO:
-			setStats(vida_max*1.25,ataque*1.175,vel_ataque,salpicadura,velocidad_max*1.15);
-			break;
-		}
-		vida=vida_max;
+	case CABALLERO:
+		setStats(vida_max*1.15,ataque*1.15,vel_ataque,salpicadura,velocidad_max*1.1);
+		break;
+	case ARQUERA:
+		setStats(vida_max*1.20,ataque*1.125,vel_ataque,salpicadura,velocidad_max*1.02);
+		break;
+	case GIGANTE:
+		setStats(vida_max*1.3,ataque*1.2,vel_ataque,salpicadura,velocidad_max*1.3);
+		break;
+	case SOLDADO:
+		setStats(vida_max*1.2,ataque*1.15,vel_ataque,salpicadura,velocidad_max*1.05);
+		break;
+	case GUERRERO:
+		setStats(vida_max*1.25,ataque*1.175,vel_ataque,salpicadura,velocidad_max*1.15);
+		break;
 	}
+	vida=vida_max;
 }
 
 void Personaje :: Timer (float t) 

@@ -17,7 +17,7 @@ void Interaccion:: Ataque (Disparo* disparo)
 	{
 
 		if (dentro (*disparo, *disparo->lista[n]).modulo())
-			disparo->lista[n]->vida-=disparo->daño;
+			disparo->lista[n]->vida=disparo->lista[n]->vida-disparo->daño;
 	}
 	return;
 }

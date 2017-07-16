@@ -7,11 +7,15 @@ class Disparo : public Objeto
 protected:
 	float radio;
 	unsigned int daño;
-	Edificio* destino;
+	Edificio*destino;
+	Edificio señuelo;
+	Edificio muerto;
 	Vector velocidad;
+	float velocidad_z, z;
 	int velocidad_max, salpicadura;
 	Edificio** lista;
 	//vector aceleracion; lo omitimos por ahora
+	float tiempo;
 public:
 	Disparo(Vector posicion, Edificio* destino,unsigned int daño, unsigned int salpicadura, Edificio** lista );
 	//Introduces la posicion del disparo, aquien disparar, el daño y la salpicadura
