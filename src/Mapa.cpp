@@ -50,7 +50,7 @@ void Mapa :: inicializa()
 void Mapa :: Dibuja ()
 {
 	nombre=0;
-	//glutWireCube(0.001);
+	glutWireCube(0.001);
 	//glLoadName(MAPA);
 	cesped1();
 	barro();

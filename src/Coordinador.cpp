@@ -157,7 +157,6 @@ void Coordinador :: Tecla (unsigned char key)
 	case GAME_OVER:	
 		if(key == 'Q' || key=='q')  {
 			estado=INICIO;
-			//No sé cómo destruir el mundo
 			delete mundo;
 			mundo = new Mundo ();
 			Inicializa();
@@ -167,7 +166,8 @@ void Coordinador :: Tecla (unsigned char key)
 	case YOU_WIN:	
 		if(key == 'Q' || key=='q')  {
 			estado=INICIO;
-			//No sé cómo destruir el mundo
+			delete mundo;
+			mundo = new Mundo ();
 
 			Inicializa();
 		}
