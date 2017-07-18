@@ -10,6 +10,8 @@ protected:
 	void setStats ( unsigned int vida,unsigned int ataque, float vel_ataque, float salpicadura, float velocidad);
 	Vector destino;
 	int rango_visibilidad;
+	Vector memoria;
+	bool huyendo;
 
 public:
 	Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vector destino);
@@ -21,7 +23,7 @@ public:
 	virtual ~Personaje(void);
 	bool meMuevo ();
 	//devuele un 1 cuando llega a la posicion
-	bool Atacar (Edificio** lista);
+	bool Atacar (Edificio** lista, Disparo** disparos);
 	//Ataca, o se mueve hasta donde pueda atacar para golpear al objetivo
 	//Devuelve un 1 cuando crea un disparo hacia el objetivo
 	void Dibuja(Color equipo=0);
@@ -29,6 +31,7 @@ public:
 	void subirNivel();
 	bool setVelocidad (Vector velocidad);
 	Vector getVelocidad ();
+	bool mover(Vector destino);
 
 	friend class Interaccion;
 	friend class Lista_de;

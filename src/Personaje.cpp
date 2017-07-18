@@ -8,6 +8,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 	destino(destino),
 	Ayuntamiento(posicion)
 {
+	memoria=destino;
 	this -> tipo=LUCHADOR;
 	especifico = tipo;
 	switch (tipo)
@@ -17,7 +18,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		planta= CUADRADO;
 		//Rectángulo como si fuera un caballo
 		superficie.setValor(2,1);
-		rango=2;
+		rango=3;
 		rango_visibilidad=10;
 		break;
 	case ARQUERA:
@@ -63,9 +64,6 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 
 Personaje::~Personaje(void)
 {
-	for(int n=0;n<MAX_DISPAROS;n++)
-		if (disparos[n]!=0)
-			delete disparos[n];
 }
 
 void Personaje :: setStats ( unsigned int vida, unsigned int ataque,float vel_ataque ,float salpicadura, float velocidad)
@@ -89,9 +87,10 @@ bool Personaje:: meMuevo()
 	return false;
 }
 
-bool Personaje :: Atacar (Edificio** lista)
+bool Personaje :: Atacar (Edificio** lista, Disparo** disparos)
 {
-	if (Ayuntamiento :: Atacar (lista))
+
+	if (Ayuntamiento :: Atacar (lista, disparos))
 	{
 		destino=posicion;
 		return true;
@@ -112,8 +111,9 @@ bool Personaje :: Atacar (Edificio** lista)
 	if(objetivo)
 	{
 		destino=objetivo->getPosicion();
-		return true;
+		return false;
 	}
+	destino=memoria;
 	return false;
 }
 
@@ -158,18 +158,9 @@ void Personaje :: Dibuja (Color equipo)
 	glPushMatrix();
 	glColor3ub(color.getRed(),color.getGreen(),color.getBlue());
 	glTranslatef(posicion.vx,posicion.vy, 0);
-	glutSolidSphere(1,20,20);
+	glutSolidSphere(0.5f,20,20);
 	glPopMatrix();
 	//glEnable(GL_LIGHTING);
-
-	for (int n=0; n<MAX_DISPAROS;n++)
-	{
-		if (disparos[n]!=0)
-		{
-			disparos[n]->Dibuja();
-		}
-		
-	}
 }
 
 bool Personaje :: setVelocidad (Vector velocidad)
@@ -181,4 +172,12 @@ bool Personaje :: setVelocidad (Vector velocidad)
 Vector Personaje :: getVelocidad ()
 {
 	return velocidad;
+}
+
+bool Personaje:: mover(Vector destino)
+{
+	if(huyendo)
+		return false;
+	destino=memoria;
+	return true;
 }

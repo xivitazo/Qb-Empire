@@ -17,6 +17,7 @@ public:
 	Vector operator / (float);
 	float operator * (Vector &);
 	bool operator == (Vector &);
+	bool operator == (float );
 	bool operator != (Vector &);
 	bool operator < (float numero);
 	bool operator > (float numero);

@@ -10,16 +10,15 @@ Interaccion::~Interaccion(void)
 {
 }
 
-void Interaccion:: Ataque (Disparo* disparo)
+void Interaccion:: Ataque (Disparo* disparo, Edificio** lista)
 {
 	disparo ->radio=disparo -> salpicadura;
-	for (int n=0;disparo->lista[n]!=0 ;n++)
+	for (int n=0;lista[n]!=0 ;n++)
 	{
 
-		if (dentro (*disparo, *disparo->lista[n]).modulo())
-			disparo->lista[n]->vida=disparo->lista[n]->vida-disparo->daño;
+		if (dentro (*disparo, *lista[n]).modulo())
+			lista[n]->vida=lista[n]->vida-disparo->daño;
 	}
-	return;
 }
 
 float Interaccion :: Distancia (Objeto &a, Objeto &b)

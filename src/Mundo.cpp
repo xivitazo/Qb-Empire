@@ -4,8 +4,23 @@
 #include <stdio.h>
 
 
-Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)), jugador2 (Vector(217, 37.5),Color(179,36,40))
+Mundo::Mundo():
+	jugador1(Vector(8, 37.5),Color(0, 0, 205)), 
+	jugador2 (Vector(217, 37.5),Color(179,36,40)),
+	numero(0)
 {
+	for(int n=0; n<MAX;n++)
+	{
+		disparos[n]=0;
+	}
+}
+
+Mundo :: ~Mundo()
+{
+	for(int n=0;n<numero; n++)
+	{
+		delete disparos[n];
+	}
 }
 
 void Mundo::Dibuja()
@@ -21,6 +36,10 @@ void Mundo::Dibuja()
 	map.Dibuja();
 	jugador1.Dibuja();
 	jugador2.Dibuja();
+	for(int n=0; n<numero; n++)
+	{
+		disparos[n]->Dibuja();
+	}
 	
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
@@ -51,8 +70,25 @@ void Mundo::Timer(float t)
 		for(int i=0; i<jugador2.getNumero();i++)
 			Interaccion :: rebote(*jugador1.getPosN(n),*jugador2.getPosN(i));
 	}
+	atacar();
 	jugador1.Timer(t);
 	jugador2.Timer(t);
+	
+	for(int n=0; n<numero; n++)
+	{
+		if(disparos[n]->Timer_disparo(t))
+		{
+			Interaccion :: Ataque(disparos [n],jugador1.getLista());
+			Interaccion :: Ataque(disparos[n],jugador2.getLista());
+			delete disparos[n];
+			numero--;
+			for(int i=n;i<numero;i++)
+			{
+				disparos[i]=disparos[i+1];
+				disparos[i+1]=0;
+			}
+		}
+	}
 	/*for (int n=0; n<jugador1.getNumero(); n++)
 	for(int i=0; i<jugador2.getNumero(); i++)
 		{
@@ -64,14 +100,6 @@ void Mundo::Timer(float t)
 				jugador2.getPosN(i)->Atacar(jugador1.getLista());
 				
 		}*/
-	for(int i=0; i<jugador1.getNumero(); i++)
-	{
-		jugador1.getPosN(i)->Atacar(jugador2.getLista());
-	}
-	for(int i=0; i<jugador2.getNumero(); i++)
-	{
-		jugador2.getPosN(i)->Atacar(jugador1.getLista());
-	}
 
 	movimientoCamara(t);
 
@@ -109,7 +137,7 @@ void Mundo::Tecla(unsigned char key)
 	case '2': setPerspectiva(112.2,-28.5,60,112.5,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
 	case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo
-	case 'p': jugador1.Agregar(ARQUERA, Vector(200,50)); break;
+	case 'p': jugador1.Agregar(CABALLERO, Vector(200,50)); break;
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
 	case 'o': jugador1.Agregar(F_ORO, Vector(50,50)); break;
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
@@ -191,3 +219,9 @@ void Mundo :: Inicializa_vista()
 	amiro_y=37.5;
 	amiro_z=0;
 }
+
+void Mundo :: atacar()
+{
+	numero+=jugador1.atacar(&disparos[numero], jugador2.getLista());
+	numero+=jugador2.atacar(&disparos[numero], jugador1.getLista());
+} 

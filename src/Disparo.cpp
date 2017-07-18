@@ -5,23 +5,21 @@
 #define G 9.8
 
 using namespace ETSIDI;
-Disparo::Disparo(Vector posicion, Edificio* destino,unsigned int daño, unsigned int salpicadura, Edificio** lista ): 
+Disparo::Disparo(Vector posicion, Vector destino,unsigned int daño, unsigned int salpicadura): 
 	Objeto(1,Color(lanzaDado(1.0)*255,lanzaDado(1.0)*255,lanzaDado(1.0)*255),REDONDO,1),
 	destino(destino),
 	daño(daño),
-	salpicadura(salpicadura),
-	lista(lista)
+	salpicadura(salpicadura)
 {
 	//radio pequeño (copiado de Pang)
 	radio=0.3f;
-	muerto=*destino;
 	this -> posicion = posicion;
 	//señuelo=destino[0];
 	velocidad_max=20;
 	tiempo=0;
+	velocidad=(destino-posicion).unitario()*velocidad_max;
 	z=0;
-	muerto=*destino;
-	velocidad_z=G/2*(destino->getPosicion()-posicion).modulo()/velocidad_max;
+	velocidad_z=G/2*(destino-posicion).modulo()/velocidad_max;
 }
 
 Disparo::~Disparo(void)
@@ -33,29 +31,20 @@ bool Disparo::Mueve(void)
 	/*if(*destino!=señuelo)
 		destino=&muerto;*/
 	Vector v;
-	v=(destino->posicion-posicion).unitario();
+	v=(destino-posicion).unitario();
 //Hallas la direccion ue debe seguir el disparo de forma dinámica
 	velocidad = v*velocidad_max;
-	if((destino->posicion-posicion).modulo()<0.5f)
-		velocidad=(destino->posicion-posicion)*(velocidad_max/0.5f);
-	if (abs(posicion.vx-destino->posicion.vx)<=destino->superficie.vx/2 && abs(posicion.vy-destino->posicion.vy)<=destino->superficie.vy/2)
+	if((destino-posicion).modulo()<0.5f)
+		velocidad=(destino-posicion)*(velocidad_max/0.5f);
+	if (posicion==destino)
 //Si esta dentro de los limites del objetivo
-	{
-		Interaccion :: Ataque (this);
-		return 0;
-	}
-	if(velocidad.modulo()<=0.001f)
-	{
-		Interaccion :: Ataque (this);
-		return 0;
-	}
-	return true;
+		return true;
+	return false;
 
 }
 
 bool Disparo :: Timer_disparo(float t)
 {
-	muerto=*destino;
 	posicion=posicion+velocidad*t;
 	z=velocidad_z*t-G/2*t*t;
 	tiempo+=t;

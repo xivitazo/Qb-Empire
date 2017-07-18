@@ -8,10 +8,6 @@ Ayuntamiento :: Ayuntamiento(Vector posicion) :
 	salpicadura(2)
 {
 	this -> posicion = posicion;
-	for (int n=0;n<MAX_DISPAROS; n++)
-	{
-		disparos[n]=0;
-	}
 	tipo = AYUNTAMIENTO;
 	especifico = NINGUNO;
 //	rango_visibilidad=35;
@@ -24,30 +20,27 @@ Ayuntamiento :: ~Ayuntamiento(void)
 {
 }
 
-bool Ayuntamiento :: Atacar (Edificio** lista)
+bool Ayuntamiento :: Atacar (Edificio** lista, Disparo** disparo)
 {
-	int objetivo=0;
+	Vector objetivo;
 	for(int n=0; lista[n]!=0;n++)
 	{
 		if((posicion-lista[n]->getPosicion()).modulo()<=rango)
 		{
 			if(objetivo==0)
-				objetivo = n;
-			else if ((lista[objetivo]->getPosicion()-posicion).modulo()>(lista[n]->getPosicion()-posicion).modulo())
-				objetivo= n;
+				objetivo = lista[n]->getPosicion();
+			else if ((objetivo-posicion).modulo()>(lista[n]->getPosicion()-posicion).modulo())
+				objetivo= lista[n]->getPosicion();
 		}
 	}
 	if (objetivo == 0)
 		return false;
-	for (int n=0; n<MAX_DISPAROS; n++)
-	{
-		if (disparos[n]==0 && poderDisparar())
+		if ( poderDisparar())
 		{
 			tiempo=0;
-			disparos[n] = new Disparo (posicion,lista[objetivo],ataque,salpicadura, lista);
+			*disparo= new Disparo (posicion,objetivo,ataque,salpicadura);
 			return true;
 		}
-	}
 	return false;
 
 }
@@ -55,16 +48,6 @@ bool Ayuntamiento :: Atacar (Edificio** lista)
 void Ayuntamiento :: Timer (float t)
 {
 	Edificio :: Timer (t);
-	for(int n=0;n<MAX_DISPAROS;n++)
-	{
-		if(!disparos[n])
-			continue;
-		if(!disparos[n]->Timer_disparo(t))
-		{
-			delete disparos[n];
-			disparos[n]=0;
-		}
-	}
 	tiempo+=t;
 }
 
@@ -72,14 +55,6 @@ void Ayuntamiento :: Dibuja (Color equipo)
 {
 	casita(posicion, equipo, color, superficie, altura);
 	
-	for (int n=0; n<MAX_DISPAROS;n++)
-	{
-		if (disparos[n]!=0)
-		{
-			disparos[n]->Dibuja();
-		}
-		
-	}
 }
 
 void Ayuntamiento :: subirNivel () 
