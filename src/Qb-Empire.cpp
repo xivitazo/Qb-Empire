@@ -60,8 +60,7 @@ int main(int argc,char* argv[])
 	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
 
 	gluPerspective( 40.0, 1280/720.0f, 0.1, 400);  
-	//gluPerspective( 40.0, 1920/1080.f, 0.1, 300);  
-
+	//gluPerspective( 40.0, 1920/1080.f, 0.1, 300);
 	//IDEA
 	//Si usamos full Screen, flag=1. 
 	//Si no usamos full screen, flag=0;

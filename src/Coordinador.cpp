@@ -9,6 +9,7 @@ bool Coordinador :: flag5=0;	//Menu seleccion F_HIERRO
 bool Coordinador :: flag6=0;	//Menu seleccion CUARTEL
 bool Coordinador :: flag7=0;	//Menu seleccion LUCHADOR
 bool Coordinador :: flag_jugador=0;
+
 unsigned int Coordinador :: flag_musica=2;
 
 Coordinador::Coordinador(void)
@@ -25,6 +26,7 @@ Coordinador::~Coordinador(void)
 void Coordinador :: Dibuja()
 {
 	mundo->Dibuja();
+
 
 	if(estado==INICIO)   Menus :: inicio();
 	else if(estado == OPCIONES)
@@ -63,28 +65,6 @@ void Coordinador :: Dibuja()
 	else if (estado == GAME_OVER)
 	{
 		Menus :: game_over ();
-		/*
-		mundo.Dibuja();
-		glPushMatrix();
-			ETSIDI::setTextColor(1,0,0);
-			glTranslatef(0, 0, 40);
-			ETSIDI::setFont("fuentes/Bitwise.ttf",100);
-			ETSIDI::printxy("GAME OVER", 50,-5);
-			glPopMatrix();
-			glPushMatrix();
-			ETSIDI::setTextColor(1,0,0);
-			glTranslatef(0, 0, -20);
-			ETSIDI::setFont("fuentes/Bitwise.ttf",30);
-			ETSIDI::printxy("PRESS -Q- TO RESTART", 70,-5);
-			glPopMatrix();
-			glPushMatrix();
-			ETSIDI::setTextColor(1,0,0);
-			glTranslatef(0, 0, -40);
-			ETSIDI::setFont("fuentes/Bitwise.ttf",30);
-			ETSIDI::printxy("PRESS -Esc- TO EXIT", 75,-5);
-		glPopMatrix();
-		*/
-
 	}
 	else if (estado == YOU_WIN)
 	{
@@ -109,6 +89,9 @@ void Coordinador :: Tecla (unsigned char key)
 		if(key=='o' || key=='O'){
 			estado=OPCIONES;
 		}
+		if(key=='o' || key=='O'){
+			estado=OPCIONES;
+		}
 		else if (key == 27)	exit(1);
 		break;
 	case OPCIONES:
@@ -128,7 +111,7 @@ void Coordinador :: Tecla (unsigned char key)
 			estado=GAME_OVER;
 			mundo->setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
 		}
-		if( key=='A')	
+		if(key == 'a' || key=='A')	
 		{
 			estado=YOU_WIN;
 			mundo->setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
@@ -145,6 +128,7 @@ void Coordinador :: Tecla (unsigned char key)
 		}
 		if(key == 8) {
 			//retroceso (DEL)
+
 			flag1=0;
 			flag2=0;
 			flag3=0;
@@ -317,95 +301,5 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		seleccion=0;
 	}
 	flag_jugador=false;
-	
-/*
-	switch(names[j])
-	{
-	case 20:
-		//MENU DE AYUDA PARA CONSTRUIR (ESPACIO)
-		if(flag1)	
-		{
-			mundo->Mouse(names[j]);
-			flag1=false;
-		}
-		else		flag1=true;
-		flag3=false;
-		flag2=false;
-		flag4=false;
-		flag5=false;
-		flag6=false;
-		break;
-	case 21:	
-		cout<<"AYUNTAMIENTO"<<endl;
-		if(flag2)
-		{
-			mundo->Mouse(names[j]);
-			//flag2=false;
-		}
-		else		flag2=true;
-		flag1=false;
-		flag3=false;
-		flag4=false;
-		flag5=false;
-		flag6=false;
-		break;
-	case 22:
-		cout<<"FABRICA DE ORO"<<endl;
-		if(flag3)
-		{
-			mundo->Mouse(names[j]);
-			flag3=false;
-		}
-		else		flag3=true;
-		flag1=false;
-		flag2=false;
-		flag4=false;
-		flag5=false;
-		flag6=false;
-		break;
-	case 23:
-		cout<<"FABRICA DE HIERRO"<<endl;
-		if(flag5)
-		{
-			mundo->Mouse(names[j]);
-			flag5=false;
-		}
-		else		flag5=true;
-		flag1=false;
-		flag2=false;
-		flag4=false;
-		flag3=false;
-		flag6=false;
-		break;
-	case 24:
-		cout<<"FABRICA DE COMIDA"<<endl;
-		if(flag4)
-		{
-			mundo->Mouse(names[j]);
-			flag4=false;
-		}
-		else		flag4=true;
-		flag1=false;
-		flag2=false;
-		flag3=false;
-		flag5=false;
-		flag6=false;
-		break;
-	case 25:
-		cout<<"CUARTEL"<<endl;
-		if(flag6)	
-		{
-			mundo->Mouse(names[j]);
-			flag6=false;
-		}
-		else		flag6=true;
-		flag1=false;
-		flag2=false;
-		flag4=false;
-		flag5=false;
-		flag3=false;
-		break;		
-	}*/
-
 	return true;
 }

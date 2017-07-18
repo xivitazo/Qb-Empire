@@ -13,6 +13,7 @@ protected:
 	static unsigned int flag_musica;
 	int seleccion;
 
+
 public:
 	Coordinador(void);
 	virtual ~Coordinador(void);

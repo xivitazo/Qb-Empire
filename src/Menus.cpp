@@ -11,6 +11,7 @@ Menus::~Menus(void)
 
 void Menus :: seleccion (Type tipo, Mundo &mundo)
 {
+		
 	glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
@@ -18,12 +19,11 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
-
 		switch(tipo)
 		{
 		case AYUNTAMIENTO:
 			setTextColor(215.0f/255.0f, 45.0f/255.0f, 109.0f/255.0f);
-			setFont("fuentes/LemonMilk.otf",30);		
+			setFont("fuentes/LemonMilk.otf",30);
 			char aux[100];
 			//sprintf(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
 			sprintf_s(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
@@ -74,7 +74,6 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 			printxy(aux6, 900, 250);
 			break;
 		}
-
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 
@@ -82,6 +81,8 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glPopMatrix();
 
 	glEnable(GL_DEPTH_TEST);
+		
+
 }
 
 void Menus :: construccion(Mundo &mundo)
@@ -111,11 +112,9 @@ void Menus :: construccion(Mundo &mundo)
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
-
 		setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",20);		
 			char aux1[100], aux2[100], aux3[100], aux4[100];
-						
 			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   O   -");	
 			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   Y  -");	
 			sprintf_s(aux3," CONSTRUIR FABRICA DE COMIDA  -  PULSAR   U  -");
@@ -159,7 +158,6 @@ void Menus :: superior(Mundo &mundo)
 	*/
 	
 	//FORMA DEFINITIVA DE HACER LOS MENUS 
-	
 	glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
@@ -177,7 +175,6 @@ void Menus :: superior(Mundo &mundo)
 				mundo.jugador1.almacen.getComida() );
 			printxy(aux,60 , glutGet(GLUT_WINDOW_HEIGHT)-60);
 			printxy("AYUDA :: ESP",glutGet(GLUT_WINDOW_WIDTH)-200 , glutGet(GLUT_WINDOW_HEIGHT)-60);
-				
 			
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -186,7 +183,6 @@ void Menus :: superior(Mundo &mundo)
 		glPopMatrix();
 
 	glEnable(GL_DEPTH_TEST);
-	
 }
 
 void Menus :: Timer (float t)

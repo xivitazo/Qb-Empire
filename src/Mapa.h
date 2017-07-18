@@ -5,7 +5,7 @@
 #include "Color.h"
 #include "ETSIDI.h"
 #include "glut.h"
-using namespace std;
+//using namespace std;
 using namespace ETSIDI;
 enum Nombre {JUGADOR1, JUGADOR2, MAPA, MENU};
 

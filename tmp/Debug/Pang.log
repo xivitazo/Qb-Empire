@@ -1,12 +1,10 @@
-﻿Compilación iniciada a las 17/07/2017 11:33:43.
-     1>Proyecto "C:\Users\Luis\Documents\GitHub\Qb-Empire\Pang.vcxproj" en el nodo 2 (Build destinos).
+﻿Compilación iniciada a las 18/07/2017 22:19:27.
+     1>Proyecto "C:\Users\Javi\Documents\UNI\Info Industr\Qb-Empire\Pang.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Ilib /Isrc /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"tmp\Debug\\" /Fd"tmp\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt src\Mapa.cpp src\Personaje.cpp
-         Personaje.cpp
-         Mapa.cpp
-         Generando código...
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /Ilib /Isrc /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"tmp\Debug\\" /Fd"tmp\Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt src\Menus.cpp
+         Menus.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Luis\Documents\GitHub\Qb-Empire\bin\Qb-Empire.exe" /INCREMENTAL /NOLOGO /LIBPATH:lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Luis\Documents\GitHub\Qb-Empire\bin\Qb-Empire.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Luis\Documents\GitHub\Qb-Empire\bin\Qb-Empire.lib" /MACHINE:X86 tmp\Debug\Ayuntamiento.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Javi\Documents\UNI\Info Industr\Qb-Empire\bin\Qb-Empire.exe" /INCREMENTAL /NOLOGO /LIBPATH:lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Javi\Documents\UNI\Info Industr\Qb-Empire\bin\Qb-Empire.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Javi\Documents\UNI\Info Industr\Qb-Empire\bin\Qb-Empire.lib" /MACHINE:X86 tmp\Debug\Ayuntamiento.obj
          tmp\Debug\Color.obj
          tmp\Debug\Coordinador.obj
          tmp\Debug\Cuartel.obj
@@ -24,9 +22,9 @@
          tmp\Debug\Recursos.obj
          tmp\Debug\Vector.obj
          tmp\Debug\Vector3D.obj
-         Pang.vcxproj -> C:\Users\Luis\Documents\GitHub\Qb-Empire\bin\Qb-Empire.exe
-     1>Compilación del proyecto terminada "C:\Users\Luis\Documents\GitHub\Qb-Empire\Pang.vcxproj" (Build destinos).
+         Pang.vcxproj -> C:\Users\Javi\Documents\UNI\Info Industr\Qb-Empire\bin\Qb-Empire.exe
+     1>Compilación del proyecto terminada "C:\Users\Javi\Documents\UNI\Info Industr\Qb-Empire\Pang.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:03.95
+Tiempo transcurrido 00:00:01.93
