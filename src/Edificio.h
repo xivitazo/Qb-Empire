@@ -32,6 +32,7 @@ public:
 	void Dibuja(Color equipo=0);
 	void casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura);
 	void setTipo(Type tipo);
+	Type getTipo (void );
 	bool poderGenerar ();
 	//Te dice si puedes generar lo que quieras
 	virtual void subirNivel();
@@ -42,7 +43,8 @@ public:
 	int getRango (){return rango;}
 	virtual bool Atacar (Edificio** lista){return false;}
 	virtual Edificio* generar ( int nivel, Luchadores tipo, Vector destino){return 0;}
-	virtual bool generar (Recursos& almacen){return false;};
+	virtual bool generar (Recursos& almacen){return false;}
+	virtual bool mover(Vector destino){return false;}
 
 
 	friend class Interaccion;

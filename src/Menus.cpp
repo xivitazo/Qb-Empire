@@ -11,7 +11,7 @@ Menus::~Menus(void)
 
 void Menus :: seleccion (Type tipo, Mundo &mundo)
 {
-	if(tipo==AYUNTAMIENTO){
+		
 	glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
@@ -19,62 +19,40 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
-
-		setTextColor(215.0f/255.0f, 45.0f/255.0f, 109.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
+		switch(tipo)
+		{
+		case AYUNTAMIENTO:
+			setTextColor(215.0f/255.0f, 45.0f/255.0f, 109.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",30);
 			char aux[100];
 			//sprintf(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
 			sprintf_s(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
 			printxy(aux, 50, 50);
-			
-		glMatrixMode(GL_PROJECTION);
-		glPopMatrix();
-
-		glMatrixMode(GL_MODELVIEW);
-		glPopMatrix();
-
-	glEnable(GL_DEPTH_TEST);
-
-	
-	}
-	if(tipo==F_ORO){
-	//Menu definitivo
-	glMatrixMode(GL_PROJECTION);
-		glPushMatrix();
-		glLoadIdentity();
-		gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT));
-		glMatrixMode(GL_MODELVIEW);
-		glPushMatrix();
-		glLoadIdentity();
-
-		setTextColor(245.0f/255.0f,208.0f/255.0f,51.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
-			char aux[100];
-			sprintf_s(aux,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[F_ORO]);
-			printxy(aux, 50, 50);
-
-		glMatrixMode(GL_PROJECTION);
-		glPopMatrix();
-
-		glMatrixMode(GL_MODELVIEW);
-		glPopMatrix();
-
-	glEnable(GL_DEPTH_TEST);
-
-	}
-
-
-	if(tipo==CUARTEL){
-	glMatrixMode(GL_PROJECTION);
-		glPushMatrix();
-		glLoadIdentity();
-		gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT));
-		glMatrixMode(GL_MODELVIEW);
-		glPushMatrix();
-		glLoadIdentity();
-
-		setTextColor(139.0f/255.0f,69.0f/255.0f,19.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
+			break;
+		case F_ORO: 
+			setTextColor(245.0f/255.0f,208.0f/255.0f,51.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",30);		
+			char auxo[100];
+			sprintf_s(auxo,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[F_ORO]);
+			printxy(auxo, 50, 50);
+			break;
+		case F_HIERRO:
+			setTextColor(157/255.0f,161/255.0f,170/255.0f);
+			setFont("fuentes/LemonMilk.otf",30);		
+			char auxh[100];
+			sprintf_s(auxh,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[F_HIERRO]);
+			printxy(auxh, 50, 50);
+			break;
+		case F_COMIDA:
+			setTextColor(234.0f/255.0f, 137.0f/255.0f, 154.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",30);		
+			char auxc[100];
+			sprintf_s(auxc,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[F_COMIDA]);
+			printxy(auxc, 50, 50);
+			break;
+		case CUARTEL:
+			setTextColor(139.0f/255.0f,69.0f/255.0f,19.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",30);		
 			char aux1[100], aux2[100], aux3[100], aux4[100], aux5[100], aux6[100];
 			sprintf_s(aux1,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[CUARTEL]);
 			sprintf_s(aux2,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[ARQUERA]);
@@ -94,7 +72,8 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 			printxy(aux4, 900, 150);
 			printxy(aux5, 900, 200);
 			printxy(aux6, 900, 250);
-
+			break;
+		}
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 
@@ -102,54 +81,8 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glPopMatrix();
 
 	glEnable(GL_DEPTH_TEST);
+		
 
-	}
-	if(tipo==F_HIERRO){
-	glMatrixMode(GL_PROJECTION);
-		glPushMatrix();
-		glLoadIdentity();
-		gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT));
-		glMatrixMode(GL_MODELVIEW);
-		glPushMatrix();
-		glLoadIdentity();
-
-		setTextColor(157.0f/255.0f, 161.0f/255.0f, 170.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
-			char aux[100];
-			sprintf_s(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[F_HIERRO]);
-			printxy(aux, 50, 50);
-			
-		glMatrixMode(GL_PROJECTION);
-		glPopMatrix();
-
-		glMatrixMode(GL_MODELVIEW);
-		glPopMatrix();
-
-	glEnable(GL_DEPTH_TEST);
-	}
-	if(tipo==F_COMIDA){
-	glMatrixMode(GL_PROJECTION);
-		glPushMatrix();
-		glLoadIdentity();
-		gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT));
-		glMatrixMode(GL_MODELVIEW);
-		glPushMatrix();
-		glLoadIdentity();
-
-		setTextColor(234.0f/255.0f, 137.0f/255.0f, 154.0f/255.0f);
-			setFont("fuentes/waltographUI.ttf",30);		
-			char aux[100];
-			sprintf_s(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[F_COMIDA]);
-			printxy(aux, 50, 50);
-			
-		glMatrixMode(GL_PROJECTION);
-		glPopMatrix();
-
-		glMatrixMode(GL_MODELVIEW);
-		glPopMatrix();
-
-	glEnable(GL_DEPTH_TEST);
-	}
 }
 
 void Menus :: construccion(Mundo &mundo)
@@ -179,10 +112,8 @@ void Menus :: construccion(Mundo &mundo)
 		glMatrixMode(GL_MODELVIEW);
 		glPushMatrix();
 		glLoadIdentity();
-
-		
 		setTextColor(1,0.8,0);
-			setFont("fuentes/waltographUI.ttf",30);		
+			setFont("fuentes/LemonMilk.otf",20);		
 			char aux1[100], aux2[100], aux3[100], aux4[100];
 			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   O   -");	
 			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   Y  -");	
@@ -242,8 +173,8 @@ void Menus :: superior(Mundo &mundo)
 				mundo.jugador1.almacen.getHierro(),
 				mundo.jugador1.almacen.getOro(),
 				mundo.jugador1.almacen.getComida() );
-			printxy(aux,50,1000);
-		
+			printxy(aux,60 , glutGet(GLUT_WINDOW_HEIGHT)-60);
+			printxy("AYUDA :: ESP",glutGet(GLUT_WINDOW_WIDTH)-200 , glutGet(GLUT_WINDOW_HEIGHT)-60);
 			
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -269,21 +200,21 @@ void Menus :: inicio ()
 		glLoadIdentity();
 
 		setTextColor(1,1,0);
-			setFont("fuentes/Bitwise.ttf",100);		
-			printxy("QB--EMPIRE", 580,700);
+			setFont("fuentes/cityburn.ttf",100);		
+			printxy("QB EMPIRE",glutGet(GLUT_WINDOW_WIDTH)*1/4 , glutGet(GLUT_WINDOW_HEIGHT)*3/4);
 
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
-			printxy("PULSE LA TECLA -E- PARA EMPEZAR", 200,280);
+			setFont("fuentes/LemonMilk.otf",30);//200, 280
+			printxy("PULSE LA TECLA -E- PARA EMPEZAR", glutGet(GLUT_WINDOW_WIDTH)*1/4, 280);
 
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
-			printxy("PULSE LA TECLA -O- PARA OPCIONES", 200,180);
+			setFont("fuentes/LemonMilk.otf",30);//200,180
+			printxy("PULSE LA TECLA -O- PARA OPCIONES",glutGet(GLUT_WINDOW_WIDTH)*1/4, 180);
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
-			printxy("PULSE LA TECLA -Esc- PARA SALIR", 210, 80);
+			setFont("fuentes/LemonMilk.otf",30);//210, 80
+			printxy("PULSE LA TECLA -Esc- PARA SALIR",glutGet(GLUT_WINDOW_WIDTH)*1/4, 80);
 	
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -311,11 +242,11 @@ void Menus :: game_over ()
 
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PRESS -Q- TO RESTART", 200, 280);
 	
 		setTextColor(1,0,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PRESS -Esc- TO EXIT",210,180);
 	
 		glMatrixMode(GL_PROJECTION);
@@ -340,15 +271,15 @@ void Menus :: opciones ()
 		glLoadIdentity();
 
 		setTextColor(0.5,0.5,1);
-			setFont("fuentes/waltographUI.ttff",50);
+			setFont("fuentes/LemonMilk.otf",50);
 			printxy("MUSICA  - M - ", 650, 550);
 	
 		setTextColor(0.5,0.8,0);
-			setFont("fuentes/waltographUI.ttf",50);
+			setFont("fuentes/LemonMilk.otf",50);
 			printxy("EFECTOS  - K -", 650,400);
 
 		setTextColor(1,0,0);
-			setFont("fuentes/waltographUI.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("VOLVER  - DEL -", 200,200);
 	
 		glMatrixMode(GL_PROJECTION);
@@ -378,11 +309,11 @@ void Menus :: you_win()
 
 	
 		setTextColor(0,1,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PRESS -Q- TO RESTART", 200, 280);
 	
 		setTextColor(0,1,0);
-			setFont("fuentes/Bitwise.ttf",30);
+			setFont("fuentes/LemonMilk.otf",30);
 			printxy("PRESS -Esc- TO EXIT",210,180);
 	
 		glMatrixMode(GL_PROJECTION);

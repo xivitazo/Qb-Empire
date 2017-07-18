@@ -56,3 +56,8 @@ unsigned int Color:: getBlue ()
 {
 	return blue;
 }
+
+bool Color :: operator== (Color &c)
+{
+	return this->red==c.red && this->green==c.green && this->blue == c.blue;
+}

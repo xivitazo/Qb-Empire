@@ -1,6 +1,10 @@
+
 #include "Mundo.h"
+#include <math.h>
 #include "Menus.h"
 #include <iostream>
+#include "glut.h"
+
 using namespace std;
 
 GLfloat x=0, y=0, z=-0.1;
@@ -20,10 +24,23 @@ void Mundo::Dibuja()
 
 	
 	//dibujo del suelo
+	//glPushName(2);
+	glLoadName(MAPA);
 	map.Dibuja();
+	//glPopName();
+
+	//Dibujamos ayuntamientos
+
+	glLoadName(JUGADOR1);
 	jugador1.Dibuja();
-	jugador2.Dibuja();
-	
+	//glPopName();
+
+	//glLoadName(3);
+	glLoadName(JUGADOR2);
+	jugador2.Dibuja();	
+	//glPopName();
+	glLoadName(99);
+
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
 	//printf("%d\n", jugador1.getNivel(AYUNTAMIENTO));
@@ -64,11 +81,9 @@ void Mundo::Timer(float t)
 				jugador2.getPosN(i).Atacar(jugador1.getLista());
 		}
 	movimientoCamara(t);
-
 	//Para el sonido del disparo
 	//ETSIDI::play("sonidos/impacto.wav");
-	
-	
+
 }
 
 void Mundo::Inicializa()
@@ -107,17 +122,18 @@ void Mundo::Tecla(unsigned char key)
 	case 'b': miro_y-=1; break;
 	case 'N':
 	case 'n': miro_z-=1; break;
-	case '1': setPerspectiva(-37.5,37.5,50,25,37.5,0); break; //Vista Poblado
-	case '2': setPerspectiva(112.2,-28.5,60,112.5,27.5,0); break; //Vista Batalla
+	case '1': setPerspectiva(-40,40,50,25,40,0); break; //Vista Poblado
+	case '2': setPerspectiva(120,-27.5,60,120,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
 	case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo
-	case 'P':
+	case 'P': jugador1.Agregar(ARQUERA, Vector(200,50)); break;
 	case 'p': jugador1.Agregar(CABALLERO, Vector(200,50)); break;
-	case 'I':
+	case 'I': jugador1.Agregar(CUARTEL, Vector(100,20)); break;
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
-	case 'O':
-	case 'o': jugador1.Agregar(F_ORO, Vector(50,50)); break;
-	case 'U':
+	case 'O': jugador1.Agregar(GUERRERO, Vector(200,50)); break;
+	//case 'o': jugador1.Agregar(F_ORO, Vector(50,50));	break;
+	case 'o': jugador1.Agregar(F_ORO, Vector(lanzaDado(200),lanzaDado(200)));	break;
+	case 'U': jugador1.Agregar(SOLDADO, Vector(200,50)); break;
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
 	case 'Y':
 	case 'y': jugador1.Agregar(F_HIERRO, Vector(30,68));  break;
@@ -199,16 +215,31 @@ void Mundo :: movimientoCamara (float t)
 
 void Mundo :: Inicializa_vista()
 {
-	x_ojo=112.5;
-	y_ojo=-175;
+	x_ojo=120;
+	y_ojo=-200;
 	z_ojo=50;
-	miro_x=112.5;
+	miro_x=120;
 	miro_y=37.5;
 	miro_z=0;
-	ax_ojo=112.5;
+	ax_ojo=120;
 	ay_ojo=-37.5;
 	az_ojo=50;
-	amiro_x=112.5;
+	amiro_x=120;
 	amiro_y=37.5;
 	amiro_z=0;
+}
+
+int  Mundo :: Mouse (Type  nombre)
+{
+	jugador1.subirNivel(nombre);
+	/*switch(nombre)
+	{
+	case AYUNTAMIENTO: jugador1.subirNivel(AYUNTAMIENTO); break;
+	case F_ORO: jugador1.subirNivel(F_ORO); break;
+	case F_HIERRO: jugador1.subirNivel(F_HIERRO); break;
+	case F_COMIDA: jugador1.subirNivel(F_COMIDA); break;
+	case CUARTEL: jugador1.subirNivel(CUARTEL); break;
+	} */
+
+	return false;
 }

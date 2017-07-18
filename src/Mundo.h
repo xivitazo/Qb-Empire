@@ -15,6 +15,7 @@ public:
 	void Inicializa_vista();
 	void Timer(float t);
 	void Dibuja();
+	int Mouse(Type tipo);
 	void Raton (int button, int state, Vector pos);
 	void RatonPasivo(int x, int y);
 	void setPerspectiva(float ojo_a, float ojo_b, float ojo_c, float miro_a, float miro_b, float miro_c);
@@ -30,5 +31,6 @@ public:
 	float amiro_x, amiro_y, amiro_z;
 	
 	friend class Mapa;
+	friend class Coordinador;
 	friend class Menus;
 };

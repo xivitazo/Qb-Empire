@@ -1,9 +1,9 @@
 #include "Coordinador.h"
 #include "glut.h"
 
+#define BUFSIZE 512
 static float  x=-87.5, y=-50, z=25, t=0.5;
 Coordinador coordinator;
-
 
 //los callback, funciones que seran llamadas automaticamente por la glut
 //cuando sucedan eventos
@@ -13,21 +13,39 @@ void OnTimer(int value);
 void OnKeyboardDown(unsigned char key, int x, int y);
 void OnMouse(int button, int state, int x, int y);
 void OnMousePas(int x, int y);
-
-
-
-
+/*
+void reshape(int w, int h)
+{
+   glViewport(0, 0, (GLsizei) w, (GLsizei) h);
+   glMatrixMode(GL_PROJECTION);
+   glLoadIdentity();
+   gluPerspective( 40.0, 1280/720.0f, 0.1, 300);
+   glMatrixMode(GL_MODELVIEW);
+   glLoadIdentity();
+   
+}
+*/
 int main(int argc,char* argv[])
 { 	
 	//Inicializar el gestor de ventanas GLUT
 	//y crear la ventana
 	glutInit(&argc, argv);
-	
 	glutInitWindowSize(1280,720);
+	//glutInitWindowSize(1920,1080);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutCreateWindow("Qb-Empire");
 
-	//habilitar luces y definir perspectiva
+	//habilitar luces y definir perspectiva	
+	GLfloat lightpos[] = {-50.5, 100.0, 501.0, 100.0};
+	
+	
+    glEnable(GL_LIGHT0);
+    glDepthFunc(GL_LESS);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+	
+	glMatrixMode(GL_MODELVIEW);	
+	glLoadIdentity();
 	glEnable(GL_LIGHT0);
 //	glDepthFunc(GL_LESS);
 	glEnable(GL_LIGHTING);
@@ -36,15 +54,17 @@ int main(int argc,char* argv[])
 	//glLoadIdentity();				//	MH no las pone... será por algo
 	//glDepthFunc(GL_EQUAL);
 
-	glEnable(GL_COLOR_MATERIAL);	
+	glEnable(GL_COLOR_MATERIAL);
 	glMatrixMode(GL_PROJECTION);
 	
-	gluPerspective( 40.0, 1280/720.0f, 0.1, 300);  
+	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+
+	gluPerspective( 40.0, 1280/720.0f, 0.1, 400);  
+	//gluPerspective( 40.0, 1920/1080.f, 0.1, 300);
 	//IDEA
 	//Si usamos full Screen, flag=1. 
 	//Si no usamos full screen, flag=0;
 	//glutFullScreen();
-
 
 	coordinator.Inicializa();
 
@@ -53,6 +73,7 @@ int main(int argc,char* argv[])
 	glutTimerFunc(25,OnTimer,0);	//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(OnMouse);
+	//glutReshapeFunc(reshape);
 
 	
 	//pasarle el control a GLUT,que llamara a los callbacks
@@ -76,8 +97,8 @@ void OnDraw(void)
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, qaDiffuseLight);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, qaSpecularLight);
    
-   glEnable(GL_LIGHT0);
-   glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHTING);
   
 
 	//Para definir el punto de vista
@@ -86,7 +107,6 @@ void OnDraw(void)
 	
 	coordinator.Dibuja();
 
-	
 	
 
 	//no borrar esta linea ni poner nada despues
@@ -97,7 +117,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 {
 	//poner aqui el código de teclado
 	coordinator.Tecla(key);
-	switch(key){
+	switch(key){	
 	case 27: exit(1); break;
 	case '5': x+=1; break;
 	case '6': x-=1; break;
@@ -112,7 +132,7 @@ void OnKeyboardDown(unsigned char key, int x_t, int y_t)
 
 void OnTimer(int value)
 {
-//poner aqui el código de animacion
+	//poner aqui el código de animacion
 	coordinator.Timer(0.025f);
 
 	//no borrar estas lineas
@@ -120,7 +140,7 @@ void OnTimer(int value)
 	glutPostRedisplay();
 }
 
-void OnMouse(int button, int state, int vx, int vy)
+void OnMouse(int button, int state, int x, int y)
 {
 	/*
 	GLdouble x,y,z,modelview[16],proyeccion[16];
@@ -133,8 +153,88 @@ void OnMouse(int button, int state, int vx, int vy)
 	mundo.Raton(button,state,(int)x,(int)y);
 	printf("%lf\t%lf\t%lf\n", x,y,z);
 	*/
-	//printf ("%d\t%d\n", vx, vy);
-//	mundo.Raton(button, state, screenToWorldCoords(vx,vy));
+
+	//Empezamos con el Ratón
+	GLuint selectBuffer[BUFSIZE];
+	GLint hits;
+	GLint vp[4];
+	float width=1280, height=720;
+	//float width=1920, height=1080;
+
+	if ( state != GLUT_DOWN)
+      return;
+
+	glSelectBuffer(BUFSIZE,selectBuffer);
+
+	(void) glRenderMode(GL_SELECT);
+
+	glInitNames();
+	glPushName(1000);
+
+	//Para definir el punto de vista
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glGetIntegerv(GL_VIEWPORT,vp);
+	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),1.0, 1.0, vp);
+	gluPerspective( 40.0, width/height, 0.1, 400); 
+	//int x1=glutGet(GLUT_WINDOW_WIDTH);
+	//int y1=glutGet(GLUT_WINDOW_HEIGHT);
+	//Para definir el punto de vista
+	glMatrixMode(GL_MODELVIEW);	
+	glLoadIdentity();
+	
+	//glPopName();
+	coordinator.Dibuja();
+
+	glFlush();
+
+	//Vuelvo a colocar la vista original
+	//Aplico un RESHAPE. 
+	glViewport(0, 0, (GLsizei) width, (GLsizei) height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    // gluPerspective( 40.0, 1280/720.0f, 0.1, 300);
+	gluPerspective( 40.0, width/height, 0.1, 400);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+	hits=glRenderMode(GL_RENDER);
+
+	cout<<"Hits: "<<hits<<endl;
+
+	GLuint hitnames[BUFSIZE];
+	unsigned int hi = 0;
+	GLuint *bufp = selectBuffer;
+	GLuint name, numnames, z1, z2;
+	int nombre[100];
+	unsigned k=0;
+
+	// [0x6]
+	for(unsigned int j = 0; j < hits && *bufp<BUFSIZE; j++)
+	{
+		numnames = *bufp++;
+		z1 = *bufp++;
+		z2 = *bufp++;
+		while(numnames--)
+		{
+			name = *bufp++;
+			hitnames[hi++] = name;
+			if(hitnames[hi-1]>=0 && hitnames[hi-1]<10000)
+			{
+				//Asumo que no daremos más de 1000 nombres. me parecen suficientes . tenemos el
+				//problema de qe se cuele una dirección de memoria entre el 0 y el 1000... pero como es necesario leer todo el buffer para encontrar dóndo
+				//ha puesto el nombre el buffer, es la manera más sencilla que se me ocurre con un margen de error muy pequeño
+				if(name!=99)
+				{
+					nombre[k++]=name;
+					cout<<"Nombre"<<j<<": "<<nombre[k-1]<<endl;
+				}
+			}
+		}
+	}
+	coordinator.Mouse(nombre, k,(bool)button);
 }
 
-
+void OnMousePas(int x, int y)
+{
+}

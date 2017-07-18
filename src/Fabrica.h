@@ -5,7 +5,7 @@
 class Fabrica : public Edificio
 {
 protected:
-	Type tipo;
+	Type type;
 	int produccion;
 	unsigned int p_subirNivel; 
 	//Precio de oro que cuesta subir de nivel;

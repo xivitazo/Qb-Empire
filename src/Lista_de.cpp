@@ -20,8 +20,6 @@ Lista_de::Lista_de(Vector ayuntamiento, Color equipo ):
 	max_Type[EDIFICIOS]=4;
 	max_Type[COMBATIENTES]=20;
 
-
-
 	lista[numero++]=new Ayuntamiento (ayuntamiento);
 	numero_generado[EDIFICIOS]++;
 }
@@ -33,18 +31,23 @@ Lista_de::~Lista_de(void)
 
 bool Lista_de:: Agregar (Type tipo, Vector posicion)
 {
-	if(numero<MAX&&numero_generado[EDIFICIOS]<max_Type[EDIFICIOS])
+	if(numero<MAX && numero_generado[EDIFICIOS]<max_Type[EDIFICIOS])
 	{
 		switch (tipo){
 		case F_ORO : 
 		case F_HIERRO : 
-		case F_COMIDA : lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
-		case CUARTEL : lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
+		case F_COMIDA :
+			lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
+			return true;
+		case CUARTEL :
+			lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++;
+			return true;
 		}
 
 	}
 	return false;
 }
+
 bool Lista_de :: Agregar (Luchadores tipo, Vector destino)
 {
 	for(int n=0;n<numero&&lista[numero]==0;n++)
@@ -62,7 +65,9 @@ void Lista_de :: Dibuja()
 {
 	for(int n=0; n<numero;n++)
 	{
+		glPushName(n+100);
 		lista[n]->Dibuja(equipo);
+		glPopName();
 	}
 	
 }
@@ -91,6 +96,7 @@ void Lista_de :: Morir()
 		}
 	}
 }
+
 bool Lista_de :: subirNivel(Type tipo)
 {
 	if (nivel[tipo]<4)
@@ -110,6 +116,7 @@ bool Lista_de :: subirNivel(Type tipo)
 	}
 	return false;
 }
+
 bool Lista_de :: subirNivel(Luchadores tipo)
 {
 	nivel[tipo+LUCHADOR]++;
@@ -120,6 +127,7 @@ bool Lista_de :: subirNivel(Luchadores tipo)
 	}
 	return true;
 }
+
 void Lista_de :: Timer (float t)
 {
 	Rebote();

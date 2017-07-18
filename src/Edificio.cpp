@@ -9,6 +9,7 @@ Edificio::Edificio(unsigned int v, unsigned int _altura, Color _color, Planta pl
 	vida_max=v;
 	vida=vida_max;
 }
+
 Edificio :: Edificio (const Edificio* copia)
 {
 }
@@ -22,8 +23,10 @@ void Edificio :: setTipo (Type tipo)
 	this->tipo=tipo;
 }
 
-
-
+Type Edificio :: getTipo (void )
+{
+	return tipo;
+}
 
 void Edificio :: Timer (float t)
 {
@@ -41,11 +44,12 @@ void Edificio :: Tecla ()
 void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura)
 {
 	glPushMatrix();
+	glutWireCube(0.001); 
+	
 	//Esta gilipollez mantiene las luces en su sitio, no sé muy bien cómo ni porqué... ha sido prueba y error
 	//es un cubo ínfimo que mantiene las luces encendidas por la manera en la que se dibuja (usando glut), pues
 	// usando solo los glvertex la luz por defecto se desactiva a no ser que dibujemos con una matriz
 	//Lo cual no he podido averiguar cómo se hace por falta de apuntes
-	glutWireCube(0.0001); 
 	glTranslatef(posicion.vx, posicion.vy, 0);
 	dimension=dimension/2;
 	
@@ -176,10 +180,12 @@ void Edificio :: color_vida()
 {
 	color.set(color.getRed()*(vida/vida_max),color.getGreen()*(vida/vida_max),color.getBlue()*(vida/vida_max));
 }
+
 bool Edificio :: poderGenerar ()
 {
 	return true;
 }
+
 void Edificio :: subirNivel()
 {
 }
