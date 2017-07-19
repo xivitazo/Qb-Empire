@@ -21,6 +21,5 @@ public:
 	bool operator = (Vector3D &);
 	Vector3D unitario();
 	Vector3D perpendicular();
-	Vector3D operator^ (Vector3D &);
 };
 

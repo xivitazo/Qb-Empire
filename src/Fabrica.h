@@ -5,7 +5,7 @@
 class Fabrica : public Edificio
 {
 protected:
-	Type type;
+	Type tipo;
 	int produccion;
 	unsigned int p_subirNivel; 
 	//Precio de oro que cuesta subir de nivel;
@@ -27,6 +27,5 @@ public:
 	bool poderGenerar();
 	bool generar (Recursos& Almacen);
 	friend class Interaccion;
-	friend class Menus;
 };
 

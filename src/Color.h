@@ -12,6 +12,5 @@ public:
 	unsigned int getRed ();
 	unsigned int getGreen ();
 	unsigned int getBlue ();
-	bool operator == (Color &c);
 };
 

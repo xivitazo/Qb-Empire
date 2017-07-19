@@ -93,7 +93,6 @@
     <ClCompile Include="src\Interaccion.cpp" />
     <ClCompile Include="src\Lista_de.cpp" />
     <ClCompile Include="src\Mapa.cpp" />
-    <ClCompile Include="src\Menus.cpp" />
     <ClCompile Include="src\Mundo.cpp" />
     <ClCompile Include="src\Objeto.cpp" />
     <ClCompile Include="src\Personaje.cpp" />
@@ -113,7 +112,6 @@
     <ClInclude Include="src\Interaccion.h" />
     <ClInclude Include="src\Lista_de.h" />
     <ClInclude Include="src\Mapa.h" />
-    <ClInclude Include="src\Menus.h" />
     <ClInclude Include="src\Mundo.h" />
     <ClInclude Include="src\Objeto.h" />
     <ClInclude Include="src\Personaje.h" />

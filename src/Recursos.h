@@ -9,5 +9,4 @@ public:
 	unsigned int getOro();
 	Recursos(void);
 	~Recursos(void);
-	friend class Menus;
 };
