@@ -6,7 +6,7 @@
 
 using namespace ETSIDI;
 Disparo::Disparo(Vector posicion, Vector destino,unsigned int daño, unsigned int salpicadura): 
-	Objeto(1,Color(lanzaDado(1.0)*255,lanzaDado(1.0)*255,lanzaDado(1.0)*255),REDONDO,1),
+	Objeto(1,Color(100+lanzaDado(1.0)*155,100+lanzaDado(1.0)*155,100+lanzaDado(1.0)*155),REDONDO,1),
 	destino(destino),
 	daño(daño),
 	salpicadura(salpicadura)
@@ -18,8 +18,9 @@ Disparo::Disparo(Vector posicion, Vector destino,unsigned int daño, unsigned int
 	velocidad_max=20;
 	tiempo=0;
 	velocidad=(destino-posicion).unitario()*velocidad_max;
-	z=0;
-	velocidad_z=G/2*(destino-posicion).modulo()/velocidad_max;
+	z0=1;
+	z=z0;
+	velocidad_z=(-z0+G/2*(destino-posicion).modulo()/velocidad_max*(destino-posicion).modulo()/velocidad_max)/((destino-posicion).modulo()/velocidad_max);
 }
 
 Disparo::~Disparo(void)
@@ -46,7 +47,7 @@ bool Disparo::Mueve(void)
 bool Disparo :: Timer_disparo(float t)
 {
 	posicion=posicion+velocidad*t;
-	z=velocidad_z*t-G/2*t*t;
+	z=z0+velocidad_z*tiempo-G/2*tiempo*tiempo;
 	tiempo+=t;
 	return Mueve();
 }

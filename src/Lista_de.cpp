@@ -91,8 +91,10 @@ void Lista_de :: Morir()
 			for (int i=n;i<numero; i++)
 			{
 				lista[i]=lista[i+1];
-				lista[i+1]=0;
+				lista[i]->setNombre(i);
+				//lista[i+1]=0;
 			}
+			lista[numero]=0;
 		}
 	}
 }

@@ -172,7 +172,7 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 
 void Edificio :: color_vida()
 {
-	color.set(color_max.getRed()*(vida/vida_max),color_max.getGreen()*(vida/vida_max),color_max.getBlue()*(vida/vida_max));
+	color.set(color_max.getRed()*((float)vida/(float)vida_max),color_max.getGreen()*((float)vida/(float)vida_max),color_max.getBlue()*((float)vida/(float)vida_max));
 }
 bool Edificio :: poderGenerar ()
 {

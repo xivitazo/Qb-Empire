@@ -12,7 +12,7 @@ Interaccion::~Interaccion(void)
 
 void Interaccion:: Ataque (Disparo* disparo, Edificio** lista)
 {
-	disparo ->radio=disparo -> salpicadura;
+	disparo ->superficie=Vector(disparo->salpicadura,disparo->salpicadura);
 	for (int n=0;lista[n]!=0 ;n++)
 	{
 

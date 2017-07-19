@@ -43,7 +43,7 @@ public:
 	virtual bool Atacar (Edificio** lista, Disparo** disparo){return false;}
 	virtual Edificio* generar ( int nivel, Luchadores tipo, Vector destino){return 0;}
 	virtual bool generar (Recursos& almacen){return false;};
-
+	void setNombre(int n){nombre=n;}
 
 	friend class Interaccion;
 	friend class Disparo;

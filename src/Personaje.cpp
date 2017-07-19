@@ -22,7 +22,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		rango_visibilidad=10;
 		break;
 	case ARQUERA:
-		setStats(150,150, 0.75,0, 3);
+		setStats(150,150, 0.75,0.1, 3);
 		planta = CUADRADO;
 		//Pirámide de 4 lados
 		superficie.setValor(1,1);

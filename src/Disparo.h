@@ -9,7 +9,7 @@ protected:
 	unsigned int daño;
 	Vector destino;
 	Vector velocidad;
-	float velocidad_z, z;
+	float velocidad_z, z, z0;
 	int velocidad_max, salpicadura;
 	//vector aceleracion; lo omitimos por ahora
 	float tiempo;
