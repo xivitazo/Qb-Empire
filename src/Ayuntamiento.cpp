@@ -35,12 +35,12 @@ bool Ayuntamiento :: Atacar (Edificio** lista, Disparo** disparo)
 	}
 	if (objetivo == 0)
 		return false;
-		if ( poderDisparar())
-		{
-			tiempo=0;
-			*disparo= new Disparo (posicion,objetivo,ataque,salpicadura);
-			return true;
-		}
+	if ( poderDisparar())
+	{
+		tiempo=0;
+		*disparo= new Disparo (posicion,objetivo,ataque,salpicadura);
+		return true;
+	}
 	return false;
 
 }

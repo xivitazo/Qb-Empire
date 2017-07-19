@@ -20,6 +20,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		superficie.setValor(2,1);
 		rango=3;
 		rango_visibilidad=10;
+		altura=3;
 		break;
 	case ARQUERA:
 		setStats(150,150, 0.75,0.1, 3);
@@ -28,6 +29,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		superficie.setValor(1,1);
 		rango=30;
 		rango_visibilidad=40;
+		altura=2;
 		break;
 	case GIGANTE:
 		setStats(1000,250, 2.5,3, 3);
@@ -36,6 +38,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		superficie.setValor(2,2);
 		rango_visibilidad=4;
 		rango=3;
+		altura=5;
 		break;
 	case SOLDADO:
 		setStats(200,100, 1, 0.5, 3);
@@ -44,6 +47,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		superficie.setValor(1,1);
 		rango_visibilidad=5;
 		rango=1;
+		altura=2;
 		break;
 	case GUERRERO:
 		setStats(300,300, 1.5,0.5, 4.5);
@@ -52,6 +56,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		superficie.setValor(1,1);
 		rango_visibilidad=6;
 		rango=1;
+		altura=3;
 		break;
 	}
 	for (unsigned int n=1; n<nivel; n++)
@@ -81,10 +86,10 @@ bool Personaje:: meMuevo()
 	if (destino==posicion)
 	{
 		velocidad=0;
-		return 1;
+		return true;
 	}
 	velocidad=(destino-posicion).unitario()*(float)velocidad_max;
-	return 0;
+	return false;
 }
 
 bool Personaje :: Atacar (Edificio** lista, Disparo** disparos)
@@ -108,7 +113,7 @@ bool Personaje :: Atacar (Edificio** lista, Disparo** disparos)
 				objetivo=lista[n];
 		}
 	}
-	if(objetivo)
+	if(objetivo!=0)
 	{
 		destino=objetivo->getPosicion();
 		return false;
@@ -143,7 +148,7 @@ void Personaje :: subirNivel ()
 
 void Personaje :: Timer (float t) 
 {
-	Edificio :: Timer(t);
+	Ayuntamiento :: Timer(t);
 	meMuevo();
 	posicion=posicion+velocidad*t;
 		
@@ -154,17 +159,19 @@ void Personaje :: Timer (float t)
 void Personaje :: Dibuja (Color equipo)
 {	
 	glPushMatrix();
-	glColor3ub(equipo.getRed(),equipo.getGreen(),equipo.getBlue());
+	color_max=equipo;
+	color_vida();
+	glColor3ub(color.getRed(),color.getGreen(),color.getBlue());
 	glTranslatef(posicion.vx,posicion.vy, 1);
 	
 	switch(especifico)
 	{
-	case CABALLERO:	glutSolidSphere(2,20,20);	break;
-	case ARQUERA:	glutSolidCone((double)1,(double) altura, 20, 20);	break;
+	case CABALLERO:	glutSolidSphere(altura,20,20);	break;
+	case ARQUERA:	glutSolidCone((double)superficie.vx,(double) altura, 20, 20);	break;
 	case GIGANTE:	
 		glRotatef(90,1, 0, 0);
-		glutSolidTeapot(5);		break;
-	case SOLDADO:	glutSolidSphere(1,20,20);	break;
+		glutSolidTeapot(altura);		break;
+	case SOLDADO:	glutSolidSphere(altura,20,20);	break;
 	case GUERRERO:	glutSolidIcosahedron();		break;
 	}
 	glPopMatrix();

@@ -7,9 +7,8 @@ Fabrica::Fabrica(Type _tipo,Vector posicion, unsigned int nivel):
 	tiempo(0),
 	Edificio(1000,4,Color (),CUADRADO, Vector(4,4))
 {
-	this->tipo=tipo;
+	this->tipo= _tipo;
 	this -> posicion = posicion;
-	this -> tipo= tipo;
 	especifico=NINGUNO;
 	switch(tipo){
 	case F_ORO:		color_max.set(245, 208, 51); produccion=2;	break;
@@ -17,9 +16,9 @@ Fabrica::Fabrica(Type _tipo,Vector posicion, unsigned int nivel):
 	case F_HIERRO:	color_max.set(157, 161, 170); produccion=3;	
 	}
 	color=color_max;
-	for(unsigned int n=0;n<nivel;n++)
+	for(unsigned int n=1;n<nivel;n++)
 		subirNivel();
-	rango=-1;
+//	rango=-1;
 }
 
 Fabrica::~Fabrica(void)

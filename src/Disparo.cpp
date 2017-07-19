@@ -56,7 +56,7 @@ void Disparo :: Dibuja(void)
 {
 	glPushMatrix();
 		glTranslatef(posicion.vx,posicion.vy,z);
-		glColor3ub(lanzaDado(1.0)*color.getRed(), lanzaDado(1.0)*color.getGreen(), lanzaDado(1.0)*color.getBlue());
+		glColor3ub(200-lanzaDado(1.0)*color.getRed(), 200-lanzaDado(1.0)*color.getGreen(), 200-lanzaDado(1.0)*color.getBlue());
 		glutSolidSphere(radio,10,10);
 	glPopMatrix();
 }

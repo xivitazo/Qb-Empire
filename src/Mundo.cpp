@@ -104,8 +104,8 @@ void Mundo::Timer(float t)
 			for(int i=n;i<numero;i++)
 			{
 				disparos[i]=disparos[i+1];
-				disparos[i+1]=0;
 			}
+			disparos[numero]=0;
 		}
 	}
 
@@ -155,13 +155,13 @@ void Mundo::Tecla(unsigned char key)
 	case '2': setPerspectiva(120,-27.5,60,120,27.5,0); break; //Vista Batalla
 	case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
 	case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo
-	case 'P': jugador1.Agregar(ARQUERA, Vector(200,50)); break;
-	case 'p': jugador1.Agregar(CABALLERO, Vector(200,50)); break;
-	case 'I': jugador1.Agregar(CUARTEL, Vector(100,20)); break;
+	case 'P': jugador1.Agregar(ARQUERA, Vector(225,40)); break;
+	case 'p': jugador1.Agregar(CABALLERO, Vector(225,40)); break;
+	case 'I': jugador1.Agregar(GIGANTE, Vector(225,40)); break;
 	case 'i': jugador1.Agregar(CUARTEL, Vector(10,20)); break;
 	case 'O': jugador1.Agregar(GUERRERO, Vector(200,50)); break;
 	//case 'o': jugador1.Agregar(F_ORO, Vector(50,50));	break;
-	case 'o': jugador1.Agregar(F_ORO, Vector(lanzaDado(200),lanzaDado(200)));	break;
+	case 'o': jugador1.Agregar(F_ORO, Vector(lanzaDado(225),lanzaDado(75)));	break;
 	case 'U': jugador1.Agregar(SOLDADO, Vector(200,50)); break;
 	case 'u': jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
 	case 'Y':

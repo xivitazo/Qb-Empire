@@ -17,6 +17,7 @@ public:
 	bool operator == (Vector &);
 	bool operator == (float);
 	bool operator != (Vector &);
+	bool operator != (float);
 	bool operator < (float numero);
 	bool operator > (float numero);
 	Vector unitario();

@@ -102,3 +102,10 @@ bool Vector :: operator > (float numero)
 {
 	return modulo()>numero;
 }
+
+bool Vector :: operator != (float n)
+{
+	if(abs(modulo()-n)<=0.1f)
+		return false;
+	return true;
+}
