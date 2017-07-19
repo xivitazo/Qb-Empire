@@ -81,6 +81,13 @@ bool Vector :: operator == (Vector &v)
 		return true;
 	return false;
 }
+bool Vector :: operator == (float x)
+{
+	if(abs(modulo()-x)<=0.1f)
+		return true;
+	return false;
+}
+
 bool Vector :: operator != (Vector &v)
 {
 	if(abs(vx-v.vx)<=0.1f && abs(vy-v.vy)<=0.1f)

@@ -9,9 +9,23 @@ using namespace std;
 
 GLfloat x=0, y=0, z=-0.1;
 
-Mundo::Mundo():jugador1(Vector(8, 37.5),Color(0, 0, 205)),
-			jugador2 (Vector(217, 37.5),Color(179,36,40))
+Mundo::Mundo():
+	jugador1(Vector(8, 37.5),Color(0, 0, 205)), 
+	jugador2 (Vector(217, 37.5),Color(179,36,40)),
+	numero(0)
 {
+	for(int n=0; n<MAX;n++)
+	{
+		disparos[n]=0;
+	}
+}
+
+Mundo :: ~Mundo()
+{
+	for(int n=0;n<numero; n++)
+	{
+		delete disparos[n];
+	}
 }
 
 void Mundo::Dibuja()
@@ -40,6 +54,11 @@ void Mundo::Dibuja()
 	jugador2.Dibuja();	
 	//glPopName();
 	glLoadName(99);
+	for(int n=0; n<numero; n++)
+	{
+		disparos[n]->Dibuja();
+	}
+	
 
 	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
 	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
@@ -68,18 +87,28 @@ void Mundo::Timer(float t)
 	for(int n=0; n<jugador1.getNumero();n++)
 	{
 		for(int i=0; i<jugador2.getNumero();i++)
-			Interaccion :: Rebote(jugador1.getPosN(n),jugador2.getPosN(i));
+			Interaccion :: rebote(*jugador1.getPosN(n),*jugador2.getPosN(i));
 	}
+	atacar();
 	jugador1.Timer(t);
 	jugador2.Timer(t);
-	for (int n=0; n<jugador1.getNumero(); n++)
-	for(int i=0; i<jugador2.getNumero(); i++)
+	
+	for(int n=0; n<numero; n++)
+	{
+		if(disparos[n]->Timer_disparo(t))
 		{
-			if (Interaccion ::Distancia (jugador1.getPosN(n), jugador2.getPosN(n))<jugador1.getPosN(n).getRango())
-				jugador1.getPosN(n).Atacar(jugador2.getLista());
-			if (Interaccion ::Distancia (jugador1.getPosN(n), jugador2.getPosN(n))<jugador2.getPosN(i).getRango())
-				jugador2.getPosN(i).Atacar(jugador1.getLista());
+			Interaccion :: Ataque(disparos [n],jugador1.getLista());
+			Interaccion :: Ataque(disparos[n],jugador2.getLista());
+			delete disparos[n];
+			numero--;
+			for(int i=n;i<numero;i++)
+			{
+				disparos[i]=disparos[i+1];
+				disparos[i+1]=0;
+			}
 		}
+	}
+
 	movimientoCamara(t);
 	//Para el sonido del disparo
 	//ETSIDI::play("sonidos/impacto.wav");
@@ -161,11 +190,6 @@ void Mundo::Tecla(unsigned char key)
 
 }
 
-void Mundo::Raton(int button, int state, Vector pos)
-{
-	//printf("%f\t%f\n", pos.vx, pos.vy);
-}
-
 void Mundo:: RatonPasivo(int x, int y)
 {
 
@@ -243,3 +267,9 @@ int  Mundo :: Mouse (Type  nombre)
 
 	return false;
 }
+
+void Mundo :: atacar()
+{
+	numero+=jugador1.atacar(&disparos[numero], jugador2.getLista());
+	numero+=jugador2.atacar(&disparos[numero], jugador1.getLista());
+} 

@@ -2,14 +2,18 @@
 #include "Lista_de.h"
 #include "Mapa.h"
 #include "Vector3D.h"
+#include "Disparo.h"
 
 class Mundo
 {
 	Mapa map;
 	Lista_de jugador1, jugador2;
+	Disparo* disparos[MAX];
+	int numero;
 	
 public: 
 	Mundo();
+	~Mundo();
 	void Tecla(unsigned char key);
 	void Inicializa();
 	void Inicializa_vista();
@@ -20,6 +24,7 @@ public:
 	void RatonPasivo(int x, int y);
 	void setPerspectiva(float ojo_a, float ojo_b, float ojo_c, float miro_a, float miro_b, float miro_c);
 	void movimientoCamara(float t);
+	void atacar ();
 
 	float x_ojo;
 	float y_ojo;

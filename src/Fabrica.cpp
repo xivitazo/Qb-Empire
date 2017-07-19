@@ -3,20 +3,21 @@
 using namespace std;
 
 
-Fabrica::Fabrica(Type _tipo,Vector posicion, unsigned int nivel): 
-	type(_tipo),
+Fabrica::Fabrica(Type _tipo,Vector posicion, unsigned int nivel):
 	tiempo(0),
-	Edificio(1000, 4,Color (),CUADRADO, Vector(4,4))
+	Edificio(1000,4,Color (),CUADRADO, Vector(4,4))
 {
-	tipo=type;
+	this->tipo=tipo;
 	this -> posicion = posicion;
+	this -> tipo= tipo;
 	especifico=NINGUNO;
 	switch(tipo){
-	case F_ORO:		color.set(245, 208, 51); produccion=2;	break;
-	case F_COMIDA:	color.set(234, 137, 154); produccion=4;	break;
-	case F_HIERRO:	color.set(157, 161, 170); produccion=3;	break;
+	case F_ORO:		color_max.set(245, 208, 51); produccion=2;	break;
+	case F_COMIDA:	color_max.set(234, 137, 154); produccion=4;	break;
+	case F_HIERRO:	color_max.set(157, 161, 170); produccion=3;	
 	}
-	for(unsigned int n=1;n<nivel; n++)
+	color=color_max;
+	for(unsigned int n=0;n<nivel;n++)
 		subirNivel();
 	rango=-1;
 }
@@ -53,31 +54,7 @@ void Fabrica :: Timer (float t)
 
 void Fabrica :: Dibuja (Color equipo)
 {
-	/*
-	bool flag=false;
-	Color oro(245, 208, 51),
-		hierro(157, 161, 170), 
-		comida(234, 137, 154);
-
-		if(this->color==oro)
-		{
-			glPushName(22);
-			flag=true;
-		}
-		if(this->color==hierro)
-		{
-			glPushName(23);
-			flag=true;
-		}
-		if(this->color==comida)
-		{
-			glPushName(24);
-			flag=true;
-		}
-		*/
 	casita(posicion, equipo, color, superficie, altura);
-
-	//if(flag)	glPopName();
 }
 
 bool Fabrica :: generar (Recursos& almacen)

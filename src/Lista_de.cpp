@@ -16,12 +16,14 @@ Lista_de::Lista_de(Vector ayuntamiento, Color equipo ):
 	for(int n=0; n<MAX_GENERAL;n++)
 	{
 		numero_generado[n]=0;
+		numero_actual[n]=0;
 	}
 	max_Type[EDIFICIOS]=4;
 	max_Type[COMBATIENTES]=20;
 
 	lista[numero++]=new Ayuntamiento (ayuntamiento);
 	numero_generado[EDIFICIOS]++;
+	numero_actual[EDIFICIOS]++;
 }
 
 Lista_de::~Lista_de(void)
@@ -37,10 +39,14 @@ bool Lista_de:: Agregar (Type tipo, Vector posicion)
 		case F_ORO : 
 		case F_HIERRO : 
 		case F_COMIDA :
-			lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
+			lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); 
+			numero_generado[EDIFICIOS]++; 
+			numero_actual[EDIFICIOS]++;
 			return true;
 		case CUARTEL :
-			lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++;
+			lista[numero++] = new Cuartel(posicion, nivel[tipo]); 
+			numero_generado[EDIFICIOS]++;
+			numero_actual[EDIFICIOS]++;
 			return true;
 		}
 
@@ -58,6 +64,7 @@ bool Lista_de :: Agregar (Luchadores tipo, Vector destino)
 		return false;
 	numero++;
 	numero_generado[COMBATIENTES]++;
+	numero_actual[COMBATIENTES]++;
 	return true;
 }
 
@@ -72,31 +79,37 @@ void Lista_de :: Dibuja()
 	
 }
 
-/*void Lista_de :: choque()
-{
-	for(int n=0; n<numero;n++)
-	{
-		Interaccion
-	}
-}*/
 
 void Lista_de :: Morir()
 {
 	for (int n=0;n<numero;n++)
 	{
-		if (lista[n]->vida<=0)
+		if (lista[n]->vida<=0.0f)
 		{
-			numero_generado[lista[n]->tipo+lista[n]->especifico]--;
+			switch (lista[n]->tipo){
+			case AYUNTAMIENTO:
+				//GAME OVER
+				//Ya veremos como lo hacemos
+				break;
+			case LUCHADOR:
+				numero_actual[COMBATIENTES]--;
+				break;
+			default:
+				numero_actual[EDIFICIOS]--;
+				break;
+			}
 			delete lista[n];
 			numero--;
 			for (int i=n;i<numero; i++)
 			{
 				lista[i]=lista[i+1];
+				lista[i]->setNombre(i);
+				//lista[i+1]=0;
 			}
+			lista[numero]=0;
 		}
 	}
 }
-
 bool Lista_de :: subirNivel(Type tipo)
 {
 	if (nivel[tipo]<4)
@@ -130,6 +143,7 @@ bool Lista_de :: subirNivel(Luchadores tipo)
 
 void Lista_de :: Timer (float t)
 {
+	Morir();
 	Rebote();
 	for(int n=0;n<numero;n++)
 	{
@@ -142,7 +156,7 @@ void Lista_de :: Rebote()
 {
 	for (int n=0;n<numero-1;n++)
 		for (int i=n; i<numero;i++)
-			Interaccion :: Rebote (*lista[n], *lista[i]);
+			Interaccion :: rebote (*lista[n], *lista[i]);
 }
 bool Lista_de :: generarRecursos()
 {
@@ -151,5 +165,15 @@ bool Lista_de :: generarRecursos()
 		lista[n]->generar(almacen);
 	}
 	return true;
+}
+
+int Lista_de :: atacar(Disparo** disparos, Edificio** enemigos)
+{
+	int generado=0;
+	for(int n=0;n<numero;n++)
+	{
+		generado+=lista[n]->Atacar(enemigos, disparos+generado);
+	}
+	return generado;
 }
 

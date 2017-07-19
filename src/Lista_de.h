@@ -5,8 +5,6 @@
 #include "Recursos.h"
 #include "Interaccion.h"
 
-#define MAX 300
-
 //Tamaño del vector de cosas
 #define MAX_TIPOS 13 
 #define MAX_GENERAL 2
@@ -35,6 +33,7 @@ class Lista_de
 	//vente al ayuntamiento y coge numero como en tu casa
 	unsigned int max_Type[MAX_GENERAL];
 	unsigned int numero_generado[MAX_GENERAL];
+	unsigned int numero_actual[MAX_GENERAL ];
 	unsigned int nivel[MAX_TIPOS];
 	//tener cuidado que static este funcionaria tanto para nuestro ayuntamiento
 	//como para el del rival en caso de que exista
@@ -72,12 +71,13 @@ public:
 	void Timer (float t);
 	void Rebote();
 	bool generarRecursos();
-	Edificio getPosN(int posicion){return lista[posicion];}
+	Edificio* getPosN(int posicion){return lista[posicion];}
 	Edificio** getLista() {return lista;}
 	Recursos getAlmacen(){return almacen;}
 	int getNivel(Type tipo){return nivel[tipo];}
 	int getNivel(Luchadores tipo){return nivel[LUCHADOR+tipo];}
 	int getMax (General tipo){return max_Type[tipo];}
+	int atacar(Disparo** disparos, Edificio** enemigos);
 
 
 

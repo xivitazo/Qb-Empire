@@ -23,13 +23,6 @@ Vector Objeto :: getPosicion()
 
 void Objeto :: Dibuja(Color equipo)
 {
-	/*
-	glColor3ub(color.getRed(),color.getGreen(),color.getBlue());    
-    glTranslatef(posicion.vx, 0, posicion.vy);    
-    glutSolidSphere(100,20,20);    
-    glTranslatef(-posicion.vx,0,-posicion.vy); 
-	*/
-	//printf("x: %f", posicion.vx);
 }
 
 void Objeto :: Timer (float t)
