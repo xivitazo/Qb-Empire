@@ -1,6 +1,7 @@
 #pragma once
 #include <cstdlib>
 #include "Vector.h"
+#include "Vector3D.h"
 #include "Color.h"
 
 enum Planta {NO_GEOMETRIA, CUADRADO, REDONDO};
@@ -17,8 +18,6 @@ protected:
 	unsigned int altura;
 	Planta planta;
 public:
-	//constructor con altura y visibilidad por defecto a 0
-//	Objeto(float a=0,bool v=0);
 	Objeto( float _altura=0, Color _color=0, Planta _planta=NO_GEOMETRIA , Vector dimension=0, bool _visible=0 );
 
 	virtual ~Objeto(void);
@@ -27,8 +26,6 @@ public:
 	Vector getPosicion();
 	void setPosicion(int x, int y);
 	virtual bool setVelocidad (Vector velocidad){return false;}
-	virtual Vector getVelocidad (){return false;}
-
 
 	friend class Interaccion;
 };

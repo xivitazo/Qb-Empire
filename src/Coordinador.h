@@ -1,20 +1,28 @@
 #pragma once
 #include "Mundo.h"
+#include "Menus.h"
+
 class Coordinador
 {
 protected:
-	enum Estado{INICIO, JUEGO, GAME_OVER};
+	enum Estado{INICIO, OPCIONES, JUEGO, GAME_OVER, YOU_WIN};
 	Estado estado;
-	Mundo mundo;
+	Mundo *mundo;
+	static int pos;
+	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag_jugador;
+	static unsigned int flag_musica;
+	int seleccion;
+
+
 public:
 	Coordinador(void);
 	virtual ~Coordinador(void);
 
+	bool Mouse (int names[], unsigned int hits, bool button);
 	void TeclaEspecial(unsigned char key);
 	void Tecla(unsigned char key);
 	void Timer(float t);
 	void Dibuja();
 	void Inicializa ();
-	void Raton (int button, int state, Vector pos);
 };
 

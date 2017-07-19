@@ -20,8 +20,6 @@ Lista_de::Lista_de(Vector ayuntamiento, Color equipo ):
 	max_Type[EDIFICIOS]=4;
 	max_Type[COMBATIENTES]=20;
 
-
-
 	lista[numero++]=new Ayuntamiento (ayuntamiento);
 	numero_generado[EDIFICIOS]++;
 }
@@ -33,13 +31,17 @@ Lista_de::~Lista_de(void)
 
 bool Lista_de:: Agregar (Type tipo, Vector posicion)
 {
-	if(numero<MAX&&numero_generado[EDIFICIOS]<max_Type[EDIFICIOS])
+	if(numero<MAX && numero_generado[EDIFICIOS]<max_Type[EDIFICIOS])
 	{
 		switch (tipo){
 		case F_ORO : 
 		case F_HIERRO : 
-		case F_COMIDA : lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; return true;
-		case CUARTEL : lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; return true;
+		case F_COMIDA :
+			lista[numero++] = new Fabrica(tipo, posicion, nivel[tipo]); numero_generado[EDIFICIOS]++; 
+			return true;
+		case CUARTEL :
+			lista[numero++] = new Cuartel(posicion, nivel[tipo]); numero_generado[EDIFICIOS]++;
+			return true;
 		}
 
 	}
@@ -63,38 +65,34 @@ void Lista_de :: Dibuja()
 {
 	for(int n=0; n<numero;n++)
 	{
+		glPushName(n+100);
 		lista[n]->Dibuja(equipo);
+		glPopName();
 	}
 	
 }
+
+/*void Lista_de :: choque()
+{
+	for(int n=0; n<numero;n++)
+	{
+		Interaccion
+	}
+}*/
 
 void Lista_de :: Morir()
 {
 	for (int n=0;n<numero;n++)
 	{
-		if (lista[n]->vida<=0.0f)
+		if (lista[n]->vida<=0)
 		{
-			switch (lista[n]->tipo){
-			case AYUNTAMIENTO:
-				//GAME OVER
-				//Ya veremos como lo hacemos
-				break;
-			case LUCHADOR:
-				numero_generado[COMBATIENTES]--;
-				break;
-			default:
-				numero_generado[EDIFICIOS]--;
-				break;
-			}
+			numero_generado[lista[n]->tipo+lista[n]->especifico]--;
 			delete lista[n];
 			numero--;
 			for (int i=n;i<numero; i++)
 			{
 				lista[i]=lista[i+1];
-				lista[i]->setNombre(i);
-				//lista[i+1]=0;
 			}
-			lista[numero]=0;
 		}
 	}
 }
@@ -132,7 +130,6 @@ bool Lista_de :: subirNivel(Luchadores tipo)
 
 void Lista_de :: Timer (float t)
 {
-	Morir();
 	Rebote();
 	for(int n=0;n<numero;n++)
 	{
@@ -144,10 +141,9 @@ void Lista_de :: Timer (float t)
 void Lista_de :: Rebote()
 {
 	for (int n=0;n<numero-1;n++)
-		for (int i=n+1; i<numero;i++)
-			Interaccion :: rebote (*lista[n], *lista[i]);
+		for (int i=n; i<numero;i++)
+			Interaccion :: Rebote (*lista[n], *lista[i]);
 }
-
 bool Lista_de :: generarRecursos()
 {
 	for(int n=0; n<numero; n++)
@@ -156,15 +152,4 @@ bool Lista_de :: generarRecursos()
 	}
 	return true;
 }
-
-int Lista_de :: atacar(Disparo** disparos, Edificio** enemigos)
-{
-	int generado=0;
-	for(int n=0;n<numero;n++)
-	{
-		generado+=lista[n]->Atacar(enemigos, disparos+generado);
-	}
-	return generado;
-}
-
 

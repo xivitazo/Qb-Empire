@@ -91,3 +91,12 @@ bool Vector3D :: operator = (Vector3D &i)
 	vz=i.vz;
 	return 1;
 }
+
+Vector3D Vector3D :: operator ^ (Vector3D &v)
+{
+	Vector3D aux;
+	aux.vx=v.vz*vy-vz*v.vy;
+	aux.vy=vz*v.vx-vx*v.vz;
+	aux.vz=vx*v.vy-vy*v.vx;
+	return aux;
+}

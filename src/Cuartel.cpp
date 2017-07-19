@@ -10,7 +10,7 @@ Cuartel :: Cuartel(Vector posicion, unsigned int nivel):
 	this->posicion=posicion;
 	tipo = CUARTEL;
 	especifico = NINGUNO;
-	for(unsigned int n=0;n<nivel; n++)
+	for(unsigned int n=1;n<nivel; n++)
 		subirNivel();
 	rango=-1;
 }
@@ -25,6 +25,7 @@ void Cuartel :: subirNivel()
 	vida=vida_max;
 	limite+=20;
 	altura+=4;
+	
 }
 
 bool Cuartel :: poderGenerar(void)
@@ -44,13 +45,19 @@ void Cuartel :: Timer (float t)
 
 void Cuartel :: Dibuja (Color equipo) 
 {
+	//glPushName(25);
 	casita(posicion, equipo, color , superficie, altura);
+	//glPopName();
+}
+
+Cuartel :: Cuartel(const Cuartel* copia):Edificio(copia)
+{
 }
 
 Edificio* Cuartel :: generar (int nivel, Luchadores tipo, Vector destino)
 {
 	if (tipo == NINGUNO || destino<0)
 		return false;
-	return new Personaje(tipo, nivel, posicion+superficie+5, destino);
+	return new Personaje(tipo, nivel, posicion+superficie, destino);
 	
 }

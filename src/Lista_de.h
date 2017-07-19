@@ -5,6 +5,7 @@
 #include "Recursos.h"
 #include "Interaccion.h"
 
+#define MAX 300
 
 //Tamaño del vector de cosas
 #define MAX_TIPOS 13 
@@ -71,16 +72,16 @@ public:
 	void Timer (float t);
 	void Rebote();
 	bool generarRecursos();
-	Edificio* getPosN(int posicion){return lista[posicion];}
+	Edificio getPosN(int posicion){return lista[posicion];}
 	Edificio** getLista() {return lista;}
 	Recursos getAlmacen(){return almacen;}
 	int getNivel(Type tipo){return nivel[tipo];}
 	int getNivel(Luchadores tipo){return nivel[LUCHADOR+tipo];}
 	int getMax (General tipo){return max_Type[tipo];}
-	int atacar(Disparo** disparos, Edificio** enemigos);
 
 
 
 
 	void prueba(int tipo);
+	friend class Menus;
 };
