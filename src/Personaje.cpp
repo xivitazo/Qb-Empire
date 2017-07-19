@@ -24,7 +24,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		break;
 	case ARQUERA:
 		setStats(150,150, 0.75,0.1, 3);
-		planta = REDONDO;
+		planta = CUADRADO;
 		//Cono
 		superficie.setValor(1,1);
 		rango=30;
@@ -33,7 +33,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		break;
 	case GIGANTE:
 		setStats(1000,250, 2.5,3, 3);
-		planta=REDONDO;
+		planta=CUADRADO;
 		//La tetera asesina
 		superficie.setValor(2,2);
 		rango_visibilidad=4;
