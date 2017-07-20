@@ -2,6 +2,8 @@
 #include "Mundo.h"
 #include "Menus.h"
 
+#define NAMESIZE 16384 //2^14
+
 class Coordinador
 {
 protected:
@@ -10,10 +12,10 @@ protected:
 	Mundo *mundo;
 	Menus menus;
 	Color cielo;
+	int seleccion[NAMESIZE];
 	static int pos;
 	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag_jugador;
 	static unsigned int flag_musica;
-	int seleccion;
 	float minutos_juego;
 
 
