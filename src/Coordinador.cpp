@@ -12,10 +12,12 @@ bool Coordinador :: flag_jugador=0;
 
 unsigned int Coordinador :: flag_musica=2;
 
-Coordinador::Coordinador(void)
+Coordinador::Coordinador(void):
+	cielo(0,0,102)
 {
 	mundo = new Mundo ();
 	estado=INICIO;
+	minutos_juego=0;
 }
 
 Coordinador::~Coordinador(void)
@@ -75,6 +77,28 @@ void Coordinador :: Dibuja()
 void Coordinador :: Timer (float t)
 {
 	mundo->Timer(t);
+	if(estado==JUEGO)
+	{
+		minutos_juego+=t/60.0f;
+		cielo.set((102.0f*(minutos_juego))/(15.0f),0,(102.0f*(15.0-minutos_juego))/15.0f);
+		if(minutos_juego>15)
+			cielo.set(102,0,0);
+	}
+	else if(estado==GAME_OVER)
+	{
+		cielo.set(102,0,0);
+		minutos_juego=0;
+	}
+	else if(estado==YOU_WIN)
+	{
+		cielo.set(0,0,102);
+		minutos_juego=0;
+	}
+	else if(estado==INICIO)
+	{
+		cielo.set(0,0,102);
+	}
+	
 }
 
 void Coordinador :: Tecla (unsigned char key)
@@ -306,4 +330,9 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 	}
 	flag_jugador=false;
 	return true;
+}
+
+void Coordinador :: dibujaCielo()
+{
+	glClearColor((float)cielo.getRed()/255.0f,(float)cielo.getGreen()/255.0f,(float)cielo.getBlue()/255.0f,1);
 }

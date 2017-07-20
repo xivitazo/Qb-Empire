@@ -8,10 +8,12 @@ protected:
 	enum Estado{INICIO, OPCIONES, JUEGO, GAME_OVER, YOU_WIN};
 	Estado estado;
 	Mundo *mundo;
+	Color cielo;
 	static int pos;
 	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag_jugador;
 	static unsigned int flag_musica;
 	int seleccion;
+	float minutos_juego;
 
 
 public:
@@ -24,5 +26,6 @@ public:
 	void Timer(float t);
 	void Dibuja();
 	void Inicializa ();
+	void dibujaCielo();
 };
 
