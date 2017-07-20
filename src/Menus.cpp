@@ -1,12 +1,34 @@
 #include "Menus.h"
 
-
 Menus::Menus()
 {
 }
 
 Menus::~Menus(void)
 {
+}
+
+void Menus :: inicializa () 
+{
+	glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT));
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+
+		edificios = new Sprite ("imagenes/edificios.png",850, glutGet(GLUT_WINDOW_HEIGHT)-50, 30, 30);
+		personajes = new Sprite ("imagenes/personajes.png", 995, glutGet(GLUT_WINDOW_HEIGHT)-50, 30, 30);
+		disparos = new Sprite ("imagenes/disparos.png",1150, glutGet(GLUT_WINDOW_HEIGHT)-50, 30, 30);
+
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Menus :: seleccion (Type tipo, Mundo &mundo)
@@ -24,17 +46,35 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		case AYUNTAMIENTO:
 			setTextColor(215.0f/255.0f, 45.0f/255.0f, 109.0f/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);
-			char aux[100];
+			char aux1[100], aux2[100], aux3[100], aux4[100], aux5[100], aux6[100];
 			//sprintf(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
-			sprintf_s(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
-			printxy(aux, 50, 50);
+			sprintf_s(aux1,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
+			printxy(aux1, 50, 50);
+			
+			setTextColor(215.0f/255.0f, 45.0f/255.0f, 109.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",20);
+			sprintf_s(aux2,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[ARQUERA]);
+			sprintf_s(aux3,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[SOLDADO]);
+			sprintf_s(aux4,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[CABALLERO]);
+			sprintf_s(aux5,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[GUERRERO]);
+			sprintf_s(aux6,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[GIGANTE]);
+			printxy("ARQUERA", 500, 250);
+			printxy("SOLDADO", 500, 200);
+			printxy("CABALLERO", 500, 150);
+			printxy("GUERRERO", 500, 100);
+			printxy("GIGANTE", 500, 50);
+			printxy(aux2, 900, 50);
+			printxy(aux3, 900, 100);
+			printxy(aux4, 900, 150);
+			printxy(aux5, 900, 200);
+			printxy(aux6, 900, 250);
 			break;
 		case F_ORO: 
 			setTextColor(245.0f/255.0f,208.0f/255.0f,51.0f/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);		
 			char auxo[100];
 			sprintf_s(auxo,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[F_ORO]);
-			printxy(auxo, 50, 50);
+			printxy(auxo, 50, 50);		// glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
 			break;
 		case F_HIERRO:
 			setTextColor(157/255.0f,161/255.0f,170/255.0f);
@@ -53,25 +93,10 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		case CUARTEL:
 			setTextColor(139.0f/255.0f,69.0f/255.0f,19.0f/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);		
-			char aux1[100], aux2[100], aux3[100], aux4[100], aux5[100], aux6[100];
-			sprintf_s(aux1,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[CUARTEL]);
-			sprintf_s(aux2,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[ARQUERA]);
-			sprintf_s(aux3,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[SOLDADO]);
-			sprintf_s(aux4,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[CABALLERO]);
-			sprintf_s(aux5,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[GUERRERO]);
-			sprintf_s(aux6,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[GIGANTE]);
-			printxy("ARQUERA", 500, 250);
-			printxy("SOLDADO", 500, 200);
-			printxy("CABALLERO", 500, 150);
-			printxy("GUERRERO", 500, 100);
-			printxy("GIGANTE", 500, 50);
+			char aux[100];
+			sprintf_s(aux,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[CUARTEL]);
 			printxy("CUARTEL", 50, 100);
-			printxy(aux1, 50, 50);
-			printxy(aux2, 900, 50);
-			printxy(aux3, 900, 100);
-			printxy(aux4, 900, 150);
-			printxy(aux5, 900, 200);
-			printxy(aux6, 900, 250);
+			printxy(aux, 50, 50);
 			break;
 		}
 		glMatrixMode(GL_PROJECTION);
@@ -115,10 +140,10 @@ void Menus :: construccion(Mundo &mundo)
 		setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",20);		
 			char aux1[100], aux2[100], aux3[100], aux4[100];
-			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   O   -");	
-			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   Y  -");	
-			sprintf_s(aux3," CONSTRUIR FABRICA DE COMIDA  -  PULSAR   U  -");
-			sprintf_s(aux4," CONSTRUIR UN CUARTEL  -  PULSAR  I  -");
+			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   E   -");	
+			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   W  -");	
+			sprintf_s(aux3," CONSTRUIR FABRICA DE COMIDA  -  PULSAR   Q  -");
+			sprintf_s(aux4," CONSTRUIR UN CUARTEL  -  PULSAR  A  -");
 			printxy(aux1,30, 200); 
 			printxy(aux2,30, 150);
 			printxy(aux3,30, 100);
@@ -134,30 +159,8 @@ void Menus :: construccion(Mundo &mundo)
 
 }
 
-void Menus :: superior(Mundo &mundo)
+void Menus :: superior (Mundo &mundo, float tiempo)
 {
-	/*
-	glPushMatrix();
-		GLdouble x,y,z,modelview[16],proyeccion[16];
-		GLint viewport[4];
-		glGetDoublev(GL_MODELVIEW_MATRIX,modelview);//Coges la matriz Modelview
-		glGetDoublev(GL_PROJECTION_MATRIX,proyeccion);//Coges la matriz proyeccion
-		glGetIntegerv(GL_VIEWPORT,viewport);//Coges el punto de vista
-		gluUnProject(0, 700,1,modelview,proyeccion,viewport,&x,&y,&z);
-		
-		glTranslatef(x, y, z);
-		setTextColor(1,0.8,0);
-		setFont("fuentes/Bitwise.ttf",20);		
-		char aux[500];
-		sprintf_s(aux,"Hierro:%d        Oro:%d        Comida:%d",
-			player.almacen.getHierro(),
-			player.almacen.getOro(),
-			player.almacen.getComida() );
-		printxy(aux,0,0);
-	glPopMatrix();
-	*/
-	
-	//FORMA DEFINITIVA DE HACER LOS MENUS 
 	glMatrixMode(GL_PROJECTION);
 		glPushMatrix();
 		glLoadIdentity();
@@ -166,16 +169,41 @@ void Menus :: superior(Mundo &mundo)
 		glPushMatrix();
 		glLoadIdentity();
 
+
 		setTextColor(1,0.8,0);
-			setFont("fuentes/Bitwise.ttf",25);		
-			char aux[500];
-			sprintf_s(aux,"Hierro: %d           Oro: %d          Comida: %d",
+			setFont("fuentes/LemonMilk.otf",15);		
+			char aux[500],aux1[500];
+			int segundos=(tiempo-(int)tiempo)*60; 
+			sprintf_s(aux,"Comida: %d            Hierro: %d           Oro: %d                              %d : %d",
 				mundo.jugador1.almacen.getHierro(),
 				mundo.jugador1.almacen.getOro(),
-				mundo.jugador1.almacen.getComida() );
+				mundo.jugador1.almacen.getComida(),
+				(int)tiempo,
+				segundos);
+			sprintf_s(aux1,"%d / %d                %d / %d                %d",
+				mundo.jugador1.numero_actual[EDIFICIOS],
+				mundo.jugador1.max_Type[EDIFICIOS],
+				mundo.jugador1.numero_actual[COMBATIENTES],
+				mundo.jugador1.max_Type[COMBATIENTES],
+				mundo.numero);
 			printxy(aux,60 , glutGet(GLUT_WINDOW_HEIGHT)-60);
-			printxy("AYUDA :: ESP",glutGet(GLUT_WINDOW_WIDTH)-200 , glutGet(GLUT_WINDOW_HEIGHT)-60);
+			printxy(aux1,880 , glutGet(GLUT_WINDOW_HEIGHT)-60);
 			
+			glPushMatrix();
+			//glRotatef(90, 1.0, 0.0, 0.0);
+			//glTranslatef(80, -80, -100);
+			//glTranslatef(0, 0, -1);
+			personajes->draw();
+			glPopMatrix();
+			glPushMatrix();
+			//glTranslatef(30, 0, 0);
+			edificios->draw();
+			glPopMatrix();
+			glPushMatrix();
+			//glTranslatef(60, 0, 0);
+			disparos->draw();
+			glPopMatrix();
+
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
 
@@ -199,22 +227,22 @@ void Menus :: inicio ()
 		glPushMatrix();
 		glLoadIdentity();
 
-		setTextColor(1,1,0);
+		setTextColor(255/255.0f,128/255.0f,0);
 			setFont("fuentes/cityburn.ttf",100);		
-			printxy("QB EMPIRE",glutGet(GLUT_WINDOW_WIDTH)*1/4 , glutGet(GLUT_WINDOW_HEIGHT)*3/4);
+			printxy("QB EMPIRE",glutGet(GLUT_WINDOW_WIDTH)*0.285 , glutGet(GLUT_WINDOW_HEIGHT)*3/4);
 
 	
-		setTextColor(1,0,0);
-			setFont("fuentes/LemonMilk.otf",30);//200, 280
-			printxy("PULSE LA TECLA -E- PARA EMPEZAR", glutGet(GLUT_WINDOW_WIDTH)*1/4, 280);
+		setTextColor(76/255.0f,153/255.0f,0);
+			setFont("fuentes/LemonMilk.otf",20);//200, 280
+			printxy("PULSE LA TECLA -E- PARA EMPEZAR", glutGet(GLUT_WINDOW_WIDTH)*0.32, 180);
 
-		setTextColor(1,0,0);
-			setFont("fuentes/LemonMilk.otf",30);//200,180
-			printxy("PULSE LA TECLA -O- PARA OPCIONES",glutGet(GLUT_WINDOW_WIDTH)*1/4, 180);
+		
+			setFont("fuentes/LemonMilk.otf",20);//200,180
+			printxy("PULSE LA TECLA -O- PARA OPCIONES",glutGet(GLUT_WINDOW_WIDTH)*0.32, 120);
 	
-		setTextColor(1,0,0);
-			setFont("fuentes/LemonMilk.otf",30);//210, 80
-			printxy("PULSE LA TECLA -Esc- PARA SALIR",glutGet(GLUT_WINDOW_WIDTH)*1/4, 80);
+		
+			setFont("fuentes/LemonMilk.otf",20);//210, 80
+			printxy("PULSE LA TECLA -Esc- PARA SALIR",glutGet(GLUT_WINDOW_WIDTH)*0.32, 60);
 	
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -236,18 +264,15 @@ void Menus :: game_over ()
 		glPushMatrix();
 		glLoadIdentity();
 
-		setTextColor(1,0,0);
+		setTextColor(255/255.0f,0,0);
 			setFont("fuentes/Bitwise.ttf",100);		
-			printxy("GAME OVER", 580, 700);
+			printxy("GAME OVER", glutGet(GLUT_WINDOW_WIDTH)*0.270 , glutGet(GLUT_WINDOW_HEIGHT)*3/4);
 
-	
-		setTextColor(1,0,0);
-			setFont("fuentes/LemonMilk.otf",30);
-			printxy("PRESS -Q- TO RESTART", 200, 280);
-	
-		setTextColor(1,0,0);
-			setFont("fuentes/LemonMilk.otf",30);
-			printxy("PRESS -Esc- TO EXIT",210,180);
+			setFont("fuentes/LemonMilk.otf",20);
+			printxy("PRESS -Q- TO RESTART",  glutGet(GLUT_WINDOW_WIDTH)*0.40, 180);
+
+			setFont("fuentes/LemonMilk.otf",20);
+			printxy("PRESS -Esc- TO EXIT",glutGet(GLUT_WINDOW_WIDTH)*0.40, 120);
 	
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -305,16 +330,16 @@ void Menus :: you_win()
 
 		setTextColor(0,1,0);
 			setFont("fuentes/Bitwise.ttf",100);		
-			printxy("YOU WIN", 580, 700);
+			printxy("YOU WIN",glutGet(GLUT_WINDOW_WIDTH)*0.285 , glutGet(GLUT_WINDOW_HEIGHT)*3/4);
 
 	
 		setTextColor(0,1,0);
-			setFont("fuentes/LemonMilk.otf",30);
-			printxy("PRESS -Q- TO RESTART", 200, 280);
+			setFont("fuentes/LemonMilk.otf",20);
+			printxy("PRESS -Q- TO RESTART",glutGet(GLUT_WINDOW_WIDTH)*0.40, 180);
 	
 		setTextColor(0,1,0);
-			setFont("fuentes/LemonMilk.otf",30);
-			printxy("PRESS -Esc- TO EXIT",210,180);
+			setFont("fuentes/LemonMilk.otf",20);
+			printxy("PRESS -Esc- TO EXIT",glutGet(GLUT_WINDOW_WIDTH)*0.40, 120);
 	
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();

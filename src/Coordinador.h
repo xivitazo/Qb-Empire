@@ -8,6 +8,7 @@ protected:
 	enum Estado{INICIO, OPCIONES, JUEGO, GAME_OVER, YOU_WIN};
 	Estado estado;
 	Mundo *mundo;
+	Menus menus;
 	Color cielo;
 	static int pos;
 	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag_jugador;
