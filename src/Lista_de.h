@@ -62,7 +62,7 @@ public:
 	//void rebote(Caja caja);
 	//void rebote(Pared pared);
 	void Choque();
-	void Morir (); 
+	int Morir (); 
 	//devuelve cuantos personajes han muerto en el bucle
 	//los muertos se iguala la direccion a 0 para poder corroborar que no se ha borrado
 	int getNumero(){return numero;}
@@ -78,6 +78,10 @@ public:
 	int getNivel(Luchadores tipo){return nivel[LUCHADOR+tipo];}
 	int getMax (General tipo){return max_Type[tipo];}
 	int atacar(Disparo** disparos, Edificio** enemigos);
+	void AñadirOro(int n){almacen.set(almacen.getComida(),almacen.getHierro(),almacen.getOro()+n);}
+	void AñadirComida(int n){almacen.set(almacen.getComida()+n,almacen.getHierro(),almacen.getOro());}
+	void AñadirHierro(int n){almacen.set(almacen.getComida(),almacen.getHierro()+n,almacen.getOro());}
+	
 
 
 

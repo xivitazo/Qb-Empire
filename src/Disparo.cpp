@@ -6,7 +6,7 @@
 
 using namespace ETSIDI;
 Disparo::Disparo(Vector posicion, Vector destino,unsigned int daño, unsigned int salpicadura): 
-	Objeto(1,Color(100+lanzaDado(1.0)*155,100+lanzaDado(1.0)*155,100+lanzaDado(1.0)*155),REDONDO,1),
+	Objeto(1,Color(100+lanzaDado(1.0)*155,100+lanzaDado(1.0)*155,100+lanzaDado(1.0)*155),CUADRADO,1),
 	destino(destino),
 	daño(daño),
 	salpicadura(salpicadura)

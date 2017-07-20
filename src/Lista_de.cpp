@@ -1,4 +1,6 @@
-#include "Lista_de.h"
+#include "Lista_de.h"7
+#include "ETSIDI.h"
+using namespace ETSIDI;
 
 
 Lista_de::Lista_de(Vector ayuntamiento, Color equipo ):
@@ -80,8 +82,9 @@ void Lista_de :: Dibuja()
 }
 
 
-void Lista_de :: Morir()
+int Lista_de :: Morir()
 {
+	int muertos=0;
 	for (int n=0;n<numero;n++)
 	{
 		if (lista[n]->vida<=0.0f)
@@ -107,8 +110,10 @@ void Lista_de :: Morir()
 				//lista[i+1]=0;
 			}
 			lista[numero]=0;
+			muertos++;
 		}
 	}
+	return muertos;
 }
 bool Lista_de :: subirNivel(Type tipo)
 {
@@ -143,7 +148,6 @@ bool Lista_de :: subirNivel(Luchadores tipo)
 
 void Lista_de :: Timer (float t)
 {
-	Morir();
 	Rebote();
 	for(int n=0;n<numero;n++)
 	{

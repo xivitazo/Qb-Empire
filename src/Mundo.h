@@ -25,6 +25,7 @@ public:
 	void setPerspectiva(float ojo_a, float ojo_b, float ojo_c, float miro_a, float miro_b, float miro_c);
 	void movimientoCamara(float t);
 	void atacar ();
+	void morir();
 
 	float x_ojo;
 	float y_ojo;

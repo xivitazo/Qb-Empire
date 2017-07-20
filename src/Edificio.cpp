@@ -27,6 +27,7 @@ Type Edificio :: getTipo (void )
 
 void Edificio :: Timer (float t)
 {
+	Objeto :: Timer(t);
 	color_vida();
 }
 

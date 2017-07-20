@@ -90,6 +90,7 @@ void Mundo::Timer(float t)
 			Interaccion :: rebote(*jugador1.getPosN(n),*jugador2.getPosN(i));
 	}
 	atacar();
+	morir();
 	jugador1.Timer(t);
 	jugador2.Timer(t);
 	
@@ -273,3 +274,38 @@ void Mundo :: atacar()
 	numero+=jugador1.atacar(&disparos[numero], jugador2.getLista());
 	numero+=jugador2.atacar(&disparos[numero], jugador1.getLista());
 } 
+
+void Mundo :: morir()
+{
+	int muertos;
+	float dado1=lanzaDado(1.0f);
+	float dado2=lanzaDado(1.0f);
+	float dado3=lanzaDado(1.0f);
+	muertos=jugador1.Morir();
+	if(dado1>0.5)
+		dado1=1;
+	else
+		dado1=0;
+	if(dado2>0.65)
+		dado2=1;
+	else
+		dado2=0;
+	if(dado3>0.85)
+		dado3=1;
+	else
+		dado3=0;
+
+	if(muertos)
+	{
+		jugador2.AñadirComida(dado1*muertos);
+		jugador2.AñadirHierro(dado2*muertos);
+		jugador2.AñadirOro(dado3*muertos);
+	}
+	muertos=jugador2.Morir();
+	if(muertos)
+	{
+		jugador1.AñadirComida(dado1*muertos);
+		jugador1.AñadirHierro(dado2*muertos);
+		jugador1.AñadirOro(dado3*muertos);
+	}
+}
