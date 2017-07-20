@@ -1,7 +1,7 @@
 #include "Coordinador.h"
 #include "glut.h"
 
-#define BUFSIZE 512
+#define BUFSIZE 65536 //2^16
 static float  x=-87.5, y=-50, z=25, t=0.5;
 Coordinador coordinator;
 Vector inicial;
@@ -162,6 +162,23 @@ void OnMouse(int button, int state, int x, int y)
 
 	if ( state != GLUT_DOWN)
 	{
+		if(inicial!=Vector(x,y))
+		{
+			Vector centro_cuadrado, err;
+			int* nombres;
+			int n;
+			centro_cuadrado=((Vector(x,y)-inicial)/2)+inicial;
+			err=(Vector(x,y)-inicial)/2;
+			if(abs(err.vx)<=0.1f)
+				err.vx=1;
+			if(abs(err.vy)<=0.1f)
+				err.vy=1;
+			nombres=click(centro_cuadrado.vx,centro_cuadrado.vy,abs(err.vx),abs(err.vy));
+			for(n=0;n<NAMESIZE&&nombres[n]!=0;n++);
+
+			printf("%d\t%d\n",x,y);
+			coordinator.Mouse(nombres,n,button);
+		}
 		inicial=0;
 		return;
 	}
@@ -169,7 +186,7 @@ void OnMouse(int button, int state, int x, int y)
 	int *nombres;
 	int n;
 	nombres=click(x,y,1,1);
-	for(n=0;n<100&&nombres[n]!=0;n++);
+	for(n=0;n<NAMESIZE&&nombres[n]!=0;n++);
 	coordinator.Mouse(nombres,n,button);
 	
 
@@ -177,7 +194,7 @@ void OnMouse(int button, int state, int x, int y)
 
 void OnMousePas(int x, int y)
 {
-	Vector centro_cuadrado, err;
+	/*Vector centro_cuadrado, err;
 	int* nombres;
 	int n;
 	centro_cuadrado=((Vector(x,y)-inicial)/2)+inicial;
@@ -187,10 +204,10 @@ void OnMousePas(int x, int y)
 	if(abs(err.vy)<=0.1f)
 		err.vy=1;
 	nombres=click(centro_cuadrado.vx,centro_cuadrado.vy,abs(err.vx),abs(err.vy));
-	for(n=0;n<100&&nombres[n]!=0;n++);
+	for(n=0;n<NAMESIZE&&nombres[n]!=0;n++);
 
 	printf("%d\t%d\n",x,y);
-	coordinator.Mouse(nombres,n,0);
+	coordinator.Mouse(nombres,n,0);*/
 	
 	
 }
@@ -209,7 +226,7 @@ int* click (int x, int y, int err_x, int err_y)
 	(void) glRenderMode(GL_SELECT);
 
 	glInitNames();
-	glPushName(1000);
+	glPushName(NAMESIZE);
 
 	//Para definir el punto de vista
 	glMatrixMode(GL_PROJECTION);
@@ -246,7 +263,7 @@ int* click (int x, int y, int err_x, int err_y)
 	unsigned int hi = 0;
 	GLuint *bufp = selectBuffer;
 	GLuint name, numnames, z1, z2;
-	int nombre[100];
+	int nombre[NAMESIZE];
 	unsigned k=0;
 
 	// [0x6]

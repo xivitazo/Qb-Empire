@@ -23,6 +23,7 @@ public:
 	bool Timer_disparo (float t);
 	bool setVelocidad(Vector velocidad){return true;}
 	int getSalpicadura(){return salpicadura;}
+	bool explosion();
 
 	//amigo de la clase interacción para que interaccion
 	//pueda usar las cosas de disparo

@@ -37,9 +37,8 @@ bool Disparo::Mueve(void)
 	velocidad = v*velocidad_max;
 	if((destino-posicion).modulo()<0.5f)
 		velocidad=(destino-posicion)*(velocidad_max/0.5f);
-	if (posicion==destino)
-//Si esta dentro de los limites del objetivo
-		return true;
+	if (posicion==destino) //Si esta dentro de los limites del objetivo
+		return explosion();
 	return false;
 
 }
@@ -59,5 +58,14 @@ void Disparo :: Dibuja(void)
 		glColor3ub(200-lanzaDado(1.0)*color.getRed(), 200-lanzaDado(1.0)*color.getGreen(), 200-lanzaDado(1.0)*color.getBlue());
 		glutSolidSphere(radio,10,10);
 	glPopMatrix();
+}
+bool Disparo :: explosion()
+{
+	velocidad=0;
+	radio+=0.2f;
+	z=+0.5*tiempo;
+	if(radio>=salpicadura)
+		return true;
+	return false;
 }
 

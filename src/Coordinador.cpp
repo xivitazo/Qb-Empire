@@ -18,6 +18,10 @@ Coordinador::Coordinador(void):
 	mundo = new Mundo ();
 	estado=INICIO;
 	minutos_juego=0;
+	for(int n=0;n<NAMESIZE;n++)
+	{
+		seleccion[n]=0;
+	}
 }
 
 Coordinador::~Coordinador(void)
@@ -79,7 +83,7 @@ void Coordinador :: Timer (float t)
 	mundo->Timer(t);
 	if(estado==JUEGO)
 	{
-		minutos_juego+=t/60.0f;
+		minutos_juego+=t/60.0F;
 		cielo.set((102.0f*(minutos_juego))/(15.0f),0,(102.0f*(15.0-minutos_juego))/15.0f);
 		if(minutos_juego>15)
 			cielo.set(102,0,0);
@@ -196,17 +200,30 @@ void Coordinador :: Inicializa ()
 
 bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 {
-	unsigned int j=0;
-	Type nombre;
-	Vector click;
+//	Type nombre;
 	int cuadrados=0;
+	if(/*flag7 && */button)
+	{
+		for (unsigned int i=0;seleccion[i]!=0;i++)
+		{
+			if(seleccion[i]==JUGADOR1)
+				mundo->jugador1.getLista()[seleccion[i+1]-100]->mover(click);
+		}
+	}
+	for (unsigned int i=0;seleccion[i]!=0;i++)
+	{
+		seleccion[i]=0;
+	}
+	unsigned int j=0;
+	flag_jugador=false;
 	for (int i=hits; i>=0; i--)	
 	{
 		
 		if(names[i]==JUGADOR1)
 		{
 			flag_jugador=true;
-			seleccion=names[i+1]-100;
+			seleccion[j++]=JUGADOR1;
+			seleccion[j++]=names[i+1];
 			switch (mundo->jugador1.getLista()[names[i+1]-100]->getTipo()){
 			case AYUNTAMIENTO: 
 				cout<<"AYUNTAMIENTO"<<endl;
@@ -310,10 +327,14 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		}
 
 	}
+	
+	for (unsigned int i=0;seleccion[i]!=0;i++)
+	{
+		cout<<seleccion[i]<<endl;
+	}
 	click=click/cuadrados;
-	cout<<click.vx<<"\t"<<click.vy<<endl;
-	if(flag7 && button)
-		mundo->jugador1.getLista()[seleccion]->mover(click);
+	//cout<<click.vx<<"\t"<<click.vy<<endl;
+	
 	if(flag_jugador==false)
 	{
 		flag1=false;
@@ -322,9 +343,11 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		flag4=false;
 		flag5=false;
 		flag6=false;
-		seleccion=0;
+		for(unsigned int n=0;n<j;n++)
+		{
+			seleccion[n]=0;
+		}
 	}
-	flag_jugador=false;
 	return true;
 }
 
