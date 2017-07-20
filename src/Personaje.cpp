@@ -5,8 +5,7 @@
 
 Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vector destino):
 	destino(destino),
-	Ayuntamiento(posicion), 
-	huyendo(0)
+	Ayuntamiento(posicion)
 {
 	memoria=destino;
 	this -> tipo=LUCHADOR;
@@ -194,6 +193,6 @@ bool Personaje:: mover(Vector destino)
 {
 	if(huyendo)
 		return false;
-	memoria=destino;
+	destino=memoria;
 	return true;
 }

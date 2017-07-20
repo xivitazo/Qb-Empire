@@ -207,99 +207,96 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		{
 			flag_jugador=true;
 			seleccion=names[i+1]-100;
-			if(button==0)
-			{
-				switch (mundo->jugador1.getLista()[names[i+1]-100]->getTipo()){
-				case AYUNTAMIENTO: 
-					cout<<"AYUNTAMIENTO"<<endl;
-					if(flag2)
-					{
-						mundo->Mouse(AYUNTAMIENTO);
-						//flag2=false;
-					}
-					else		flag2=true;
-					flag1=false;
-					flag3=false;
-					flag4=false;
-					flag5=false;
-					flag6=false;
-					flag7=false;
-					break;
-				case F_ORO:
-					cout<<"FABRICA DE ORO"<<endl;
-					if(flag3)
-					{
-						mundo->Mouse(F_ORO);
-						flag3=false;
-					}
-					else		flag3=true;
-					flag1=false;
-					flag2=false;
-					flag4=false;
-					flag5=false;
-					flag6=false;
-					flag7=false;
-					break;
-				case F_HIERRO:
-					cout<<"FABRICA DE HIERRO"<<endl;
-					if(flag5)
-					{
-						mundo->Mouse(F_HIERRO);
-						flag5=false;
-					}
-					else		flag5=true;
-					flag1=false;
-					flag2=false;
-					flag4=false;
-					flag3=false;
-					flag6=false;
-					flag7=false;
-					break;
-				case F_COMIDA:
-					cout<<"FABRICA DE COMIDA"<<endl;
-					if(flag4)
-					{
-						mundo->Mouse(F_COMIDA);
-						flag4=false;
-					}
-					else		flag4=true;
-					flag1=false;
-					flag2=false;
-					flag3=false;
-					flag5=false;
-					flag6=false;
-					flag7=false;
-					break;
-				case CUARTEL:
-					cout<<"CUARTEL"<<endl;
-					if(flag6)	
-					{
-						mundo->Mouse(CUARTEL);
-						flag6=false;
-					}
-					else		flag6=true;
-					flag1=false;
-					flag2=false;
-					flag4=false;
-					flag5=false;
-					flag3=false;
-					flag7=false;
-					break;
-				case LUCHADOR:
-					cout<<"LUCHADOR"<<endl;
-					if(flag7)
-					{
-					}
-					else flag7=true;
-					flag1=false;
-					flag2=false;
-					flag3=false;
-					flag4=false;
-					flag5=false;
-					flag6=false;
-					break;
+			switch (mundo->jugador1.getLista()[names[i+1]-100]->getTipo()){
+			case AYUNTAMIENTO: 
+				cout<<"AYUNTAMIENTO"<<endl;
+				if(flag2)
+				{
+					mundo->Mouse(AYUNTAMIENTO);
+					//flag2=false;
 				}
-		}
+				else		flag2=true;
+				flag1=false;
+				flag3=false;
+				flag4=false;
+				flag5=false;
+				flag6=false;
+				flag7=false;
+				break;
+			case F_ORO:
+				cout<<"FABRICA DE ORO"<<endl;
+				if(flag3)
+				{
+					mundo->Mouse(F_ORO);
+					flag3=false;
+				}
+				else		flag3=true;
+				flag1=false;
+				flag2=false;
+				flag4=false;
+				flag5=false;
+				flag6=false;
+				flag7=false;
+				break;
+			case F_HIERRO:
+				cout<<"FABRICA DE HIERRO"<<endl;
+				if(flag5)
+				{
+					mundo->Mouse(F_HIERRO);
+					flag5=false;
+				}
+				else		flag5=true;
+				flag1=false;
+				flag2=false;
+				flag4=false;
+				flag3=false;
+				flag6=false;
+				flag7=false;
+				break;
+			case F_COMIDA:
+				cout<<"FABRICA DE COMIDA"<<endl;
+				if(flag4)
+				{
+					mundo->Mouse(F_COMIDA);
+					flag4=false;
+				}
+				else		flag4=true;
+				flag1=false;
+				flag2=false;
+				flag3=false;
+				flag5=false;
+				flag6=false;
+				flag7=false;
+				break;
+			case CUARTEL:
+				cout<<"CUARTEL"<<endl;
+				if(flag6)	
+				{
+					mundo->Mouse(CUARTEL);
+					flag6=false;
+				}
+				else		flag6=true;
+				flag1=false;
+				flag2=false;
+				flag4=false;
+				flag5=false;
+				flag3=false;
+				flag7=false;
+				break;
+			case LUCHADOR:
+				cout<<"LUCHADOR"<<endl;
+				if(flag7)
+				{
+				}
+				else flag7=true;
+				flag1=false;
+				flag2=false;
+				flag3=false;
+				flag4=false;
+				flag5=false;
+				flag6=false;
+				break;
+			}
 
 			
 			//nombre = mundo->jugador1.getLista()[names[i+1]-100]->getTipo();
@@ -325,7 +322,6 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		flag4=false;
 		flag5=false;
 		flag6=false;
-		flag7=false;
 		seleccion=0;
 	}
 	flag_jugador=false;
