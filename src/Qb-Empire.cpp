@@ -6,6 +6,8 @@ static float  x=-87.5, y=-50, z=25, t=0.5;
 Coordinador coordinator;
 Vector inicial;
 Vector finish;
+bool boton;
+int nombre[NAMESIZE];
 
 //los callback, funciones que seran llamadas automaticamente por la glut
 //cuando sucedan eventos
@@ -162,7 +164,10 @@ void OnMouse(int button, int state, int x, int y)
 	printf("%lf\t%lf\t%lf\n", x,y,z);
 	*/
 	
-
+	if(button==0)
+		boton=false;
+	else
+		boton=true;
 	if ( state != GLUT_DOWN)
 	{
 		if(inicial!=Vector(x,y))
@@ -180,7 +185,7 @@ void OnMouse(int button, int state, int x, int y)
 			for(n=0;n<NAMESIZE&&nombres[n]!=0;n++);
 
 			//printf("%d\t%d\n",x,y);
-			coordinator.Mouse(nombres,n,button);
+			coordinator.Mouse(nombres,n, boton);
 		}
 		inicial=0;
 		finish=0;
@@ -191,7 +196,7 @@ void OnMouse(int button, int state, int x, int y)
 	int n;
 	nombres=click(x,y,1,1);
 	for(n=0;n<NAMESIZE&&nombres[n]!=0;n++);
-	coordinator.Mouse(nombres,n,button);
+	coordinator.Mouse(nombres,n,boton);
 	
 
 }
@@ -202,9 +207,10 @@ void OnMousePas(int x, int y)
 	
 	
 }
+
 void dibujaSeleccion()
 {
-	if(inicial!=0 && finish!=0)
+	if(inicial!=0 && finish!=0 && boton==0)
 	{
 		glMatrixMode(GL_PROJECTION);
 			glPushMatrix();
@@ -289,7 +295,8 @@ int* click (int x, int y, int err_x, int err_y)
 	unsigned int hi = 0;
 	GLuint *bufp = selectBuffer;
 	GLuint name, numnames, z1, z2;
-	int nombre[NAMESIZE];
+	for(int n=0; n<NAMESIZE;n++)
+		nombre[n]=0;
 	unsigned k=0;
 
 	// [0x6]
