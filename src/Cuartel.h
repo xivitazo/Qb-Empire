@@ -6,8 +6,8 @@
 class Cuartel : public Edificio
 {
 protected:
-	unsigned int limite_tropas, numero_tropas;
-	unsigned int tiempo;
+	float segundos_tropa;
+	float tiempo;
 
 public:
 	Cuartel( Vector posicion, unsigned int nivel);

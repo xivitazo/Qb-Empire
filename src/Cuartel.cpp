@@ -3,8 +3,7 @@
 
 Cuartel :: Cuartel(Vector posicion, unsigned int nivel):
 	tiempo(0), 
-	limite_tropas(100), 
-	numero_tropas(0), 
+	segundos_tropa(3.0f),
 	Edificio(1000,4, Color (139,69,19), CUADRADO, Vector(4,4))
 {
 	this->posicion=posicion;
@@ -30,17 +29,18 @@ void Cuartel :: subirNivel()
 
 bool Cuartel :: poderGenerar(void)
 {
-	return true;
+	if(tiempo>=segundos_tropa)
+	{
+		tiempo=0;
+		return true;
+	}
+	return false;
 }
 
 void Cuartel :: Timer (float t)
 {
 	Edificio :: Timer (t);
-	if (tiempo>=60)
-	{
-		numero_tropas=0;
-	}
-	else tiempo++;
+	tiempo+=t;
 }
 
 void Cuartel :: Dibuja (Color equipo) 
@@ -51,8 +51,8 @@ void Cuartel :: Dibuja (Color equipo)
 
 Edificio* Cuartel :: generar (int nivel, Luchadores tipo, Vector destino)
 {
-	if (tipo == NINGUNO || destino<0)
-		return false;
-	return new Personaje(tipo, nivel, posicion+superficie, destino);
+	if ((tipo != NINGUNO || destino>0) && poderGenerar())
+		return new Personaje(tipo, nivel, posicion+superficie, destino);
+	return 0;
 	
 }

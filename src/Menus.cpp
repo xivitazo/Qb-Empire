@@ -175,9 +175,9 @@ void Menus :: superior (Mundo &mundo, float tiempo)
 			char aux[500],aux1[500];
 			int segundos=(tiempo-(int)tiempo)*60; 
 			sprintf_s(aux,"Comida: %d            Hierro: %d           Oro: %d                              %d : %d",
+				mundo.jugador1.almacen.getComida(),
 				mundo.jugador1.almacen.getHierro(),
 				mundo.jugador1.almacen.getOro(),
-				mundo.jugador1.almacen.getComida(),
 				(int)tiempo,
 				segundos);
 			sprintf_s(aux1,"%d / %d                %d / %d                %d",

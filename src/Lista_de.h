@@ -8,6 +8,7 @@
 //Tamaño del vector de cosas
 #define MAX_TIPOS 13 
 #define MAX_GENERAL 2
+#define COLA 100
 enum General {EDIFICIOS, COMBATIENTES};
 
 
@@ -25,6 +26,8 @@ class Lista_de
 	//Distinto del numero de tropas y demás
 	Edificio  *lista [MAX];
 	//Vector que contiene edificios y personajes
+	Luchadores cola_generar[COLA];
+	int numero_cola;
 
 
 	//Atrinutos Type-Luchadores
@@ -35,6 +38,9 @@ class Lista_de
 	unsigned int numero_generado[MAX_GENERAL];
 	unsigned int numero_actual[MAX_GENERAL ];
 	unsigned int nivel[MAX_TIPOS];
+	Recursos coste[MAX_TIPOS];
+	int coste_nivel[MAX_TIPOS];
+	Vector destino;
 	//tener cuidado que static este funcionaria tanto para nuestro ayuntamiento
 	//como para el del rival en caso de que exista
 	
@@ -78,6 +84,8 @@ public:
 	int getNivel(Luchadores tipo){return nivel[LUCHADOR+tipo];}
 	int getMax (General tipo){return max_Type[tipo];}
 	int atacar(Disparo** disparos, Edificio** enemigos);
+	void inicializarCostes();
+	bool generarCombatientes();
 	void AñadirOro(int n){almacen.set(almacen.getComida(),almacen.getHierro(),almacen.getOro()+n);}
 	void AñadirComida(int n){almacen.set(almacen.getComida()+n,almacen.getHierro(),almacen.getOro());}
 	void AñadirHierro(int n){almacen.set(almacen.getComida(),almacen.getHierro()+n,almacen.getOro());}

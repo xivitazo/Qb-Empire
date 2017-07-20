@@ -147,6 +147,10 @@ void Coordinador :: Tecla (unsigned char key)
 			estado=YOU_WIN;
 			mundo->setPerspectiva(120, -200, 50, 120, 37.5, 0);
 		}
+		if(key=='S')	
+		{
+			mundo->jugador1.AñadirOro(100);
+		}
 		if(key == ' ')	{
 			if(flag1) flag1=false;
 			else flag1=true;
@@ -327,7 +331,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		cout<<seleccion[i]<<endl;
 	}*/
 	click=click/cuadrados;
-	if(/*flag7 && */button)
+	if(/*flag7 &&*/ button)
 	{
 		for (unsigned int i=0;seleccion[i]!=0;i++)
 		{
