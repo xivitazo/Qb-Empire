@@ -4,6 +4,7 @@
 #define BUFSIZE 512
 static float  x=-87.5, y=-50, z=25, t=0.5;
 Coordinador coordinator;
+Vector inicial;
 
 //los callback, funciones que seran llamadas automaticamente por la glut
 //cuando sucedan eventos
@@ -13,6 +14,7 @@ void OnTimer(int value);
 void OnKeyboardDown(unsigned char key, int x, int y);
 void OnMouse(int button, int state, int x, int y);
 void OnMousePas(int x, int y);
+int* click (int x, int y, int err_x, int err_y);
 Color cielo;
 /*
 void reshape(int w, int h)
@@ -74,6 +76,7 @@ int main(int argc,char* argv[])
 	glutTimerFunc(25,OnTimer,0);	//le decimos que dentro de 25ms llame 1 vez a la funcion OnTimer()
 	glutKeyboardFunc(OnKeyboardDown);
 	glutMouseFunc(OnMouse);
+	glutMotionFunc(OnMousePas);
 	//glutReshapeFunc(reshape);
 
 	
@@ -155,16 +158,51 @@ void OnMouse(int button, int state, int x, int y)
 	mundo.Raton(button,state,(int)x,(int)y);
 	printf("%lf\t%lf\t%lf\n", x,y,z);
 	*/
+	
 
-	//Empezamos con el Ratón
+	if ( state != GLUT_DOWN)
+	{
+		inicial=0;
+		return;
+	}
+	inicial=Vector(x,y);
+	int *nombres;
+	int n;
+	nombres=click(x,y,1,1);
+	for(n=0;n<100&&nombres[n]!=0;n++);
+	coordinator.Mouse(nombres,n,button);
+	
+
+}
+
+void OnMousePas(int x, int y)
+{
+	Vector centro_cuadrado, err;
+	int* nombres;
+	int n;
+	centro_cuadrado=((Vector(x,y)-inicial)/2)+inicial;
+	err=(Vector(x,y)-inicial)/2;
+	if(abs(err.vx)<=0.1f)
+		err.vx=1;
+	if(abs(err.vy)<=0.1f)
+		err.vy=1;
+	nombres=click(centro_cuadrado.vx,centro_cuadrado.vy,abs(err.vx),abs(err.vy));
+	for(n=0;n<100&&nombres[n]!=0;n++);
+
+	printf("%d\t%d\n",x,y);
+	coordinator.Mouse(nombres,n,0);
+	
+	
+}
+
+int* click (int x, int y, int err_x, int err_y)
+{
+		//Empezamos con el Ratón
 	GLuint selectBuffer[BUFSIZE];
 	GLint hits;
 	GLint vp[4];
 	float width=1280, height=720;
 	//float width=1920, height=1080;
-
-	if ( state != GLUT_DOWN)
-      return;
 
 	glSelectBuffer(BUFSIZE,selectBuffer);
 
@@ -177,7 +215,7 @@ void OnMouse(int button, int state, int x, int y)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glGetIntegerv(GL_VIEWPORT,vp);
-	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),1.0, 1.0, vp);
+	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),err_x, err_y, vp);
 	gluPerspective( 40.0, width/height, 0.1, 400); 
 	//int x1=glutGet(GLUT_WINDOW_WIDTH);
 	//int y1=glutGet(GLUT_WINDOW_HEIGHT);
@@ -234,9 +272,6 @@ void OnMouse(int button, int state, int x, int y)
 			}
 		}
 	}
-	coordinator.Mouse(nombre, k,(bool)button);
-}
-
-void OnMousePas(int x, int y)
-{
+	nombre[k]=0;
+	return nombre;
 }

@@ -7,7 +7,7 @@
 #include "glut.h"
 //using namespace std;
 using namespace ETSIDI;
-enum Nombre {JUGADOR1, JUGADOR2, MAPA, MENU};
+enum Nombre {NINGUNA_SEL,JUGADOR1, JUGADOR2, MAPA, MENU};
 
 class Mapa
 {
