@@ -13,6 +13,7 @@ void OnTimer(int value);
 void OnKeyboardDown(unsigned char key, int x, int y);
 void OnMouse(int button, int state, int x, int y);
 void OnMousePas(int x, int y);
+Color cielo;
 /*
 void reshape(int w, int h)
 {
@@ -86,6 +87,7 @@ void OnDraw(void)
 {
 	//Borrado de la pantalla	
    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	coordinator.dibujaCielo();
 	//GLfloat position[] = { -87.5, -50, 25, 0.5 };
 	//Definimos la iluminación
 	GLfloat position[] = { -15, 0, -5, 0.8 };
