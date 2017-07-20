@@ -19,6 +19,7 @@ protected:
 	Sprite *nube02;
 	Sprite *nube03;
 	Sprite *help;
+	GLTexture mitextura;
 
 public:
 	Mapa(void);

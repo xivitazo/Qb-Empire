@@ -1,21 +1,27 @@
 #pragma once
-#include "Coordinador.h"
+#include "Mundo.h"
 
 class Menus
 {
+	Sprite *disparos;
+	Sprite *personajes;
+	Sprite *edificios;
 public:
 	Menus();
 	virtual ~Menus(void);
 
-	static void construccion(Mundo &mundo);
-	static void seleccion(Type tipo, Mundo &mundo);
-	static void superior(Mundo &mundo);
-	static void Timer (float t);
-	static void inicio();
-	static void game_over();
-	static void opciones ();
-	static void you_win();
+	void construccion(Mundo &mundo);
+	void seleccion(Type tipo, Mundo &mundo);
+	void superior(Mundo &mundo, float tiempo);
+	void Timer (float t);
+	void inicio();
+	void game_over();
+	void opciones ();
+	void you_win();
+	void inicializa();
+
 
 	friend class Mundo;
+	friend class Coordinador;
 };
 

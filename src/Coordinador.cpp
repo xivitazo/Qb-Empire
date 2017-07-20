@@ -34,10 +34,10 @@ void Coordinador :: Dibuja()
 	mundo->Dibuja();
 
 
-	if(estado==INICIO)   Menus :: inicio();
+	if(estado==INICIO)   menus.inicio();
 	else if(estado == OPCIONES)
 	{
-		Menus :: opciones();
+		menus.opciones();
 
 		if(flag_musica%3 == 0)
 		{
@@ -48,13 +48,14 @@ void Coordinador :: Dibuja()
 	}
 	else if(estado == JUEGO )
 	{
-		Menus :: superior(*mundo);
-		if(flag1)	Menus :: construccion (*mundo);
-		if(flag2)	Menus :: seleccion (AYUNTAMIENTO, *mundo);
-		if(flag3)	Menus :: seleccion (F_ORO, *mundo);
-		if(flag6)	Menus :: seleccion (CUARTEL, *mundo);
-		if(flag5)	Menus :: seleccion (F_HIERRO, *mundo);
-		if(flag4)	Menus :: seleccion (F_COMIDA,* mundo);
+
+		menus.superior(*mundo, minutos_juego);
+		if(flag1)	menus.construccion (*mundo);
+		if(flag2)	menus.seleccion (AYUNTAMIENTO, *mundo);
+		if(flag3)	menus.seleccion (F_ORO, *mundo);
+		if(flag6)	menus.seleccion (CUARTEL, *mundo);
+		if(flag5)	menus.seleccion (F_HIERRO, *mundo);
+		if(flag4)	menus.seleccion (F_COMIDA,* mundo);
 	}
 	
 	//Frase aleatoria divertida 
@@ -70,11 +71,11 @@ void Coordinador :: Dibuja()
 
 	else if (estado == GAME_OVER)
 	{
-		Menus :: game_over ();
+		menus.game_over ();
 	}
 	else if (estado == YOU_WIN)
 	{
-		Menus :: you_win();
+		menus.you_win();
 	}
 }
 
@@ -101,6 +102,7 @@ void Coordinador :: Timer (float t)
 	else if(estado==INICIO)
 	{
 		cielo.set(0,0,102);
+		minutos_juego=0;
 	}
 	
 }
@@ -112,6 +114,7 @@ void Coordinador :: Tecla (unsigned char key)
 	case INICIO:
 		if(key=='E' || key=='e'){
 			estado=JUEGO;
+			menus.inicializa();
 			mundo->setPerspectiva(-23,-47,50,50,25,0);
 		}
 		if(key=='o' || key=='O'){
@@ -137,12 +140,12 @@ void Coordinador :: Tecla (unsigned char key)
 		if(key == 'Z')	
 		{
 			estado=GAME_OVER;
-			mundo->setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
+			mundo->setPerspectiva(120, -200, 50, 120, 37.5, 0);
 		}
-		if(key == 'a' || key=='A')	
+		if(key=='A')	
 		{
 			estado=YOU_WIN;
-			mundo->setPerspectiva(112.5, -175, 50, 112.5, 37.5, 0);
+			mundo->setPerspectiva(120, -200, 50, 120, 37.5, 0);
 		}
 		if(key == ' ')	{
 			if(flag1) flag1=false;
@@ -152,6 +155,7 @@ void Coordinador :: Tecla (unsigned char key)
 			flag4=false;
 			flag5=false;
 			flag6=false;
+			flag7=false;
 
 		}
 		if(key == 8) {
@@ -163,6 +167,7 @@ void Coordinador :: Tecla (unsigned char key)
 			flag4=0;
 			flag5=false;
 			flag6=false;
+			flag7=false;
 		}
 		if(key == 27)	exit(0);
 		break;

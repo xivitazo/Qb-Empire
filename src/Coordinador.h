@@ -10,6 +10,7 @@ protected:
 	enum Estado{INICIO, OPCIONES, JUEGO, GAME_OVER, YOU_WIN};
 	Estado estado;
 	Mundo *mundo;
+	Menus menus;
 	Color cielo;
 	int seleccion[NAMESIZE];
 	static int pos;
