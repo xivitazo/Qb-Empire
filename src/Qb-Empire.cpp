@@ -5,6 +5,7 @@
 static float  x=-87.5, y=-50, z=25, t=0.5;
 Coordinador coordinator;
 Vector inicial;
+Vector finish;
 
 //los callback, funciones que seran llamadas automaticamente por la glut
 //cuando sucedan eventos
@@ -15,6 +16,7 @@ void OnKeyboardDown(unsigned char key, int x, int y);
 void OnMouse(int button, int state, int x, int y);
 void OnMousePas(int x, int y);
 int* click (int x, int y, int err_x, int err_y);
+void dibujaSeleccion();
 Color cielo;
 /*
 void reshape(int w, int h)
@@ -109,6 +111,7 @@ void OnDraw(void)
 	//Para definir el punto de vista
 	glMatrixMode(GL_MODELVIEW);	
 	glLoadIdentity();
+	dibujaSeleccion();
 	
 	coordinator.Dibuja();
 
@@ -176,10 +179,11 @@ void OnMouse(int button, int state, int x, int y)
 			nombres=click(centro_cuadrado.vx,centro_cuadrado.vy,abs(err.vx),abs(err.vy));
 			for(n=0;n<NAMESIZE&&nombres[n]!=0;n++);
 
-			printf("%d\t%d\n",x,y);
+			//printf("%d\t%d\n",x,y);
 			coordinator.Mouse(nombres,n,button);
 		}
 		inicial=0;
+		finish=0;
 		return;
 	}
 	inicial=Vector(x,y);
@@ -194,22 +198,44 @@ void OnMouse(int button, int state, int x, int y)
 
 void OnMousePas(int x, int y)
 {
-	/*Vector centro_cuadrado, err;
-	int* nombres;
-	int n;
-	centro_cuadrado=((Vector(x,y)-inicial)/2)+inicial;
-	err=(Vector(x,y)-inicial)/2;
-	if(abs(err.vx)<=0.1f)
-		err.vx=1;
-	if(abs(err.vy)<=0.1f)
-		err.vy=1;
-	nombres=click(centro_cuadrado.vx,centro_cuadrado.vy,abs(err.vx),abs(err.vy));
-	for(n=0;n<NAMESIZE&&nombres[n]!=0;n++);
+	finish=Vector (x,y);
+	
+	
+}
+void dibujaSeleccion()
+{
+	if(inicial!=0 && finish!=0)
+	{
+		glMatrixMode(GL_PROJECTION);
+			glPushMatrix();
+			glLoadIdentity();
+			gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT));
+			glMatrixMode(GL_MODELVIEW);
+			glPushMatrix();
+			glLoadIdentity();
 
-	printf("%d\t%d\n",x,y);
-	coordinator.Mouse(nombres,n,0);*/
-	
-	
+			glBegin(GL_LINES);
+			//glTranslatef(0,0,-1);
+				glColor3ub(0,0,0);
+				glVertex3f(inicial.vx,glutGet(GLUT_WINDOW_HEIGHT)-inicial.vy,0);		
+				glVertex3f(inicial.vx,glutGet(GLUT_WINDOW_HEIGHT)-finish.vy,0);		
+				glVertex3f(inicial.vx,glutGet(GLUT_WINDOW_HEIGHT)-finish.vy,0);
+				glVertex3f(finish.vx,glutGet(GLUT_WINDOW_HEIGHT)-finish.vy,0);
+				glVertex3f(finish.vx,glutGet(GLUT_WINDOW_HEIGHT)-finish.vy,0);		
+				glVertex3f(finish.vx,glutGet(GLUT_WINDOW_HEIGHT)-inicial.vy,0);		
+				glVertex3f(finish.vx,glutGet(GLUT_WINDOW_HEIGHT)-inicial.vy,0);	
+				glVertex3f(inicial.vx,glutGet(GLUT_WINDOW_HEIGHT)-inicial.vy,0);
+			glEnd();
+			glLineWidth(2.0f);
+
+			glMatrixMode(GL_PROJECTION);
+			glPopMatrix();
+
+			glMatrixMode(GL_MODELVIEW);
+			glPopMatrix();
+
+		glEnable(GL_DEPTH_TEST);
+	}
 }
 
 int* click (int x, int y, int err_x, int err_y)
@@ -257,7 +283,7 @@ int* click (int x, int y, int err_x, int err_y)
 
 	hits=glRenderMode(GL_RENDER);
 
-	cout<<"Hits: "<<hits<<endl;
+	//cout<<"Hits: "<<hits<<endl;
 
 	GLuint hitnames[BUFSIZE];
 	unsigned int hi = 0;
@@ -267,7 +293,7 @@ int* click (int x, int y, int err_x, int err_y)
 	unsigned k=0;
 
 	// [0x6]
-	for(unsigned int j = 0; j < hits && *bufp<BUFSIZE; j++)
+	for(int j = 0; j < hits && *bufp<BUFSIZE; j++)
 	{
 		numnames = *bufp++;
 		z1 = *bufp++;
@@ -284,7 +310,7 @@ int* click (int x, int y, int err_x, int err_y)
 				if(name!=99)
 				{
 					nombre[k++]=name;
-					cout<<"Nombre"<<j<<": "<<nombre[k-1]<<endl;
+					//cout<<"Nombre"<<j<<": "<<nombre[k-1]<<endl;
 				}
 			}
 		}

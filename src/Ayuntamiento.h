@@ -17,6 +17,7 @@ public:
 	void Dibuja(Color equipo=0);
 	void subirNivel();
 	bool poderDisparar();
+	bool mover(Vector destino){return false;}
 
 
 	friend class Interaccion;

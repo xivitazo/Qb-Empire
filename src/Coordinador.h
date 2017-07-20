@@ -11,7 +11,6 @@ protected:
 	Estado estado;
 	Mundo *mundo;
 	Color cielo;
-	Vector click;
 	int seleccion[NAMESIZE];
 	static int pos;
 	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag_jugador;

@@ -197,36 +197,25 @@ void Coordinador :: Inicializa ()
 	mundo->Inicializa();
 }
 
-
 bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 {
 //	Type nombre;
+	Vector click;
 	int cuadrados=0;
-	if(/*flag7 && */button)
-	{
-		for (unsigned int i=0;seleccion[i]!=0;i++)
-		{
-			if(seleccion[i]==JUGADOR1)
-				mundo->jugador1.getLista()[seleccion[i+1]-100]->mover(click);
-		}
-	}
-	for (unsigned int i=0;seleccion[i]!=0;i++)
-	{
-		seleccion[i]=0;
-	}
 	unsigned int j=0;
+	
 	flag_jugador=false;
 	for (int i=hits; i>=0; i--)	
 	{
 		
-		if(names[i]==JUGADOR1)
+		if(names[i]==JUGADOR1 && button==0)
 		{
 			flag_jugador=true;
 			seleccion[j++]=JUGADOR1;
 			seleccion[j++]=names[i+1];
 			switch (mundo->jugador1.getLista()[names[i+1]-100]->getTipo()){
 			case AYUNTAMIENTO: 
-				cout<<"AYUNTAMIENTO"<<endl;
+				//cout<<"AYUNTAMIENTO"<<endl;
 				if(flag2)
 				{
 					mundo->Mouse(AYUNTAMIENTO);
@@ -241,7 +230,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag7=false;
 				break;
 			case F_ORO:
-				cout<<"FABRICA DE ORO"<<endl;
+				//cout<<"FABRICA DE ORO"<<endl;
 				if(flag3)
 				{
 					mundo->Mouse(F_ORO);
@@ -256,7 +245,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag7=false;
 				break;
 			case F_HIERRO:
-				cout<<"FABRICA DE HIERRO"<<endl;
+				//cout<<"FABRICA DE HIERRO"<<endl;
 				if(flag5)
 				{
 					mundo->Mouse(F_HIERRO);
@@ -271,7 +260,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag7=false;
 				break;
 			case F_COMIDA:
-				cout<<"FABRICA DE COMIDA"<<endl;
+				//cout<<"FABRICA DE COMIDA"<<endl;
 				if(flag4)
 				{
 					mundo->Mouse(F_COMIDA);
@@ -286,7 +275,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag7=false;
 				break;
 			case CUARTEL:
-				cout<<"CUARTEL"<<endl;
+				//cout<<"CUARTEL"<<endl;
 				if(flag6)	
 				{
 					mundo->Mouse(CUARTEL);
@@ -301,7 +290,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag7=false;
 				break;
 			case LUCHADOR:
-				cout<<"LUCHADOR"<<endl;
+				//cout<<"LUCHADOR"<<endl;
 				if(flag7)
 				{
 				}
@@ -328,11 +317,20 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 
 	}
 	
-	for (unsigned int i=0;seleccion[i]!=0;i++)
+	/*for (unsigned int i=0;seleccion[i]!=0;i++)
 	{
 		cout<<seleccion[i]<<endl;
-	}
+	}*/
 	click=click/cuadrados;
+	if(/*flag7 && */button)
+	{
+		for (unsigned int i=0;seleccion[i]!=0;i++)
+		{
+			if(seleccion[i]==JUGADOR1)
+				mundo->jugador1.getLista()[seleccion[i+1]-100]->mover(click);
+			
+		}
+	}
 	//cout<<click.vx<<"\t"<<click.vy<<endl;
 	
 	if(flag_jugador==false)
