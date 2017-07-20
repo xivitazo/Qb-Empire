@@ -34,6 +34,9 @@ void Mapa :: inicializa()
 	nube01 = new Sprite ("imagenes/nube01.png", 0, 105, 30, 30);
 	nube02 = new Sprite ("imagenes/nube02.png", 0, 105, 30, 30);
 	nube03 = new Sprite ("imagenes/nube03.png", 0, 105, 30, 30);
+
+	mitextura=getTexture("imagenes/piedraa.png");
+	
 	//nube01->Sprite::setPos(0, 0);
 	//nube01->ETSIDI::Sprite::setVel(0, 0);
 
@@ -116,6 +119,95 @@ void Mapa :: barro ()
 
 void Mapa :: montaña ()
 {
+	Vector dimension(20, 20);
+	glPushMatrix();
+			glEnable(GL_TEXTURE_2D);
+			glBindTexture(GL_TEXTURE_2D, mitextura.id);
+			glDisable(GL_LIGHTING);
+	
+		//PARED EJE X PROXIMO
+		for (int i=0; i<12; i++)
+		{
+			for(int n=0;n<15;n++)
+			{
+				glPushMatrix();
+				glTranslatef(dimension.vx*i+dimension.vx/2.0f,0,-dimension.vy*n-dimension.vy/2.0f);
+				glBegin(GL_POLYGON);
+					glColor3f(1,1,1);
+					glTexCoord2d(1,1); glVertex3f(-dimension.vx/2.0f,0,-dimension.vy/2.0f);
+					glTexCoord2d(0,1); glVertex3f(dimension.vx/2.0f,0,-dimension.vy/2.0f);
+					glTexCoord2d(0,0); glVertex3f(dimension.vx/2.0f,0,dimension.vy/2.0f);
+					glTexCoord2d(1,0); glVertex3f(-dimension.vx/2.0f,0,dimension.vy/2.0f);
+				glEnd();
+				glPopMatrix();
+			}
+		}
+
+		//PARED EJE Y PROXIMO
+		glPushMatrix();
+		glRotatef(90, 0, 0, -1);
+		for (int i=0; i<4; i++)
+		{
+			for(int n=0;n<15;n++)
+			{
+				glPushMatrix();
+				glTranslatef(-dimension.vx*i-dimension.vx/2.0f,0,-dimension.vy*n-dimension.vy/2.0f);
+				glBegin(GL_POLYGON);
+					glColor3f(1,1,1);
+					glTexCoord2d(1,1); glVertex3f(-dimension.vx/2.0f,0,-dimension.vy/2.0f);
+					glTexCoord2d(0,1); glVertex3f(dimension.vx/2.0f,0,-dimension.vy/2.0f);
+					glTexCoord2d(0,0); glVertex3f(dimension.vx/2.0f,0,dimension.vy/2.0f);
+					glTexCoord2d(1,0); glVertex3f(-dimension.vx/2.0f,0,dimension.vy/2.0f);
+				glEnd();
+				glPopMatrix();
+			}
+		}
+		glPopMatrix();
+
+		//PARED EJE X LEJANO
+		for (int i=0; i<12; i++)
+		{
+			for(int n=0;n<15;n++)
+			{
+				glPushMatrix();
+				glTranslatef(dimension.vx*i+dimension.vx/2.0f,80,-dimension.vy*n-dimension.vy/2.0f);
+				glBegin(GL_POLYGON);
+					glColor3f(1,1,1);
+					glTexCoord2d(1,1); glVertex3f(-dimension.vx/2.0f,0,-dimension.vy/2.0f);
+					glTexCoord2d(0,1); glVertex3f(dimension.vx/2.0f,0,-dimension.vy/2.0f);
+					glTexCoord2d(0,0); glVertex3f(dimension.vx/2.0f,0,dimension.vy/2.0f);
+					glTexCoord2d(1,0); glVertex3f(-dimension.vx/2.0f,0,dimension.vy/2.0f);
+				glEnd();
+				glPopMatrix();
+			}
+		}
+
+		//PARED EJE Y LEJANO
+		glPushMatrix();
+		glRotatef(90, 0, 0, -1);
+		for (int i=0; i<4; i++)
+		{
+			for(int n=0;n<15;n++)
+			{
+				glPushMatrix();
+				glTranslatef(-dimension.vx*i-dimension.vx/2.0f,240,-dimension.vy*n-dimension.vy/2.0f);
+				glBegin(GL_POLYGON);
+					glColor3f(1,1,1);
+					glTexCoord2d(1,1); glVertex3f(-dimension.vx/2.0f,0,-dimension.vy/2.0f);
+					glTexCoord2d(0,1); glVertex3f(dimension.vx/2.0f,0,-dimension.vy/2.0f);
+					glTexCoord2d(0,0); glVertex3f(dimension.vx/2.0f,0,dimension.vy/2.0f);
+					glTexCoord2d(1,0); glVertex3f(-dimension.vx/2.0f,0,dimension.vy/2.0f);
+				glEnd();
+				glPopMatrix();
+			}
+		}
+		glPopMatrix();
+
+		glEnable(GL_LIGHTING);
+		glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+
+	/*
 	glPushMatrix();
 	float altura=-300;
 	Vector dimension(240, 80);
@@ -153,6 +245,7 @@ void Mapa :: montaña ()
 		glVertex3f((float)dimension.vx,0,0);
 	glEnd();
 	glPopMatrix();
+	*/
 }
 
 void Mapa :: nubes ()
