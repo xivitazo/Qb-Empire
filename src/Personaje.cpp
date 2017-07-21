@@ -170,7 +170,7 @@ void Personaje :: Dibuja (Color equipo)
 	{
 	case CABALLERO:	
 		//glutSolidSphere(altura, 30, 30);
-		for(int n=0;n<altura;n++)
+		for(unsigned int n=0;n<altura;n++)
 		{
 		glPushMatrix();
 		glTranslatef(-superficie.vx/4, 0,0.5+n);
@@ -193,7 +193,7 @@ void Personaje :: Dibuja (Color equipo)
 		glutSolidTeapot(altura);		
 		break;
 	case SOLDADO:
-		for(int n=0; n<altura; n++)
+		for(unsigned int n=0; n<altura; n++)
 		{
 			glPushMatrix();
 			glTranslatef(0,0,0.5+n);
@@ -201,7 +201,7 @@ void Personaje :: Dibuja (Color equipo)
 			glPopMatrix();
 		}break;
 	case GUERRERO:	
-		for(int n=0; n<altura; n++)
+		for(unsigned int n=0; n<altura; n++)
 		{
 			glPushMatrix();
 			glTranslatef(0,0,0.5+n);

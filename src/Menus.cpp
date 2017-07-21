@@ -117,11 +117,11 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		case CUARTEL:
 			setTextColor(139.0f/255.0f,69.0f/255.0f,19.0f/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);		
-			char auxc1[100], auxc2[100];
+			char auxc1[100]/*, auxc2[100]*/;
 			sprintf_s(auxc1,"SUBIR NIVEL     (%d)     TECLA  'Q'", mundo.jugador1.nivel[CUARTEL]);
-			sprintf_s(auxc2,"DESTRUIR        (%d)     TECLA  'Q'", mundo.jugador1.coste_nivel[CUARTEL]);
+			//sprintf_s(auxc2,"DESTRUIR        (%d)     TECLA  'Q'", mundo.jugador1.coste_nivel[CUARTEL]);
 			printxy("CUARTEL", 50, 150);
-			printxy(auxc2, 50, 50);
+			//printxy(auxc2, 50, 50);
 			printxy(auxc1, 50, 100);
 
 

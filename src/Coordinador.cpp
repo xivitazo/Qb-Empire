@@ -10,7 +10,7 @@ bool Coordinador :: flag6=0;	//Menu seleccion CUARTEL
 bool Coordinador :: flag7=0;	//Menu seleccion LUCHADOR
 bool Coordinador :: flag_jugador=0;
 
-unsigned int Coordinador :: flag_musica=2;
+bool Coordinador :: flag_musica=true;
 
 Coordinador::Coordinador(void):
 	cielo(0,0,102),
@@ -44,12 +44,7 @@ void Coordinador :: Dibuja()
 	{
 		menus.opciones();
 
-		if(flag_musica%3 == 0)
-		{
-			playMusica("sonidos/Two Steps from Hell   Heart of Courage.mp3", true);
-			flag_musica++;
-		}
-		else if(flag_musica%3 == 2)		stopMusica();
+		
 	}
 	else if(estado == JUEGO )
 	{
@@ -89,9 +84,23 @@ void Coordinador :: Dibuja()
 void Coordinador :: Timer (float t)
 {
 	if(mundo->jugador1.perder())
+	{
 		estado=GAME_OVER;
+		if(flag_musica)
+		{
+			stopMusica();
+			playMusica("sonidos/ascensor.mp3");
+		}
+	}
 	else if(mundo->jugador2.perder())
+	{
 		estado=YOU_WIN;
+		if(flag_musica)
+		{
+			stopMusica();
+			playMusica("sonidos/ascensor.mp3");
+		}
+	}
 
 	if(estado==JUEGO)
 	{
@@ -129,11 +138,13 @@ void Coordinador :: Tecla (unsigned char key)
 	case INICIO:
 		if(key=='E' || key=='e'){
 			estado=JUEGO;
+			if (flag_musica)
+			{
+				stopMusica();
+				playMusica("sonidos/Repartiendo arte.mp3", true);
+			}
 			menus.inicializa();
 			setPerspectiva(-23,-47,50,50,25,0);
-		}
-		if(key=='o' || key=='O'){
-			estado=OPCIONES;
 		}
 		if(key=='o' || key=='O'){
 			estado=OPCIONES;
@@ -141,9 +152,19 @@ void Coordinador :: Tecla (unsigned char key)
 		else if (key == 27)	exit(1);
 		break;
 	case OPCIONES:
-		if(key=='M' || key=='m'){			
-			flag_musica++;
+		if(key=='M' || key=='m'){	
+			if(flag_musica == 0)
+			{
+				playMusica("sonidos/ascensor.mp3", true);
+				flag_musica=true;
+			}
+			else if(flag_musica)
+			{
+				stopMusica();
+				flag_musica=false;
+			}
 		}
+
 		if(key == 8){
 			estado=INICIO;
 		}
@@ -345,6 +366,7 @@ void Coordinador :: TeclaEspecial (unsigned char key)
 void Coordinador :: Inicializa ()
 {
 	Inicializa_vista();
+	playMusica("sonidos/ascensor.mp3", true);
 	mundo->Inicializa();
 }
 
