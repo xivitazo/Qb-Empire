@@ -194,7 +194,7 @@ void OnMouse(int button, int state, int x, int y)
 	inicial=Vector(x,y);
 	int *nombres;
 	int n;
-	nombres=click(x,y,1,1);
+	nombres=click(x,y,0,0);
 	for(n=0;n<NAMESIZE&&nombres[n]!=0;n++);
 	coordinator.Mouse(nombres,n,boton);
 	
@@ -264,7 +264,7 @@ int* click (int x, int y, int err_x, int err_y)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glGetIntegerv(GL_VIEWPORT,vp);
-	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),err_x, err_y, vp);
+	gluPickMatrix((GLdouble)x,(GLdouble)(height-y),err_x+1, err_y+1, vp);
 	gluPerspective( 40.0, width/height, 0.1, 400); 
 	//int x1=glutGet(GLUT_WINDOW_WIDTH);
 	//int y1=glutGet(GLUT_WINDOW_HEIGHT);
