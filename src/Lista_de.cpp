@@ -230,7 +230,7 @@ bool Lista_de :: generarCombatientes()
 {
 	if(cola_generar[0]==NINGUNO)
 		return false;
-	if(numero_actual[COMBATIENTES]<=max_Type[COMBATIENTES] && almacen>=coste[LUCHADOR+cola_generar[0]]*nivel[LUCHADOR+cola_generar[0]] )
+	if(numero_actual[COMBATIENTES]<max_Type[COMBATIENTES] && almacen>=coste[LUCHADOR+cola_generar[0]]*nivel[LUCHADOR+cola_generar[0]] )
 	{
 		for(int n=0;n<numero&&lista[numero]==0;n++)
 		{

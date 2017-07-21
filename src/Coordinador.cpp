@@ -10,7 +10,7 @@ bool Coordinador :: flag6=0;	//Menu seleccion CUARTEL
 bool Coordinador :: flag7=0;	//Menu seleccion LUCHADOR
 bool Coordinador :: flag_jugador=0;
 
-unsigned int Coordinador :: flag_musica=2;
+bool Coordinador :: flag_musica=true;
 
 Coordinador::Coordinador(void):
 	cielo(0,0,102)
@@ -39,12 +39,7 @@ void Coordinador :: Dibuja()
 	{
 		menus.opciones();
 
-		if(flag_musica%3 == 0)
-		{
-			playMusica("sonidos/Two Steps from Hell   Heart of Courage.mp3", true);
-			flag_musica++;
-		}
-		else if(flag_musica%3 == 2)		stopMusica();
+		
 	}
 	else if(estado == JUEGO )
 	{
@@ -114,11 +109,13 @@ void Coordinador :: Tecla (unsigned char key)
 	case INICIO:
 		if(key=='E' || key=='e'){
 			estado=JUEGO;
+			if (flag_musica)
+			{
+				stopMusica();
+				playMusica("sonidos/Repartiendo arte.mp3", true);
+			}
 			menus.inicializa();
 			mundo->setPerspectiva(-23,-47,50,50,25,0);
-		}
-		if(key=='o' || key=='O'){
-			estado=OPCIONES;
 		}
 		if(key=='o' || key=='O'){
 			estado=OPCIONES;
@@ -126,9 +123,19 @@ void Coordinador :: Tecla (unsigned char key)
 		else if (key == 27)	exit(1);
 		break;
 	case OPCIONES:
-		if(key=='M' || key=='m'){			
-			flag_musica++;
+		if(key=='M' || key=='m'){	
+			if(flag_musica == 0)
+			{
+				playMusica("sonidos/ascensor.mp3", true);
+				flag_musica=true;
+			}
+			else if(flag_musica)
+			{
+				stopMusica();
+				flag_musica=false;
+			}
 		}
+
 		if(key == 8){
 			estado=INICIO;
 		}
@@ -140,11 +147,21 @@ void Coordinador :: Tecla (unsigned char key)
 		if(key == 'Z')	
 		{
 			estado=GAME_OVER;
+			if(flag_musica)
+			{
+				stopMusica();
+				playMusica("sonidos/ascensor.mp3");
+			}
 			mundo->setPerspectiva(120, -200, 50, 120, 37.5, 0);
 		}
 		if(key=='A')	
 		{
 			estado=YOU_WIN;
+			if(flag_musica)
+			{
+				stopMusica();
+				playMusica("sonidos/ascensor.mp3");
+			}
 			mundo->setPerspectiva(120, -200, 50, 120, 37.5, 0);
 		}
 		if(key=='S')	
@@ -203,6 +220,7 @@ void Coordinador :: TeclaEspecial (unsigned char key)
 
 void Coordinador :: Inicializa ()
 {
+	playMusica("sonidos/ascensor.mp3", true);
 	mundo->Inicializa();
 }
 
