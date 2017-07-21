@@ -50,6 +50,7 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 	//Lo cual no he podido averiguar cómo se hace por falta de apuntes
 	glTranslatef(posicion.vx, posicion.vy, 0);
 	dimension=dimension/2;
+	glLineWidth(0.4f);
 	
 	//Existe distinción entre el comando GL_QUADS y el GL_POLYGON.
 	//AL parecer se renderiza mucho más rápido y ligero el GL_QUADS
@@ -169,7 +170,6 @@ void Edificio :: casita (Vector posicion, Color tejado, Color pared, Vector dime
 		glVertex3f(0,0,(float)altura+3.0f);
 		glVertex3f(dimension.vx,dimension.vy,(float)altura);	
 	glEnd();
-	glLineWidth(0.4f);
 	glPopMatrix();
 	
 }

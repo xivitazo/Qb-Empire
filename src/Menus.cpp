@@ -48,55 +48,67 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 			setFont("fuentes/LemonMilk.otf",30);
 			char aux1[100], aux2[100], aux3[100], aux4[100], aux5[100], aux6[100];
 			//sprintf(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
-			sprintf_s(aux1,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
+			sprintf_s(aux1,"SUBIR NIVEL -  (%d)   -  TECLA  'Q'",mundo.jugador1.nivel[AYUNTAMIENTO]);
 			printxy(aux1, 50, 50);
 			
-			setTextColor(215.0f/255.0f, 45.0f/255.0f, 109.0f/255.0f);
-			setFont("fuentes/LemonMilk.otf",20);
-			sprintf_s(aux2,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[ARQUERA]);
-			sprintf_s(aux3,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[SOLDADO]);
-			sprintf_s(aux4,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[CABALLERO]);
-			sprintf_s(aux5,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[GUERRERO]);
-			sprintf_s(aux6,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[GIGANTE]);
-			printxy("ARQUERA", 500, 250);
-			printxy("SOLDADO", 500, 200);
-			printxy("CABALLERO", 500, 150);
-			printxy("GUERRERO", 500, 100);
-			printxy("GIGANTE", 500, 50);
-			printxy(aux2, 900, 50);
-			printxy(aux3, 900, 100);
-			printxy(aux4, 900, 150);
-			printxy(aux5, 900, 200);
-			printxy(aux6, 900, 250);
+			setTextColor(255.0f/255.0f,255.0f/255.0f,0.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",15);
+			sprintf_s(aux2,"SUBIR NIVEL -  (%d)  -  TECLA  'W'", mundo.jugador1.nivel[SOLDADO]);
+			sprintf_s(aux3,"SUBIR NIVEL -  (%d)  -  TECLA  'E'", mundo.jugador1.nivel[ARQUERA]);
+			sprintf_s(aux4,"SUBIR NIVEL -  (%d)  -  TECLA  'R'", mundo.jugador1.nivel[CABALLERO]);
+			sprintf_s(aux5,"SUBIR NIVEL -  (%d)  -  TECLA  'T'", mundo.jugador1.nivel[GUERRERO]);
+			sprintf_s(aux6,"SUBIR NIVEL -  (%d)  -  TECLA  'Y'", mundo.jugador1.nivel[GIGANTE]);
+			printxy("SOLDADO        ", 700, 300);
+			printxy("ARQUERA        ", 700, 250);
+			printxy("CABALLERO      ", 700, 200);
+			printxy("GUERRERO       ", 700, 150);
+			printxy("GIGANTE        ", 700, 100);
+			printxy(aux2, 900, 300);
+			printxy(aux3, 900, 250);
+			printxy(aux4, 900, 200);
+			printxy(aux5, 900, 150);
+			printxy(aux6, 900, 100);
 			break;
 		case F_ORO: 
 			setTextColor(245.0f/255.0f,208.0f/255.0f,51.0f/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);		
 			char auxo[100];
-			sprintf_s(auxo,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[F_ORO]);
+			sprintf_s(auxo,"SUBIR NIVEL -  (%d)   -  TECLA  'Q'", mundo.jugador1.nivel[F_ORO]);
 			printxy(auxo, 50, 50);		// glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT)
 			break;
 		case F_HIERRO:
 			setTextColor(157/255.0f,161/255.0f,170/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);		
 			char auxh[100];
-			sprintf_s(auxh,"SUBIR NIVEL -  (%d)", mundo.jugador1.nivel[F_HIERRO]);
+			sprintf_s(auxh,"SUBIR NIVEL -  (%d)   -  TECLA  'Q'", mundo.jugador1.nivel[F_HIERRO]);
 			printxy(auxh, 50, 50);
 			break;
 		case F_COMIDA:
 			setTextColor(234.0f/255.0f, 137.0f/255.0f, 154.0f/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);		
 			char auxc[100];
-			sprintf_s(auxc,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[F_COMIDA]);
+			sprintf_s(auxc,"SUBIR NIVEL  -  (%d)   -  TECLA  'Q'",mundo.jugador1.nivel[F_COMIDA]);
 			printxy(auxc, 50, 50);
 			break;
 		case CUARTEL:
 			setTextColor(139.0f/255.0f,69.0f/255.0f,19.0f/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);		
 			char aux[100];
-			sprintf_s(aux,"SUBIR NIVEL -  (%d)  -  TECLA  'X'", mundo.jugador1.nivel[CUARTEL]);
+			sprintf_s(aux,"SUBIR NIVEL  -  (%d)  -  TECLA  'Q'", mundo.jugador1.nivel[CUARTEL]);
 			printxy("CUARTEL", 50, 100);
 			printxy(aux, 50, 50);
+
+			setTextColor(255.0f/255.0f,255.0f/255.0f,0.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",20);
+			printxy("GENERAR :", 900,500);
+
+			setTextColor(255.0f/255.0f,255.0f/255.0f,0.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",15);
+			printxy("SOLDADO     -    TECLA  'W'", 900, 400);
+			printxy("ARQUERA	 -    TECLA  'E'", 900, 350);
+			printxy("CABALLERO	 -    TECLA  'R'", 900, 300);
+			printxy("GUERRERO    -    TECLA  'T'", 900, 250);
+			printxy("GIGANTE     -    TECLA  'Y'", 900, 200);
 			break;
 		}
 		glMatrixMode(GL_PROJECTION);
@@ -140,9 +152,9 @@ void Menus :: construccion(Mundo &mundo)
 		setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",20);		
 			char aux1[100], aux2[100], aux3[100], aux4[100];
-			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   E   -");	
-			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   W  -");	
 			sprintf_s(aux3," CONSTRUIR FABRICA DE COMIDA  -  PULSAR   Q  -");
+			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   E   -");	
+			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   W  -");
 			sprintf_s(aux4," CONSTRUIR UN CUARTEL  -  PULSAR  A  -");
 			printxy(aux1,30, 200); 
 			printxy(aux2,30, 150);
@@ -172,22 +184,27 @@ void Menus :: superior (Mundo &mundo, float tiempo)
 
 		setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",15);		
-			char aux[500],aux1[500];
+			char aux1[500],aux2[500], aux3[500];
 			int segundos=(tiempo-(int)tiempo)*60; 
-			sprintf_s(aux,"Comida: %d            Hierro: %d           Oro: %d                              %d : %d",
+
+			sprintf_s(aux1,"Comida: %d            Hierro: %d           Oro: %d",
 				mundo.jugador1.almacen.getComida(),
 				mundo.jugador1.almacen.getHierro(),
-				mundo.jugador1.almacen.getOro(),
-				(int)tiempo,
+				mundo.jugador1.almacen.getOro());
+				
+			sprintf_s(aux2,"%d : %d",
+			(int)tiempo,
 				segundos);
-			sprintf_s(aux1,"%d / %d                %d / %d                %d",
+
+			sprintf_s(aux3,"%d / %d                %d / %d                %d",
 				mundo.jugador1.numero_actual[EDIFICIOS],
 				mundo.jugador1.max_Type[EDIFICIOS],
 				mundo.jugador1.numero_actual[COMBATIENTES],
 				mundo.jugador1.max_Type[COMBATIENTES],
 				mundo.numero);
-			printxy(aux,60 , glutGet(GLUT_WINDOW_HEIGHT)-60);
-			printxy(aux1,880 , glutGet(GLUT_WINDOW_HEIGHT)-60);
+			printxy(aux1,60 , glutGet(GLUT_WINDOW_HEIGHT)-60);
+			printxy(aux2,670 , glutGet(GLUT_WINDOW_HEIGHT)-60);
+			printxy(aux3,880 , glutGet(GLUT_WINDOW_HEIGHT)-60);
 			
 			glPushMatrix();
 			//glRotatef(90, 1.0, 0.0, 0.0);

@@ -19,8 +19,8 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		planta= CUADRADO;
 		//Rectángulo como si fuera un caballo
 		superficie.setValor(2,1);
-		rango=3;
-		rango_visibilidad=10;
+		rango=3.5;
+		rango_visibilidad=12;
 		altura=3;
 		break;
 	case ARQUERA:
@@ -45,19 +45,20 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		setStats(200,100, 1, 0.5, 3);
 		planta=CUADRADO;
 		//cubo
-		superficie.setValor(1,1);
+		altura=2;
+		superficie.setValor(altura,altura);
 		rango_visibilidad=5;
 		rango=1;
-		altura=2;
+		
 		break;
 	case GUERRERO:
 		setStats(300,300, 1.5,0.5, 4.5);
 		planta=CUADRADO;
 		//Prisma de base cuadrada de altura 2l
-		superficie.setValor(1,1);
+		altura=3;
+		superficie.setValor(altura,altura);
 		rango_visibilidad=6;
 		rango=1;
-		altura=3;
 		break;
 	}
 	for (unsigned int n=1; n<nivel; n++)
@@ -167,12 +168,22 @@ void Personaje :: Dibuja (Color equipo)
 	
 	switch(especifico)
 	{
-	case CABALLERO:	glutSolidSphere(altura,20,20);	break;
+	case CABALLERO:	
+		glPushMatrix();
+		glTranslatef(-superficie.vy/2, 0,0);
+		glutSolidCube(superficie.vy);
+		glPopMatrix();
+		glPushMatrix();
+		glTranslatef(+superficie.vy/2, 0,0);
+		glutSolidCube(superficie.vy);
+		glPopMatrix();
+		break;
+		
 	case ARQUERA:	glutSolidCone((double)superficie.vx,(double) altura, 20, 20);	break;
 	case GIGANTE:	
 		glRotatef(90,1, 0, 0);
 		glutSolidTeapot(altura);		break;
-	case SOLDADO:	glutSolidSphere(altura,20,20);	break;
+	case SOLDADO:	glutSolidCube(altura);	break;
 	case GUERRERO:	glutSolidIcosahedron();		break;
 	}
 	glPopMatrix();

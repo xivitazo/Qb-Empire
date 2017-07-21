@@ -102,8 +102,7 @@ int Lista_de :: Morir()
 		{
 			switch (lista[n]->tipo){
 			case AYUNTAMIENTO:
-				//GAME OVER
-				//Ya veremos como lo hacemos
+				ayuntamiento=false;
 				break;
 			case LUCHADOR:
 				numero_actual[COMBATIENTES]--;
@@ -154,7 +153,7 @@ bool Lista_de :: subirNivel(Type tipo)
 
 bool Lista_de :: subirNivel(Luchadores tipo)
 {
-	if(almacen.getOro()>=coste_nivel[LUCHADOR+tipo] && nivel[LUCHADOR+tipo]<4)
+	if(almacen.getOro()>=coste_nivel[LUCHADOR+tipo] && nivel[LUCHADOR+tipo]<4 && nivel[CUARTEL]>nivel[LUCHADOR + tipo])
 	{
 		AñadirOro(-coste_nivel[LUCHADOR+tipo]);
 		nivel[tipo+LUCHADOR]++;

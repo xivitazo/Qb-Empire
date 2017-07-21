@@ -16,6 +16,9 @@ class Lista_de
 {
 	int numero;
 	
+	//Nos informa si el ayuntamiento sigue vivo
+	bool ayuntamiento;
+	
 	Recursos almacen;
 
 	Color equipo;
@@ -89,7 +92,7 @@ public:
 	void AñadirOro(int n){almacen.set(almacen.getComida(),almacen.getHierro(),almacen.getOro()+n);}
 	void AñadirComida(int n){almacen.set(almacen.getComida()+n,almacen.getHierro(),almacen.getOro());}
 	void AñadirHierro(int n){almacen.set(almacen.getComida(),almacen.getHierro()+n,almacen.getOro());}
-	
+	bool perder(){return !ayuntamiento;}
 
 
 

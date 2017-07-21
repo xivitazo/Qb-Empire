@@ -10,7 +10,7 @@ class Mundo
 	Lista_de jugador1, jugador2;
 	Disparo* disparos[MAX];
 	int numero;
-	
+
 public: 
 	Mundo();
 	~Mundo();
@@ -19,7 +19,6 @@ public:
 	void Inicializa_vista();
 	void Timer(float t);
 	void Dibuja();
-	int Mouse(Type tipo);
 	void Raton (int button, int state, Vector pos);
 	void RatonPasivo(int x, int y);
 	void setPerspectiva(float ojo_a, float ojo_b, float ojo_c, float miro_a, float miro_b, float miro_c);

@@ -54,15 +54,13 @@ void Mapa :: Dibuja ()
 {
 	nombre=0;
 	glutWireCube(0.001);
-	//glLoadName(MAPA);
 	cesped1();
 	barro();
 	cesped2();
-	//rio();
 	glLoadName(99);
 	montaña();
 	sprites();
-	//glPopName();
+
 }
 
 void Mapa :: cesped1 ()
@@ -205,6 +203,21 @@ void Mapa :: montaña ()
 
 		glEnable(GL_LIGHTING);
 		glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+	
+	glPushMatrix();
+		glLineWidth(1.0f);
+		glBegin(GL_LINES);
+		glColor3ub(0, 0, 0);
+		glVertex3f(0, 0, 0);
+		glVertex3f(240, 0, 0);
+		glVertex3f(240, 0, 0);
+		glVertex3f(240, 80, 0);
+		glVertex3f(240, 80, 0);
+		glVertex3f(0, 80, 0);
+		glVertex3f(0, 80, 0);
+		glVertex3f(0, 0, 0);
+		glEnd();
 	glPopMatrix();
 
 	/*
