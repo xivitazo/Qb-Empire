@@ -46,28 +46,32 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		case AYUNTAMIENTO:
 			setTextColor(215.0f/255.0f, 45.0f/255.0f, 109.0f/255.0f);
 			setFont("fuentes/LemonMilk.otf",30);
-			char aux1[100], aux2[100], aux3[100], aux4[100], aux5[100], aux6[100];
+			char aux1[100], aux2[100], aux3[100], aux4[100], aux5[100], aux6[100], aux7[100];
 			//sprintf(aux,"SUBIR NIVEL -  (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
-			sprintf_s(aux1,"SUBIR NIVEL -  (%d)   -  TECLA  'Q'",mundo.jugador1.nivel[AYUNTAMIENTO]);
-			printxy(aux1, 50, 50);
+			sprintf_s(aux1,"SUBIR NIVEL   (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
+			sprintf_s(aux7,"DESTRUIR       (%d)",mundo.jugador1.nivel[AYUNTAMIENTO]);
+			printxy("Q", 450, 120);
+			printxy("Z", 450, 50);
+			printxy(aux1, 50, 120);
+			printxy(aux7, 50, 50);
 			
-			setTextColor(255.0f/255.0f,255.0f/255.0f,0.0f/255.0f);
+			setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",15);
-			sprintf_s(aux2,"SUBIR NIVEL -  (%d)  -  TECLA  'W'", mundo.jugador1.nivel[SOLDADO]);
-			sprintf_s(aux3,"SUBIR NIVEL -  (%d)  -  TECLA  'E'", mundo.jugador1.nivel[ARQUERA]);
-			sprintf_s(aux4,"SUBIR NIVEL -  (%d)  -  TECLA  'R'", mundo.jugador1.nivel[CABALLERO]);
-			sprintf_s(aux5,"SUBIR NIVEL -  (%d)  -  TECLA  'T'", mundo.jugador1.nivel[GUERRERO]);
-			sprintf_s(aux6,"SUBIR NIVEL -  (%d)  -  TECLA  'Y'", mundo.jugador1.nivel[GIGANTE]);
-			printxy("SOLDADO        ", 700, 300);
-			printxy("ARQUERA        ", 700, 250);
-			printxy("CABALLERO      ", 700, 200);
-			printxy("GUERRERO       ", 700, 150);
-			printxy("GIGANTE        ", 700, 100);
-			printxy(aux2, 900, 300);
-			printxy(aux3, 900, 250);
-			printxy(aux4, 900, 200);
-			printxy(aux5, 900, 150);
-			printxy(aux6, 900, 100);
+			sprintf_s(aux2,"SUBIR NIVEL -  (%d)  -  TECLA  'W'", mundo.jugador1.nivel[LUCHADOR+SOLDADO]);
+			sprintf_s(aux3,"SUBIR NIVEL -  (%d)  -  TECLA  'E'", mundo.jugador1.nivel[LUCHADOR+ARQUERA]);
+			sprintf_s(aux4,"SUBIR NIVEL -  (%d)  -  TECLA  'R'", mundo.jugador1.nivel[LUCHADOR+CABALLERO]);
+			sprintf_s(aux5,"SUBIR NIVEL -  (%d)  -  TECLA  'T'", mundo.jugador1.nivel[LUCHADOR+GUERRERO]);
+			sprintf_s(aux6,"SUBIR NIVEL -  (%d)  -  TECLA  'Y'", mundo.jugador1.nivel[LUCHADOR+GIGANTE]);
+			printxy("SOLDADO        ", 700, 250);
+			printxy("ARQUERA        ", 700, 200);
+			printxy("CABALLERO      ", 700, 150);
+			printxy("GUERRERO       ", 700, 100);
+			printxy("GIGANTE        ", 700, 50);
+			printxy(aux2, 950, 250);
+			printxy(aux3, 950, 200);
+			printxy(aux4, 950, 150);
+			printxy(aux5, 950, 100);
+			printxy(aux6, 950, 50);
 			break;
 		case F_ORO: 
 			setTextColor(245.0f/255.0f,208.0f/255.0f,51.0f/255.0f);
@@ -98,17 +102,64 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 			printxy("CUARTEL", 50, 100);
 			printxy(aux, 50, 50);
 
-			setTextColor(255.0f/255.0f,255.0f/255.0f,0.0f/255.0f);
+			setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",20);
-			printxy("GENERAR :", 900,500);
+			printxy("GENERAR :", 1000,300);
 
-			setTextColor(255.0f/255.0f,255.0f/255.0f,0.0f/255.0f);
+			setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",15);
-			printxy("SOLDADO     -    TECLA  'W'", 900, 400);
-			printxy("ARQUERA	 -    TECLA  'E'", 900, 350);
-			printxy("CABALLERO	 -    TECLA  'R'", 900, 300);
-			printxy("GUERRERO    -    TECLA  'T'", 900, 250);
-			printxy("GIGANTE     -    TECLA  'Y'", 900, 200);
+			printxy("SOLDADO", 1000, 250);
+			printxy("TECLA  'W'", 1150, 250);
+			printxy("ARQUERA", 1000, 200);
+			printxy("TECLA  'E'", 1150, 200);
+			printxy("CABALLERO", 1000, 150);
+			printxy("TECLA  'R'", 1150, 150);
+			printxy("GUERRERO", 1000, 100);
+			printxy("TECLA  'T'", 1150, 100);
+			printxy("GIGANTE", 1000, 50);
+			printxy("TECLA  'Y'", 1150, 50);
+
+			setTextColor(153.0f/255.0f, 76.0f/255.0f, 0.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",15);		
+			printxy("COLA PARA GENERAR: ",700, 150);
+
+			setTextColor(102.0f/255.0f, 51.0f/255.0f, 0.0f/255.0f);
+			setFont("fuentes/LemonMilk.otf",12);	
+			Luchadores *cola=mundo.jugador1.getCola();
+			int numero=1;
+			int linea=0;
+			for(int i=0; i<mundo.jugador1.getNumCola(); i++)
+			{
+				if(cola[i]==cola[i+1])
+					numero++;
+				else
+				{
+					char aux[100];
+					sprintf_s(aux," x%d",numero);
+					switch(cola[i])
+					{
+					case SOLDADO: 
+						printxy("SOLDADO ", 705 , 120-20*linea);
+						break;
+					case ARQUERA:
+						printxy("ARQUERA ", 705 , 120-20*linea);
+						break;
+					case CABALLERO:
+						printxy("CABALLERO", 705 ,120-20*linea);
+						break;
+					case GUERRERO:
+						printxy("GUERRERO", 705 , 120-20*linea);
+						break;
+					case GIGANTE:
+						printxy("GIGANTE", 705 , 120-20*linea);
+						break;
+					}
+					printxy(aux,805 , 120-20*linea);
+					numero=1;
+					linea++;
+				}
+				
+			}
 			break;
 		}
 		glMatrixMode(GL_PROJECTION);
@@ -118,6 +169,13 @@ void Menus :: seleccion (Type tipo, Mundo &mundo)
 		glPopMatrix();
 
 	glEnable(GL_DEPTH_TEST);
+	if(tipo==CUARTEL)
+	{
+		glPushMatrix();
+		glTranslatef(mundo.jugador1.getDestino().vx,mundo.jugador1.getDestino().vy,0);
+		bandera(mundo.jugador1.getEquipo());
+		glPopMatrix();
+	}
 		
 
 }
@@ -152,14 +210,25 @@ void Menus :: construccion(Mundo &mundo)
 		setTextColor(1,0.8,0);
 			setFont("fuentes/LemonMilk.otf",20);		
 			char aux1[100], aux2[100], aux3[100], aux4[100];
-			sprintf_s(aux3," CONSTRUIR FABRICA DE COMIDA  -  PULSAR   Q  -");
-			sprintf_s(aux1," CONSTRUIR FABRICA DE ORO  -  PULSAR   E   -");	
-			sprintf_s(aux2," CONSTRUIR FABRICA DE HIERRO  -  PULSAR   W  -");
-			sprintf_s(aux4," CONSTRUIR UN CUARTEL  -  PULSAR  A  -");
-			printxy(aux1,30, 200); 
-			printxy(aux2,30, 150);
-			printxy(aux3,30, 100);
-			printxy(aux4,30, 50);
+			printxy("GRANJA", 500, 200);
+			printxy("Q", 500, 150);
+			printxy("MINA HIERRO", 700, 200);
+			printxy("W", 700, 150);
+			printxy("MINA ORO", 900, 200);
+			printxy("E", 900, 150);
+			printxy("CUARTEL", 1100, 200);
+			printxy("R", 1100, 150);
+
+			
+			setFont("fuentes/LemonMilk.otf",15);
+			sprintf_s(aux1,"%d HIERRO", mundo.jugador1.coste[0].getHierro());
+			printxy(aux1,500, 100);
+			sprintf_s(aux2,"%d HIERRO", mundo.jugador1.coste[0].getHierro());
+			printxy(aux2,700, 100);
+			sprintf_s(aux3,"%d HIERRO", mundo.jugador1.coste[0].getHierro());
+			printxy(aux3,900, 100);		
+			sprintf_s(aux4,"%d HIERRO", mundo.jugador1.coste[0].getHierro());
+			printxy(aux4,1100, 100);
 
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -313,16 +382,16 @@ void Menus :: opciones ()
 		glLoadIdentity();
 
 		setTextColor(0.5,0.5,1);
-			setFont("fuentes/LemonMilk.otf",50);
-			printxy("MUSICA  - M - ", 650, 550);
+			setFont("fuentes/LemonMilk.otf",30);
+			printxy("MUSICA      TECLA  M", 850, 600);
 	
 		setTextColor(0.5,0.8,0);
-			setFont("fuentes/LemonMilk.otf",50);
-			printxy("EFECTOS  - K -", 650,400);
+			setFont("fuentes/LemonMilk.otf",30);
+			printxy("EFECTOS     TECLA  K", 850,540);
 
 		setTextColor(1,0,0);
 			setFont("fuentes/LemonMilk.otf",30);
-			printxy("VOLVER  - DEL -", 200,200);
+			printxy("VOLVER  - DEL -", 150,540);
 	
 		glMatrixMode(GL_PROJECTION);
 		glPopMatrix();
@@ -367,4 +436,48 @@ void Menus :: you_win()
 	glEnable(GL_DEPTH_TEST);
 
 
+}
+
+void Menus :: creacion()
+{
+	glMatrixMode(GL_PROJECTION);
+		glPushMatrix();
+		glLoadIdentity();
+		gluOrtho2D(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT));
+		glMatrixMode(GL_MODELVIEW);
+		glPushMatrix();
+		glLoadIdentity();
+
+		setTextColor(1,0.8,0);
+			setFont("fuentes/LemonMilk.otf",25);
+			printxy("CLICK IZQUIERDO EN EL LUGAR DONDE QUIERAS GENERAR TU EDIFICIO", 40, 100);
+	
+		glMatrixMode(GL_PROJECTION);
+		glPopMatrix();
+
+		glMatrixMode(GL_MODELVIEW);
+		glPopMatrix();
+
+	glEnable(GL_DEPTH_TEST);
+
+}
+
+void Menus :: bandera(Color& equipo)
+{
+	glPushMatrix();
+	glColor3ub(102,51,0);
+	glutSolidSphere(0.5,5,5);
+	glColor3ub(0,0,0);
+	glLineWidth(10.0f);
+	glBegin(GL_LINE);
+		glVertex3f(0,0,0);
+		glVertex3f(0,0,3);
+	glEnd();
+	glColor3ub(equipo.getRed(),equipo.getGreen(),equipo.getBlue());
+	glBegin(GL_POLYGON);
+		glVertex3f(0,0,2);
+		glVertex3f(0,0,3);
+		glVertex3f(sqrt(2),sqrt(2),3);
+	glEnd();
+	glPopMatrix();
 }

@@ -63,6 +63,7 @@ void Ayuntamiento :: subirNivel ()
 	ataque*=1.35;
 	altura+=4;
 }
+
 bool Ayuntamiento :: poderDisparar()
 {
 	if(tiempo>=vel_ataque)

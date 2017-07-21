@@ -13,7 +13,8 @@ bool Coordinador :: flag_jugador=0;
 unsigned int Coordinador :: flag_musica=2;
 
 Coordinador::Coordinador(void):
-	cielo(0,0,102)
+	cielo(0,0,102),
+	construccion(NINGUNA_F)
 {
 	mundo = new Mundo ();
 	estado=INICIO;
@@ -50,12 +51,14 @@ void Coordinador :: Dibuja()
 	{
 
 		menus.superior(*mundo, minutos_juego);
+		//menus.cola(*mundo);
 		if(flag1)	menus.construccion (*mundo);
 		if(flag2)	menus.seleccion (AYUNTAMIENTO, *mundo);
 		if(flag3)	menus.seleccion (F_ORO, *mundo);
 		if(flag6)	menus.seleccion (CUARTEL, *mundo);
 		if(flag5)	menus.seleccion (F_HIERRO, *mundo);
 		if(flag4)	menus.seleccion (F_COMIDA,* mundo);
+		if(construccion != NINGUNA_F) menus.creacion ();
 	}
 	
 	//Frase aleatoria divertida 
@@ -152,17 +155,36 @@ void Coordinador :: Tecla (unsigned char key)
 		case '4': mundo->setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo		
 		case 'h':
 		case 'H': mundo->jugador2.Agregar(CABALLERO, Vector(0,0)); break;
+		case'm':
+	//	case'M':
+			mundo->jugador1.huir();
+			break;
 
 		case 'w':
-		case 'W': mundo->jugador1.Agregar(SOLDADO, Vector(200,50));	break;
+		case 'W': 
+			if(!flag1 && !flag2)
+				mundo->jugador1.Agregar(SOLDADO, Vector(200,50));
+			break;
 		case 'e':
-		case 'E': mundo->jugador1.Agregar(ARQUERA, Vector(225,40));	break;
+		case 'E': 
+			if(!flag1 && !flag2)
+				mundo->jugador1.Agregar(ARQUERA, Vector(225,40));	
+			break;
 		case 'r':
-		case 'R': mundo->jugador1.Agregar(CABALLERO, Vector(225,40)); break;
+		case 'R': 
+			if(!flag1 && !flag2)
+				mundo->jugador1.Agregar(CABALLERO, Vector(225,40)); 
+			break;
 		case 't':
-		case 'T': mundo->jugador1.Agregar(GUERRERO, Vector(200,50));break;
+		case 'T': 
+			if(!flag1 && !flag2)
+				mundo->jugador1.Agregar(GUERRERO, Vector(200,50));
+			break;
 		case 'y':	
-		case 'Y': mundo->jugador1.Agregar(GIGANTE, Vector(225,40)); break;
+		case 'Y': 
+			if(!flag1 && !flag2)
+				mundo->jugador1.Agregar(GIGANTE, Vector(225,40)); 
+			break;
 
 		case 'K':
 		case 'k': mundo->jugador2.Agregar(CUARTEL, Vector(240-10,80-25)); break;
@@ -170,21 +192,20 @@ void Coordinador :: Tecla (unsigned char key)
 		case 'l': mundo->jugador2.Agregar(F_ORO, Vector(225-50,75-50)); break;
 		case 'J':
 		case 'j': mundo->jugador2.Agregar(F_COMIDA, Vector(225-75,75-68));  break;
-		case 'M':
-		case 'm': mundo->jugador2.Agregar(F_HIERRO, Vector(225-30,75-68));  break;
+		case 'M': mundo->jugador2.Agregar(F_HIERRO, Vector(225-30,75-68));  break;
 		}
 		if(flag1)
 		{
 			switch(key)
 			{
 			case 'a':
-			case 'A': mundo->jugador1.Agregar(CUARTEL, Vector(10,20)); break;
+			case 'A': construccion=CUARTEL; flag1=false; break;
 			case 'q':
-			case 'Q': mundo->jugador1.Agregar(F_COMIDA, Vector(75,68));  break;
+			case 'Q': construccion=F_COMIDA; flag1=false; break;
 			case 'w':
-			case 'W': mundo->jugador1.Agregar(F_HIERRO, Vector(30,68));  break;
+			case 'W':construccion=F_HIERRO; flag1=false; break;
 			case 'e':
-			case 'E': mundo->jugador1.Agregar(F_ORO, Vector(50,50));	break;
+			case 'E': construccion=F_ORO; flag1=false; break;
 			}
 		}
 		//AYUNTAMIENTO
@@ -202,12 +223,13 @@ void Coordinador :: Tecla (unsigned char key)
 			case 'R': mundo->jugador1.subirNivel(CABALLERO);  break;
 			case 't':flag2=false;
 			case 'T': mundo->jugador1.subirNivel(GUERRERO);	break;
-			case 'y':	flag2=false;
+			case 'y':flag2=false;
 			case 'Y': mundo->jugador1.subirNivel(GIGANTE);	break;
 			case 'z':flag2=false;
 			case 'Z':// eliminar(ayuntamiento); 
 				break;
 			}
+			flag2=false;
 		}
 		//F_ORO
 		if(flag3)
@@ -253,6 +275,14 @@ void Coordinador :: Tecla (unsigned char key)
 		{
 			mundo->jugador1.AñadirOro(100);
 		}
+		if(key=='D')	
+		{
+			mundo->jugador1.AñadirHierro(100);
+		}
+		if(key=='F')	
+		{
+			mundo->jugador1.AñadirComida(100);
+		}
 		if(key == ' ')	
 		{
 			if(flag1)	flag1=false;
@@ -266,6 +296,7 @@ void Coordinador :: Tecla (unsigned char key)
 			flag5=false;
 			flag6=false;
 			flag7=false;
+			construccion=NINGUNA_F;
 		}
 		if(key == 8) {
 			//retroceso (DEL)
@@ -277,6 +308,7 @@ void Coordinador :: Tecla (unsigned char key)
 			flag5=false;
 			flag6=false;
 			flag7=false;
+			construccion=NINGUNA_F;
 		}
 		if(key == 27)	exit(0);
 		break;
@@ -321,7 +353,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 	for (int i=hits; i>=0; i--)	
 	{
 		
-		if(names[i]==JUGADOR1 && button==0)
+		if(names[i]==JUGADOR1 && button==0 && construccion==NINGUNA_F)
 		{
 			flag_jugador=true;
 			seleccion[j++]=JUGADOR1;
@@ -362,6 +394,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 				flag3=false;
 				flag6=false;
 				flag7=false;
+
 				break;
 			case F_COMIDA:
 				//cout<<"FABRICA DE COMIDA"<<endl;
@@ -425,7 +458,17 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 			
 		}
 	}
+	if(flag6 && button)
+	{
+		mundo->jugador1.setDestino(click);
+		flag_jugador=true;
+	}
 	//cout<<click.vx<<"\t"<<click.vy<<endl;
+	if(construccion!=NINGUNA_F)
+	{
+		mundo->jugador1.Agregar(construccion, click);
+		construccion=NINGUNA_F;
+	}
 	
 	if(flag_jugador==false)
 	{
@@ -436,6 +479,7 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 		flag5=false;
 		flag6=false;
 		flag7=false;
+		construccion=NINGUNA_F;
 		for(unsigned int n=0;n<j;n++)
 		{
 			seleccion[n]=0;

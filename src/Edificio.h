@@ -47,6 +47,7 @@ public:
 	virtual bool generar (Recursos& almacen){return false;}
 	virtual bool mover(Vector destino){return false;}
 	void setNombre(int n){nombre=n;}
+	virtual bool huir(){return false;}
 
 
 	friend class Interaccion;

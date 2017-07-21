@@ -32,6 +32,7 @@ public:
 	bool setVelocidad (Vector velocidad);
 	bool mover(Vector destino);
 	Vector getVelocidad();
+	bool huir ();
 
 	friend class Interaccion;
 	friend class Lista_de;

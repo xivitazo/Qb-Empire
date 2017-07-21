@@ -253,3 +253,12 @@ bool Lista_de :: generarCombatientes()
 	return false;
 }
 
+bool Lista_de :: huir()
+{
+	for(int n=0;n<numero;n++)
+	{
+		lista[n]->huir();
+	}
+	return true;
+}
+

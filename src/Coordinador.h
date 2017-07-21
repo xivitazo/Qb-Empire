@@ -11,6 +11,7 @@ protected:
 	Estado estado;
 	Mundo *mundo;
 	Menus menus;
+	Type construccion;
 	Color cielo;
 	int seleccion[NAMESIZE];
 	static int pos;

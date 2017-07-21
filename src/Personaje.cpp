@@ -18,10 +18,10 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		setStats(250,200, 1.5, 1, 10);
 		planta= CUADRADO;
 		//Rectángulo como si fuera un caballo
-		superficie.setValor(2,1);
+		superficie.setValor(2, 1);
 		rango=3.5;
 		rango_visibilidad=12;
-		altura=3;
+		altura=1;
 		break;
 	case ARQUERA:
 		setStats(150,150, 0.75,0.1, 3);
@@ -36,7 +36,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		setStats(1000,250, 2.5,3, 3);
 		planta=CUADRADO;
 		//La tetera asesina
-		superficie.setValor(2,2);
+		superficie.setValor(3,3);
 		rango_visibilidad=4;
 		rango=3;
 		altura=5;
@@ -46,7 +46,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		planta=CUADRADO;
 		//cubo
 		altura=2;
-		superficie.setValor(altura,altura);
+		superficie.setValor(1,1);
 		rango_visibilidad=5;
 		rango=1;
 		
@@ -56,7 +56,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		planta=CUADRADO;
 		//Prisma de base cuadrada de altura 2l
 		altura=3;
-		superficie.setValor(altura,altura);
+		superficie.setValor(1,1);
 		rango_visibilidad=6;
 		rango=1;
 		break;
@@ -87,6 +87,7 @@ bool Personaje:: meMuevo()
 {
 	if (destino==posicion)
 	{
+		huyendo=0;
 		velocidad=0;
 		return true;
 	}
@@ -123,7 +124,6 @@ bool Personaje :: Atacar (Edificio** lista, Disparo** disparos)
 	destino=memoria;
 	return false;
 }
-
 
 void Personaje :: subirNivel ()
 {
@@ -169,14 +169,17 @@ void Personaje :: Dibuja (Color equipo)
 	switch(especifico)
 	{
 	case CABALLERO:	
+		glutSolidSphere(altura*2, 30, 30);
+		/*
 		glPushMatrix();
 		glTranslatef(-superficie.vy/2, 0,0);
-		glutSolidCube(superficie.vy);
+		glutSolidCube(1);
 		glPopMatrix();
 		glPushMatrix();
 		glTranslatef(+superficie.vy/2, 0,0);
-		glutSolidCube(superficie.vy);
+		glutSolidCube(1);
 		glPopMatrix();
+		*/
 		break;
 		
 	case ARQUERA:	glutSolidCone((double)superficie.vx,(double) altura, 20, 20);	break;
@@ -184,7 +187,7 @@ void Personaje :: Dibuja (Color equipo)
 		glRotatef(90,1, 0, 0);
 		glutSolidTeapot(altura);		break;
 	case SOLDADO:	glutSolidCube(altura);	break;
-	case GUERRERO:	glutSolidIcosahedron();		break;
+	case GUERRERO:	glutSolidTorus(1, 1.5, 20, 20);		break;
 	}
 	glPopMatrix();
 	
@@ -206,5 +209,12 @@ bool Personaje:: mover(Vector destino)
 	if(huyendo)
 		return false;
 	memoria=destino;
+	return true;
+}
+bool Personaje :: huir()
+{
+	huyendo=1;
+	memoria.vx=posicion.vx-50;
+	memoria.vy=posicion.vy;
 	return true;
 }

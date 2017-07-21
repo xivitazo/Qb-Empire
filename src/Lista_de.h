@@ -93,6 +93,12 @@ public:
 	void AñadirComida(int n){almacen.set(almacen.getComida()+n,almacen.getHierro(),almacen.getOro());}
 	void AñadirHierro(int n){almacen.set(almacen.getComida(),almacen.getHierro()+n,almacen.getOro());}
 	bool perder(){return !ayuntamiento;}
+	Luchadores* getCola(){return cola_generar; }
+	int getNumCola(){return numero_cola;}
+	bool huir ();
+	void setDestino(Vector& destino){this->destino=destino;}
+	Vector getDestino(){return destino;}
+	Color getEquipo(){return equipo;}
 
 
 

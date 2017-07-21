@@ -57,29 +57,7 @@ void Mundo::Dibuja()
 	for(int n=0; n<numero; n++)
 	{
 		disparos[n]->Dibuja();
-	}
-	
-
-	//printf ("%d\t%d\n", jugador1.getNumero(), jugador2.getNumero());
-	//printf("Comida:%d\tHierro:%d\tOro:%d\n", jugador1.getAlmacen().getComida(),jugador1.getAlmacen().getHierro(), jugador1.getAlmacen().getOro()); 
-	//printf("%d\n", jugador1.getNivel(AYUNTAMIENTO));
-	//printf("%d\n", jugador1.getMax(COMBATIENTES));
-	//printf("%d\n", jugador1.getNumero());
-	
-	//Tenemos posibles coordenadas del mapa.
-	/*printf("Posicion Ojo x:  %f",x_ojo);
-	printf("\n");
-	printf("Posicion Ojo y: %f",y_ojo);
-	printf("\n");
-	printf("Posicion Ojo z: %f",z_ojo);
-	printf("\n");
-	printf("Miro x:  %f", miro_x);
-	printf("\n");
-	printf("Miro y: %f", miro_y);
-	printf("\n");
-	printf("Miro z: %f", miro_z);
-	printf("\n");*/
-  
+	}  
 }
 
 void Mundo::Timer(float t)
