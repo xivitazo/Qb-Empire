@@ -202,12 +202,12 @@ void Coordinador :: Tecla (unsigned char key)
 		{
 			switch(key)
 			{
-			case 'a':
-			case 'A': construccion=CUARTEL; flag1=false; break;
+			case 'r':
+			case 'R': construccion=CUARTEL; flag1=false; break;
 			case 'q':
 			case 'Q': construccion=F_COMIDA; flag1=false; break;
 			case 'w':
-			case 'W':construccion=F_HIERRO; flag1=false; break;
+			case 'W': construccion=F_HIERRO; flag1=false; break;
 			case 'e':
 			case 'E': construccion=F_ORO; flag1=false; break;
 			}

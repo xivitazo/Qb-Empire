@@ -22,7 +22,7 @@ public:
 	void inicializa();
 	void creacion ();
 	void bandera(Color& equipo);
-	
+	void tablero ();
 
 
 	friend class Mundo;

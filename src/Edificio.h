@@ -31,7 +31,7 @@ public:
 	void Tecla();
 	void Timer (float t);
 	void Dibuja(Color equipo=0);
-	void casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura);
+	static void casita (Vector posicion, Color tejado, Color pared, Vector dimension, int altura);
 	void setTipo(Type tipo);
 	Type getTipo (void );
 	bool poderGenerar ();

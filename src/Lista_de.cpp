@@ -1,4 +1,4 @@
-#include "Lista_de.h"7
+#include "Lista_de.h"
 #include "ETSIDI.h"
 using namespace ETSIDI;
 
@@ -130,7 +130,7 @@ bool Lista_de :: subirNivel(Type tipo)
 {
 	if(tipo!=AYUNTAMIENTO && nivel[tipo]>=nivel[AYUNTAMIENTO])
 		return false;
-	if (nivel[tipo]<4 && almacen.getOro()>=coste_nivel[tipo] )
+	if (nivel[tipo]<4 && almacen.getOro()>=(unsigned int)coste_nivel[tipo] )
 	{
 		AñadirOro(-coste_nivel[tipo]);
 		nivel[tipo]++;
@@ -153,7 +153,7 @@ bool Lista_de :: subirNivel(Type tipo)
 
 bool Lista_de :: subirNivel(Luchadores tipo)
 {
-	if(almacen.getOro()>=coste_nivel[LUCHADOR+tipo] && nivel[LUCHADOR+tipo]<4 && nivel[CUARTEL]>nivel[LUCHADOR + tipo])
+	if(almacen.getOro()>=(unsigned int)coste_nivel[LUCHADOR+tipo] && nivel[LUCHADOR+tipo]<4 && nivel[CUARTEL]>nivel[LUCHADOR + tipo])
 	{
 		AñadirOro(-coste_nivel[LUCHADOR+tipo]);
 		nivel[tipo+LUCHADOR]++;

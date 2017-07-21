@@ -48,7 +48,7 @@ bool Recursos :: operator<= (Recursos &r)
 Recursos Recursos :: operator * (float n)
 {
 	Recursos aux;
-	aux.set(comida*n,hierro*n,oro*n);
+	aux.set(comida*(unsigned int)n,hierro*(unsigned int)n,oro*(unsigned int)n);
 	return  aux;
 }
 
