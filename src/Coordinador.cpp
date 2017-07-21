@@ -32,6 +32,10 @@ Coordinador::~Coordinador(void)
 
 void Coordinador :: Dibuja()
 {
+	gluLookAt(ax_ojo, ay_ojo, az_ojo,  // posicion del ojo
+		amiro_x, amiro_y, amiro_z,      // hacia que punto mira  (0,0,0) 
+			0.0, 0, 1.0);      // definimos hacia arriba (eje Z)  
+
 	mundo->Dibuja();
 
 
@@ -84,8 +88,6 @@ void Coordinador :: Dibuja()
 
 void Coordinador :: Timer (float t)
 {
-	mundo->Timer(t);
-
 	if(mundo->jugador1.perder())
 		estado=GAME_OVER;
 	else if(mundo->jugador2.perder())
@@ -93,6 +95,7 @@ void Coordinador :: Timer (float t)
 
 	if(estado==JUEGO)
 	{
+		mundo->Timer(t);
 		minutos_juego+=t/60.0F;
 		cielo.set((102.0f*(minutos_juego))/(15.0f),0,(102.0f*(15.0-minutos_juego))/15.0f);
 		if(minutos_juego>15)
@@ -100,13 +103,13 @@ void Coordinador :: Timer (float t)
 	}
 	else if(estado==GAME_OVER)
 	{
-		mundo->setPerspectiva(120, -200, 50, 120, 37.5, 0);
+		setPerspectiva(120, -200, 50, 120, 37.5, 0);
 		cielo.set(102,0,0);
 		minutos_juego=0;
 	}
 	else if(estado==YOU_WIN)
 	{
-		mundo->setPerspectiva(120, -200, 50, 120, 37.5, 0);
+		setPerspectiva(120, -200, 50, 120, 37.5, 0);
 		cielo.set(0,0,102);
 		minutos_juego=0;
 	}
@@ -115,6 +118,7 @@ void Coordinador :: Timer (float t)
 		cielo.set(0,0,102);
 		minutos_juego=0;
 	}
+	movimientoCamara(t);
 	
 }
 
@@ -126,7 +130,7 @@ void Coordinador :: Tecla (unsigned char key)
 		if(key=='E' || key=='e'){
 			estado=JUEGO;
 			menus.inicializa();
-			mundo->setPerspectiva(-23,-47,50,50,25,0);
+			setPerspectiva(-23,-47,50,50,25,0);
 		}
 		if(key=='o' || key=='O'){
 			estado=OPCIONES;
@@ -149,10 +153,10 @@ void Coordinador :: Tecla (unsigned char key)
 	case JUEGO:
 		switch(key)
 		{     
-		case '1': mundo->setPerspectiva(-40,40,50,25,40,0); break; //Vista Poblado
-		case '2': mundo->setPerspectiva(120,-27.5,60,120,27.5,0); break; //Vista Batalla
-		case '3': mundo->setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
-		case '4': mundo->setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo		
+		case '1': setPerspectiva(-40,40,50,25,40,0); break; //Vista Poblado
+		case '2': setPerspectiva(120,-27.5,60,120,27.5,0); break; //Vista Batalla
+		case '3': setPerspectiva(-23,-47,50,50,25,0); break; //Vista General
+		case '4': setPerspectiva(150-23,-47,50,175,25,0); break; //Vista Enemigo		
 		case 'h':
 		case 'H': mundo->jugador2.Agregar(CABALLERO, Vector(0,0)); break;
 		case'm':
@@ -340,6 +344,7 @@ void Coordinador :: TeclaEspecial (unsigned char key)
 
 void Coordinador :: Inicializa ()
 {
+	Inicializa_vista();
 	mundo->Inicializa();
 }
 
@@ -491,4 +496,62 @@ bool Coordinador :: Mouse (int names[], unsigned int hits, bool button)
 void Coordinador :: dibujaCielo()
 {
 	glClearColor((float)cielo.getRed()/255.0f,(float)cielo.getGreen()/255.0f,(float)cielo.getBlue()/255.0f,1);
+}
+
+void Coordinador :: movimientoCamara (float t)
+{
+	Vector3D destino(x_ojo,y_ojo,z_ojo);
+	Vector3D posicion (ax_ojo, ay_ojo, az_ojo);
+	Vector3D destino_miro(miro_x, miro_y, miro_z);
+	Vector3D posicion_miro(amiro_x, amiro_y, amiro_z);
+	Vector3D velocidad;
+	if((destino-posicion).modulo()>10)
+	{
+		velocidad=(destino-posicion).unitario()*100;
+		//printf("velocidad: %f %f %f\n",velocidad.vx, velocidad.vy, velocidad.vz);
+		
+	}
+	else if ((destino-posicion).modulo()<=10)
+			velocidad = (destino-posicion)*10;
+	posicion=posicion + velocidad*t;
+	if((destino_miro-posicion_miro).modulo()>1)
+	{
+		velocidad=(destino_miro-posicion_miro).unitario()*10;
+	}
+	else if ((destino_miro-posicion_miro).modulo()<1)
+			velocidad = (destino_miro-posicion_miro)*10;
+	posicion_miro=posicion_miro+velocidad*t*5;
+		amiro_x=posicion_miro.vx;
+		amiro_y=posicion_miro.vy;
+		amiro_z=posicion_miro.vz;
+		ax_ojo=posicion.vx;
+		ay_ojo=posicion.vy;
+		az_ojo=posicion.vz;
+	//printf("%f %f %f\n",ax_ojo, ay_ojo, az_ojo);
+}
+
+void Coordinador :: Inicializa_vista()
+{
+	x_ojo=120;
+	y_ojo=-200;
+	z_ojo=50;
+	miro_x=120;
+	miro_y=37.5;
+	miro_z=0;
+	ax_ojo=120;
+	ay_ojo=-37.5;
+	az_ojo=50;
+	amiro_x=120;
+	amiro_y=37.5;
+	amiro_z=0;
+}
+
+void Coordinador:: setPerspectiva(float ojo_a, float ojo_b, float ojo_c, float miro_a, float miro_b, float miro_c)
+{
+	x_ojo=ojo_a;
+	y_ojo=ojo_b;
+	z_ojo=ojo_c;
+	miro_x=miro_a;
+	miro_y=miro_b;
+	miro_z=miro_c;
 }

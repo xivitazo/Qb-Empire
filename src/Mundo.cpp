@@ -30,9 +30,7 @@ Mundo :: ~Mundo()
 
 void Mundo::Dibuja()
 {
-	gluLookAt(ax_ojo, ay_ojo, az_ojo,  // posicion del ojo
-		amiro_x, amiro_y, amiro_z,      // hacia que punto mira  (0,0,0) 
-			0.0, 0, 1.0);      // definimos hacia arriba (eje Z)    
+	  
 
 	//aqui es donde hay que poner el codigo de dibujo
 
@@ -88,7 +86,6 @@ void Mundo::Timer(float t)
 		}
 	}
 
-	movimientoCamara(t);
 	//Para el sonido del disparo
 	//ETSIDI::play("sonidos/impacto.wav");
 
@@ -96,7 +93,6 @@ void Mundo::Timer(float t)
 
 void Mundo::Inicializa()
 {
-	Inicializa_vista();
 
 	map.inicializa();
 
@@ -133,64 +129,6 @@ void Mundo::Tecla(unsigned char key)
 void Mundo:: RatonPasivo(int x, int y)
 {
 
-}
-
-void Mundo:: setPerspectiva(float ojo_a, float ojo_b, float ojo_c, float miro_a, float miro_b, float miro_c)
-{
-	x_ojo=ojo_a;
-	y_ojo=ojo_b;
-	z_ojo=ojo_c;
-	miro_x=miro_a;
-	miro_y=miro_b;
-	miro_z=miro_c;
-}
-
-void Mundo :: movimientoCamara (float t)
-{
-	Vector3D destino(x_ojo,y_ojo,z_ojo);
-	Vector3D posicion (ax_ojo, ay_ojo, az_ojo);
-	Vector3D destino_miro(miro_x, miro_y, miro_z);
-	Vector3D posicion_miro(amiro_x, amiro_y, amiro_z);
-	Vector3D velocidad;
-	if((destino-posicion).modulo()>10)
-	{
-		velocidad=(destino-posicion).unitario()*100;
-		//printf("velocidad: %f %f %f\n",velocidad.vx, velocidad.vy, velocidad.vz);
-		
-	}
-	else if ((destino-posicion).modulo()<=10)
-			velocidad = (destino-posicion)*10;
-	posicion=posicion + velocidad*t;
-	if((destino_miro-posicion_miro).modulo()>1)
-	{
-		velocidad=(destino_miro-posicion_miro).unitario()*10;
-	}
-	else if ((destino_miro-posicion_miro).modulo()<1)
-			velocidad = (destino_miro-posicion_miro)*10;
-	posicion_miro=posicion_miro+velocidad*t*5;
-		amiro_x=posicion_miro.vx;
-		amiro_y=posicion_miro.vy;
-		amiro_z=posicion_miro.vz;
-		ax_ojo=posicion.vx;
-		ay_ojo=posicion.vy;
-		az_ojo=posicion.vz;
-	//printf("%f %f %f\n",ax_ojo, ay_ojo, az_ojo);
-}
-
-void Mundo :: Inicializa_vista()
-{
-	x_ojo=120;
-	y_ojo=-200;
-	z_ojo=50;
-	miro_x=120;
-	miro_y=37.5;
-	miro_z=0;
-	ax_ojo=120;
-	ay_ojo=-37.5;
-	az_ojo=50;
-	amiro_x=120;
-	amiro_y=37.5;
-	amiro_z=0;
 }
 
 void Mundo :: atacar()
