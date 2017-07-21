@@ -11,12 +11,21 @@ protected:
 	Estado estado;
 	Mundo *mundo;
 	Menus menus;
+	Type construccion;
 	Color cielo;
 	int seleccion[NAMESIZE];
 	static int pos;
 	static bool flag1, flag2, flag3, flag4, flag5, flag6, flag7, flag_jugador;
 	static bool flag_musica;
 	float minutos_juego;
+	float x_ojo;
+	float y_ojo;
+	float z_ojo;
+	float miro_x, miro_y, miro_z;
+	float ax_ojo;
+	float ay_ojo;
+	float az_ojo;
+	float amiro_x, amiro_y, amiro_z;
 
 
 public:
@@ -30,5 +39,9 @@ public:
 	void Dibuja();
 	void Inicializa ();
 	void dibujaCielo();
+	void movimientoCamara(float t);
+	void Inicializa_vista();
+	void setPerspectiva(float ojo_a, float ojo_b, float ojo_c, float miro_a, float miro_b, float miro_c);
+	
 };
 

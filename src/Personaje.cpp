@@ -18,9 +18,9 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		setStats(250,200, 1.5, 1, 10);
 		planta= CUADRADO;
 		//Rectángulo como si fuera un caballo
-		superficie.setValor(2,1);
-		rango=3;
-		rango_visibilidad=10;
+		superficie.setValor(2, 1);
+		rango=3.5;
+		rango_visibilidad=12;
 		altura=3;
 		break;
 	case ARQUERA:
@@ -36,7 +36,7 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		setStats(1000,250, 2.5,3, 3);
 		planta=CUADRADO;
 		//La tetera asesina
-		superficie.setValor(2,2);
+		superficie.setValor(3,3);
 		rango_visibilidad=4;
 		rango=3;
 		altura=5;
@@ -45,19 +45,20 @@ Personaje::Personaje(Luchadores tipo, unsigned int nivel, Vector posicion, Vecto
 		setStats(200,100, 1, 0.5, 3);
 		planta=CUADRADO;
 		//cubo
+		altura=2;
 		superficie.setValor(1,1);
 		rango_visibilidad=5;
 		rango=1;
-		altura=2;
+		
 		break;
 	case GUERRERO:
 		setStats(300,300, 1.5,0.5, 4.5);
 		planta=CUADRADO;
 		//Prisma de base cuadrada de altura 2l
+		altura=3;
 		superficie.setValor(1,1);
 		rango_visibilidad=6;
 		rango=1;
-		altura=3;
 		break;
 	}
 	for (unsigned int n=1; n<nivel; n++)
@@ -86,6 +87,7 @@ bool Personaje:: meMuevo()
 {
 	if (destino==posicion)
 	{
+		huyendo=0;
 		velocidad=0;
 		return true;
 	}
@@ -122,7 +124,6 @@ bool Personaje :: Atacar (Edificio** lista, Disparo** disparos)
 	destino=memoria;
 	return false;
 }
-
 
 void Personaje :: subirNivel ()
 {
@@ -163,17 +164,50 @@ void Personaje :: Dibuja (Color equipo)
 	color_max=equipo;
 	color_vida();
 	glColor3ub(color.getRed(),color.getGreen(),color.getBlue());
-	glTranslatef(posicion.vx,posicion.vy, 1);
+	glTranslatef(posicion.vx,posicion.vy, 0);
 	
 	switch(especifico)
 	{
-	case CABALLERO:	glutSolidSphere(altura,20,20);	break;
-	case ARQUERA:	glutSolidCone((double)superficie.vx,(double) altura, 20, 20);	break;
+	case CABALLERO:	
+		//glutSolidSphere(altura, 30, 30);
+		for(unsigned int n=0;n<altura;n++)
+		{
+		glPushMatrix();
+		glTranslatef(-superficie.vx/4, 0,0.5+n);
+		glutSolidCube(1);
+		glPopMatrix();
+		glPushMatrix();
+		glTranslatef(+superficie.vx/4, 0,0.5+n);
+		glutSolidCube(1);
+		glPopMatrix();
+		}
+		
+		break;
+		
+	case ARQUERA:	
+		glutSolidCone((double)superficie.vx,(double) altura, 20, 20);
+		break;
 	case GIGANTE:	
+		glTranslatef(0,0,2);
 		glRotatef(90,1, 0, 0);
-		glutSolidTeapot(altura);		break;
-	case SOLDADO:	glutSolidSphere(altura,20,20);	break;
-	case GUERRERO:	glutSolidIcosahedron();		break;
+		glutSolidTeapot(altura);		
+		break;
+	case SOLDADO:
+		for(unsigned int n=0; n<altura; n++)
+		{
+			glPushMatrix();
+			glTranslatef(0,0,0.5+n);
+			glutSolidCube(1);
+			glPopMatrix();
+		}break;
+	case GUERRERO:	
+		for(unsigned int n=0; n<altura; n++)
+		{
+			glPushMatrix();
+			glTranslatef(0,0,0.5+n);
+			glutSolidCube(1);
+			glPopMatrix();
+		}break;
 	}
 	glPopMatrix();
 	
@@ -195,5 +229,12 @@ bool Personaje:: mover(Vector destino)
 	if(huyendo)
 		return false;
 	memoria=destino;
+	return true;
+}
+bool Personaje :: huir()
+{
+	huyendo=1;
+	memoria.vx=posicion.vx-50;
+	memoria.vy=posicion.vy;
 	return true;
 }
